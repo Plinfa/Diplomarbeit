@@ -6,39 +6,39 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="lib" path="C:/Users/David/Desktop/Diplomarbeit EQOS/Eclipse/Diplomarbeit/activation-1.1.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/David/Desktop/Diplomarbeit EQOS/Eclipse/Diplomarbeit/commons-codec-1.12.jar"/>
-	<classpathentry kind="lib" path="C:/Users/David/Desktop/Diplomarbeit EQOS/Eclipse/Diplomarbeit/commons-collections4-4.3.jar"/>
-	<classpathentry kind="lib" path="C:/Users/David/Desktop/Diplomarbeit EQOS/Eclipse/Diplomarbeit/commons-compress-1.18.jar"/>
-	<classpathentry kind="lib" path="C:/Users/David/Desktop/Diplomarbeit EQOS/Eclipse/Diplomarbeit/commons-logging-1.2.jar"/>
-	<classpathentry kind="lib" path="C:/Users/David/Desktop/Diplomarbeit EQOS/Eclipse/Diplomarbeit/commons-math3-3.6.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/David/Desktop/Diplomarbeit EQOS/Eclipse/Diplomarbeit/curvesapi-1.06.jar"/>
-	<classpathentry kind="lib" path="C:/Users/David/Desktop/Diplomarbeit EQOS/Eclipse/Diplomarbeit/hamcrest-core-1.3.jar"/>
-	<classpathentry kind="lib" path="C:/Users/David/Desktop/Diplomarbeit EQOS/Eclipse/Diplomarbeit/jaxb-api-2.3.0.jar"/>
-	<classpathentry kind="lib" path="C:/Users/David/Desktop/Diplomarbeit EQOS/Eclipse/Diplomarbeit/jaxb-core-2.3.0.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/David/Desktop/Diplomarbeit EQOS/Eclipse/Diplomarbeit/jaxb-impl-2.3.0.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/David/Desktop/Diplomarbeit EQOS/Eclipse/Diplomarbeit/jcommon-1.0.23.jar"/>
-	<classpathentry kind="lib" path="C:/Users/David/Desktop/Diplomarbeit EQOS/Eclipse/Diplomarbeit/jdatepicker-1.3.4.jar"/>
-	<classpathentry kind="lib" path="C:/Users/David/Desktop/Diplomarbeit EQOS/Eclipse/Diplomarbeit/jfreechart-1.0.19.jar"/>
-	<classpathentry kind="lib" path="C:/Users/David/Desktop/Diplomarbeit EQOS/Eclipse/Diplomarbeit/jfreechart-1.0.19-experimental.jar"/>
-	<classpathentry kind="lib" path="C:/Users/David/Desktop/Diplomarbeit EQOS/Eclipse/Diplomarbeit/jfreechart-1.0.19-swt.jar"/>
-	<classpathentry kind="lib" path="C:/Users/David/Desktop/Diplomarbeit EQOS/Eclipse/Diplomarbeit/jfreesvg-2.0.jar"/>
-	<classpathentry kind="lib" path="C:/Users/David/Desktop/Diplomarbeit EQOS/Eclipse/Diplomarbeit/jgoodies.jar"/>
-	<classpathentry kind="lib" path="C:/Users/David/Desktop/Diplomarbeit EQOS/Eclipse/Diplomarbeit/junit-4.11.jar"/>
-	<classpathentry kind="lib" path="C:/Users/David/Desktop/Diplomarbeit EQOS/Eclipse/Diplomarbeit/junit-4.12.jar"/>
-	<classpathentry kind="lib" path="C:/Users/David/Desktop/Diplomarbeit EQOS/Eclipse/Diplomarbeit/log4j-1.2.17.jar"/>
-	<classpathentry kind="lib" path="C:/Users/David/Desktop/Diplomarbeit EQOS/Eclipse/Diplomarbeit/mariadb-java-client-2.4.3.jar"/>
-	<classpathentry kind="lib" path="C:/Users/David/Desktop/Diplomarbeit EQOS/Eclipse/Diplomarbeit/orsoncharts-1.4-eval-nofx.jar"/>
-	<classpathentry kind="lib" path="C:/Users/David/Desktop/Diplomarbeit EQOS/Eclipse/Diplomarbeit/orsonpdf-1.6-eval.jar"/>
-	<classpathentry kind="lib" path="C:/Users/David/Desktop/Diplomarbeit EQOS/Eclipse/Diplomarbeit/poi-4.1.0.jar"/>
-	<classpathentry kind="lib" path="C:/Users/David/Desktop/Diplomarbeit EQOS/Eclipse/Diplomarbeit/poi-examples-4.1.0.jar"/>
-	<classpathentry kind="lib" path="C:/Users/David/Desktop/Diplomarbeit EQOS/Eclipse/Diplomarbeit/poi-excelant-4.1.0.jar"/>
-	<classpathentry kind="lib" path="C:/Users/David/Desktop/Diplomarbeit EQOS/Eclipse/Diplomarbeit/poi-ooxml-4.1.0.jar"/>
-	<classpathentry kind="lib" path="C:/Users/David/Desktop/Diplomarbeit EQOS/Eclipse/Diplomarbeit/poi-ooxml-schemas-4.1.0.jar"/>
-	<classpathentry kind="lib" path="C:/Users/David/Desktop/Diplomarbeit EQOS/Eclipse/Diplomarbeit/poi-scratchpad-4.1.0.jar"/>
-	<classpathentry kind="lib" path="C:/Users/David/Desktop/Diplomarbeit EQOS/Eclipse/Diplomarbeit/rs2xml.jar"/>
-	<classpathentry kind="lib" path="C:/Users/David/Desktop/Diplomarbeit EQOS/Eclipse/Diplomarbeit/servlet.jar"/>
-	<classpathentry kind="lib" path="C:/Users/David/Desktop/Diplomarbeit EQOS/Eclipse/Diplomarbeit/swtgraphics2d.jar"/>
-	<classpathentry kind="lib" path="C:/Users/David/Desktop/Diplomarbeit EQOS/Eclipse/Diplomarbeit/xmlbeans-3.1.0.jar"/>
+	<classpathentry kind="lib" path="C:/jarfiles/activation-1.1.1.jar"/>
+	<classpathentry kind="lib" path="C:/jarfiles/commons-codec-1.12.jar"/>
+	<classpathentry kind="lib" path="C:/jarfiles/commons-collections4-4.3.jar"/>
+	<classpathentry kind="lib" path="C:/jarfiles/commons-compress-1.18.jar"/>
+	<classpathentry kind="lib" path="C:/jarfiles/commons-logging-1.2.jar"/>
+	<classpathentry kind="lib" path="C:/jarfiles/commons-math3-3.6.1.jar"/>
+	<classpathentry kind="lib" path="C:/jarfiles/curvesapi-1.06.jar"/>
+	<classpathentry kind="lib" path="C:/jarfiles/hamcrest-core-1.3.jar"/>
+	<classpathentry kind="lib" path="C:/jarfiles/jaxb-api-2.3.0.jar"/>
+	<classpathentry kind="lib" path="C:/jarfiles/jaxb-core-2.3.0.1.jar"/>
+	<classpathentry kind="lib" path="C:/jarfiles/jaxb-impl-2.3.0.1.jar"/>
+	<classpathentry kind="lib" path="C:/jarfiles/jcommon-1.0.23.jar"/>
+	<classpathentry kind="lib" path="C:/jarfiles/jdatepicker-1.3.4.jar"/>
+	<classpathentry kind="lib" path="C:/jarfiles/jfreechart-1.0.19.jar"/>
+	<classpathentry kind="lib" path="C:/jarfiles/jfreechart-1.0.19-experimental.jar"/>
+	<classpathentry kind="lib" path="C:/jarfiles/jfreechart-1.0.19-swt.jar"/>
+	<classpathentry kind="lib" path="C:/jarfiles/jfreesvg-2.0.jar"/>
+	<classpathentry kind="lib" path="C:/jarfiles/jgoodies.jar"/>
+	<classpathentry kind="lib" path="C:/jarfiles/junit-4.11.jar"/>
+	<classpathentry kind="lib" path="C:/jarfiles/junit-4.12.jar"/>
+	<classpathentry kind="lib" path="C:/jarfiles/log4j-1.2.17.jar"/>
+	<classpathentry kind="lib" path="C:/jarfiles/mariadb-java-client-2.4.3.jar"/>
+	<classpathentry kind="lib" path="C:/jarfiles/orsoncharts-1.4-eval-nofx.jar"/>
+	<classpathentry kind="lib" path="C:/jarfiles/orsonpdf-1.6-eval.jar"/>
+	<classpathentry kind="lib" path="C:/jarfiles/poi-4.1.0.jar"/>
+	<classpathentry kind="lib" path="C:/jarfiles/poi-examples-4.1.0.jar"/>
+	<classpathentry kind="lib" path="C:/jarfiles/poi-excelant-4.1.0.jar"/>
+	<classpathentry kind="lib" path="C:/jarfiles/poi-ooxml-4.1.0.jar"/>
+	<classpathentry kind="lib" path="C:/jarfiles/poi-ooxml-schemas-4.1.0.jar"/>
+	<classpathentry kind="lib" path="C:/jarfiles/poi-scratchpad-4.1.0.jar"/>
+	<classpathentry kind="lib" path="C:/jarfiles/rs2xml.jar"/>
+	<classpathentry kind="lib" path="C:/jarfiles/servlet.jar"/>
+	<classpathentry kind="lib" path="C:/jarfiles/swtgraphics2d.jar"/>
+	<classpathentry kind="lib" path="C:/jarfiles/xmlbeans-3.1.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
