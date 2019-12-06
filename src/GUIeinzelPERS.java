@@ -38,7 +38,7 @@ public class GUIeinzelPERS {
 		frameEinzelPerso = new JFrame();
 		frameEinzelPerso.setIconImage(Toolkit.getDefaultToolkit().getImage(GUIeinzelPERS.class.getResource("/ressources/EQOS.jpg")));
 		frameEinzelPerso.setBounds(100, 100, 690, 406);
-		frameEinzelPerso.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frameEinzelPerso.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setMinimumSize(new Dimension(1000, 1000));
