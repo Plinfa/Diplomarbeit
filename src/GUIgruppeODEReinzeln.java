@@ -77,8 +77,8 @@ public class GUIgruppeODEReinzeln {
 						von=Integer.parseInt(textField_3.getText());
 						bis=Integer.parseInt(textField_4.getText());
 						
-						int lenght=jdbc.getProjekte().size();
-						
+						int lenght=jdbc.Projektecount();
+						System.out.println(lenght);
 						
 						for(int i=0; i<lenght; i++) {
 						    if (jdbc.getProjekte().get(i).getKostenstelle()==(projnr)) {

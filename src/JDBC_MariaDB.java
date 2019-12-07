@@ -581,6 +581,38 @@ public class JDBC_MariaDB
 			
 		}
 		
+		public int Projektecount() 
+		{
+			
+			int count=0;
+			
+			ResultSet res=null;
+			
+			try {
+			
+				Statement stmt =con.createStatement();
+			
+				//SQL Befehl
+				
+				//String sql = "SELECT ANGA, GruppenNr, AAktiv, PersNr, StichtagUrlaub, Eintritt, SVNr, Name, Vorname";//, NameuVorname, PlzOrt, Strasse, GebDat, Stand, Geschl, Nation, Tel, Handy, Email, gelernterBeruf, Aufgabenbereich, Sicherheitsvertrauensperson, Firmenhandy, Kennzeichen, Fahrzeug, FIN, Handwerkerbefreiung, Führerscheine, FührerscheinNr, Behörde, Ausstelldat, gültigbis, Führerscheinüberprüfung, InfoschrPrivatnutzung, EzB, FahrbewilligungNr, Kranführerausbildung, C95LKW, HubstaplerÖ, HubstaplerDE, Notfallperson, NotfallsTel,TShirt, Jacke, Schuhe, GültigkeitA1, SicherheitspassNr, Bürounterweisung, VBFnAPG, Bayernwerkgültigbis, TenneT, TowerLatchSystem, Steigschulung, GUntersuchungenfälligam, GUntersuchungenfällig, PSAÜberprüfung, EHKursDauer, EHKursam, ErsthelferbisDE, nötigeDauer, APGSchulung, RichtigesPrüfenARCUS, LumpiSeilschulung, Compliance, Teleskopstapler, Hubarbeitsbühnen, HubarbeitsbKartenNr FROM mitarbeiter";
+				
+			String sql = "SELECT COUNT(ProjektNr) FROM projekt";
+			
+				res= stmt.executeQuery(sql);	
+				
+					
+				count = res.getInt(2);
+			
+				}
+				catch(SQLException e)
+				{
+				e.printStackTrace(); 
+				}
+			
+			
+			return count;
+		}
+		
 		public void projektliste_füllen(int projektnummer, String projektname, Date startdatum, Date enddatum) {
 			
 			
