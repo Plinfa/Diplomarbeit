@@ -25,7 +25,7 @@ public class Main {
 		}
 		
 		JDBC_MariaDB jdbc = new JDBC_MariaDB();
-		jdbc.insertallfromExcel();
+		jdbc.Projektecount();
 		
 		*/
 		

@@ -67,15 +67,19 @@ public class GUIgruppeODEReinzeln {
 			public void actionPerformed(ActionEvent e) {
 				
 				int row =table.getSelectedRow();
+				int column=0;
+				String content =table.getValueAt(row,column).toString();
+				int PersNr=Integer.parseInt(content);
 				
 				int von=0;
 				int bis=0;
 				int projnr=0;
+				projnr=Integer.parseInt(textField_2.getText());
+				von=Integer.parseInt(textField_3.getText());
+				bis=Integer.parseInt(textField_4.getText());
 					
 					try {
-						projnr=Integer.parseInt(textField_2.getText());
-						von=Integer.parseInt(textField_3.getText());
-						bis=Integer.parseInt(textField_4.getText());
+						
 						
 						int lenght=jdbc.Projektecount();
 						System.out.println(lenght);

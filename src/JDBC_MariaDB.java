@@ -301,6 +301,77 @@ public class JDBC_MariaDB
 		
 	}
 
+	public void Mitarbeiterzuteilen(int PersNr,  int von, int bis, int projnr){
+		
+		
+		int lenght=Projektecount();
+		System.out.println(lenght);
+		
+		ResultSet res=null;
+		String verfueg=Verfuegbarkeit(PersNr);
+		
+		try {
+		
+			Statement stmt =con.createStatement();
+			
+		
+			//SQL Befehl
+			
+			String sql = "SELECT * FROM projekt";
+			
+			res= stmt.executeQuery(sql);
+			
+			
+			
+			while(! res.isLast()) // as long as valid data is in the result set
+			{
+				
+				
+			res.next(); // go to next line in the customer table
+			
+						
+			int projektnummer = res.getInt(1);
+			
+			
+		
+			if(projektnummer==projnr) {
+				
+				while(von<=bis) {
+		        	
+		        	if (verfueg!=null) {
+		        		
+		        		//zuteilung löschen
+		        		
+		        	}
+		        	
+		        	else {
+		        		
+		        		//zuteilen 
+		        		
+		        	}
+		        	von++;
+		        }
+				
+				
+			}        
+		
+			
+			}
+		}
+				catch(SQLException e)
+				{
+				e.printStackTrace(); 
+				}
+		    
+		    
+		
+		
+		
+		//JOptionPane.showMessageDialog(null, "Mitarbeiter erfolgreich hinzugefügt ", "Bestätigen", JOptionPane.OK_CANCEL_OPTION);
+	
+	}
+	
+	
 
 	public void insertEmployee(int PersoNr, String Name, String Nachname ){
 		
@@ -584,8 +655,8 @@ public class JDBC_MariaDB
 		public int Projektecount() 
 		{
 			
-			int count=0;
-			
+			String count=null;
+			int countint=0;
 			ResultSet res=null;
 			
 			try {
@@ -600,8 +671,18 @@ public class JDBC_MariaDB
 			
 				res= stmt.executeQuery(sql);	
 				
+				while(res.next())
+				{
+					count = res.getString(1);
 					
-				count = res.getInt(2);
+		
+					
+		
+				}	
+				
+				countint=Integer.parseInt(count);
+				res.close();
+				stmt.close();
 			
 				}
 				catch(SQLException e)
@@ -610,7 +691,61 @@ public class JDBC_MariaDB
 				}
 			
 			
-			return count;
+			return countint;
+		}
+		
+		
+		public String Verfuegbarkeit(int PersNr){
+			
+			
+			
+			String verfueg=null;
+			ResultSet res=null;
+			String von=null;
+			String bis=null;
+			
+			try {
+			
+				Statement stmt =con.createStatement();
+				
+			
+				//SQL Befehl
+				
+				String sql = "SELECT * FROM ist WHERE PersNr='"+PersNr+"'";
+				
+				res= stmt.executeQuery(sql);
+				
+				
+				
+
+				while(res.next())
+				{
+			
+					
+					
+					
+					
+					von = res.getString(1);
+					bis = res.getString(2);
+					verfueg = res.getString(3);
+					
+					
+		
+				}	
+				
+				
+				}
+			
+					catch(SQLException e)
+					{
+					e.printStackTrace(); 
+					}
+			    
+			    
+			
+			return verfueg;
+			
+			
 		}
 		
 		public void projektliste_füllen(int projektnummer, String projektname, Date startdatum, Date enddatum) {
@@ -621,6 +756,8 @@ public class JDBC_MariaDB
 			projekte.add(xx);
 			
 		}
+		
+		
 
 
 		public ArrayList<Employee> getMitarbeiter() {
