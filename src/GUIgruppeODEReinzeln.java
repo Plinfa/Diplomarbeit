@@ -71,12 +71,16 @@ public class GUIgruppeODEReinzeln {
 				String content =table.getValueAt(row,column).toString();
 				int PersNr=Integer.parseInt(content);
 				
-				int von=0;
-				int bis=0;
+				//int von=0;
+				//int bis=0;
 				int projnr=0;
 				projnr=Integer.parseInt(textField_2.getText());
-				von=Integer.parseInt(textField_3.getText());
-				bis=Integer.parseInt(textField_4.getText());
+				//von=Integer.parseInt(textField_3.getText());
+				//bis=Integer.parseInt(textField_4.getText());
+				String von=null;
+				String bis=null;
+				von=textField_3.getText();
+				bis=textField_4.getText();
 					
 					try {
 						
@@ -84,6 +88,8 @@ public class GUIgruppeODEReinzeln {
 						int lenght=jdbc.Projektecount();
 						System.out.println(lenght);
 						
+						jdbc.Mitarbeiterzuteilen(PersNr, von, bis, projnr);
+						/*
 						for(int i=0; i<lenght; i++) {
 						    if (jdbc.getProjekte().get(i).getKostenstelle()==(projnr)) {
 						        while(von<=bis) {
@@ -103,13 +109,13 @@ public class GUIgruppeODEReinzeln {
 						        
 						      /*  Project projektname =jdbc.getMitarbeiter().get(1).getWochen().get(2).getZugeteilt();
 						        String projname=projektname.getNameProj();
-						        System.out.println(projname);*/
+						        System.out.println(projname);
 						        break;
 						    }
 						    
-						    
+						   
 						}
-						
+						 */
 						
 						//JOptionPane.showMessageDialog(null, "Mitarbeiter erfolgreich hinzugefügt ", "Bestätigen", JOptionPane.OK_CANCEL_OPTION);
 					

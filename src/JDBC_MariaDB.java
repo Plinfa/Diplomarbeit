@@ -39,7 +39,7 @@ public class JDBC_MariaDB
 		try {
 			
 			
-			con= DriverManager.getConnection("jdbc:mariadb://localhost:3306/eqospersonalplanung","root","5455809Otto");
+			con= DriverManager.getConnection("jdbc:mariadb://localhost:3306/eqospersonalplanung","root","davmay81");
 		
 			}catch(SQLException e)
 				{
@@ -301,10 +301,11 @@ public class JDBC_MariaDB
 		
 	}
 
-	public void Mitarbeiterzuteilen(int PersNr,  int von, int bis, int projnr){
+	public void Mitarbeiterzuteilen(int PersNr,  String von, String bis, int projnr){
 		
 		
 		int lenght=Projektecount();
+		
 		System.out.println(lenght);
 		
 		ResultSet res=null;
@@ -317,20 +318,33 @@ public class JDBC_MariaDB
 		
 			//SQL Befehl
 			
-			String sql = "SELECT * FROM projekt";
 			
-			res= stmt.executeQuery(sql);
-			
+			//String sql = "SELECT * FROM projekt";
 			
 			
+				if(verfueg!=null) {
+					System.out.println("mitarbeiter ist nicht verfuegbar");
+					
+				}
+				else {
+					String sql = "INSERT INTO arbeitet VALUES('"+von+"','"+bis+"','"+projnr+"','"+PersNr+"')";
+					res= stmt.executeQuery(sql);
+				}
+			
+			
+			res.close();
+			stmt.close();
+			
+			/*
 			while(! res.isLast()) // as long as valid data is in the result set
 			{
 				
-				
-			res.next(); // go to next line in the customer table
+				int projektnummer = res.getInt(1);
+			
+				res.next(); // go to next line in the customer table
 			
 						
-			int projektnummer = res.getInt(1);
+			
 			
 			
 		
@@ -347,7 +361,7 @@ public class JDBC_MariaDB
 		        	else {
 		        		
 		        		//zuteilen 
-		        		
+		        		String zuteilen = "INSERT INTO arbeitet VALUES('"+von+"','"+bis+"','"+projnr+"','"+PersNr+"')";
 		        	}
 		        	von++;
 		        }
@@ -357,7 +371,10 @@ public class JDBC_MariaDB
 		
 			
 			}
+			*/
 		}
+		
+		
 				catch(SQLException e)
 				{
 				e.printStackTrace(); 
