@@ -41,7 +41,7 @@ public class JDBC_MariaDB
 		try {
 			
 			
-			con= DriverManager.getConnection("jdbc:mariadb://localhost:3306/eqospersonalplanung","root","5455809Otto");
+			con= DriverManager.getConnection("jdbc:mariadb://localhost:3306/eqospersonalplanung","root","davmay81");
 		
 			}catch(SQLException e)
 				{
@@ -309,7 +309,7 @@ public class JDBC_MariaDB
 		
 		
 		ResultSet res=null;
-		String verfueg=Verfuegbarkeitabfrage(PersNr);
+		String verfueg=verfuegbarkeitabfrage(PersNr);
 		
 		try {
 		
@@ -329,11 +329,12 @@ public class JDBC_MariaDB
 				else {
 					String sql = "INSERT INTO arbeitet VALUES('"+von+"','"+bis+"','"+projnr+"','"+PersNr+"')";
 					res= stmt.executeQuery(sql);
+					res.close();
+					stmt.close();
 				}
 			
 			
-			res.close();
-			stmt.close();
+			
 			
 			/*
 			while(! res.isLast()) // as long as valid data is in the result set
@@ -765,7 +766,7 @@ public class JDBC_MariaDB
 			
 		}
 		
-public void verfuegbarkeitSetzen(int PersNr,  java.sql.Date von, java.sql.Date bis){
+public void unverfuegbarSetzen(int PersNr,  java.sql.Date von, java.sql.Date bis, int Grund){
 			
 			
 			
@@ -779,14 +780,14 @@ public void verfuegbarkeitSetzen(int PersNr,  java.sql.Date von, java.sql.Date b
 				
 			
 				//SQL Befehl
-				
-				String sql = "SELECT * FROM ist WHERE PersNr='"+PersNr+"'";
+				// i think u meant this
+				String sql = "INSERT INTO ist VALUES ('"+von+"','"+bis+"','"+PersNr+"','"+Grund+"')";
 				
 				res= stmt.executeQuery(sql);
 				
 				
 				
-
+/*
 				while(res.next())
 				{
 			
@@ -802,7 +803,9 @@ public void verfuegbarkeitSetzen(int PersNr,  java.sql.Date von, java.sql.Date b
 		
 				}	
 				
-				
+				*/	
+				res.close();
+				stmt.close();
 				}
 			
 					catch(SQLException e)

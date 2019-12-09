@@ -28,14 +28,14 @@ public class GUIvon_bis {
 	/**
 	 * Create the application.
 	 */
-	public GUIvon_bis(JDBC_MariaDB jdbc, int row) {
-		initialize(jdbc, row);
+	public GUIvon_bis(JDBC_MariaDB jdbc, int PersNr) {
+		initialize(jdbc, PersNr);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize(JDBC_MariaDB jdbc, int row) {
+	private void initialize(JDBC_MariaDB jdbc, int PersNr) {
 		frame12 = new JFrame();
 		frame12.setIconImage(Toolkit.getDefaultToolkit().getImage(GUIvon_bis.class.getResource("/ressources/EQOS.jpg")));
 		frame12.setBounds(100, 100, 526, 337);
@@ -62,7 +62,9 @@ public class GUIvon_bis {
 				int bisint=0;
 				int vJahr=0;
 				int bJahr=0;
-				int PersNr=//Wert aus Datenbank
+				int Grund=4;
+				//int PersNr=//Wert aus Datenbank
+						
 				
 				vonint=Integer.parseInt(textField.getText());
 				bisint=Integer.parseInt(textField_1.getText());
@@ -87,7 +89,7 @@ public class GUIvon_bis {
 				
 					try {
 						
-						jdbc.verfuegbarkeitSetzen(PersNr, von, bis);
+						jdbc.unverfuegbarSetzen(PersNr, von, bis, Grund);
 						
 					}catch(Exception e1) {
 						e1.printStackTrace();
@@ -103,6 +105,9 @@ public class GUIvon_bis {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
+				
+				/*
+				
 				int von=0;
 				int bis=0;
 				
@@ -116,7 +121,7 @@ public class GUIvon_bis {
 						
 						/*for(int i=0; i<lenght; i++) {
 						    if (jdbc.getMitarbeiter().get(i).getPersnr()==(PersoNr)) {
-						        System.out.println("ok cool");*/
+						        System.out.println("ok cool");
 						        while(von<=bis) {
 						        	
 						        	jdbc.getMitarbeiter().get(row).getWochen().get(von).setKrank(false);
@@ -141,7 +146,7 @@ public class GUIvon_bis {
 					textField.setText(null);
 					textField_1.setText(null);
 					frame12.dispose();
-				
+				*/
 				
 			}
 		});
@@ -149,6 +154,48 @@ public class GUIvon_bis {
 		JButton btnNewButton_1 = new JButton("Urlaub");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				int vonint=0;
+				int bisint=0;
+				int vJahr=0;
+				int bJahr=0;
+				int Grund=6;
+				//int PersNr=//Wert aus Datenbank
+				
+				vonint=Integer.parseInt(textField.getText());
+				bisint=Integer.parseInt(textField_1.getText());
+				vJahr=Integer.parseInt(textField_2.getText());
+				bJahr=Integer.parseInt(textField_3.getText());
+						
+				int startday=2;								//2 für Montag
+				int endday=7;								//7 für Samstag
+				
+				Calendar startdate = Calendar.getInstance();
+				startdate.setWeekDate(vJahr, vonint, startday);	//von Datum setzen
+				Date vonDate=startdate.getTime();				//in Java Date speichern
+				java.sql.Date von = new java.sql.Date(vonDate.getTime());	//in SQL Date umwandeln
+						
+						
+				Calendar enddate = Calendar.getInstance();
+				enddate.setWeekDate(bJahr, bisint, endday);	//bis Datum setzen
+				enddate.getTime();
+				Date bisDate=enddate.getTime();				//in Java Date speichern
+				java.sql.Date bis = new java.sql.Date(bisDate.getTime()); 	 //in SQL Date umwandeln	
+				
+				
+					try {
+						
+						jdbc.unverfuegbarSetzen(PersNr, von, bis, Grund);
+						
+					}catch(Exception e1) {
+						e1.printStackTrace();
+					}
+					
+					textField.setText(null);
+					textField_1.setText(null);
+					frame12.dispose();
+				
+				/*
 				int von=0;
 				int bis=0;
 				
@@ -162,7 +209,7 @@ public class GUIvon_bis {
 						
 						/*for(int i=0; i<lenght; i++) {
 						    if (jdbc.getMitarbeiter().get(i).getPersnr()==(PersoNr)) {
-						        System.out.println("ok cool");*/
+						        System.out.println("ok cool");
 						        while(von<=bis) {
 						        	
 						        	jdbc.getMitarbeiter().get(row).getWochen().get(von).setUrlaub(true);
@@ -185,12 +232,55 @@ public class GUIvon_bis {
 					textField.setText(null);
 					textField_1.setText(null);
 					frame12.dispose();
+					*/
 			}
 		});
 		
 		JButton btnNewButton_2 = new JButton("Schulung");
 		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				int vonint=0;
+				int bisint=0;
+				int vJahr=0;
+				int bJahr=0;
+				int Grund=5;
+				//int PersNr=//Wert aus Datenbank
+				
+				vonint=Integer.parseInt(textField.getText());
+				bisint=Integer.parseInt(textField_1.getText());
+				vJahr=Integer.parseInt(textField_2.getText());
+				bJahr=Integer.parseInt(textField_3.getText());
+						
+				int startday=2;								//2 für Montag
+				int endday=7;								//7 für Samstag
+				
+				Calendar startdate = Calendar.getInstance();
+				startdate.setWeekDate(vJahr, vonint, startday);	//von Datum setzen
+				Date vonDate=startdate.getTime();				//in Java Date speichern
+				java.sql.Date von = new java.sql.Date(vonDate.getTime());	//in SQL Date umwandeln
+						
+						
+				Calendar enddate = Calendar.getInstance();
+				enddate.setWeekDate(bJahr, bisint, endday);	//bis Datum setzen
+				enddate.getTime();
+				Date bisDate=enddate.getTime();				//in Java Date speichern
+				java.sql.Date bis = new java.sql.Date(bisDate.getTime()); 	 //in SQL Date umwandeln	
+				
+				
+					try {
+						
+						jdbc.unverfuegbarSetzen(PersNr, von, bis, Grund);
+						
+					}catch(Exception e1) {
+						e1.printStackTrace();
+					}
+					
+					textField.setText(null);
+					textField_1.setText(null);
+					frame12.dispose();
+				
+				/*
 				int von=0;
 				int bis=0;
 				
@@ -204,7 +294,7 @@ public class GUIvon_bis {
 						
 						/*for(int i=0; i<lenght; i++) {
 						    if (jdbc.getMitarbeiter().get(i).getPersnr()==(PersoNr)) {
-						        System.out.println("ok cool");*/
+						        System.out.println("ok cool");
 						        while(von<=bis) {
 						        	
 						        	jdbc.getMitarbeiter().get(row).getWochen().get(von).setSchulung(true);
@@ -228,6 +318,7 @@ public class GUIvon_bis {
 					textField.setText(null);
 					textField_1.setText(null);
 					frame12.dispose();
+					*/
 			}
 		});
 		

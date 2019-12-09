@@ -328,16 +328,17 @@ public class GUIgruppeODEReinzeln {
 		JButton button_3 = new JButton("Mitarbeiter nicht verf\u00FCgbar");
 		button_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				int row;
-				int PersoNr;
-				String PersonalNr;
-				row=table.getSelectedRow();
+				
+				int row =table.getSelectedRow();
+				int column=0;
+				String content =table.getValueAt(row,column).toString();
+				int PersNr=Integer.parseInt(content);
 				
 				
 				EventQueue.invokeLater(new Runnable() {
 					public void run() {
 						try {
-							GUIvon_bis window = new GUIvon_bis(jdbc, row);
+							GUIvon_bis window = new GUIvon_bis(jdbc, PersNr);
 							window.frame12.setVisible(true);
 							
 						} catch (Exception e) {
