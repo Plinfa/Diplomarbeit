@@ -5,6 +5,8 @@ import javax.swing.JButton;
 import javax.swing.JTable;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.awt.event.ActionEvent;
 import javax.swing.JMenuBar;
@@ -37,6 +39,8 @@ public class GUIgruppeODEReinzeln {
 	private JTextField textField_2;
 	private JTextField textField_3;
 	private JTextField textField_4;
+	private JTextField textField;
+	private JTextField textField_1;
 	/**
 	 * Launch the application.
 	 */
@@ -77,16 +81,37 @@ public class GUIgruppeODEReinzeln {
 				projnr=Integer.parseInt(textField_2.getText());
 				//von=Integer.parseInt(textField_3.getText());
 				//bis=Integer.parseInt(textField_4.getText());
-				String von=null;
-				String bis=null;
-				von=textField_3.getText();
-				bis=textField_4.getText();
-					
+				String vonEingabe=null;
+				String bisEingabe=null;
+				String vonJahr=null;
+				String bisJahr=null;
+				vonEingabe=textField_3.getText();
+				bisEingabe=textField_4.getText();
+				vonJahr=textField.getText();
+				bisJahr=textField_1.getText();				//Eingabe
+				int vonint=Integer.parseInt(vonEingabe);		
+				int bisint=Integer.parseInt(bisEingabe);
+				int vJahr=Integer.parseInt(vonJahr);
+				int bJahr=Integer.parseInt(bisJahr);		//Eingabe in Integer umwandeln
+				int startday=2;								//2 für Montag
+				int endday=7;	
+				
+				Calendar startdate = Calendar.getInstance();
+				startdate.setWeekDate(vJahr, vonint, startday);	//von Datum setzen
+				Date vonDate=startdate.getTime();			//in Java Date speichern
+				java.sql.Date von = new java.sql.Date(vonDate.getTime());	//in SQL Date umwandeln
+				
+				
+				Calendar enddate = Calendar.getInstance();
+				enddate.setWeekDate(bJahr, bisint, endday);	//bis Datum setzen
+				enddate.getTime();
+				Date bisDate=enddate.getTime();				//in Java Date speichern
+				java.sql.Date bis = new java.sql.Date(bisDate.getTime()); 	 //in SQL Date umwandeln
+				
 					try {
 						
 						
-						int lenght=jdbc.Projektecount();
-						System.out.println(lenght);
+						
 						
 						jdbc.Mitarbeiterzuteilen(PersNr, von, bis, projnr);
 						/*
@@ -174,7 +199,7 @@ public class GUIgruppeODEReinzeln {
 		textField_3.setColumns(10);
 		
 		textField_4 = new JTextField();
-		textField_4.setBounds(771, 169, 96, 20);
+		textField_4.setBounds(771, 171, 96, 20);
 		frame6.getContentPane().add(textField_4);
 		textField_4.setColumns(10);
 		
@@ -223,6 +248,8 @@ public class GUIgruppeODEReinzeln {
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
+				
+				frame6.dispose();
 				EventQueue.invokeLater(new Runnable() {
 					public void run() {
 						try {
@@ -332,6 +359,24 @@ public class GUIgruppeODEReinzeln {
 		});
 		button_5.setBounds(463, 48, 145, 23);
 		frame6.getContentPane().add(button_5);
+		
+		textField = new JTextField();
+		textField.setBounds(665, 198, 96, 20);
+		frame6.getContentPane().add(textField);
+		textField.setColumns(10);
+		
+		textField_1 = new JTextField();
+		textField_1.setBounds(771, 198, 96, 20);
+		frame6.getContentPane().add(textField_1);
+		textField_1.setColumns(10);
+		
+		JLabel lblKw = new JLabel("KW:");
+		lblKw.setBounds(607, 174, 48, 14);
+		frame6.getContentPane().add(lblKw);
+		
+		JLabel lblJahr = new JLabel("Jahr:");
+		lblJahr.setBounds(607, 201, 48, 14);
+		frame6.getContentPane().add(lblJahr);
 		
 		menuBar = new JMenuBar();
 		frame6.setJMenuBar(menuBar);

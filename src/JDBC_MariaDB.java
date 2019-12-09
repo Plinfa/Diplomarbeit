@@ -9,6 +9,8 @@ import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.util.*;
 
+import javax.swing.JOptionPane;
+
 import org.jfree.data.category.IntervalCategoryDataset;
 import org.jfree.data.gantt.Task;
 import org.jfree.data.gantt.TaskSeries;
@@ -39,7 +41,7 @@ public class JDBC_MariaDB
 		try {
 			
 			
-			con= DriverManager.getConnection("jdbc:mariadb://localhost:3306/eqospersonalplanung","root","davmay81");
+			con= DriverManager.getConnection("jdbc:mariadb://localhost:3306/eqospersonalplanung","root","5455809Otto");
 		
 			}catch(SQLException e)
 				{
@@ -301,15 +303,13 @@ public class JDBC_MariaDB
 		
 	}
 
-	public void Mitarbeiterzuteilen(int PersNr,  String von, String bis, int projnr){
+	public void Mitarbeiterzuteilen(int PersNr,  java.sql.Date von, java.sql.Date bis, int projnr){
 		
 		
-		int lenght=Projektecount();
 		
-		System.out.println(lenght);
 		
 		ResultSet res=null;
-		String verfueg=Verfuegbarkeit(PersNr);
+		String verfueg=Verfuegbarkeitabfrage(PersNr);
 		
 		try {
 		
@@ -323,7 +323,7 @@ public class JDBC_MariaDB
 			
 			
 				if(verfueg!=null) {
-					System.out.println("mitarbeiter ist nicht verfuegbar");
+					JOptionPane.showMessageDialog(null, "Mitarbeiter ist in diesem Zeitraum in mindestens einer Woche nicht verfügbar", "Fehler", JOptionPane.ERROR_MESSAGE);
 					
 				}
 				else {
@@ -712,7 +712,7 @@ public class JDBC_MariaDB
 		}
 		
 		
-		public String Verfuegbarkeit(int PersNr){
+		public String verfuegbarkeitabfrage(int PersNr){
 			
 			
 			
@@ -765,6 +765,55 @@ public class JDBC_MariaDB
 			
 		}
 		
+public void verfuegbarkeitSetzen(int PersNr,  java.sql.Date von, java.sql.Date bis){
+			
+			
+			
+			String verfueg=null;
+			ResultSet res=null;
+			
+			
+			try {
+			
+				Statement stmt =con.createStatement();
+				
+			
+				//SQL Befehl
+				
+				String sql = "SELECT * FROM ist WHERE PersNr='"+PersNr+"'";
+				
+				res= stmt.executeQuery(sql);
+				
+				
+				
+
+				while(res.next())
+				{
+			
+					
+					
+					
+					
+					von = res.getString(1);
+					bis = res.getString(2);
+					verfueg = res.getString(3);
+					
+					
+		
+				}	
+				
+				
+				}
+			
+					catch(SQLException e)
+					{
+					e.printStackTrace(); 
+					}
+						
+		}
+		
+
+
 		public void projektliste_füllen(int projektnummer, String projektname, Date startdatum, Date enddatum) {
 			
 			
