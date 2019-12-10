@@ -114,33 +114,7 @@ public class GUIgruppeODEReinzeln {
 						
 						
 						jdbc.Mitarbeiterzuteilen(PersNr, von, bis, projnr);
-						/*
-						for(int i=0; i<lenght; i++) {
-						    if (jdbc.getProjekte().get(i).getKostenstelle()==(projnr)) {
-						        while(von<=bis) {
-						        	
-						        	if (jdbc.getMitarbeiter().get(row).getWochen().get(von).isKrank()==true | jdbc.getMitarbeiter().get(row).getWochen().get(von).isSchulung()==true | jdbc.getMitarbeiter().get(row).getWochen().get(von).isUrlaub()==true) {
-						        		
-						        		jdbc.getMitarbeiter().get(row).getWochen().get(von).setZugeteilt(null);
-						        	}
-						        	
-						        	else {
-						        		
-						        		jdbc.getMitarbeiter().get(row).getWochen().get(von).setZugeteilt(jdbc.getProjekte().get(i));
-						        		
-						        	}
-						        	von++;
-						        }
-						        
-						      /*  Project projektname =jdbc.getMitarbeiter().get(1).getWochen().get(2).getZugeteilt();
-						        String projname=projektname.getNameProj();
-						        System.out.println(projname);
-						        break;
-						    }
-						    
-						   
-						}
-						 */
+						
 						
 						//JOptionPane.showMessageDialog(null, "Mitarbeiter erfolgreich hinzugefügt ", "Bestätigen", JOptionPane.OK_CANCEL_OPTION);
 					

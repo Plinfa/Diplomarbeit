@@ -41,7 +41,7 @@ public class JDBC_MariaDB
 		try {
 			
 			
-			con= DriverManager.getConnection("jdbc:mariadb://localhost:3306/eqospersonalplanung","root","davmay81");
+			con= DriverManager.getConnection("jdbc:mariadb://localhost:3306/eqospersonalplanung","root","5455809Otto");
 		
 			}catch(SQLException e)
 				{
@@ -138,7 +138,7 @@ public class JDBC_MariaDB
 		
 		
 		ResultSet res=null;
-		ResultSet resu=null;
+		
 		try {
 		
 			Statement stmt =con.createStatement();
@@ -149,20 +149,38 @@ public class JDBC_MariaDB
 		
 		
 			res= stmt.executeQuery(sql);	
-			resu= stmt.executeQuery(sql);
-				
-			while(! resu.isLast()) // as long as valid data is in the result set
-			{
-				
-				
-			resu.next(); // go to next line in the customer table
-			
-			
-			int persnr = resu.getInt(1);//persnr= 1 spalte
-			
 			
 		
 			}
+				catch(SQLException e)
+				{
+				e.printStackTrace(); 
+				}
+		
+		
+		return res;
+	}
+	
+	public ResultSet selectAbwesenheiten(int PersNr) 
+	{
+		
+		
+		
+		ResultSet res=null;
+		
+		
+		try {
+		
+			Statement stmt =con.createStatement();
+		
+			//SQL Befehl
+			
+			String sql = "SELECT ist.von, ist.bis, abwesenheit.Grund FROM ist JOIN abwesenheit ON ist.Nr=abwesenheit.Nr WHERE PersNr='"+PersNr+"'";
+			
+			
+		
+			res= stmt.executeQuery(sql);	
+			
 		
 			}
 				catch(SQLException e)
@@ -315,12 +333,6 @@ public class JDBC_MariaDB
 		
 			Statement stmt =con.createStatement();
 			
-		
-			//SQL Befehl
-			
-			
-			//String sql = "SELECT * FROM projekt";
-			
 			
 				if(verfueg!=null) {
 					JOptionPane.showMessageDialog(null, "Mitarbeiter ist in diesem Zeitraum in mindestens einer Woche nicht verfügbar", "Fehler", JOptionPane.ERROR_MESSAGE);
@@ -333,46 +345,6 @@ public class JDBC_MariaDB
 					stmt.close();
 				}
 			
-			
-			
-			
-			/*
-			while(! res.isLast()) // as long as valid data is in the result set
-			{
-				
-				int projektnummer = res.getInt(1);
-			
-				res.next(); // go to next line in the customer table
-			
-						
-			
-			
-			
-		
-			if(projektnummer==projnr) {
-				
-				while(von<=bis) {
-		        	
-		        	if (verfueg!=null) {
-		        		
-		        		//zuteilung löschen
-		        		
-		        	}
-		        	
-		        	else {
-		        		
-		        		//zuteilen 
-		        		String zuteilen = "INSERT INTO arbeitet VALUES('"+von+"','"+bis+"','"+projnr+"','"+PersNr+"')";
-		        	}
-		        	von++;
-		        }
-				
-				
-			}        
-		
-			
-			}
-			*/
 		}
 		
 		
@@ -787,23 +759,6 @@ public void unverfuegbarSetzen(int PersNr,  java.sql.Date von, java.sql.Date bis
 				
 				
 				
-/*
-				while(res.next())
-				{
-			
-					
-					
-					
-					
-					von = res.getString(1);
-					bis = res.getString(2);
-					verfueg = res.getString(3);
-					
-					
-		
-				}	
-				
-				*/	
 				res.close();
 				stmt.close();
 				}

@@ -11,7 +11,11 @@ import java.util.Calendar;
 import java.util.Date;
 import java.awt.event.ActionEvent;
 import javax.swing.LayoutStyle.ComponentPlacement;
+
+import net.proteanit.sql.DbUtils;
+
 import java.awt.Toolkit;
+import javax.swing.JTable;
 
 public class GUIvon_bis {
 
@@ -20,6 +24,7 @@ public class GUIvon_bis {
 	private JTextField textField_1;
 	private JTextField textField_2;
 	private JTextField textField_3;
+	private JTable table;
 
 	/**
 	 * Launch the application.
@@ -38,7 +43,7 @@ public class GUIvon_bis {
 	private void initialize(JDBC_MariaDB jdbc, int PersNr) {
 		frame12 = new JFrame();
 		frame12.setIconImage(Toolkit.getDefaultToolkit().getImage(GUIvon_bis.class.getResource("/ressources/EQOS.jpg")));
-		frame12.setBounds(100, 100, 526, 337);
+		frame12.setBounds(100, 100, 746, 431);
 		frame12.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
 		textField = new JTextField();
@@ -62,7 +67,7 @@ public class GUIvon_bis {
 				int bisint=0;
 				int vJahr=0;
 				int bJahr=0;
-				int Grund=4;
+				int Grund=1;
 				//int PersNr=//Wert aus Datenbank
 						
 				
@@ -159,7 +164,7 @@ public class GUIvon_bis {
 				int bisint=0;
 				int vJahr=0;
 				int bJahr=0;
-				int Grund=6;
+				int Grund=2;
 				//int PersNr=//Wert aus Datenbank
 				
 				vonint=Integer.parseInt(textField.getText());
@@ -195,44 +200,7 @@ public class GUIvon_bis {
 					textField_1.setText(null);
 					frame12.dispose();
 				
-				/*
-				int von=0;
-				int bis=0;
 				
-					
-					try {
-						von=Integer.parseInt(textField.getText());
-						bis=Integer.parseInt(textField_1.getText());
-						
-						//int lenght=jdbc.getMitarbeiter().size();
-						
-						
-						/*for(int i=0; i<lenght; i++) {
-						    if (jdbc.getMitarbeiter().get(i).getPersnr()==(PersoNr)) {
-						        System.out.println("ok cool");
-						        while(von<=bis) {
-						        	
-						        	jdbc.getMitarbeiter().get(row).getWochen().get(von).setUrlaub(true);
-						        	jdbc.getMitarbeiter().get(row).getWochen().get(von).setZugeteilt(null);
-						        	von++;
-						        	
-						        }
-						        
-						   // }
-						    
-						
-						
-						
-						//JOptionPane.showMessageDialog(null, "Mitarbeiter erfolgreich hinzugefügt ", "Bestätigen", JOptionPane.OK_CANCEL_OPTION);
-					
-					}catch(Exception e1) {
-						e1.printStackTrace();
-					}
-					
-					textField.setText(null);
-					textField_1.setText(null);
-					frame12.dispose();
-					*/
 			}
 		});
 		
@@ -244,7 +212,7 @@ public class GUIvon_bis {
 				int bisint=0;
 				int vJahr=0;
 				int bJahr=0;
-				int Grund=5;
+				int Grund=3;
 				//int PersNr=//Wert aus Datenbank
 				
 				vonint=Integer.parseInt(textField.getText());
@@ -279,46 +247,7 @@ public class GUIvon_bis {
 					textField.setText(null);
 					textField_1.setText(null);
 					frame12.dispose();
-				
-				/*
-				int von=0;
-				int bis=0;
-				
-					
-					try {
-						von=Integer.parseInt(textField.getText());
-						bis=Integer.parseInt(textField_1.getText());
-						
-						//int lenght=jdbc.getMitarbeiter().size();
-						
-						
-						/*for(int i=0; i<lenght; i++) {
-						    if (jdbc.getMitarbeiter().get(i).getPersnr()==(PersoNr)) {
-						        System.out.println("ok cool");
-						        while(von<=bis) {
-						        	
-						        	jdbc.getMitarbeiter().get(row).getWochen().get(von).setSchulung(true);
-						        	jdbc.getMitarbeiter().get(row).getWochen().get(von).setZugeteilt(null);
-						        	von++;
-						        	
-						        }
-						        boolean schulung=jdbc.getMitarbeiter().get(1).getWochen().get(5).isSchulung();
-						        System.out.println(schulung);
-						   // }
-						    
-						
-						
-						
-						//JOptionPane.showMessageDialog(null, "Mitarbeiter erfolgreich hinzugefügt ", "Bestätigen", JOptionPane.OK_CANCEL_OPTION);
-					
-					}catch(Exception e1) {
-						e1.printStackTrace();
-					}
-					
-					textField.setText(null);
-					textField_1.setText(null);
-					frame12.dispose();
-					*/
+			
 			}
 		});
 		
@@ -329,23 +258,15 @@ public class GUIvon_bis {
 		textField_3.setColumns(10);
 		
 		JLabel lblJahr = new JLabel("Jahr:");
-			
+		
+		table = new JTable();
+		table.setModel(DbUtils.resultSetToTableModel(jdbc.selectAbwesenheiten(PersNr)));
 		
 		GroupLayout groupLayout = new GroupLayout(frame12.getContentPane());
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.TRAILING)
-				.addGroup(groupLayout.createSequentialGroup()
+				.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(42)
-							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-								.addComponent(btnNewButton)
-								.addGroup(groupLayout.createSequentialGroup()
-									.addComponent(btnBesttigen)
-									.addGap(117)
-									.addComponent(btnNewButton_1)
-									.addGap(18)
-									.addComponent(btnNewButton_2))))
 						.addGroup(groupLayout.createSequentialGroup()
 							.addGap(20)
 							.addComponent(lblJahr)
@@ -356,36 +277,53 @@ public class GUIvon_bis {
 								.addComponent(textField_2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 							.addPreferredGap(ComponentPlacement.UNRELATED)
 							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-								.addComponent(textField_3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 								.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-								.addComponent(lblBis))
-							.addGap(95)))
-					.addContainerGap(132, Short.MAX_VALUE))
+								.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+									.addComponent(textField_3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+									.addComponent(lblBis))))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(42)
+							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+								.addComponent(btnNewButton)
+								.addGroup(groupLayout.createSequentialGroup()
+									.addComponent(btnBesttigen)
+									.addGap(18)
+									.addComponent(btnNewButton_1)
+									.addGap(10)
+									.addComponent(btnNewButton_2)))))
+					.addPreferredGap(ComponentPlacement.RELATED, 91, Short.MAX_VALUE)
+					.addComponent(table, GroupLayout.PREFERRED_SIZE, 232, GroupLayout.PREFERRED_SIZE)
+					.addGap(136))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(85)
-					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblVon)
-						.addComponent(lblBis))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(textField_2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblJahr)
-						.addComponent(textField_3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGap(47)
-					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(btnBesttigen)
-						.addComponent(btnNewButton_1)
-						.addComponent(btnNewButton_2))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(btnNewButton)
-					.addContainerGap(48, Short.MAX_VALUE))
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(85)
+							.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+								.addComponent(lblVon)
+								.addComponent(lblBis))
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+								.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+								.addComponent(textField_2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblJahr)
+								.addComponent(textField_3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+							.addGap(47)
+							.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+								.addComponent(btnBesttigen)
+								.addComponent(btnNewButton_1)
+								.addComponent(btnNewButton_2))
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(btnNewButton))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(98)
+							.addComponent(table, GroupLayout.PREFERRED_SIZE, 186, GroupLayout.PREFERRED_SIZE)))
+					.addContainerGap(108, Short.MAX_VALUE))
 		);
 		frame12.getContentPane().setLayout(groupLayout);
 	}
