@@ -41,7 +41,7 @@ public class JDBC_MariaDB
 		try {
 			
 			
-			con= DriverManager.getConnection("jdbc:mariadb://localhost:3306/eqospersonalplanung","root","5455809Otto");
+			con= DriverManager.getConnection("jdbc:mariadb://localhost:3306/eqospersonalplanung","root","davmay81");
 		
 			}catch(SQLException e)
 				{
@@ -621,7 +621,7 @@ public class JDBC_MariaDB
 					
 					 //SQL Befehl
 					
-				String sql = "INSERT INTO projekt VALUES ('"+ProjektNr+"','"+Projektname+"','"+Ort+"','"+Startdatum+"','"+Enddatum+"')";
+				String sql = "INSERT INTO projekt (ProjektNr, Name, Ort, von, bis) VALUES ('"+ProjektNr+"','"+Projektname+"','"+Ort+"','"+Startdatum+"','"+Enddatum+"')";
 					 res= stmt.executeQuery(sql);	
 					
 						res.close();		
@@ -738,7 +738,7 @@ public class JDBC_MariaDB
 			
 		}
 		
-public void unverfuegbarSetzen(int PersNr,  java.sql.Date von, java.sql.Date bis, int Grund){
+public void unverfuegbarSetzen(int PersNr,  java.sql.Date von, java.sql.Date bis, String Grund){
 			
 			
 			
@@ -753,7 +753,7 @@ public void unverfuegbarSetzen(int PersNr,  java.sql.Date von, java.sql.Date bis
 			
 				//SQL Befehl
 				// i think u meant this
-				String sql = "INSERT INTO ist VALUES ('"+von+"','"+bis+"','"+PersNr+"','"+Grund+"')";
+				String sql = "INSERT INTO abwesenheit (PersNr, Grund, von, bis) VALUES ('"+PersNr+"','"+Grund+"','"+von+"','"+bis+"')";
 				
 				res= stmt.executeQuery(sql);
 				

@@ -67,7 +67,7 @@ public class GUIvon_bis {
 				int bisint=0;
 				int vJahr=0;
 				int bJahr=0;
-				int Grund=1;
+				String Grund= "krank";
 				//int PersNr=//Wert aus Datenbank
 						
 				
@@ -164,7 +164,7 @@ public class GUIvon_bis {
 				int bisint=0;
 				int vJahr=0;
 				int bJahr=0;
-				int Grund=2;
+				String Grund= "urlaub";
 				//int PersNr=//Wert aus Datenbank
 				
 				vonint=Integer.parseInt(textField.getText());
@@ -212,7 +212,7 @@ public class GUIvon_bis {
 				int bisint=0;
 				int vJahr=0;
 				int bJahr=0;
-				int Grund=3;
+				String Grund= "schulung";
 				//int PersNr=//Wert aus Datenbank
 				
 				vonint=Integer.parseInt(textField.getText());
