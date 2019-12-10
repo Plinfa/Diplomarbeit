@@ -175,7 +175,7 @@ public class JDBC_MariaDB
 		
 			//SQL Befehl
 			
-			String sql = "SELECT ist.von, ist.bis, abwesenheit.Grund FROM ist JOIN abwesenheit ON ist.Nr=abwesenheit.Nr WHERE PersNr='"+PersNr+"'";
+			String sql = "SELECT von, bis, Grund FROM abwesenheit WHERE PersNr='"+PersNr+"'";
 			
 			
 		
