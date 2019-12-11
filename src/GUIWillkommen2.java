@@ -119,6 +119,8 @@ public class GUIWillkommen2 {
 				if (JOptionPane.showConfirmDialog(frame, "Wirklich beenden?", "Personal- und Projektmanager", JOptionPane.YES_NO_OPTION)==JOptionPane.YES_NO_OPTION) {
 					System.exit(0);
 				}
+				
+				
 			}
 		});
 		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
