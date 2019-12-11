@@ -16,6 +16,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
 import javax.swing.JProgressBar;
+import javax.swing.JLabel;
 //Wartecker Marcel
 public class GUIstartmenue2 {
 
@@ -44,7 +45,7 @@ public class GUIstartmenue2 {
 		frame2.setBounds(100, 100, 1118, 627);
 		frame2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		JButton btnMitarbeiter = new JButton("Mitarbeiter");
+		JButton btnMitarbeiter = new JButton("Mitarbeiterplanung");
 		btnMitarbeiter.setBounds(561, 154, 531, 60);
 		btnMitarbeiter.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -62,7 +63,7 @@ public class GUIstartmenue2 {
 			}
 		});
 		
-		JButton btnProjekte = new JButton("Projekte");
+		JButton btnProjekte = new JButton("Projektplanung");
 		btnProjekte.setBounds(42, 154, 397, 60);
 		btnProjekte.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -82,42 +83,37 @@ public class GUIstartmenue2 {
 			}
 		});
 		
-		JButton btnPersonalbedarf = new JButton("Personalbedarf");
-		btnPersonalbedarf.setBounds(56, 446, 107, 23);
-		btnPersonalbedarf.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				frame2.dispose();
-				EventQueue.invokeLater(new Runnable() {
-					public void run() {
-						try {
-							GUIPersonalbedarf window = new GUIPersonalbedarf(jdbc);
-							window.frmPersonalUndProjektmanager.setVisible(true);
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
-					}
-				});
-			}
-		});
-		
-		
-		
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(42, 272, 2, 2);
-		table = new JTable();
-		scrollPane.setViewportView(table);
-		table.setModel(DbUtils.resultSetToTableModel(jdbc.selectTabelleProjects()));
-		
 		JProgressBar progressBar = new JProgressBar(0, 100);
 		progressBar.setBounds(561, 272, 531, 60);
 		progressBar.setValue(34);
 		progressBar.setStringPainted(true);
+		
 		frame2.getContentPane().setLayout(null);
 		frame2.getContentPane().add(btnProjekte);
-		frame2.getContentPane().add(scrollPane);
 		frame2.getContentPane().add(progressBar);
 		frame2.getContentPane().add(btnMitarbeiter);
-		frame2.getContentPane().add(btnPersonalbedarf);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(42, 244, 397, 172);
+		frame2.getContentPane().add(scrollPane);
+		
+		table = new JTable();
+		scrollPane.setViewportView(table);
+		table.setModel(DbUtils.resultSetToTableModel(jdbc.selectTabelleProjects()));
+		
+		JLabel lblAuslastungNchsteKw = new JLabel("Auslastung n\u00E4chste KW:");
+		lblAuslastungNchsteKw.setBounds(561, 247, 284, 14);
+		frame2.getContentPane().add(lblAuslastungNchsteKw);
+		
+		JLabel lblAuslastungbernchsteKw = new JLabel("Auslastung \u00FCbern\u00E4chste KW:");
+		lblAuslastungbernchsteKw.setBounds(561, 343, 211, 14);
+		frame2.getContentPane().add(lblAuslastungbernchsteKw);
+		
+		JProgressBar progressBar_1 = new JProgressBar(0, 100);
+		progressBar_1.setValue(22);
+		progressBar_1.setStringPainted(true);
+		progressBar_1.setBounds(561, 371, 531, 60);
+		frame2.getContentPane().add(progressBar_1);
 		
 		JMenuBar menuBar = new JMenuBar();
 		frame2.setJMenuBar(menuBar);

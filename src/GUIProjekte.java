@@ -107,7 +107,7 @@ public class GUIProjekte {
 		lblProjekte.setBounds(207, 28, 48, 14);
 		
 		JButton btnProjektplanungDiagramm = new JButton("Projektplanung Diagramm");
-		btnProjektplanungDiagramm.setBounds(890, 108, 172, 23);
+		btnProjektplanungDiagramm.setBounds(551, 67, 172, 23);
 		btnProjektplanungDiagramm.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				EventQueue.invokeLater(new Runnable() {
@@ -122,29 +122,10 @@ public class GUIProjekte {
 				});
 			}
 		});
-		
-		JButton btnNewButton = new JButton("Personalbedarf gesamt");
-		btnNewButton.setBounds(519, 45, 172, 23);
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				frame5.dispose();
-				EventQueue.invokeLater(new Runnable() {
-					public void run() {
-						try {
-							GUIPersonalbedarf window = new GUIPersonalbedarf(jdbc);
-							window.frmPersonalUndProjektmanager.setVisible(true);
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
-					}
-				});
-			}
-		});
 		frame5.getContentPane().setLayout(null);
 		frame5.getContentPane().add(lblProjekte);
 		frame5.getContentPane().add(btnHinzufgen);
 		frame5.getContentPane().add(btnLschen);
-		frame5.getContentPane().add(btnNewButton);
 		frame5.getContentPane().add(btnProjektplanungDiagramm);
 		
 		JScrollPane scrollPane = new JScrollPane();
@@ -205,30 +186,6 @@ public class GUIProjekte {
 				});
 				btnUpdate.setBounds(198, 67, 89, 23);
 				frame5.getContentPane().add(btnUpdate);
-				
-				JButton btnEinzelprojektPersonalbedarf = new JButton("Einzelprojekt Personalbedarf");
-				btnEinzelprojektPersonalbedarf.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						
-						EventQueue.invokeLater(new Runnable() {
-							public void run() {
-								try {
-									GUIeinzelPERS window = new GUIeinzelPERS(jdbc);
-									window.frameEinzelPerso.setVisible(true);
-								} catch (Exception e) {
-									e.printStackTrace();
-								}
-							}
-						});
-						
-						
-						
-						
-						
-					}
-				});
-				btnEinzelprojektPersonalbedarf.setBounds(504, 89, 187, 23);
-				frame5.getContentPane().add(btnEinzelprojektPersonalbedarf);
 		
 		
 		

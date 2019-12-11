@@ -172,7 +172,7 @@ public class GUIPersonalbedarf {
 		JMenuBar menuBar = new JMenuBar();
 		frmPersonalUndProjektmanager.setJMenuBar(menuBar);
 		
-		JButton btnZu = new JButton("Mitarbeiter zuteilen");
+		JButton btnZu = new JButton("zurück");
 		btnZu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frmPersonalUndProjektmanager.dispose();
@@ -189,24 +189,6 @@ public class GUIPersonalbedarf {
 			}
 		});
 		menuBar.add(btnZu);
-		
-		JButton btnProjekte = new JButton("Projekte");
-		btnProjekte.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				frmPersonalUndProjektmanager.dispose();
-				EventQueue.invokeLater(new Runnable() {
-					public void run() {
-						try {
-							GUIProjekte window = new GUIProjekte(new JDBC_MariaDB());
-							window.frame5.setVisible(true);
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
-					}
-				});
-			}
-		});
-		menuBar.add(btnProjekte);
 	}
 	
 	public String needed(JDBC_MariaDB jdbc, int week) {

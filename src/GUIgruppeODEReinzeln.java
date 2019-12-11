@@ -41,6 +41,7 @@ public class GUIgruppeODEReinzeln {
 	private JTextField textField_4;
 	private JTextField textField;
 	private JTextField textField_1;
+	private JButton btnPersonalbedarfProProjekt;
 	/**
 	 * Launch the application.
 	 */
@@ -66,7 +67,7 @@ public class GUIgruppeODEReinzeln {
 		frame6.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		btnBesttigen = new JButton("Best\u00E4tigen");
-		btnBesttigen.setBounds(491, 405, 85, 23);
+		btnBesttigen.setBounds(853, 197, 85, 23);
 		btnBesttigen.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -141,7 +142,7 @@ public class GUIgruppeODEReinzeln {
 		scrollPane.setViewportView(table);
 		
 		scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(600, 244, 285, 196);
+		scrollPane_1.setBounds(583, 242, 285, 196);
 		frame6.getContentPane().add(scrollPane_1);
 		
 		table_1 = new JTable();
@@ -151,29 +152,29 @@ public class GUIgruppeODEReinzeln {
 		table_1.setModel(DbUtils.resultSetToTableModel(jdbc.selectTabelleProjects()));
 		
 		label = new JLabel("Projektnummer");
-		label.setBounds(665, 90, 74, 14);
+		label.setBounds(641, 90, 74, 14);
 		frame6.getContentPane().add(label);
 		
 		label_1 = new JLabel("von:");
-		label_1.setBounds(676, 149, 21, 14);
+		label_1.setBounds(652, 149, 21, 14);
 		frame6.getContentPane().add(label_1);
 		
 		label_2 = new JLabel("bis:");
-		label_2.setBounds(787, 149, 18, 14);
+		label_2.setBounds(763, 149, 18, 14);
 		frame6.getContentPane().add(label_2);
 		
 		textField_2 = new JTextField();
-		textField_2.setBounds(665, 110, 96, 20);
+		textField_2.setBounds(641, 110, 96, 20);
 		frame6.getContentPane().add(textField_2);
 		textField_2.setColumns(10);
 		
 		textField_3 = new JTextField();
-		textField_3.setBounds(665, 171, 96, 20);
+		textField_3.setBounds(641, 171, 96, 20);
 		frame6.getContentPane().add(textField_3);
 		textField_3.setColumns(10);
 		
 		textField_4 = new JTextField();
-		textField_4.setBounds(771, 171, 96, 20);
+		textField_4.setBounds(747, 171, 96, 20);
 		frame6.getContentPane().add(textField_4);
 		textField_4.setColumns(10);
 		
@@ -215,7 +216,7 @@ public class GUIgruppeODEReinzeln {
 			}
 			
 		});
-		button.setBounds(132, 69, 89, 23);
+		button.setBounds(59, 149, 89, 23);
 		frame6.getContentPane().add(button);
 		
 		JButton button_1 = new JButton("Hinzuf\u00FCgen");
@@ -246,7 +247,7 @@ public class GUIgruppeODEReinzeln {
 		
 		
 		
-		button_1.setBounds(132, 48, 89, 23);
+		button_1.setBounds(59, 129, 89, 23);
 		frame6.getContentPane().add(button_1);
 		
 		JButton button_2 = new JButton("Update");
@@ -296,7 +297,7 @@ public class GUIgruppeODEReinzeln {
 			
 			}
 		});
-		button_2.setBounds(59, 48, 67, 23);
+		button_2.setBounds(158, 129, 67, 23);
 		frame6.getContentPane().add(button_2);
 		
 		JButton button_3 = new JButton("Mitarbeiter nicht verf\u00FCgbar");
@@ -322,7 +323,7 @@ public class GUIgruppeODEReinzeln {
 				});
 			}
 		});
-		button_3.setBounds(265, 48, 163, 23);
+		button_3.setBounds(245, 129, 163, 23);
 		frame6.getContentPane().add(button_3);
 		
 		JButton button_5 = new JButton("Zuteilung Detailansicht");
@@ -332,26 +333,65 @@ public class GUIgruppeODEReinzeln {
 				
 			}
 		});
-		button_5.setBounds(463, 48, 145, 23);
+		button_5.setBounds(59, 197, 145, 23);
 		frame6.getContentPane().add(button_5);
 		
 		textField = new JTextField();
-		textField.setBounds(665, 198, 96, 20);
+		textField.setBounds(641, 198, 96, 20);
 		frame6.getContentPane().add(textField);
 		textField.setColumns(10);
 		
 		textField_1 = new JTextField();
-		textField_1.setBounds(771, 198, 96, 20);
+		textField_1.setBounds(747, 198, 96, 20);
 		frame6.getContentPane().add(textField_1);
 		textField_1.setColumns(10);
 		
 		JLabel lblKw = new JLabel("KW:");
-		lblKw.setBounds(607, 174, 48, 14);
+		lblKw.setBounds(583, 174, 48, 14);
 		frame6.getContentPane().add(lblKw);
 		
 		JLabel lblJahr = new JLabel("Jahr:");
-		lblJahr.setBounds(607, 201, 48, 14);
+		lblJahr.setBounds(583, 201, 48, 14);
 		frame6.getContentPane().add(lblJahr);
+		
+		JButton btnNewButton = new JButton("Personalbedarf gesamt");
+		btnNewButton.setBounds(337, 11, 213, 57);
+		frame6.getContentPane().add(btnNewButton);
+		
+		btnPersonalbedarfProProjekt = new JButton("Personalbedarf pro Projekt");
+		btnPersonalbedarfProProjekt.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				EventQueue.invokeLater(new Runnable() {
+					public void run() {
+						try {
+							GUIeinzelPERS window = new GUIeinzelPERS(jdbc);
+							window.frameEinzelPerso.setVisible(true);
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					}
+				});
+			}
+		});
+		btnPersonalbedarfProProjekt.setBounds(583, 449, 198, 23);
+		frame6.getContentPane().add(btnPersonalbedarfProProjekt);
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				frame6.dispose();
+				
+				EventQueue.invokeLater(new Runnable() {
+					public void run() {
+						try {
+							GUIPersonalbedarf window = new GUIPersonalbedarf(jdbc);
+							window.frmPersonalUndProjektmanager.setVisible(true);
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					}
+				});
+			}
+		});
 		
 		menuBar = new JMenuBar();
 		frame6.setJMenuBar(menuBar);
@@ -374,24 +414,7 @@ public class GUIgruppeODEReinzeln {
 		});
 		menuBar.add(btnZurck);
 		
-		JButton btnNewButton = new JButton("Personalbedarf");
-		menuBar.add(btnNewButton);
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				frame6.dispose();
-				
-				EventQueue.invokeLater(new Runnable() {
-					public void run() {
-						try {
-							GUIPersonalbedarf window = new GUIPersonalbedarf(jdbc);
-							window.frmPersonalUndProjektmanager.setVisible(true);
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
-					}
-				});
-			}
-		});
+		JButton btnMitarbeiterdetailsBearbeiten = new JButton("Mitarbeiterdetails bearbeiten");
+		menuBar.add(btnMitarbeiterdetailsBearbeiten);
 	}
 }

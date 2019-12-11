@@ -40,53 +40,45 @@ public class GUIeinzelPERS {
 		frameEinzelPerso.setBounds(100, 100, 690, 406);
 		frameEinzelPerso.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setMinimumSize(new Dimension(1000, 1000));
-		
 		textField = new JTextField();
+		textField.setBounds(157, 18, 96, 20);
 		textField.setColumns(10);
+		frameEinzelPerso.getContentPane().setLayout(null);
 		
 		JLabel lblProjektname = new JLabel("Projektname:");
-		GroupLayout groupLayout = new GroupLayout(frameEinzelPerso.getContentPane());
-		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.TRAILING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addContainerGap(46, Short.MAX_VALUE)
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(37)
-							.addComponent(lblProjektname)
-							.addGap(18)
-							.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-							.addContainerGap(429, Short.MAX_VALUE))
-						.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
-							.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 618, GroupLayout.PREFERRED_SIZE)
-							.addContainerGap())))
-		);
-		groupLayout.setVerticalGroup(
-			groupLayout.createParallelGroup(Alignment.TRAILING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addContainerGap(18, Short.MAX_VALUE)
-					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblProjektname))
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 241, GroupLayout.PREFERRED_SIZE)
-					.addGap(52))
-		);
-		frameEinzelPerso.getContentPane().setLayout(groupLayout);
+		lblProjektname.setBounds(74, 21, 65, 14);
+		frameEinzelPerso.getContentPane().add(lblProjektname);
+		frameEinzelPerso.getContentPane().add(textField);
+		
+		JScrollPane scrollPane_1 = new JScrollPane();
+		scrollPane_1.setBounds(46, 49, 618, 241);
+		frameEinzelPerso.getContentPane().add(scrollPane_1);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane_1.setViewportView(scrollPane);
+		scrollPane.setMinimumSize(new Dimension(1000, 1000));
 		
 		JMenuBar menuBar = new JMenuBar();
 		frameEinzelPerso.setJMenuBar(menuBar);
 		
-		JButton button = new JButton("Mitarbeiter zuteilen");
+		JButton button = new JButton("zurück");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				EventQueue.invokeLater(new Runnable() {
+					public void run() {
+						try {
+							GUIgruppeODEReinzeln window = new GUIgruppeODEReinzeln(jdbc);
+							window.frame6.setVisible(true);
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					}
+				});
+				
+				
+				
 			}
 		});
 		menuBar.add(button);
-		
-		JButton button_1 = new JButton("Projekte");
-		menuBar.add(button_1);
 	}
 }
