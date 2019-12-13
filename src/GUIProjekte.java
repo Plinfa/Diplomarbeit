@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.awt.event.ActionEvent;
 import javax.swing.JMenuBar;
+import javax.swing.JOptionPane;
+
 import java.awt.Toolkit;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -88,9 +90,15 @@ public class GUIProjekte {
 						
 						row=table.getSelectedRow();
 						ProjektNr=table.getValueAt(row, 0).toString();
+						if (JOptionPane.showConfirmDialog(frame5, "Projekt und alle Einträge wirklich löschen?", "Personal- und Projektmanager", JOptionPane.YES_NO_OPTION)==JOptionPane.YES_NO_OPTION) 
+						{
+							jdbc.deleteProject(ProjektNr);
+						}
+						else {
+							
+						}
 						
 						
-						jdbc.deleteProject(ProjektNr);
 						System.out.println(ProjektNr);
 						
 					}catch(Exception e1) {

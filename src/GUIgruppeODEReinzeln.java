@@ -177,11 +177,7 @@ public class GUIgruppeODEReinzeln {
 			public void actionPerformed(ActionEvent e) {
 				EventQueue.invokeLater(new Runnable() {
 					public void run() {
-						/*
-						 * try { GUIMitarbeiterENTF window = new GUIMitarbeiterENTF(new JDBC_MariaDB());
-						 * window.frame8.setVisible(true); } catch (Exception e) { e.printStackTrace();
-						 * }
-						 */
+						
 						int row = 0;
 						String PersNr = null;
 
@@ -189,9 +185,15 @@ public class GUIgruppeODEReinzeln {
 
 							row = table.getSelectedRow();
 							PersNr = table.getValueAt(row, 0).toString();
-
-							jdbc.deleteEmployee(PersNr);
-							System.out.println(PersNr);
+							if (JOptionPane.showConfirmDialog(frame6, "Mitarbeiter und alle Einträge wirklich löschen?", "Personal- und Projektmanager", JOptionPane.YES_NO_OPTION)==JOptionPane.YES_NO_OPTION) 
+							{
+								jdbc.deleteEmployee(PersNr);
+							}
+							else {
+								
+							}
+							
+							//System.out.println(PersNr);
 
 						} catch (Exception e1) {
 
@@ -301,7 +303,7 @@ public class GUIgruppeODEReinzeln {
 				});
 			}
 		});
-		button_3.setBounds(245, 129, 163, 23);
+		button_3.setBounds(245, 129, 183, 23);
 		frame6.getContentPane().add(button_3);
 
 		JButton button_5 = new JButton("Zuteilung Detailansicht");

@@ -35,8 +35,7 @@ public class JDBC_MariaDB {
 
 		try {
 
-			con = DriverManager.getConnection("jdbc:mariadb://localhost:3306/eqospersonalplanung", "root",
-					"5455809Otto");
+			con = DriverManager.getConnection("jdbc:mariadb://localhost:3306/eqospersonalplanung", "root","davmay81");
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -56,20 +55,7 @@ public class JDBC_MariaDB {
 
 			// SQL Befehl
 
-			// String sql = "SELECT ANGA, GruppenNr, AAktiv, PersNr, StichtagUrlaub,
-			// Eintritt, SVNr, Name, Vorname";//, NameuVorname, PlzOrt, Strasse, GebDat,
-			// Stand, Geschl, Nation, Tel, Handy, Email, gelernterBeruf, Aufgabenbereich,
-			// Sicherheitsvertrauensperson, Firmenhandy, Kennzeichen, Fahrzeug, FIN,
-			// Handwerkerbefreiung, Führerscheine, FührerscheinNr, Behörde, Ausstelldat,
-			// gültigbis, Führerscheinüberprüfung, InfoschrPrivatnutzung, EzB,
-			// FahrbewilligungNr, Kranführerausbildung, C95LKW, HubstaplerÖ, HubstaplerDE,
-			// Notfallperson, NotfallsTel,TShirt, Jacke, Schuhe, GültigkeitA1,
-			// SicherheitspassNr, Bürounterweisung, VBFnAPG, Bayernwerkgültigbis, TenneT,
-			// TowerLatchSystem, Steigschulung, GUntersuchungenfälligam,
-			// GUntersuchungenfällig, PSAÜberprüfung, EHKursDauer, EHKursam,
-			// ErsthelferbisDE, nötigeDauer, APGSchulung, RichtigesPrüfenARCUS,
-			// LumpiSeilschulung, Compliance, Teleskopstapler, Hubarbeitsbühnen,
-			// HubarbeitsbKartenNr FROM mitarbeiter";
+		
 
 			String sql = "SELECT * FROM mitarbeiter";
 
@@ -104,20 +90,7 @@ public class JDBC_MariaDB {
 
 			// SQL Befehl
 
-			// String sql = "SELECT ANGA, GruppenNr, AAktiv, PersNr, StichtagUrlaub,
-			// Eintritt, SVNr, Name, Vorname";//, NameuVorname, PlzOrt, Strasse, GebDat,
-			// Stand, Geschl, Nation, Tel, Handy, Email, gelernterBeruf, Aufgabenbereich,
-			// Sicherheitsvertrauensperson, Firmenhandy, Kennzeichen, Fahrzeug, FIN,
-			// Handwerkerbefreiung, Führerscheine, FührerscheinNr, Behörde, Ausstelldat,
-			// gültigbis, Führerscheinüberprüfung, InfoschrPrivatnutzung, EzB,
-			// FahrbewilligungNr, Kranführerausbildung, C95LKW, HubstaplerÖ, HubstaplerDE,
-			// Notfallperson, NotfallsTel,TShirt, Jacke, Schuhe, GültigkeitA1,
-			// SicherheitspassNr, Bürounterweisung, VBFnAPG, Bayernwerkgültigbis, TenneT,
-			// TowerLatchSystem, Steigschulung, GUntersuchungenfälligam,
-			// GUntersuchungenfällig, PSAÜberprüfung, EHKursDauer, EHKursam,
-			// ErsthelferbisDE, nötigeDauer, APGSchulung, RichtigesPrüfenARCUS,
-			// LumpiSeilschulung, Compliance, Teleskopstapler, Hubarbeitsbühnen,
-			// HubarbeitsbKartenNr FROM mitarbeiter";
+			
 
 			String sql = "SELECT * FROM mitarbeiter";
 
@@ -389,10 +362,15 @@ public class JDBC_MariaDB {
 			Statement stmt = con.createStatement();
 
 			// SQL Befehl
+			String deletearbeitet ="DELETE FROM arbeitet WHERE PersNr= '" + PersNr + "'";
+			String deleteabwesenheit = "DELETE FROM abwesenheit WHERE PersNr= '" + PersNr + "'";
+			String deletefaehrt = "DELETE FROM fährt WHERE PersNr= '" + PersNr + "'";
+			String deletemitarbeiter = "DELETE FROM mitarbeiter WHERE PersNr= '" + PersNr + "'";
 
-			String sql = "DELETE FROM mitarbeiter WHERE PersNr= '" + PersNr + "'";
-
-			res = stmt.executeQuery(sql);
+			res = stmt.executeQuery(deletearbeitet);
+			res = stmt.executeQuery(deleteabwesenheit);
+			res = stmt.executeQuery(deletefaehrt);
+			res = stmt.executeQuery(deletemitarbeiter);
 
 			res.close();
 			stmt.close();
@@ -412,10 +390,16 @@ public class JDBC_MariaDB {
 			Statement stmt = con.createStatement();
 
 			// SQL Befehl
+			
+			String deletebenötigt ="DELETE FROM benötigt WHERE ProjektNr= '" + ProjektNr + "'";
+			String deletearbeitet = "DELETE FROM arbeitet WHERE ProjektNr= '" + ProjektNr + "'";
+			String deleteleitet = "DELETE FROM leitetprojekt WHERE ProjektNr= '" + ProjektNr + "'";
+			String deleteproject = "DELETE FROM projekt WHERE ProjektNr='" + ProjektNr + "'";
 
-			String sql = "DELETE FROM projekt WHERE ProjektNr='" + ProjektNr + "'";
-
-			res = stmt.executeQuery(sql);
+			res = stmt.executeQuery(deletebenötigt);
+			res = stmt.executeQuery(deletearbeitet);
+			res = stmt.executeQuery(deleteleitet);
+			res = stmt.executeQuery(deleteproject);
 
 			res.close();
 			stmt.close();

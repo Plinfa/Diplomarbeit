@@ -56,17 +56,17 @@ public class GUIvon_bis {
 		textField_1.setColumns(10);
 		
 		JLabel lblVon = new JLabel("von KW:");
-		lblVon.setBounds(51, 85, 40, 14);
+		lblVon.setBounds(51, 85, 58, 14);
 		
 		JLabel lblBis = new JLabel("bis KW:");
-		lblBis.setBounds(157, 85, 37, 14);
+		lblBis.setBounds(157, 85, 50, 14);
 		
 		
 		
 		
 		
 		JButton btnBesttigen = new JButton("krank");
-		btnBesttigen.setBounds(42, 198, 59, 23);
+		btnBesttigen.setBounds(42, 198, 67, 23);
 		btnBesttigen.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int vonint=0;
@@ -164,7 +164,7 @@ public class GUIvon_bis {
 		});
 		
 		JButton btnNewButton_1 = new JButton("Urlaub");
-		btnNewButton_1.setBounds(119, 198, 65, 23);
+		btnNewButton_1.setBounds(119, 198, 75, 23);
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -213,7 +213,7 @@ public class GUIvon_bis {
 		});
 		
 		JButton btnNewButton_2 = new JButton("Schulung");
-		btnNewButton_2.setBounds(194, 198, 77, 23);
+		btnNewButton_2.setBounds(204, 198, 87, 23);
 		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
