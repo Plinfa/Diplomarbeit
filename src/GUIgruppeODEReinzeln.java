@@ -309,7 +309,11 @@ public class GUIgruppeODEReinzeln {
 		JButton button_5 = new JButton("Zuteilung Detailansicht");
 		button_5.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
+					
+				//neues Fenster mit jTable bitte marcel
+				//jdbc.zuteilungdetailansicht(PersNr);
+				
+				
 			}
 		});
 		button_5.setBounds(59, 197, 145, 23);

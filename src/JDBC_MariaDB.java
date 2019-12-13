@@ -147,7 +147,7 @@ public class JDBC_MariaDB {
 
 	public ResultSet selectAllProjects() {
 		ResultSet res = null;
-		ResultSet resu = null;
+		//ResultSet resu = null;
 		try {
 
 			Statement stmt = con.createStatement();
@@ -157,21 +157,24 @@ public class JDBC_MariaDB {
 			String sql = "SELECT * FROM projekt";
 
 			res = stmt.executeQuery(sql);
-			resu = stmt.executeQuery(sql);
+			//resu = stmt.executeQuery(sql);
 
-			while (!resu.isLast()) // as long as valid data is in the result set
+			while (!res.isLast()) // as long as valid data is in the result set
 			{
 
-				resu.next(); // go to next line in the customer table
+				res.next(); // go to next line in the customer table
 
-				int projektnummer = resu.getInt(1);
-				String projektname = resu.getString(2);
-				Date startdatum = resu.getDate(4);
-				Date enddatum = resu.getDate(5);
+				int projektnummer = res.getInt(1);
+				String projektname = res.getString(2);
+				Date startdatum = res.getDate(4);
+				Date enddatum = res.getDate(5);
 
 				projektliste_füllen(projektnummer, projektname, startdatum, enddatum);
 
 			}
+			res.close();
+			stmt.close();
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -424,11 +427,7 @@ public class JDBC_MariaDB {
 
 			while (res.next()) {
 				passwort = res.getString(1); // Spalte 1
-				// String firstname = res.getString(2); //Spalte 2
-				// String lastname = res.getString(3); //...
-				// String name = res.getString(4);
-
-				// Ausgabe
+				
 
 			}
 
@@ -475,58 +474,7 @@ public class JDBC_MariaDB {
 
 			// SQL Befehl
 
-			// String sql = "UPDATE mitarbeiter SET ANGA='"+tablecontent.get(0)+"',
-			// GruppenNr='"+tablecontent.get(1)+"',
-			// AAktiv='"+tablecontent.get(2)+"',PersNr='"+tablecontent.get(3)+"',
-			// StichtagUrlaub='"+tablecontent.get(4)+"', Eintritt='"+tablecontent.get(5)+"',
-			// SVNr='"+tablecontent.get(6)+"', Name='"+tablecontent.get(7)+"',
-			// Vorname='"+tablecontent.get(8)+"'WHERE PersNr='"+PersNr+"'";//,
-			// NameuVorname='"+tablecontent.get(9)+"', PlzOrt='"+tablecontent.get(10)+"',
-			// Strasse='"+tablecontent.get(11)+"', GebDat='"+tablecontent.get(12)+"',
-			// Stand='"+tablecontent.get(13)+"', Geschl='"+tablecontent.get(14)+"',
-			// Nation='"+tablecontent.get(15)+"', Tel='"+tablecontent.get(16)+"',
-			// Handy='"+tablecontent.get(17)+"', Email='"+tablecontent.get(18)+"',
-			// gelernterBeruf='"+tablecontent.get(19)+"',
-			// Aufgabenbereich='"+tablecontent.get(20)+"',
-			// Sicherheitsvertrauensperson='"+tablecontent.get(21)+"',
-			// Firmenhandy='"+tablecontent.get(22)+"',
-			// Kennzeichen='"+tablecontent.get(23)+"', Fahrzeug='"+tablecontent.get(24)+"',
-			// FIN='"+tablecontent.get(25)+"',
-			// Handwerkerbefreiung='"+tablecontent.get(26)+"',
-			// Führerscheine='"+tablecontent.get(27)+"',
-			// FührerscheinNr='"+tablecontent.get(28)+"',
-			// Behörde='"+tablecontent.get(29)+"', Ausstelldat='"+tablecontent.get(30)+"',
-			// gültigbis='"+tablecontent.get(31)+"',
-			// Führerscheinüberprüfung='"+tablecontent.get(32)+"',
-			// InfoschrPrivatnutzung='"+tablecontent.get(33)+"',
-			// EzB='"+tablecontent.get(34)+"', FahrbewilligungNr='"+tablecontent.get(35)+"',
-			// Kranführerausbildung='"+tablecontent.get(36)+"',
-			// C95LKW='"+tablecontent.get(37)+"', HubstaplerÖ='"+tablecontent.get(38)+"',
-			// HubstaplerDE='"+tablecontent.get(39)+"',
-			// Notfallperson='"+tablecontent.get(40)+"',
-			// NotfallsTel='"+tablecontent.get(41)+"',TShirt='"+tablecontent.get(42)+"',
-			// Jacke='"+tablecontent.get(43)+"', Schuhe='"+tablecontent.get(44)+"',
-			// GültigkeitA1='"+tablecontent.get(45)+"',
-			// SicherheitspassNr='"+tablecontent.get(46)+"',
-			// Bürounterweisung='"+tablecontent.get(47)+"',
-			// VBFnAPG='"+tablecontent.get(48)+"',
-			// Bayernwerkgültigbis='"+tablecontent.get(49)+"',
-			// TenneT='"+tablecontent.get(50)+"',
-			// TowerLatchSystem='"+tablecontent.get(51)+"',
-			// Steigschulung='"+tablecontent.get(52)+"',
-			// GUntersuchungenfälligam='"+tablecontent.get(53)+"',
-			// GUntersuchungenfällig='"+tablecontent.get(54)+"',
-			// PSAÜberprüfung='"+tablecontent.get(55)+"',
-			// EHKursDauer='"+tablecontent.get(56)+"', EHKursam='"+tablecontent.get(57)+"',
-			// ErsthelferbisDE='"+tablecontent.get(58)+"',
-			// nötigeDauer='"+tablecontent.get(59)+"',
-			// APGSchulung='"+tablecontent.get(60)+"',
-			// RichtigesPrüfenARCUS='"+tablecontent.get(61)+"',
-			// LumpiSeilschulung='"+tablecontent.get(62)+"',
-			// Compliance='"+tablecontent.get(63)+"',
-			// Teleskopstapler='"+tablecontent.get(64)+"',
-			// Hubarbeitsbühnen='"+tablecontent.get(65)+"',
-			// HubarbeitsbKartenNr='"+tablecontent.get(66)+"'WHERE PersNr='"+PersNr+"'";
+			
 			String sql = "UPDATE mitarbeiter SET PersNr='" + tablecontent.get(0) + "', Name='" + tablecontent.get(1)
 					+ "', Vorname='" + tablecontent.get(2) + "'WHERE PersNr='" + PersNr + "'";
 
@@ -607,20 +555,7 @@ public class JDBC_MariaDB {
 
 			// SQL Befehl
 
-			// String sql = "SELECT ANGA, GruppenNr, AAktiv, PersNr, StichtagUrlaub,
-			// Eintritt, SVNr, Name, Vorname";//, NameuVorname, PlzOrt, Strasse, GebDat,
-			// Stand, Geschl, Nation, Tel, Handy, Email, gelernterBeruf, Aufgabenbereich,
-			// Sicherheitsvertrauensperson, Firmenhandy, Kennzeichen, Fahrzeug, FIN,
-			// Handwerkerbefreiung, Führerscheine, FührerscheinNr, Behörde, Ausstelldat,
-			// gültigbis, Führerscheinüberprüfung, InfoschrPrivatnutzung, EzB,
-			// FahrbewilligungNr, Kranführerausbildung, C95LKW, HubstaplerÖ, HubstaplerDE,
-			// Notfallperson, NotfallsTel,TShirt, Jacke, Schuhe, GültigkeitA1,
-			// SicherheitspassNr, Bürounterweisung, VBFnAPG, Bayernwerkgültigbis, TenneT,
-			// TowerLatchSystem, Steigschulung, GUntersuchungenfälligam,
-			// GUntersuchungenfällig, PSAÜberprüfung, EHKursDauer, EHKursam,
-			// ErsthelferbisDE, nötigeDauer, APGSchulung, RichtigesPrüfenARCUS,
-			// LumpiSeilschulung, Compliance, Teleskopstapler, Hubarbeitsbühnen,
-			// HubarbeitsbKartenNr FROM mitarbeiter";
+			
 
 			String sql = "SELECT COUNT(ProjektNr) FROM projekt";
 
@@ -756,6 +691,31 @@ public class JDBC_MariaDB {
 			e.printStackTrace();
 		}
 
+	}
+	public void zuteilungdetailansicht(int PersNr) {
+
+		ResultSet res = null;
+
+		try {
+
+			Statement stmt = con.createStatement();
+
+			// SQL Befehl
+
+			
+
+			String sql = "SELECT * FROM arbeitet WHERE PersNr='" + PersNr + "'";
+
+			res = stmt.executeQuery(sql);
+
+			res.close();
+			stmt.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		
 	}
 
 	public void projektliste_füllen(int projektnummer, String projektname, Date startdatum, Date enddatum) {
