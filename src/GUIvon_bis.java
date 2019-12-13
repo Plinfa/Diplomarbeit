@@ -5,6 +5,7 @@ import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.util.Calendar;
@@ -17,6 +18,7 @@ import net.proteanit.sql.DbUtils;
 import java.awt.Toolkit;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
+import javax.swing.JMenuBar;
 
 public class GUIvon_bis {
 
@@ -102,22 +104,36 @@ public class GUIvon_bis {
 						
 						jdbc.unverfuegbarSetzen(PersNr, von, bis, Grund);
 						
+						
 					}catch(Exception e1) {
 						e1.printStackTrace();
 					}
-					
+					table.setModel(DbUtils.resultSetToTableModel(jdbc.selectAbwesenheiten(PersNr)));
 					textField.setText(null);
 					textField_1.setText(null);
-					frame12.dispose();
+					//frame12.dispose();
 			}
 		});
 		
-		JButton btnNewButton = new JButton("wieder verf\u00FCgbar");
-		btnNewButton.setBounds(42, 227, 115, 23);
+		JButton btnNewButton = new JButton("Eintrag l\u00F6schen");
+		btnNewButton.setBounds(42, 227, 134, 23);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
+				int row = table.getSelectedRow();
 				
+				String von = table.getValueAt(row, 0).toString();
+				String bis = table.getValueAt(row, 1).toString();
+				
+				if (JOptionPane.showConfirmDialog(frame12, "Eintrag wirklich löschen?", "Personal- und Projektmanager", JOptionPane.YES_NO_OPTION)==JOptionPane.YES_NO_OPTION) 
+				{
+					jdbc.deleteabwesenheit(von, bis, PersNr);
+				}
+				else {
+					
+				}
+				
+				table.setModel(DbUtils.resultSetToTableModel(jdbc.selectAbwesenheiten(PersNr)));
 				/*
 				
 				int von=0;
@@ -206,7 +222,8 @@ public class GUIvon_bis {
 					
 					textField.setText(null);
 					textField_1.setText(null);
-					frame12.dispose();
+					table.setModel(DbUtils.resultSetToTableModel(jdbc.selectAbwesenheiten(PersNr)));
+					//frame12.dispose();
 				
 				
 			}
@@ -255,7 +272,8 @@ public class GUIvon_bis {
 					
 					textField.setText(null);
 					textField_1.setText(null);
-					frame12.dispose();
+					table.setModel(DbUtils.resultSetToTableModel(jdbc.selectAbwesenheiten(PersNr)));
+					//frame12.dispose();
 			
 			}
 		});
@@ -290,5 +308,19 @@ public class GUIvon_bis {
 		table = new JTable();
 		scrollPane.setViewportView(table);
 		table.setModel(DbUtils.resultSetToTableModel(jdbc.selectAbwesenheiten(PersNr)));
+		
+		JMenuBar menuBar = new JMenuBar();
+		frame12.setJMenuBar(menuBar);
+		
+		JButton btnNewButton_3 = new JButton("zur\u00FCck");
+		
+		btnNewButton_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frame12.dispose();
+				
+			}
+		});
+		menuBar.add(btnNewButton_3);
+		
 	}
 }

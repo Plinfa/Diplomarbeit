@@ -56,7 +56,7 @@ public class GUIProjektHINZU {
 		frame11.setTitle("Projekt Hinzuf\u00FCgen");
 		frame11.setIconImage(Toolkit.getDefaultToolkit().getImage(GUIProjektHINZU.class.getResource("/ressources/EQOS.jpg")));
 		frame11.setBounds(100, 100, 450, 300);
-		frame11.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame11.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
 		
 		

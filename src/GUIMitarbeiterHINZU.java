@@ -12,6 +12,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Toolkit;
 import javax.swing.LayoutStyle.ComponentPlacement;
+
+import net.proteanit.sql.DbUtils;
+
 import javax.swing.JScrollBar;
 import javax.swing.JSpinner;
 import javax.swing.JTable;
@@ -89,6 +92,8 @@ public class GUIMitarbeiterHINZU {
 					textField_1.setText(null);
 					textField_2.setText(null);
 					frame9.dispose();
+					
+					
 					GUIgruppeODEReinzeln window = new GUIgruppeODEReinzeln(jdbc);
 					window.frame6.setVisible(true);
 			}

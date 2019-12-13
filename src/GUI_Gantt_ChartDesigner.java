@@ -35,15 +35,15 @@ public class GUI_Gantt_ChartDesigner {
 	 */
 	
 	//Wartecker Marcel
-	public GUI_Gantt_ChartDesigner(JDBC_MariaDB jdbc) {
+	public GUI_Gantt_ChartDesigner(JDBC_MariaDB jdbc,IntervalCategoryDataset dataset) {
 		
-		initialize(jdbc);
+		initialize(jdbc, dataset);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize(JDBC_MariaDB jdbc) {
+	private void initialize(JDBC_MariaDB jdbc,IntervalCategoryDataset dataset ) {
 		frame4 = new JFrame();
 		frame4.setIconImage(Toolkit.getDefaultToolkit().getImage(GUI_Gantt_ChartDesigner.class.getResource("/ressources/EQOS.jpg")));
 		frame4.setTitle("Personal- und Projektmanager");
@@ -52,7 +52,7 @@ public class GUI_Gantt_ChartDesigner {
 		
 		
 		
-		IntervalCategoryDataset dataset = jdbc.zeitplanung();
+		//IntervalCategoryDataset dataset = jdbc.zeitplanung();
 		
 
 		JFreeChart chart = ChartFactory.createGanttChart("Projektplanung", // Chart title

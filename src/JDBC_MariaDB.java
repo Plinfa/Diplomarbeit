@@ -254,6 +254,59 @@ public class JDBC_MariaDB {
 		return dataset;
 
 	}
+	public IntervalCategoryDataset zuteilungdetailansicht(int PersNr) {
+
+		ResultSet res = null;
+		TaskSeriesCollection dataset = new TaskSeriesCollection();
+		TaskSeries series1 = new TaskSeries("erwartet");
+
+		try {
+
+			Statement stmt = con.createStatement();
+
+			// SQL Befehl
+
+			String sql = "SELECT projekt.Name,arbeitet.von, arbeitet.bis FROM arbeitet JOIN projekt ON arbeitet.ProjektNr=projekt.ProjektNr WHERE PersNr= '"+PersNr+"'";
+
+			res = stmt.executeQuery(sql);
+
+			while (!res.isLast()) // as long as valid data is in the result set
+			{
+
+				res.next(); // go to next line in the customer table
+
+				java.sql.Date heute = new java.sql.Date(Calendar.getInstance().getTime().getTime());
+
+				String projektname = res.getString(1);
+				Date startdatum = res.getDate(2);
+				Date enddatum = res.getDate(3);
+
+				if (startdatum.compareTo(heute) < 0) {
+
+					startdatum = heute;
+
+				}
+
+				/*
+				 * if(enddatum.compareTo(heute)<0) {
+				 * 
+				 * deleteProject(res.getString(1));
+				 * 
+				 * }
+				 */
+
+				series1.add(new Task(projektname, startdatum, enddatum));
+
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		dataset.add(series1);
+
+		return dataset;
+
+	}
 
 	public void Mitarbeiterzuteilen(int PersNr, java.sql.Date von, java.sql.Date bis, int projnr) {
 
@@ -385,7 +438,7 @@ public class JDBC_MariaDB {
 	}
 
 	// David
-	public void deleteProject(String ProjektNr) {
+	public void deleteProject(int ProjektNr) {
 		ResultSet res = null;
 
 		try {
@@ -403,6 +456,29 @@ public class JDBC_MariaDB {
 			res = stmt.executeQuery(deletearbeitet);
 			res = stmt.executeQuery(deleteleitet);
 			res = stmt.executeQuery(deleteproject);
+
+			res.close();
+			stmt.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+	}
+	public void deleteabwesenheit(String von, String bis, int PersNr) {
+		ResultSet res = null;
+
+		try {
+
+			Statement stmt = con.createStatement();
+
+			// SQL Befehl
+			
+			String deleteabwesenheit ="DELETE FROM abwesenheit WHERE von= '" +von + "' AND bis= '" + bis + "' AND PersNr='" + PersNr + "' ";
+			
+
+			res = stmt.executeQuery(deleteabwesenheit);
+			
 
 			res.close();
 			stmt.close();
@@ -692,32 +768,7 @@ public class JDBC_MariaDB {
 		}
 
 	}
-	public void zuteilungdetailansicht(int PersNr) {
-
-		ResultSet res = null;
-
-		try {
-
-			Statement stmt = con.createStatement();
-
-			// SQL Befehl
-
-			
-
-			String sql = "SELECT * FROM arbeitet WHERE PersNr='" + PersNr + "'";
-
-			res = stmt.executeQuery(sql);
-
-			res.close();
-			stmt.close();
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-
-		
-	}
-
+	
 	public void projektliste_füllen(int projektnummer, String projektname, Date startdatum, Date enddatum) {
 
 		Project xx = new Project(projektnummer, projektname, startdatum, enddatum);

@@ -67,7 +67,7 @@ public class GUIgruppeODEReinzeln {
 		frame6.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		btnBesttigen = new JButton("Best\u00E4tigen");
-		btnBesttigen.setBounds(853, 197, 85, 23);
+		btnBesttigen.setBounds(799, 197, 96, 23);
 		btnBesttigen.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
@@ -136,7 +136,7 @@ public class GUIgruppeODEReinzeln {
 		scrollPane.setViewportView(table);
 
 		scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(583, 242, 285, 196);
+		scrollPane_1.setBounds(557, 242, 338, 196);
 		frame6.getContentPane().add(scrollPane_1);
 
 		table_1 = new JTable();
@@ -150,11 +150,11 @@ public class GUIgruppeODEReinzeln {
 		frame6.getContentPane().add(label);
 
 		label_1 = new JLabel("von:");
-		label_1.setBounds(652, 149, 21, 14);
+		label_1.setBounds(652, 149, 38, 14);
 		frame6.getContentPane().add(label_1);
 
 		label_2 = new JLabel("bis:");
-		label_2.setBounds(763, 149, 18, 14);
+		label_2.setBounds(763, 149, 38, 14);
 		frame6.getContentPane().add(label_2);
 
 		textField_2 = new JTextField();
@@ -163,12 +163,12 @@ public class GUIgruppeODEReinzeln {
 		textField_2.setColumns(10);
 
 		textField_3 = new JTextField();
-		textField_3.setBounds(641, 171, 96, 20);
+		textField_3.setBounds(587, 173, 96, 20);
 		frame6.getContentPane().add(textField_3);
 		textField_3.setColumns(10);
 
 		textField_4 = new JTextField();
-		textField_4.setBounds(747, 171, 96, 20);
+		textField_4.setBounds(693, 173, 96, 20);
 		frame6.getContentPane().add(textField_4);
 		textField_4.setColumns(10);
 
@@ -208,32 +208,37 @@ public class GUIgruppeODEReinzeln {
 			}
 
 		});
-		button.setBounds(59, 149, 89, 23);
+		button.setBounds(59, 149, 103, 23);
 		frame6.getContentPane().add(button);
 
 		JButton button_1 = new JButton("Hinzuf\u00FCgen");
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				frame6.dispose();
+				//frame6.dispose();
 				EventQueue.invokeLater(new Runnable() {
 					public void run() {
 						try {
 							GUIMitarbeiterHINZU window = new GUIMitarbeiterHINZU(jdbc);
 							window.frame9.setVisible(true);
+							
+							
 
 						} catch (Exception e) {
 							e.printStackTrace();
 						}
+						
 					}
 
 				});
-				// frame3.dispose();
-
+				 frame6.dispose();
+				
+				
 			}
+			
 		});
 
-		button_1.setBounds(59, 129, 89, 23);
+		button_1.setBounds(59, 129, 103, 23);
 		frame6.getContentPane().add(button_1);
 
 		JButton button_2 = new JButton("Update");
@@ -278,7 +283,7 @@ public class GUIgruppeODEReinzeln {
 
 			}
 		});
-		button_2.setBounds(158, 129, 67, 23);
+		button_2.setBounds(172, 129, 79, 23);
 		frame6.getContentPane().add(button_2);
 
 		JButton button_3 = new JButton("Mitarbeiter nicht verf\u00FCgbar");
@@ -303,16 +308,30 @@ public class GUIgruppeODEReinzeln {
 				});
 			}
 		});
-		button_3.setBounds(245, 129, 183, 23);
+		button_3.setBounds(261, 129, 191, 23);
 		frame6.getContentPane().add(button_3);
 
 		JButton button_5 = new JButton("Zuteilung Detailansicht");
 		button_5.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 					
-				//neues Fenster mit jTable bitte marcel
-				//jdbc.zuteilungdetailansicht(PersNr);
 				
+				EventQueue.invokeLater(new Runnable() {
+					public void run() {
+						try {
+							int row = table.getSelectedRow();
+							int column = 0;
+							String content = table.getValueAt(row, column).toString();
+							int PersNr = Integer.parseInt(content);
+							
+							jdbc.zuteilungdetailansicht(PersNr);
+							GUI_Gantt_ChartDesigner window = new GUI_Gantt_ChartDesigner(jdbc, jdbc.zuteilungdetailansicht(PersNr));
+							window.frame4.setVisible(true);
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					}
+				});
 				
 			}
 		});
@@ -320,21 +339,21 @@ public class GUIgruppeODEReinzeln {
 		frame6.getContentPane().add(button_5);
 
 		textField = new JTextField();
-		textField.setBounds(641, 198, 96, 20);
+		textField.setBounds(587, 200, 96, 20);
 		frame6.getContentPane().add(textField);
 		textField.setColumns(10);
 
 		textField_1 = new JTextField();
-		textField_1.setBounds(747, 198, 96, 20);
+		textField_1.setBounds(693, 200, 96, 20);
 		frame6.getContentPane().add(textField_1);
 		textField_1.setColumns(10);
 
 		JLabel lblKw = new JLabel("KW:");
-		lblKw.setBounds(583, 174, 48, 14);
+		lblKw.setBounds(557, 173, 48, 14);
 		frame6.getContentPane().add(lblKw);
 
 		JLabel lblJahr = new JLabel("Jahr:");
-		lblJahr.setBounds(583, 201, 48, 14);
+		lblJahr.setBounds(557, 200, 48, 14);
 		frame6.getContentPane().add(lblJahr);
 
 		JButton btnNewButton = new JButton("Personalbedarf gesamt");
@@ -356,7 +375,7 @@ public class GUIgruppeODEReinzeln {
 				});
 			}
 		});
-		btnPersonalbedarfProProjekt.setBounds(583, 449, 198, 23);
+		btnPersonalbedarfProProjekt.setBounds(557, 449, 198, 23);
 		frame6.getContentPane().add(btnPersonalbedarfProProjekt);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

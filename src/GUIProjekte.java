@@ -70,7 +70,7 @@ public class GUIProjekte {
 								}
 							}
 						});
-						
+						frame5.dispose();
 						
 					}
 				});
@@ -84,12 +84,14 @@ public class GUIProjekte {
 						
 						
 						int row=0;
-						String ProjektNr=null;
+						String ProjNr=null;
 						
 						try {
 						
 						row=table.getSelectedRow();
-						ProjektNr=table.getValueAt(row, 0).toString();
+						ProjNr=table.getValueAt(row, 0).toString();
+						
+						int ProjektNr = Integer.parseInt(ProjNr);
 						if (JOptionPane.showConfirmDialog(frame5, "Projekt und alle Einträge wirklich löschen?", "Personal- und Projektmanager", JOptionPane.YES_NO_OPTION)==JOptionPane.YES_NO_OPTION) 
 						{
 							jdbc.deleteProject(ProjektNr);
@@ -99,7 +101,7 @@ public class GUIProjekte {
 						}
 						
 						
-						System.out.println(ProjektNr);
+						//System.out.println(ProjektNr);
 						
 					}catch(Exception e1) {
 						
@@ -121,7 +123,7 @@ public class GUIProjekte {
 				EventQueue.invokeLater(new Runnable() {
 					public void run() {
 						try {
-							GUI_Gantt_ChartDesigner window = new GUI_Gantt_ChartDesigner(jdbc);
+							GUI_Gantt_ChartDesigner window = new GUI_Gantt_ChartDesigner(jdbc,jdbc.zeitplanung());
 							window.frame4.setVisible(true);
 						} catch (Exception e) {
 							e.printStackTrace();
