@@ -117,7 +117,7 @@ public class GUIProjekte {
 		lblProjekte.setBounds(207, 28, 48, 14);
 		
 		JButton btnProjektplanungDiagramm = new JButton("Projektplanung Diagramm");
-		btnProjektplanungDiagramm.setBounds(551, 67, 172, 23);
+		btnProjektplanungDiagramm.setBounds(656, 67, 219, 23);
 		btnProjektplanungDiagramm.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				EventQueue.invokeLater(new Runnable() {
@@ -196,6 +196,10 @@ public class GUIProjekte {
 				});
 				btnUpdate.setBounds(198, 67, 89, 23);
 				frame5.getContentPane().add(btnUpdate);
+				
+				JButton btnPersbedarfProProjekt = new JButton("Pers.Bedarf pro Projekt pro Woche planen");
+				btnPersbedarfProProjekt.setBounds(308, 67, 312, 23);
+				frame5.getContentPane().add(btnPersbedarfProProjekt);
 		
 		
 		

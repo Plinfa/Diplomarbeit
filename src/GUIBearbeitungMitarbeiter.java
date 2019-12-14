@@ -1,0 +1,51 @@
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JTable;
+
+import net.proteanit.sql.DbUtils;
+
+import javax.swing.JScrollPane;
+import javax.swing.JButton;
+import java.awt.Toolkit;
+
+public class GUIBearbeitungMitarbeiter {
+
+	public JFrame frame111;
+	private JTable table;
+
+	/**
+	 * Launch the application.
+	 */
+	
+
+	/**
+	 * Create the application.
+	 */
+	public GUIBearbeitungMitarbeiter(JDBC_MariaDB jdbc) {
+		initialize(jdbc);
+	}
+
+	/**
+	 * Initialize the contents of the frame.
+	 */
+	private void initialize(JDBC_MariaDB jdbc) {
+		frame111 = new JFrame();
+		frame111.setIconImage(Toolkit.getDefaultToolkit().getImage(GUIBearbeitungMitarbeiter.class.getResource("/ressources/EQOS.jpg")));
+		frame111.setBounds(100, 100, 709, 470);
+		frame111.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame111.getContentPane().setLayout(null);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(90, 92, 551, 303);
+		frame111.getContentPane().add(scrollPane);
+		
+		table = new JTable();
+		scrollPane.setViewportView(table);
+		table.setModel(DbUtils.resultSetToTableModel(jdbc.selectTabelleMitarbeiter()));
+		
+		JButton btnnderungenSpeichern = new JButton("\u00C4nderungen speichern");
+		btnnderungenSpeichern.setBounds(91, 43, 189, 23);
+		frame111.getContentPane().add(btnnderungenSpeichern);
+	}
+}

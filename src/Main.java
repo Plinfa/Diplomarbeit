@@ -16,7 +16,8 @@ public class Main {
 
 	public static void main(String[] args) {
 		
-		
+		//String zeit=datePicker.getJFormattedTextField().getText();
+		//System.out.println(zeit);
 		
 		
 		

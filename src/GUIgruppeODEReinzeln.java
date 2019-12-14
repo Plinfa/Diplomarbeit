@@ -43,6 +43,9 @@ public class GUIgruppeODEReinzeln {
 	private JTextField textField;
 	private JTextField textField_1;
 	private JButton btnPersonalbedarfProProjekt;
+	private JButton btnZuteilungPerEmail;
+	private JButton btnAutomatischeZuteilungkannZiel;
+	private JButton btnPartienVerwalten;
 
 	/**
 	 * Launch the application.
@@ -377,6 +380,14 @@ public class GUIgruppeODEReinzeln {
 		});
 		btnPersonalbedarfProProjekt.setBounds(557, 449, 198, 23);
 		frame6.getContentPane().add(btnPersonalbedarfProProjekt);
+		
+		btnZuteilungPerEmail = new JButton("Zuteilung per Email senden (Kann Ziel)");
+		btnZuteilungPerEmail.setBounds(229, 197, 283, 23);
+		frame6.getContentPane().add(btnZuteilungPerEmail);
+		
+		btnPartienVerwalten = new JButton("Partien verwalten");
+		btnPartienVerwalten.setBounds(69, 449, 168, 23);
+		frame6.getContentPane().add(btnPartienVerwalten);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
@@ -417,6 +428,26 @@ public class GUIgruppeODEReinzeln {
 		menuBar.add(btnZurck);
 
 		JButton btnMitarbeiterdetailsBearbeiten = new JButton("Mitarbeiterdetails bearbeiten");
+		btnMitarbeiterdetailsBearbeiten.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				frame6.dispose();
+				
+				EventQueue.invokeLater(new Runnable() {
+					public void run() {
+						try {
+							GUIBearbeitungMitarbeiter window = new GUIBearbeitungMitarbeiter(jdbc);
+							window.frame111.setVisible(true);
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					}
+				});
+			}
+		});
 		menuBar.add(btnMitarbeiterdetailsBearbeiten);
+		
+		btnAutomatischeZuteilungkannZiel = new JButton("Automatische Zuteilung(Kann Ziel)");
+		menuBar.add(btnAutomatischeZuteilungkannZiel);
 	}
 }

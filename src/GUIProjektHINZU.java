@@ -83,6 +83,7 @@ public class GUIProjektHINZU {
 		
 		JDatePickerImpl datePicker=generateDatePicker();	
 		datePicker.setBounds(238, 87, 120, 23);
+		
 	
 		
 		JDatePickerImpl datePicker1=generateDatePicker();	
