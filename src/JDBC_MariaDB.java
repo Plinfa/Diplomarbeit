@@ -144,6 +144,27 @@ public class JDBC_MariaDB {
 
 		return res;
 	}
+	
+	public ResultSet selectPersbedarfplanungfürProj(int ProjNr) {
+
+		ResultSet res = null;
+
+		try {
+
+			Statement stmt = con.createStatement();
+
+			// SQL Befehl
+
+			String sql = "SELECT von, bis, Anzahl FROM benötigt WHERE ProjektNr='" + ProjNr + "'";
+
+			res = stmt.executeQuery(sql);
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return res;
+	}
 
 	public ResultSet selectAllProjects() {
 		ResultSet res = null;
@@ -756,6 +777,31 @@ public class JDBC_MariaDB {
 			// i think u meant this
 			String sql = "INSERT INTO abwesenheit (PersNr, Grund, von, bis) VALUES ('" + PersNr + "','" + Grund + "','"
 					+ von + "','" + bis + "')";
+
+			res = stmt.executeQuery(sql);
+
+			res.close();
+			stmt.close();
+		}
+
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+	}
+	public void persbedarfplanen(int ProjNr, java.sql.Date von, java.sql.Date bis, int anzahl) {
+
+		
+		ResultSet res = null;
+
+		try {
+
+			Statement stmt = con.createStatement();
+
+			// SQL Befehl
+			// i think u meant this
+			String sql = "INSERT INTO benötigt (Anzahl, von, bis, ProjektNr) VALUES ('" + anzahl + "','" + von + "','"
+					+ bis + "','" + ProjNr + "')";
 
 			res = stmt.executeQuery(sql);
 

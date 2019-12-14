@@ -197,7 +197,28 @@ public class GUIProjekte {
 				btnUpdate.setBounds(198, 67, 89, 23);
 				frame5.getContentPane().add(btnUpdate);
 				
+				
 				JButton btnPersbedarfProProjekt = new JButton("Pers.Bedarf pro Projekt pro Woche planen");
+				btnPersbedarfProProjekt.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						
+						int row = table.getSelectedRow();
+						int column = 0;
+						String content = table.getValueAt(row, column).toString();
+						int ProjNr = Integer.parseInt(content);
+						
+						EventQueue.invokeLater(new Runnable() {
+							public void run() {
+								try {
+									GUIPersB_planen window = new GUIPersB_planen(jdbc, ProjNr);
+									window.frame27.setVisible(true);
+								} catch (Exception e) {
+									e.printStackTrace();
+								}
+							}
+						});
+					}
+				});
 				btnPersbedarfProProjekt.setBounds(308, 67, 312, 23);
 				frame5.getContentPane().add(btnPersbedarfProProjekt);
 		

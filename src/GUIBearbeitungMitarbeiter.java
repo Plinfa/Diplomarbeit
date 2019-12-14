@@ -8,6 +8,9 @@ import net.proteanit.sql.DbUtils;
 import javax.swing.JScrollPane;
 import javax.swing.JButton;
 import java.awt.Toolkit;
+import javax.swing.JMenuBar;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class GUIBearbeitungMitarbeiter {
 
@@ -47,5 +50,27 @@ public class GUIBearbeitungMitarbeiter {
 		JButton btnnderungenSpeichern = new JButton("\u00C4nderungen speichern");
 		btnnderungenSpeichern.setBounds(91, 43, 189, 23);
 		frame111.getContentPane().add(btnnderungenSpeichern);
+		
+		JMenuBar menuBar = new JMenuBar();
+		frame111.setJMenuBar(menuBar);
+		
+		JButton btnZurck = new JButton("zur\u00FCck");
+		btnZurck.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frame111.dispose();
+				EventQueue.invokeLater(new Runnable() {
+					public void run() {
+						try {
+							GUIgruppeODEReinzeln window = new GUIgruppeODEReinzeln(jdbc);
+							window.frame6.setVisible(true);
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					}
+				});
+				
+			}
+		});
+		menuBar.add(btnZurck);
 	}
 }

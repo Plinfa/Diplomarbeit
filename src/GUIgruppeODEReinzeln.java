@@ -366,10 +366,15 @@ public class GUIgruppeODEReinzeln {
 		btnPersonalbedarfProProjekt = new JButton("Personalbedarf pro Projekt");
 		btnPersonalbedarfProProjekt.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				int row = table.getSelectedRow();
+				int column = 0;
+				String content = table.getValueAt(row, column).toString();
+				int ProjNr = Integer.parseInt(content);
+				
 				EventQueue.invokeLater(new Runnable() {
 					public void run() {
 						try {
-							GUIeinzelPERS window = new GUIeinzelPERS(jdbc);
+							GUIeinzelPERS window = new GUIeinzelPERS(jdbc, ProjNr);
 							window.frameEinzelPerso.setVisible(true);
 						} catch (Exception e) {
 							e.printStackTrace();
@@ -386,6 +391,21 @@ public class GUIgruppeODEReinzeln {
 		frame6.getContentPane().add(btnZuteilungPerEmail);
 		
 		btnPartienVerwalten = new JButton("Partien verwalten");
+		btnPartienVerwalten.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				EventQueue.invokeLater(new Runnable() {
+					public void run() {
+						try {
+							GUIPartienverwaltung window = new GUIPartienverwaltung(jdbc);
+							window.frame17.setVisible(true);
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					}
+				});
+			}
+		});
 		btnPartienVerwalten.setBounds(69, 449, 168, 23);
 		frame6.getContentPane().add(btnPartienVerwalten);
 		btnNewButton.addActionListener(new ActionListener() {

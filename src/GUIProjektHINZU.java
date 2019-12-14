@@ -82,7 +82,7 @@ public class GUIProjektHINZU {
 		
 		
 		JDatePickerImpl datePicker=generateDatePicker();	
-		datePicker.setBounds(238, 87, 120, 23);
+		datePicker.setBounds(132, 152, 120, 39);
 		
 	
 		
@@ -112,6 +112,9 @@ public class GUIProjektHINZU {
 						Ort=textField_4.getText();
 						Startdatum=textField_5.getText();
 						Enddatum=textField_6.getText();
+						
+
+				        
 						
 						jdbc.insertProject(ProjektNr, Projektname, Ort, Startdatum, Enddatum);
 						

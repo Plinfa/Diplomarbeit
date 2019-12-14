@@ -124,7 +124,8 @@ public class GUIPersonalbedarf {
 		scrollPane.setMinimumSize(new Dimension(1000, 1000));
 		
 		table_1 = new JTable(data, columns);
-		table_1.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+		table_1.setAutoResizeMode(JTable.AUTO_RESIZE_OFF); 
+		table_1.setRowHeight(25);
 		scrollPane.setViewportView(table_1);
 		GroupLayout groupLayout = new GroupLayout(frmPersonalUndProjektmanager.getContentPane());
 		groupLayout.setHorizontalGroup(

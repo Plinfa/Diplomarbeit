@@ -4,10 +4,16 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.Properties;
 
 import javax.swing.SwingUtilities;
 import javax.swing.WindowConstants;
 
+
+import org.jdatepicker.impl.DateComponentFormatter;
+import org.jdatepicker.impl.JDatePanelImpl;
+import org.jdatepicker.impl.JDatePickerImpl;
+import org.jdatepicker.impl.UtilDateModel;
 
 
 public class Main {
@@ -16,8 +22,6 @@ public class Main {
 
 	public static void main(String[] args) {
 		
-		//String zeit=datePicker.getJFormattedTextField().getText();
-		//System.out.println(zeit);
 		
 		
 		

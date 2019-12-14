@@ -17,7 +17,6 @@ import javax.swing.JLabel;
 public class GUIeinzelPERS {
 
 	public JFrame frameEinzelPerso;
-	private JTextField textField;
 
 	/**
 	 * Launch the application.
@@ -27,28 +26,19 @@ public class GUIeinzelPERS {
 	/**
 	 * Create the application.
 	 */
-	public GUIeinzelPERS(JDBC_MariaDB jdbc) {
-		initialize(jdbc);
+	public GUIeinzelPERS(JDBC_MariaDB jdbc, int ProjNr) {
+		initialize(jdbc, ProjNr);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize(JDBC_MariaDB jdbc) {
+	private void initialize(JDBC_MariaDB jdbc, int ProjNr) {
 		frameEinzelPerso = new JFrame();
 		frameEinzelPerso.setIconImage(Toolkit.getDefaultToolkit().getImage(GUIeinzelPERS.class.getResource("/ressources/EQOS.jpg")));
 		frameEinzelPerso.setBounds(100, 100, 690, 406);
 		frameEinzelPerso.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		
-		textField = new JTextField();
-		textField.setBounds(157, 18, 96, 20);
-		textField.setColumns(10);
 		frameEinzelPerso.getContentPane().setLayout(null);
-		
-		JLabel lblProjektname = new JLabel("Projektname:");
-		lblProjektname.setBounds(74, 21, 65, 14);
-		frameEinzelPerso.getContentPane().add(lblProjektname);
-		frameEinzelPerso.getContentPane().add(textField);
 		
 		JScrollPane scrollPane_1 = new JScrollPane();
 		scrollPane_1.setBounds(46, 49, 618, 241);
@@ -64,6 +54,7 @@ public class GUIeinzelPERS {
 		JButton button = new JButton("zurück");
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				frameEinzelPerso.dispose();
 				EventQueue.invokeLater(new Runnable() {
 					public void run() {
 						try {
