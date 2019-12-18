@@ -360,7 +360,7 @@ public class GUIgruppeODEReinzeln {
 		frame6.getContentPane().add(lblJahr);
 
 		JButton btnNewButton = new JButton("Personalbedarf gesamt");
-		btnNewButton.setBounds(337, 11, 213, 57);
+		btnNewButton.setBounds(544, 449, 213, 33);
 		frame6.getContentPane().add(btnNewButton);
 
 		btnPersonalbedarfProProjekt = new JButton("Personalbedarf pro Projekt");
@@ -383,7 +383,7 @@ public class GUIgruppeODEReinzeln {
 				});
 			}
 		});
-		btnPersonalbedarfProProjekt.setBounds(557, 449, 198, 23);
+		btnPersonalbedarfProProjekt.setBounds(760, 449, 198, 23);
 		frame6.getContentPane().add(btnPersonalbedarfProProjekt);
 		
 		btnZuteilungPerEmail = new JButton("Zuteilung per Email senden (Kann Ziel)");
