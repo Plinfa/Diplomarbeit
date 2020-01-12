@@ -408,6 +408,14 @@ public class GUIgruppeODEReinzeln {
 		});
 		btnPartienVerwalten.setBounds(69, 449, 168, 23);
 		frame6.getContentPane().add(btnPartienVerwalten);
+		
+		JRadioButton rdbtnEinzeln = new JRadioButton("einzeln");
+		rdbtnEinzeln.setBounds(558, 50, 109, 23);
+		frame6.getContentPane().add(rdbtnEinzeln);
+		
+		JRadioButton rdbtnPartie = new JRadioButton("Partie");
+		rdbtnPartie.setBounds(668, 50, 109, 23);
+		frame6.getContentPane().add(rdbtnPartie);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
