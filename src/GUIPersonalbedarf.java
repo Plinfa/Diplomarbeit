@@ -14,7 +14,9 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.JMenuBar;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
-
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.awt.event.ActionEvent;
 import javax.swing.JTable;
 import javax.swing.JProgressBar;
@@ -237,12 +239,17 @@ public String krank(JDBC_MariaDB jdbc, int week, int year) {
 		
 		Calendar calendar = Calendar.getInstance();
 		calendar.setWeekDate(year, week, 2);
+		ResultSet res = null;
 		
 		Date abfrage=calendar.getTime();
+		java.sql.Date abfrage1 = new java.sql.Date(abfrage.getTime());
 		
+		
+		String krank=jdbc.countkrank(abfrage1);
 		//zählen wie viele krank
 		
-		String krank = String.valueOf(krk);
+		
+		//String krank = String.valueOf(krk);
 		
 		return krank;
 	}

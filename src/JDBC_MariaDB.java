@@ -35,7 +35,7 @@ public class JDBC_MariaDB {
 
 		try {
 
-			con = DriverManager.getConnection("jdbc:mariadb://localhost:3306/eqospersonalplanung", "root","5455809Otto");
+			con = DriverManager.getConnection("jdbc:mariadb://localhost:3306/eqospersonalplanung", "root","davmay81");
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -813,6 +813,43 @@ public class JDBC_MariaDB {
 			e.printStackTrace();
 		}
 
+	}
+	
+	public String countkrank(java.sql.Date abfrage1) {
+
+		
+		ResultSet res = null;
+		String count=null;
+		int countkrank=0;
+		try {
+
+			Statement stmt = con.createStatement();
+
+			// SQL Befehl
+
+
+			String sql = "SELECT COUNT(id)FROM abwesenheit WHERE Grund = 'krank' AND von='"+abfrage1+"'";
+
+			res = stmt.executeQuery(sql);
+			
+			while (res.next()) {
+				
+				count = res.getString(1);
+			
+			}
+			
+			 //countkrank = Integer.parseInt(count);
+			
+					res.close();
+			stmt.close();
+		}
+
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		//System.out.println(countkrank);
+		return count;
+		
 	}
 	
 	public void projektliste_füllen(int projektnummer, String projektname, Date startdatum, Date enddatum) {

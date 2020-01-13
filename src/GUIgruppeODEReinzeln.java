@@ -11,6 +11,7 @@ import java.util.List;
 import java.awt.event.ActionEvent;
 import javax.swing.JMenuBar;
 import javax.swing.JOptionPane;
+import javax.swing.ButtonGroup;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import java.awt.Toolkit;
@@ -416,6 +417,20 @@ public class GUIgruppeODEReinzeln {
 		JRadioButton rdbtnPartie = new JRadioButton("Partie");
 		rdbtnPartie.setBounds(668, 50, 109, 23);
 		frame6.getContentPane().add(rdbtnPartie);
+		
+		ButtonGroup gruppe = new ButtonGroup();
+		 
+        //JRadioButtons werden zur ButtonGroup hinzugefügt
+        gruppe.add(rdbtnEinzeln);
+        gruppe.add(rdbtnPartie);
+        
+        rdbtnPartie.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				//table.setModel(nur Partieleiter);
+			}
+		});
+		
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
