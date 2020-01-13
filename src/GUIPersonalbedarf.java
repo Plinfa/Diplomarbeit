@@ -99,13 +99,13 @@ public class GUIPersonalbedarf {
 			String jahr=String.valueOf(year);
 			columns[i]=week+ ", "+jahr;
 			
-			String nichtzugeteilt=needed(jdbc, spalte);
-			String zugeteilt=generellzugeteilt(jdbc, spalte);
-			String krank=krank(jdbc, spalte);
-			String urlaub=urlaub(jdbc, spalte);
-			String schulung=schulung(jdbc, spalte);
+			String nichtzugeteilt=needed(jdbc, woche, year);
+			String zugeteilt=generellzugeteilt(jdbc, woche, year);
+			String krank=krank(jdbc, woche, year);
+			String urlaub=urlaub(jdbc, woche, year);
+			String schulung=schulung(jdbc, woche, year);
 				
-			data [0][spalte]=String.valueOf(jdbc.getMitarbeiter().size());
+			data [0][spalte]=//Mitarbeiter zählen;
 			data [1][spalte]=krank;
 			data [2][spalte]=urlaub;
 			data [3][spalte]=schulung;
@@ -192,111 +192,86 @@ public class GUIPersonalbedarf {
 		menuBar.add(btnZu);
 	}
 	
-	public String needed(JDBC_MariaDB jdbc, int week) {
+	public String needed(JDBC_MariaDB jdbc, int week, int year) {
+		
+		Calendar calendar = Calendar.getInstance();
+		calendar.setWeekDate(year, week, 2);
+		
+		Date abfrage=calendar.getTime();
 		
 		int nichtzug=0;
 		
-		int lenght=jdbc.getMitarbeiter().size();
 		
-		
-		for(int i=0; i<lenght; i++) {
-		    if (jdbc.getMitarbeiter().get(i).getWochen().get(week).getZugeteilt()==null) {
-		    	
-		    	if(jdbc.getMitarbeiter().get(i).getWochen().get(week).isKrank()==true | jdbc.getMitarbeiter().get(i).getWochen().get(week).isSchulung()==true | jdbc.getMitarbeiter().get(i).getWochen().get(week).isUrlaub()==true) {
-		    		
-		    	}
-		    	else {
-		    		
-		    		nichtzug++;
-		    	}
-		    }
+		//zählen wie viele nicht zugeteilt
+	
 		        
 			
 			
 			
-		}
+		
 		String nichtzugeteilt = String.valueOf(nichtzug);
 		
 		return nichtzugeteilt;
 	}
 	
-	public String generellzugeteilt(JDBC_MariaDB jdbc, int week) {
+	public String generellzugeteilt(JDBC_MariaDB jdbc, int week, int year) {
 		
 		int zuget=0;
 		
-		int lenght=jdbc.getMitarbeiter().size();
+		Calendar calendar = Calendar.getInstance();
+		calendar.setWeekDate(year, week, 2);
 		
+		Date abfrage=calendar.getTime();
 		
-		for(int i=0; i<lenght; i++) {
-		    if (jdbc.getMitarbeiter().get(i).getWochen().get(week).getZugeteilt()!=null) {
-		    	
-		    	zuget++;
-		    	 
-		    }		
-			
-		}
+		//zählen wie viele zugeteilt
+		
 		
 		String zugeteilt = String.valueOf(zuget);
 		
 		return zugeteilt;
 	}
 	
-public String krank(JDBC_MariaDB jdbc, int week) {
+public String krank(JDBC_MariaDB jdbc, int week, int year) {
 		
 		int krk=0;
 		
-		int lenght=jdbc.getMitarbeiter().size();
+		Calendar calendar = Calendar.getInstance();
+		calendar.setWeekDate(year, week, 2);
 		
+		Date abfrage=calendar.getTime();
 		
-		for(int i=0; i<lenght; i++) {
-		    if (jdbc.getMitarbeiter().get(i).getWochen().get(week).isKrank()==true) {
-		    	
-		    	krk++;
-		    	 
-		    }		
-			
-		}
+		//zählen wie viele krank
 		
 		String krank = String.valueOf(krk);
 		
 		return krank;
 	}
-public String urlaub(JDBC_MariaDB jdbc, int week) {
+public String urlaub(JDBC_MariaDB jdbc, int week, int year) {
 	
 	int url=0;
 	
-	int lenght=jdbc.getMitarbeiter().size();
+	Calendar calendar = Calendar.getInstance();
+	calendar.setWeekDate(year, week, 2);
 	
+	Date abfrage=calendar.getTime();
 	
-	for(int i=0; i<lenght; i++) {
-	    if (jdbc.getMitarbeiter().get(i).getWochen().get(week).isUrlaub()==true) {
-	    	
-	    	url++;
-	    	 
-	    }		
-		
-	}
+	//zählen wie viele urlaub
 	
 	String urlaub = String.valueOf(url);
 	
 	return urlaub;
 }
 
-	public String schulung(JDBC_MariaDB jdbc, int week) {
+	public String schulung(JDBC_MariaDB jdbc, int week, int year) {
 	
 	int sch=0;
 	
-	int lenght=jdbc.getMitarbeiter().size();
+	Calendar calendar = Calendar.getInstance();
+	calendar.setWeekDate(year, week, 2);
 	
+	Date abfrage=calendar.getTime();
 	
-	for(int i=0; i<lenght; i++) {
-	    if (jdbc.getMitarbeiter().get(i).getWochen().get(week).isSchulung()==true) {
-	    	
-	    	sch++;
-	    	 
-	    }		
-		
-	}
+	//zählen wie viele schulung
 	
 	String schulung = String.valueOf(sch);
 	
