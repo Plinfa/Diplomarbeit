@@ -83,6 +83,9 @@ public class GUIPersonalbedarf {
 		int woche = c1.get(Calendar.WEEK_OF_YEAR);
 		int spalte=0;
 		int year= c1.get(Calendar.YEAR);
+		
+		
+		
 		while(i<=107) {
 			if(year==2020 || year==2026|| year==2032 || year==2037 || year==2043 || year==2048 || year==2054) {
 				if(woche>=54) {

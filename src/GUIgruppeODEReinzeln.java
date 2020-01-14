@@ -427,7 +427,14 @@ public class GUIgruppeODEReinzeln {
         rdbtnPartie.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				//table.setModel(nur Partieleiter);
+				table.setModel(DbUtils.resultSetToTableModel(jdbc.selectPartieLeiter()));
+			}
+		});
+        
+        rdbtnEinzeln.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				table.setModel(DbUtils.resultSetToTableModel(jdbc.selectMitarbeiterinfo()));
 			}
 		});
 		

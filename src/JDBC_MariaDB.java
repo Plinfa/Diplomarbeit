@@ -35,7 +35,7 @@ public class JDBC_MariaDB {
 
 		try {
 
-			con = DriverManager.getConnection("jdbc:mariadb://localhost:3306/eqospersonalplanung", "root","davmay81");
+			con = DriverManager.getConnection("jdbc:mariadb://localhost:3306/eqospersonalplanung", "root","5455809Otto");
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -114,6 +114,27 @@ public class JDBC_MariaDB {
 			// SQL Befehl
 
 			String sql = "SELECT PersNr, Name, Nachname FROM mitarbeiter";
+
+			res = stmt.executeQuery(sql);
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return res;
+	}
+	
+	public ResultSet selectPartieLeiter() {
+
+		ResultSet res = null;
+
+		try {
+
+			Statement stmt = con.createStatement();
+
+			// SQL Befehl
+
+			String sql = "SELECT leitetpartie.PartieNr, mitarbeiter.Name, mitarbeiter.Nachname  FROM leitetpartie JOIN mitarbeiter ON leitetpartie.PersNr=mitarbeiter.PersNr";
 
 			res = stmt.executeQuery(sql);
 
