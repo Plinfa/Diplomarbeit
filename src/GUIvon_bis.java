@@ -211,11 +211,10 @@ public class GUIvon_bis {
 				Date bisDate=enddate.getTime();				//in Java Date speichern
 				java.sql.Date bis = new java.sql.Date(bisDate.getTime()); 	 //in SQL Date umwandeln	
 				
-				
 					try {
 						
 						jdbc.unverfuegbarSetzen(PersNr, von, bis, Grund);
-						
+					
 					}catch(Exception e1) {
 						e1.printStackTrace();
 					}
@@ -260,6 +259,7 @@ public class GUIvon_bis {
 				enddate.getTime();
 				Date bisDate=enddate.getTime();				//in Java Date speichern
 				java.sql.Date bis = new java.sql.Date(bisDate.getTime()); 	 //in SQL Date umwandeln	
+				
 				
 				
 					try {

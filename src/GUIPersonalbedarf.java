@@ -109,8 +109,9 @@ public class GUIPersonalbedarf {
 			String krank=krank(jdbc, woche, year);
 			String urlaub=urlaub(jdbc, woche, year);
 			String schulung=schulung(jdbc, woche, year);
+			String mitarbeiter=jdbc.countmitarbeiter();
 				
-			data [0][spalte]=//Mitarbeiter zählen;
+			data [0][spalte]=mitarbeiter;
 			data [1][spalte]=krank;
 			data [2][spalte]=urlaub;
 			data [3][spalte]=schulung;
@@ -227,22 +228,25 @@ public class GUIPersonalbedarf {
 		calendar.setWeekDate(year, week, 2);
 		
 		Date abfrage=calendar.getTime();
+		java.sql.Date abfrage1 = new java.sql.Date(abfrage.getTime());
 		
+		
+		String zugeteilt=jdbc.countkrank(abfrage1);
 		//zählen wie viele zugeteilt
 		
 		
-		String zugeteilt = String.valueOf(zuget);
+		
 		
 		return zugeteilt;
 	}
 	
 public String krank(JDBC_MariaDB jdbc, int week, int year) {
 		
-		int krk=0;
+		
 		
 		Calendar calendar = Calendar.getInstance();
 		calendar.setWeekDate(year, week, 2);
-		ResultSet res = null;
+		
 		
 		Date abfrage=calendar.getTime();
 		java.sql.Date abfrage1 = new java.sql.Date(abfrage.getTime());
@@ -258,16 +262,19 @@ public String krank(JDBC_MariaDB jdbc, int week, int year) {
 	}
 public String urlaub(JDBC_MariaDB jdbc, int week, int year) {
 	
-	int url=0;
+	
 	
 	Calendar calendar = Calendar.getInstance();
 	calendar.setWeekDate(year, week, 2);
 	
 	Date abfrage=calendar.getTime();
+	java.sql.Date abfrage1 = new java.sql.Date(abfrage.getTime());
 	
+	
+	String urlaub=jdbc.counturlaub(abfrage1);
 	//zählen wie viele urlaub
 	
-	String urlaub = String.valueOf(url);
+	//String urlaub = String.valueOf(url);
 	
 	return urlaub;
 }
@@ -280,11 +287,16 @@ public String urlaub(JDBC_MariaDB jdbc, int week, int year) {
 	calendar.setWeekDate(year, week, 2);
 	
 	Date abfrage=calendar.getTime();
+	java.sql.Date abfrage1 = new java.sql.Date(abfrage.getTime());
 	
+	
+	String schulung=jdbc.countschulung(abfrage1);
 	//zählen wie viele schulung
 	
-	String schulung = String.valueOf(sch);
+	//String schulung = String.valueOf(sch);
 	
 	return schulung;
 	}
+	
+	
 }
