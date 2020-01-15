@@ -222,7 +222,7 @@ public class GUIPersonalbedarf {
 	
 	public String generellzugeteilt(JDBC_MariaDB jdbc, int week, int year) {
 		
-		int zuget=0;
+		
 		
 		Calendar calendar = Calendar.getInstance();
 		calendar.setWeekDate(year, week, 2);
@@ -231,7 +231,7 @@ public class GUIPersonalbedarf {
 		java.sql.Date abfrage1 = new java.sql.Date(abfrage.getTime());
 		
 		
-		String zugeteilt=jdbc.countkrank(abfrage1);
+		String zugeteilt=jdbc.countzugeteilt(abfrage1);
 		//zählen wie viele zugeteilt
 		
 		
@@ -281,7 +281,7 @@ public String urlaub(JDBC_MariaDB jdbc, int week, int year) {
 
 	public String schulung(JDBC_MariaDB jdbc, int week, int year) {
 	
-	int sch=0;
+	
 	
 	Calendar calendar = Calendar.getInstance();
 	calendar.setWeekDate(year, week, 2);

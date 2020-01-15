@@ -382,7 +382,36 @@ public class JDBC_MariaDB {
 		// "Bestätigen", JOptionPane.OK_CANCEL_OPTION);
 
 	}
+	public void Partiezuteilen(int PersNr, java.sql.Date von, java.sql.Date bis, int projnr) {
 
+		ResultSet res = null;
+		boolean verfueg = verfuegbarkeitabfrage(PersNr, von, bis);
+
+		try {
+
+			Statement stmt = con.createStatement();
+
+			if (verfueg == false) {
+				JOptionPane.showMessageDialog(null,
+						"Mitarbeiter ist in diesem Zeitraum in mindestens einer Woche nicht verfügbar", "Fehler",
+						JOptionPane.ERROR_MESSAGE);
+
+			} else {
+				String sql = "INSERT INTO arbeitet ( zugeteilt.PartieNr, mitarbeiter.PersNr, mitarbeiter.Name, mitarbeiter.Nachname, leitetpartie.PersNr  FROM zugeteilt JOIN mitarbeiter ON zugeteilt.PersNr=mitarbeiter.PersNr JOIN leitetpartie ON zugeteilt.PartieNr=leitetpartie.PartieNr ";
+				res = stmt.executeQuery(sql);
+				res.close();
+				stmt.close();
+			}
+
+		}
+
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+	
+
+	}
 	public void insertEmployee(int PersoNr, String Name, String Nachname) {
 
 		ResultSet res = null;
