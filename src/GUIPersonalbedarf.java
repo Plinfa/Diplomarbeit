@@ -68,7 +68,7 @@ public class GUIPersonalbedarf {
 		
 		JLabel lblZugeteilt = new JLabel("zugeteilt");
 		
-		JLabel lblNichtZugeteiltbentigt = new JLabel("nicht zugeteilt/ben\u00F6tigt");
+		JLabel lblNichtZugeteiltbentigt = new JLabel("nicht zugeteilt");
 		
 		JLabel lblKw = new JLabel("KW:");
 	//	textField_6.setText(nichtzugeteilt);
@@ -76,7 +76,7 @@ public class GUIPersonalbedarf {
 		int i=0;
 		
 		String columns [] = new String[108];
-		String [][] data= new String [6][108];
+		String [][] data= new String [7][108];
 	
 		Calendar c1 = Calendar.getInstance();
 		
@@ -117,6 +117,7 @@ public class GUIPersonalbedarf {
 			data [3][spalte]=schulung;
 			data [4][spalte]=zugeteilt;
 			data [5][spalte]=nichtzugeteilt;
+			data [6][spalte]=null;
 	
 			
 			
@@ -133,6 +134,8 @@ public class GUIPersonalbedarf {
 		table_1.setAutoResizeMode(JTable.AUTO_RESIZE_OFF); 
 		table_1.setRowHeight(25);
 		scrollPane.setViewportView(table_1);
+		
+		JLabel lblBentigt = new JLabel("ben\u00F6tigt");
 		GroupLayout groupLayout = new GroupLayout(frmPersonalUndProjektmanager.getContentPane());
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
@@ -140,24 +143,23 @@ public class GUIPersonalbedarf {
 					.addGap(122)
 					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
 						.addComponent(lblMitarbeiter)
-						.addComponent(lblKw)
 						.addComponent(lblKrank)
 						.addComponent(lblUrlaub)
 						.addComponent(lblSchulung)
 						.addComponent(lblZugeteilt)
-						.addComponent(lblNichtZugeteiltbentigt))
+						.addComponent(lblNichtZugeteiltbentigt)
+						.addComponent(lblBentigt)
+						.addComponent(lblKw))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 618, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(182, Short.MAX_VALUE))
+					.addContainerGap(186, Short.MAX_VALUE))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(77)
-							.addComponent(lblKw)
-							.addPreferredGap(ComponentPlacement.RELATED)
+							.addGap(97)
 							.addComponent(lblMitarbeiter)
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addComponent(lblKrank)
@@ -168,10 +170,14 @@ public class GUIPersonalbedarf {
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addComponent(lblZugeteilt)
 							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(lblNichtZugeteiltbentigt))
+							.addComponent(lblNichtZugeteiltbentigt)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(lblBentigt))
 						.addGroup(groupLayout.createSequentialGroup()
 							.addGap(65)
-							.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 297, GroupLayout.PREFERRED_SIZE)))
+							.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+								.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 297, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblKw))))
 					.addContainerGap(158, Short.MAX_VALUE))
 		);
 		frmPersonalUndProjektmanager.getContentPane().setLayout(groupLayout);
@@ -297,6 +303,4 @@ public String urlaub(JDBC_MariaDB jdbc, int week, int year) {
 	
 	return schulung;
 	}
-	
-	
 }

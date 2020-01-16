@@ -85,7 +85,8 @@ public class GUIstartmenue2 {
 		
 		JProgressBar progressBar = new JProgressBar(0, 100);
 		progressBar.setBounds(561, 272, 531, 60);
-		progressBar.setValue(34);
+		
+		progressBar.setValue(2);
 		progressBar.setStringPainted(true);
 		
 		frame2.getContentPane().setLayout(null);
