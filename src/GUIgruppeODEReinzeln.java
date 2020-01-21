@@ -367,9 +367,9 @@ public class GUIgruppeODEReinzeln {
 		btnPersonalbedarfProProjekt = new JButton("Personalbedarf pro Projekt");
 		btnPersonalbedarfProProjekt.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				int row = table.getSelectedRow();
+				int row = table_1.getSelectedRow();
 				int column = 0;
-				String content = table.getValueAt(row, column).toString();
+				String content = table_1.getValueAt(row, column).toString();
 				int ProjNr = Integer.parseInt(content);
 				
 				EventQueue.invokeLater(new Runnable() {

@@ -105,7 +105,7 @@ public class GUIPersonalbedarf {
 			columns[i]=week+ ", "+jahr;
 			
 			String nichtzugeteilt=needed(jdbc, woche, year);
-			String zugeteilt=generellzugeteilt(jdbc, woche, year);
+			String zugeteilt=generellzugeteilt(jdbc, woche, year, 0);
 			String krank=krank(jdbc, woche, year);
 			String urlaub=urlaub(jdbc, woche, year);
 			String schulung=schulung(jdbc, woche, year);
@@ -126,6 +126,8 @@ public class GUIPersonalbedarf {
 			woche++;
 			i++;
 		}
+		
+		
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setMinimumSize(new Dimension(1000, 1000));
@@ -226,9 +228,9 @@ public class GUIPersonalbedarf {
 		return nichtzugeteilt;
 	}
 	
-	public String generellzugeteilt(JDBC_MariaDB jdbc, int week, int year) {
+	public String generellzugeteilt(JDBC_MariaDB jdbc, int week, int year, int ProjNr) {
 		
-		
+	
 		
 		Calendar calendar = Calendar.getInstance();
 		calendar.setWeekDate(year, week, 2);
@@ -237,7 +239,7 @@ public class GUIPersonalbedarf {
 		java.sql.Date abfrage1 = new java.sql.Date(abfrage.getTime());
 		
 		
-		String zugeteilt=jdbc.countzugeteilt(abfrage1);
+		String zugeteilt=jdbc.countzugeteilt(abfrage1, ProjNr);
 		//zählen wie viele zugeteilt
 		
 		
