@@ -188,10 +188,10 @@ public class GUIProjekte {
 						jdbc.updateProjekt(ProjektNr,tablecontent);
 						//JOptionPane.showMessageDialog(null, "Update war erfolgreich ", "Bestätigen", JOptionPane.OK_CANCEL_OPTION);
 						
-					}catch(Exception e1) {
+						}catch(Exception e1) {
 						
-						e1.printStackTrace();
-					}
+							e1.printStackTrace();
+						}
 					}
 				});
 				btnUpdate.setBounds(198, 67, 89, 23);
