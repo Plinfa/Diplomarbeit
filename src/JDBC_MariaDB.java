@@ -35,7 +35,7 @@ public class JDBC_MariaDB {
 
 		try {
 
-			con = DriverManager.getConnection("jdbc:mariadb://localhost:3306/eqospersonalplanung", "root","5455809Otto");
+			con = DriverManager.getConnection("jdbc:mariadb://localhost:3306/eqospersonalplanung", "root","davmay81");
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -1056,6 +1056,47 @@ public String countzugeteilt(java.sql.Date abfrage1, int ProjNr) {
 }
 
 
+public String countbenötigt(java.sql.Date abfrage1, int ProjNr) {
+
+	
+	ResultSet res = null;
+	String count=null;
+	
+	try {
+
+		Statement stmt = con.createStatement();
+
+		// SQL Befehl
+
+		if(ProjNr==0) {
+			String sql = "SELECT SUM(Anzahl)FROM benötigt WHERE  '"+abfrage1+"' BETWEEN von AND bis";
+			res = stmt.executeQuery(sql);
+		}
+		else {
+			String sql = "SELECT SUM(Anzahl)FROM benötigt WHERE ProjektNr='"+ProjNr+"' AND  '"+abfrage1+"' BETWEEN von AND bis  ";
+			
+			res = stmt.executeQuery(sql);
+			
+		}
+		while (res.next()) {
+			
+			count = res.getString(1);
+		
+		}
+		
+		
+		
+				res.close();
+				stmt.close();
+	}
+
+	catch (SQLException e) {
+		e.printStackTrace();
+	}
+	
+	return count;
+	
+}
 	public void projektliste_füllen(int projektnummer, String projektname, Date startdatum, Date enddatum) {
 
 		Project xx = new Project(projektnummer, projektname, startdatum, enddatum);

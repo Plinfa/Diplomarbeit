@@ -104,12 +104,13 @@ public class GUIPersonalbedarf {
 			String jahr=String.valueOf(year);
 			columns[i]=week+ ", "+jahr;
 			
-			String nichtzugeteilt=needed(jdbc, woche, year);
+			String benoetigt=benoetigt(jdbc, woche, year,0);
 			String zugeteilt=generellzugeteilt(jdbc, woche, year, 0);
 			String krank=krank(jdbc, woche, year);
 			String urlaub=urlaub(jdbc, woche, year);
 			String schulung=schulung(jdbc, woche, year);
 			String mitarbeiter=jdbc.countmitarbeiter();
+			String nichtzugeteilt=nichtzugeteilt(jdbc, woche, year);
 				
 			data [0][spalte]=mitarbeiter;
 			data [1][spalte]=krank;
@@ -117,7 +118,7 @@ public class GUIPersonalbedarf {
 			data [3][spalte]=schulung;
 			data [4][spalte]=zugeteilt;
 			data [5][spalte]=nichtzugeteilt;
-			data [6][spalte]=null;
+			data [6][spalte]=benoetigt;
 	
 			
 			
@@ -206,26 +207,22 @@ public class GUIPersonalbedarf {
 		menuBar.add(btnZu);
 	}
 	
-	public String needed(JDBC_MariaDB jdbc, int week, int year) {
+	public String benoetigt(JDBC_MariaDB jdbc, int week, int year, int ProjNr) {
 		
 		Calendar calendar = Calendar.getInstance();
 		calendar.setWeekDate(year, week, 2);
 		
+		
+		
 		Date abfrage=calendar.getTime();
+		java.sql.Date abfrage1 = new java.sql.Date(abfrage.getTime());
 		
-		int nichtzug=0;
-		
-		
+		String benoetigt=jdbc.countbenötigt(abfrage1,ProjNr);
 		//zählen wie viele nicht zugeteilt
 	
-		        
-			
-			
-			
+		       
 		
-		String nichtzugeteilt = String.valueOf(nichtzug);
-		
-		return nichtzugeteilt;
+		return benoetigt;
 	}
 	
 	public String generellzugeteilt(JDBC_MariaDB jdbc, int week, int year, int ProjNr) {
@@ -248,6 +245,33 @@ public class GUIPersonalbedarf {
 		return zugeteilt;
 	}
 	
+public String nichtzugeteilt(JDBC_MariaDB jdbc, int week, int year) {
+		
+	
+		
+		Calendar calendar = Calendar.getInstance();
+		calendar.setWeekDate(year, week, 2);
+		
+		Date abfrage=calendar.getTime();
+		java.sql.Date abfrage1 = new java.sql.Date(abfrage.getTime());
+		
+		
+		//String nichtzugeteilt=jdbc.countnichtzugeteilt(abfrage1);
+		String mitarbeiter=jdbc.countmitarbeiter();
+		int mitarbeitercount = Integer.parseInt(mitarbeiter);
+		String zugeteilt=jdbc.countzugeteilt(abfrage1,0);
+		int zugeteiltcount = Integer.parseInt(zugeteilt);
+		
+		int nichtzugeteiltcount=mitarbeitercount-zugeteiltcount;
+		String nichtzugeteilt=Integer.toString(nichtzugeteiltcount);
+		//zählen wie viele zugeteilt
+		
+		
+		
+		
+		return nichtzugeteilt;
+	}
+	
 public String krank(JDBC_MariaDB jdbc, int week, int year) {
 		
 		
@@ -264,7 +288,7 @@ public String krank(JDBC_MariaDB jdbc, int week, int year) {
 		//zählen wie viele krank
 		
 		
-		//String krank = String.valueOf(krk);
+		
 		
 		return krank;
 	}

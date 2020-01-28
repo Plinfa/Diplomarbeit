@@ -119,10 +119,11 @@ public class GUIeinzelPERS {
 			String jahr=String.valueOf(year);
 			columns[i]=week+ ", "+jahr;
 			
-			String benotigt=null;//bei diesem Proj zugeteilt
+			String benotigt=benoetigt(jdbc, woche, year, ProjNr);//bei diesem Proj zugeteilt
 			String zugeteilt=zugeteilt(jdbc, woche, year, ProjNr);//bei diesem Proj zugeteilt
-			String diff=null;//bei diesem Proj zugeteilt
-				
+			//String diff=differenz(jdbc, woche, year, ProjNr);//bei diesem Proj zugeteilt
+			// error da diff minus ist
+				String diff=null;
 			data [0][spalte]=benotigt;
 			data [1][spalte]=zugeteilt;
 			data [2][spalte]=diff;
@@ -168,4 +169,47 @@ public String zugeteilt(JDBC_MariaDB jdbc, int week, int year, int ProjNr) {
 		
 		return zugeteilt;
 	}
+public String benoetigt(JDBC_MariaDB jdbc, int week, int year, int ProjNr) {
+	
+	Calendar calendar = Calendar.getInstance();
+	calendar.setWeekDate(year, week, 2);
+	
+	
+	
+	Date abfrage=calendar.getTime();
+	java.sql.Date abfrage1 = new java.sql.Date(abfrage.getTime());
+	
+	String benoetigt=jdbc.countbenötigt(abfrage1,ProjNr);
+	//zählen wie viele nicht zugeteilt
+
+	       
+	
+	return benoetigt;
+}
+public String differenz(JDBC_MariaDB jdbc, int week, int year, int ProjNr) {
+	
+	
+	
+	Calendar calendar = Calendar.getInstance();
+	calendar.setWeekDate(year, week, 2);
+	
+	Date abfrage=calendar.getTime();
+	java.sql.Date abfrage1 = new java.sql.Date(abfrage.getTime());
+	
+	
+	//String nichtzugeteilt=jdbc.countnichtzugeteilt(abfrage1);
+	String benoetigt=jdbc.countbenötigt(abfrage1, ProjNr);
+	int benoetigtcount = Integer.parseInt(benoetigt);
+	String zugeteilt=jdbc.countzugeteilt(abfrage1,ProjNr);
+	int zugeteiltcount = Integer.parseInt(zugeteilt);
+	
+	int differenzcount=benoetigtcount-zugeteiltcount;
+	String diff=Integer.toString(differenzcount);
+	//zählen wie viele zugeteilt
+	
+	
+	
+	
+	return diff;
+}
 }
