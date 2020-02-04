@@ -4,6 +4,8 @@ import javax.swing.JFrame;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.awt.event.ActionEvent;
 import java.awt.Toolkit;
@@ -25,6 +27,7 @@ import java.awt.CardLayout;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JRadioButton;
+
 //Wartecker Marcel
 public class GUIstartmenue2 {
 
@@ -57,6 +60,9 @@ public class GUIstartmenue2 {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize(JDBC_MariaDB jdbc) {
+		
+
+		
 		frame2 = new JFrame();
 		frame2.setTitle("Personal- und Projektmanager");
 		frame2.setIconImage(Toolkit.getDefaultToolkit().getImage(GUIstartmenue2.class.getResource("/ressources/EQOS.jpg")));
@@ -102,7 +108,7 @@ public class GUIstartmenue2 {
 		JProgressBar progressBar_1 = new JProgressBar(0, 100);
 		progressBar_1.setBounds(767, 331, 146, 17);
 		Startmenue.add(progressBar_1);
-		progressBar_1.setValue(22);
+		//progressBar_1.setValue(jdbc.auslastung(abfrage1, ProjNr));
 		progressBar_1.setStringPainted(true);
 		
 		JMenuBar menuBar = new JMenuBar();
@@ -487,4 +493,4 @@ public class GUIstartmenue2 {
 		table_2.setModel(DbUtils.resultSetToTableModel(jdbc.selectMitarbeiterinfo()));
 		table_3.setModel(DbUtils.resultSetToTableModel(jdbc.selectTabelleProjects()));
 	}
-}
+	}

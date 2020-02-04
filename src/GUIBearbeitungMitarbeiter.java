@@ -48,6 +48,13 @@ public class GUIBearbeitungMitarbeiter {
 		table.setModel(DbUtils.resultSetToTableModel(jdbc.selectTabelleMitarbeiter()));
 		
 		JButton btnnderungenSpeichern = new JButton("\u00C4nderungen speichern");
+		btnnderungenSpeichern.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				//jdbc.updateMitarbeiter(PersoNr, tablecontent);
+				//personalnummer von ausgewähltem mitarbeiter benötigt
+			}
+		});
 		btnnderungenSpeichern.setBounds(91, 43, 189, 23);
 		frame111.getContentPane().add(btnnderungenSpeichern);
 		

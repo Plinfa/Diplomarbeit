@@ -245,51 +245,6 @@ public class GUIgruppeODEReinzeln {
 		button_1.setBounds(59, 129, 103, 23);
 		frame6.getContentPane().add(button_1);
 
-		JButton button_2 = new JButton("Update");
-		button_2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				String content = null;
-				int row = 0;
-				String PersoNr = null;
-
-				try {
-
-					row = table.getSelectedRow();
-					PersoNr = table.getValueAt(row, 0).toString();
-
-					List<String> tablecontent = new ArrayList<String>();
-					tablecontent.clear();
-
-					for (int column = 1; column <= table.getColumnCount(); column++) {
-						content = null;
-
-						if (table.getModel().getValueAt(row, column - 1) == null) {
-
-							tablecontent.add(column - 1, "");
-						} else {
-							content = table.getModel().getValueAt(row, column - 1).toString();
-							tablecontent.add(column - 1, content);
-
-						}
-
-					}
-
-					// System.out.println(tablecontent);
-
-					jdbc.updateMitarbeiter(PersoNr, tablecontent);
-					JOptionPane.showMessageDialog(null, "Update war erfolgreich ", "Bestätigen",
-							JOptionPane.OK_CANCEL_OPTION);
-
-				} catch (Exception e1) {
-
-					e1.printStackTrace();
-				}
-
-			}
-		});
-		button_2.setBounds(172, 129, 79, 23);
-		frame6.getContentPane().add(button_2);
-
 		JButton button_3 = new JButton("Mitarbeiter nicht verf\u00FCgbar");
 		button_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

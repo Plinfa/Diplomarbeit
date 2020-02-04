@@ -121,9 +121,9 @@ public class GUIeinzelPERS {
 			
 			String benotigt=benoetigt(jdbc, woche, year, ProjNr);//bei diesem Proj zugeteilt
 			String zugeteilt=zugeteilt(jdbc, woche, year, ProjNr);//bei diesem Proj zugeteilt
-			//String diff=differenz(jdbc, woche, year, ProjNr);//bei diesem Proj zugeteilt
+			String diff=differenz(jdbc, woche, year, ProjNr);//bei diesem Proj zugeteilt
 			// error da diff minus ist
-				String diff=null;
+				//String diff="0";
 			data [0][spalte]=benotigt;
 			data [1][spalte]=zugeteilt;
 			data [2][spalte]=diff;
@@ -180,6 +180,7 @@ public String benoetigt(JDBC_MariaDB jdbc, int week, int year, int ProjNr) {
 	java.sql.Date abfrage1 = new java.sql.Date(abfrage.getTime());
 	
 	String benoetigt=jdbc.countbenötigt(abfrage1,ProjNr);
+	
 	//zählen wie viele nicht zugeteilt
 
 	       
@@ -188,7 +189,7 @@ public String benoetigt(JDBC_MariaDB jdbc, int week, int year, int ProjNr) {
 }
 public String differenz(JDBC_MariaDB jdbc, int week, int year, int ProjNr) {
 	
-	
+	int differenzcount=0;
 	
 	Calendar calendar = Calendar.getInstance();
 	calendar.setWeekDate(year, week, 2);
@@ -196,15 +197,21 @@ public String differenz(JDBC_MariaDB jdbc, int week, int year, int ProjNr) {
 	Date abfrage=calendar.getTime();
 	java.sql.Date abfrage1 = new java.sql.Date(abfrage.getTime());
 	
+
+	int benoetigtcount = Integer.parseInt(jdbc.countbenötigt(abfrage1, ProjNr));
 	
-	//String nichtzugeteilt=jdbc.countnichtzugeteilt(abfrage1);
-	String benoetigt=jdbc.countbenötigt(abfrage1, ProjNr);
-	int benoetigtcount = Integer.parseInt(benoetigt);
-	String zugeteilt=jdbc.countzugeteilt(abfrage1,ProjNr);
-	int zugeteiltcount = Integer.parseInt(zugeteilt);
+		int zugeteiltcount = Integer.parseInt(jdbc.countzugeteilt(abfrage1,ProjNr));
+		if(benoetigtcount==0) {
+			differenzcount=0;
+		}
+		else {
+			differenzcount=zugeteiltcount-benoetigtcount;
+		}
+		 
+		String diff=Integer.toString(differenzcount);
 	
-	int differenzcount=benoetigtcount-zugeteiltcount;
-	String diff=Integer.toString(differenzcount);
+	
+	
 	//zählen wie viele zugeteilt
 	
 	

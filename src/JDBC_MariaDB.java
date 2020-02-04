@@ -1081,6 +1081,9 @@ public String countbenötigt(java.sql.Date abfrage1, int ProjNr) {
 		while (res.next()) {
 			
 			count = res.getString(1);
+			if(count==null) {
+				count="0";
+			}
 		
 		}
 		
@@ -1097,6 +1100,15 @@ public String countbenötigt(java.sql.Date abfrage1, int ProjNr) {
 	return count;
 	
 }
+	public int auslastung(java.sql.Date abfrage1, int ProjNr) {
+		
+		int benoetigt = Integer.parseInt(countbenötigt(abfrage1, ProjNr));
+		int zugeteilt = Integer.parseInt(countzugeteilt(abfrage1, ProjNr));
+		int auslastung_next=0;
+		
+		auslastung_next= (zugeteilt/benoetigt)*100;
+		return auslastung_next;
+	}
 	public void projektliste_füllen(int projektnummer, String projektname, Date startdatum, Date enddatum) {
 
 		Project xx = new Project(projektnummer, projektname, startdatum, enddatum);
