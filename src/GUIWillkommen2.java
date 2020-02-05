@@ -26,6 +26,9 @@ import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import java.awt.Toolkit;
 import javax.swing.LayoutStyle.ComponentPlacement;
+import java.awt.Frame;
+import java.awt.Component;
+import javax.swing.SwingConstants;
 //Wartecker Marcel
 public class GUIWillkommen2 {
 
@@ -53,10 +56,9 @@ public class GUIWillkommen2 {
 		
 		frame = new JFrame();
 		frame.setIconImage(Toolkit.getDefaultToolkit().getImage(GUIWillkommen2.class.getResource("/ressources/EQOS.jpg")));
-		frame.setBounds(100, 100, 1122, 630);
+		frame.setBounds(100, 100, 659, 442);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setTitle("Personal- und Projektmanager");
-		frame.setExtendedState(frame.getExtendedState() | JFrame.MAXIMIZED_BOTH);
 		
 		JLabel label = new JLabel("");
 		
@@ -98,12 +100,17 @@ public class GUIWillkommen2 {
 				
 		});
 		
-		JLabel lblPasswort = new JLabel("Passwort");
+		JLabel lblPasswort = new JLabel("Passwort:");
 		
 		JLabel lblLogin = new JLabel("Login:");
+		lblLogin.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		lblLogin.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		JLabel lblPersonalprojektmanager = new JLabel("Personal- und Projektmanager");
-		lblPersonalprojektmanager.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblPersonalprojektmanager.setAlignmentX(Component.CENTER_ALIGNMENT);
+		lblPersonalprojektmanager.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		
+		lblPersonalprojektmanager.setHorizontalAlignment(JLabel.CENTER);
 		
 		JButton btnReset = new JButton("Reset");
 		btnReset.addActionListener(new ActionListener() {
@@ -125,54 +132,59 @@ public class GUIWillkommen2 {
 		});
 		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
 		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
+			groupLayout.createParallelGroup(Alignment.TRAILING)
 				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(220)
-					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-								.addComponent(label_1)
-								.addComponent(label))
-							.addGap(559))
-						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(lblPasswort, GroupLayout.PREFERRED_SIZE, 68, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.UNRELATED)))
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addComponent(lblLogin, GroupLayout.PREFERRED_SIZE, 81, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblPersonalprojektmanager, GroupLayout.PREFERRED_SIZE, 215, GroupLayout.PREFERRED_SIZE)
 						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(passwordField, GroupLayout.PREFERRED_SIZE, 132, GroupLayout.PREFERRED_SIZE)
-							.addGap(18)
-							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
-								.addComponent(btnAnmelden, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								.addComponent(btnExit, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								.addComponent(btnReset, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-					.addContainerGap(96, Short.MAX_VALUE))
+							.addGap(220)
+							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+								.addComponent(label)
+								.addComponent(label_1)))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(270)
+							.addComponent(lblLogin, GroupLayout.DEFAULT_SIZE, 81, Short.MAX_VALUE)
+							.addGap(178)))
+					.addGap(114))
+				.addGroup(groupLayout.createSequentialGroup()
+					.addGap(178)
+					.addComponent(lblPasswort, GroupLayout.PREFERRED_SIZE, 60, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(passwordField, GroupLayout.DEFAULT_SIZE, 124, Short.MAX_VALUE)
+					.addGap(18)
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addComponent(btnExit, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 81, Short.MAX_VALUE)
+						.addComponent(btnReset, GroupLayout.DEFAULT_SIZE, 81, Short.MAX_VALUE)
+						.addComponent(btnAnmelden, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+					.addGap(178))
+				.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
+					.addGap(189)
+					.addComponent(lblPersonalprojektmanager, GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
+					.addGap(196))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addGap(53)
-					.addComponent(lblPersonalprojektmanager, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
-					.addGap(28)
-					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+					.addComponent(lblPersonalprojektmanager, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
+						.addComponent(label)
+						.addComponent(label_1)
+						.addComponent(lblLogin, GroupLayout.PREFERRED_SIZE, 116, GroupLayout.PREFERRED_SIZE))
+					.addGap(32)
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addGroup(groupLayout.createSequentialGroup()
-							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-								.addComponent(label_1)
-								.addComponent(label))
-							.addGap(52))
+							.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+								.addComponent(lblPasswort, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addComponent(passwordField, GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE))
+							.addGap(137))
 						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(lblLogin, GroupLayout.PREFERRED_SIZE, 43, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)))
-					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(passwordField, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnAnmelden)
-						.addComponent(lblPasswort, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(btnReset)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(btnExit)
-					.addGap(328))
+							.addComponent(btnAnmelden)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(btnReset)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(btnExit)
+							.addContainerGap())))
 		);
 		frame.getContentPane().setLayout(groupLayout);
 	}

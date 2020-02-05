@@ -81,7 +81,6 @@ public class GUIstartmenue2 {
 		frame2.setBounds(100, 100, 1118, 627);
 		frame2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame2.getContentPane().setLayout(new CardLayout(0, 0));
-		frame2.setExtendedState(frame2.getExtendedState() | JFrame.MAXIMIZED_BOTH);
 		
 		Startmenue = new JPanel();
 		Startmenue.setBackground(SystemColor.menu);
@@ -94,14 +93,14 @@ public class GUIstartmenue2 {
 		Startmenue.add(btnProjekte);
 		
 		JProgressBar progressBar = new JProgressBar(0, 100);
-		progressBar.setBounds(767, 294, 146, 17);
+		progressBar.setBounds(781, 313, 296, 25);
 		Startmenue.add(progressBar);
 		
 		progressBar.setValue(2);
 		progressBar.setStringPainted(true);
 		
 		JButton btnMitarbeiter = new JButton("Mitarbeiterplanung");
-		btnMitarbeiter.setBounds(830, 143, 380, 111);
+		btnMitarbeiter.setBounds(682, 143, 380, 111);
 		Startmenue.add(btnMitarbeiter);
 		
 		JScrollPane scrollPane = new JScrollPane();
@@ -113,15 +112,15 @@ public class GUIstartmenue2 {
 		table.setModel(DbUtils.resultSetToTableModel(jdbc.selectTabelleProjects()));
 		
 		JLabel lblAuslastungNchsteKw = new JLabel("Auslastung n\u00E4chste KW:");
-		lblAuslastungNchsteKw.setBounds(630, 294, 118, 14);
+		lblAuslastungNchsteKw.setBounds(644, 313, 118, 25);
 		Startmenue.add(lblAuslastungNchsteKw);
 		
 		JLabel lblAuslastungbernchsteKw = new JLabel("Auslastung \u00FCbern\u00E4chste KW:");
-		lblAuslastungbernchsteKw.setBounds(608, 331, 140, 14);
+		lblAuslastungbernchsteKw.setBounds(622, 350, 140, 25);
 		Startmenue.add(lblAuslastungbernchsteKw);
 		
 		JProgressBar progressBar_1 = new JProgressBar(0, 100);
-		progressBar_1.setBounds(767, 331, 146, 17);
+		progressBar_1.setBounds(781, 350, 296, 25);
 		Startmenue.add(progressBar_1);
 		
 		/*Calendar c1 = Calendar.getInstance();
