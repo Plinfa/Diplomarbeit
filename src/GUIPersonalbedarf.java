@@ -53,7 +53,7 @@ public class GUIPersonalbedarf {
 		frmPersonalUndProjektmanager.setTitle("Personal- und Projektmanager");
 		frmPersonalUndProjektmanager.setIconImage(Toolkit.getDefaultToolkit().getImage(GUIPersonalbedarf.class.getResource("/ressources/EQOS.jpg")));
 		frmPersonalUndProjektmanager.setBounds(100, 100, 1057, 584);
-		frmPersonalUndProjektmanager.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmPersonalUndProjektmanager.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
 		
 		JLabel lblMitarbeiter = new JLabel("Mitarbeiter");
@@ -191,17 +191,10 @@ public class GUIPersonalbedarf {
 		JButton btnZu = new JButton("zurück");
 		btnZu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				
 				frmPersonalUndProjektmanager.dispose();
-				EventQueue.invokeLater(new Runnable() {
-					public void run() {
-						try {
-							GUIgruppeODEReinzeln window = new GUIgruppeODEReinzeln(jdbc);
-							window.frame6.setVisible(true);
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
-					}
-				});
+				
 			}
 		});
 		menuBar.add(btnZu);

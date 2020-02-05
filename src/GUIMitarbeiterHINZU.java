@@ -52,21 +52,28 @@ public class GUIMitarbeiterHINZU {
 		frame9.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
 		textField = new JTextField();
+		textField.setBounds(26, 53, 96, 20);
 		textField.setColumns(10);
 		
 		textField_1 = new JTextField();
+		textField_1.setBounds(26, 104, 96, 20);
 		textField_1.setColumns(10);
 		
 		textField_2 = new JTextField();
+		textField_2.setBounds(26, 155, 96, 20);
 		textField_2.setColumns(10);
 		
 		JLabel lblPersnr = new JLabel("PersNr");
+		lblPersnr.setBounds(26, 33, 46, 14);
 		
 		JLabel lblName = new JLabel("Name");
+		lblName.setBounds(26, 84, 46, 14);
 		
 		JLabel lblVorname = new JLabel("Vorname");
+		lblVorname.setBounds(26, 135, 53, 14);
 		
 		JButton btnEingabe = new JButton("Eingabe");
+		btnEingabe.setBounds(168, 212, 89, 23);
 		btnEingabe.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				String Name=null;
@@ -94,49 +101,16 @@ public class GUIMitarbeiterHINZU {
 					frame9.dispose();
 					
 					
-					GUIgruppeODEReinzeln window = new GUIgruppeODEReinzeln(jdbc);
-					window.frame6.setVisible(true);
+					
 			}
 		});
-		
-		GroupLayout groupLayout = new GroupLayout(frame9.getContentPane());
-		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(26)
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblPersnr, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE)
-						.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblVorname, GroupLayout.PREFERRED_SIZE, 53, GroupLayout.PREFERRED_SIZE)
-						.addComponent(textField_2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblName, GroupLayout.PREFERRED_SIZE, 46, GroupLayout.PREFERRED_SIZE))
-					.addGap(46)
-					.addComponent(btnEingabe, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE)
-					.addGap(177))
-		);
-		groupLayout.setVerticalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(212)
-							.addComponent(btnEingabe))
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(33)
-							.addComponent(lblPersnr)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(lblName)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(lblVorname)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(textField_2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-					.addGap(26))
-		);
-		frame9.getContentPane().setLayout(groupLayout);
+		frame9.getContentPane().setLayout(null);
+		frame9.getContentPane().add(textField);
+		frame9.getContentPane().add(lblPersnr);
+		frame9.getContentPane().add(textField_1);
+		frame9.getContentPane().add(lblVorname);
+		frame9.getContentPane().add(textField_2);
+		frame9.getContentPane().add(lblName);
+		frame9.getContentPane().add(btnEingabe);
 	}
 }

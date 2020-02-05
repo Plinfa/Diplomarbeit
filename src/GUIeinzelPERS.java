@@ -71,19 +71,7 @@ public class GUIeinzelPERS {
 		button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frameEinzelPerso.dispose();
-				EventQueue.invokeLater(new Runnable() {
-					public void run() {
-						try {
-							GUIgruppeODEReinzeln window = new GUIgruppeODEReinzeln(jdbc);
-							window.frame6.setVisible(true);
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
-					}
-				});
-				
-				
-				
+								
 			}
 		});
 		menuBar.add(button);

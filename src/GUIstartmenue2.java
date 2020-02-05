@@ -27,6 +27,11 @@ import java.awt.CardLayout;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JRadioButton;
+import java.awt.Dimension;
+import java.awt.Color;
+import java.awt.Rectangle;
+import java.awt.Component;
+import java.awt.SystemColor;
 
 //Wartecker Marcel
 public class GUIstartmenue2 {
@@ -44,6 +49,9 @@ public class GUIstartmenue2 {
 	private JPanel Startmenue;
 	private JPanel Projektplanung;
 	private JPanel Mitarbeiterplanung;
+	private JTextField textField_5;
+	private JTextField textField_6;
+	private JTextField textField_7;
 	/**
 	 * Launch the application.
 	 */
@@ -64,13 +72,20 @@ public class GUIstartmenue2 {
 
 		
 		frame2 = new JFrame();
+		frame2.getContentPane().setBackground(Color.RED);
+		frame2.getContentPane().setBounds(new Rectangle(2147483647, 2147483647, 2147483647, 2147483647));
+		frame2.setBackground(Color.DARK_GRAY);
+		frame2.getContentPane().setSize(new Dimension(2147483647, 2147483647));
 		frame2.setTitle("Personal- und Projektmanager");
 		frame2.setIconImage(Toolkit.getDefaultToolkit().getImage(GUIstartmenue2.class.getResource("/ressources/EQOS.jpg")));
 		frame2.setBounds(100, 100, 1118, 627);
 		frame2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame2.getContentPane().setLayout(new CardLayout(0, 0));
+		frame2.setExtendedState(frame2.getExtendedState() | JFrame.MAXIMIZED_BOTH);
 		
 		Startmenue = new JPanel();
+		Startmenue.setBackground(SystemColor.menu);
+		Startmenue.setSize(2147483647, 2147483647);
 		frame2.getContentPane().add(Startmenue, "name_1799136513500");
 		Startmenue.setLayout(null);
 		
@@ -86,7 +101,7 @@ public class GUIstartmenue2 {
 		progressBar.setStringPainted(true);
 		
 		JButton btnMitarbeiter = new JButton("Mitarbeiterplanung");
-		btnMitarbeiter.setBounds(767, 236, 125, 23);
+		btnMitarbeiter.setBounds(830, 143, 380, 111);
 		Startmenue.add(btnMitarbeiter);
 		
 		JScrollPane scrollPane = new JScrollPane();
@@ -108,8 +123,18 @@ public class GUIstartmenue2 {
 		JProgressBar progressBar_1 = new JProgressBar(0, 100);
 		progressBar_1.setBounds(767, 331, 146, 17);
 		Startmenue.add(progressBar_1);
-		//progressBar_1.setValue(jdbc.auslastung(abfrage1, ProjNr));
-		progressBar_1.setStringPainted(true);
+		
+		/*Calendar c1 = Calendar.getInstance();
+		
+		int woche = c1.get(Calendar.WEEK_OF_YEAR);
+		int year= c1.get(Calendar.YEAR);
+		
+		c1.set(year, woche+1, 2);
+		
+		Date abfrage=c1.getTime();
+		java.sql.Date abfrage1 = new java.sql.Date(abfrage.getTime());
+		progressBar_1.setValue(jdbc.auslastung(abfrage1, 0));
+		progressBar_1.setStringPainted(true);*/
 		
 		JMenuBar menuBar = new JMenuBar();
 		menuBar.setBounds(0, 0, 1102, 25);
@@ -156,7 +181,10 @@ public class GUIstartmenue2 {
 		});
 		btnMitarbeiter.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				frame2.dispose();
+				
+				Startmenue.setVisible(false);
+				Mitarbeiterplanung.setVisible(true);
+				/*frame2.dispose();
 				EventQueue.invokeLater(new Runnable() {
 					public void run() {
 						try {
@@ -166,13 +194,16 @@ public class GUIstartmenue2 {
 							e.printStackTrace();
 						}
 					}
-				});
+				});*/
 			}
 		});
 		btnProjekte.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				EventQueue.invokeLater(new Runnable() {
+				Startmenue.setVisible(false);
+				Projektplanung.setVisible(true);
+				
+				/*EventQueue.invokeLater(new Runnable() {
 					public void run() {
 						try {
 							GUIProjekte window = new GUIProjekte(jdbc);
@@ -181,7 +212,7 @@ public class GUIstartmenue2 {
 							e.printStackTrace();
 						}
 					}
-				});
+				});*/
 				
 				
 			}
@@ -192,7 +223,7 @@ public class GUIstartmenue2 {
 		Projektplanung.setLayout(null);
 		
 		JMenuBar menuBar_1 = new JMenuBar();
-		menuBar_1.setBounds(0, 0, 1101, 25);
+		menuBar_1.setBounds(0, 0, 1601, 25);
 		Projektplanung.add(menuBar_1);
 		
 		JButton button = new JButton("zur\u00FCck");
@@ -278,7 +309,7 @@ public class GUIstartmenue2 {
 				});
 			}
 		});
-		button_3.setBounds(649, 92, 219, 23);
+		button_3.setBounds(649, 92, 538, 23);
 		Projektplanung.add(button_3);
 		
 		JButton button_4 = new JButton("Update");
@@ -368,6 +399,61 @@ public class GUIstartmenue2 {
 		Mitarbeiterplanung.setLayout(null);
 		
 		JButton button_6 = new JButton("Best\u00E4tigen");
+		button_6.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				int row = table_2.getSelectedRow();
+				int column = 0;
+				String content = table_2.getValueAt(row, column).toString();
+				int PersNr = Integer.parseInt(content);
+
+				// int von=0;
+				// int bis=0;
+				int projnr = 0;
+				projnr = Integer.parseInt(textField.getText());
+				// von=Integer.parseInt(textField_3.getText());
+				// bis=Integer.parseInt(textField_4.getText());
+				String vonEingabe = null;
+				String bisEingabe = null;
+				String vonJahr = null;
+				String bisJahr = null;
+				vonEingabe = textField_1.getText();
+				bisEingabe = textField_2.getText();
+				vonJahr = textField_3.getText();
+				bisJahr = textField_4.getText(); 				// Eingabe
+				int vonint = Integer.parseInt(vonEingabe);
+				int bisint = Integer.parseInt(bisEingabe);
+				int vJahr = Integer.parseInt(vonJahr);
+				int bJahr = Integer.parseInt(bisJahr); 			// Eingabe in Integer umwandeln
+				int startday = 2; 								// 2 für Montag
+				int endday = 7;
+
+				Calendar startdate = Calendar.getInstance();
+				startdate.setWeekDate(vJahr, vonint, startday); 			// von Datum setzen
+				Date vonDate = startdate.getTime(); 						// in Java Date speichern
+				java.sql.Date von = new java.sql.Date(vonDate.getTime()); 	// in SQL Date umwandeln
+
+				Calendar enddate = Calendar.getInstance();
+				enddate.setWeekDate(bJahr, bisint, endday); 				// bis Datum setzen
+				enddate.getTime();
+				Date bisDate = enddate.getTime(); 							// in Java Date speichern
+				java.sql.Date bis = new java.sql.Date(bisDate.getTime()); 	// in SQL Date umwandeln
+
+				try {
+
+					jdbc.Mitarbeiterzuteilen(PersNr, von, bis, projnr);
+
+					// JOptionPane.showMessageDialog(null, "Mitarbeiter erfolgreich hinzugefügt ",
+					// "Bestätigen", JOptionPane.OK_CANCEL_OPTION);
+
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
+
+				textField_1.setText(null);
+				textField_2.setText(null);
+			}
+		});
 		button_6.setBounds(870, 241, 96, 23);
 		Mitarbeiterplanung.add(button_6);
 		
@@ -399,22 +485,94 @@ public class GUIstartmenue2 {
 		Mitarbeiterplanung.add(textField_2);
 		
 		JButton button_7 = new JButton("entfernen");
+		button_7.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				EventQueue.invokeLater(new Runnable() {
+					public void run() {
+						
+						int row = 0;
+						String PersNr = null;
+
+						try {
+
+							row = table_2.getSelectedRow();
+							PersNr = table_2.getValueAt(row, 0).toString();
+							if (JOptionPane.showConfirmDialog(frame2, "Mitarbeiter und alle Einträge wirklich löschen?", "Personal- und Projektmanager", JOptionPane.YES_NO_OPTION)==JOptionPane.YES_NO_OPTION) 
+							{
+								jdbc.deleteEmployee(PersNr);
+							}
+							else {
+								
+							}
+							
+							//System.out.println(PersNr);
+
+						} catch (Exception e1) {
+
+							e1.printStackTrace();
+						}
+						table_2.setModel(DbUtils.resultSetToTableModel(jdbc.selectMitarbeiterinfo()));
+					}
+
+				});
+			}
+		});
 		button_7.setBounds(130, 193, 103, 23);
 		Mitarbeiterplanung.add(button_7);
 		
 		JButton button_8 = new JButton("Hinzuf\u00FCgen");
+		
 		button_8.setBounds(130, 173, 103, 23);
 		Mitarbeiterplanung.add(button_8);
 		
-		JButton button_9 = new JButton("Update");
-		button_9.setBounds(243, 173, 79, 23);
-		Mitarbeiterplanung.add(button_9);
-		
 		JButton button_10 = new JButton("Mitarbeiter nicht verf\u00FCgbar");
+		button_10.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				int row = table_2.getSelectedRow();
+				int column = 0;
+				String content = table_2.getValueAt(row, column).toString();
+				int PersNr = Integer.parseInt(content);
+
+				EventQueue.invokeLater(new Runnable() {
+					public void run() {
+						try {
+							GUIvon_bis window = new GUIvon_bis(jdbc, PersNr);
+							window.frame12.setVisible(true);
+
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					}
+				});
+			}
+			
+		});
 		button_10.setBounds(332, 173, 191, 23);
 		Mitarbeiterplanung.add(button_10);
 		
 		JButton button_11 = new JButton("Zuteilung Detailansicht");
+		button_11.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				EventQueue.invokeLater(new Runnable() {
+					public void run() {
+						try {
+							int row = table_2.getSelectedRow();
+							int column = 0;
+							String content = table_2.getValueAt(row, column).toString();
+							int PersNr = Integer.parseInt(content);
+							
+							jdbc.zuteilungdetailansicht(PersNr);
+							GUI_Gantt_ChartDesigner window = new GUI_Gantt_ChartDesigner(jdbc, jdbc.zuteilungdetailansicht(PersNr));
+							window.frame4.setVisible(true);
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					}
+				});
+				
+			}
+		});
 		button_11.setBounds(130, 241, 145, 23);
 		Mitarbeiterplanung.add(button_11);
 		
@@ -437,10 +595,45 @@ public class GUIstartmenue2 {
 		Mitarbeiterplanung.add(label_5);
 		
 		JButton button_12 = new JButton("Personalbedarf gesamt");
+		button_12.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				EventQueue.invokeLater(new Runnable() {
+					public void run() {
+						try {
+							GUIPersonalbedarf window = new GUIPersonalbedarf(jdbc);
+							window.frmPersonalUndProjektmanager.setVisible(true);
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					}
+				});
+			}
+		});
 		button_12.setBounds(615, 493, 213, 33);
 		Mitarbeiterplanung.add(button_12);
 		
 		JButton button_13 = new JButton("Personalbedarf pro Projekt");
+		button_13.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int row = table_3.getSelectedRow();
+				int column = 0;
+				String content = table_3.getValueAt(row, column).toString();
+				int ProjNr = Integer.parseInt(content);
+				
+				EventQueue.invokeLater(new Runnable() {
+					public void run() {
+						try {
+							GUIeinzelPERS window = new GUIeinzelPERS(jdbc, ProjNr);
+							window.frameEinzelPerso.setVisible(true);
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					}
+				});
+				
+			}
+		});
 		button_13.setBounds(831, 493, 198, 23);
 		Mitarbeiterplanung.add(button_13);
 		
@@ -449,6 +642,22 @@ public class GUIstartmenue2 {
 		Mitarbeiterplanung.add(button_14);
 		
 		JButton button_15 = new JButton("Partien verwalten");
+		button_15.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				EventQueue.invokeLater(new Runnable() {
+					public void run() {
+						try {
+							GUIPartienverwaltung window = new GUIPartienverwaltung(jdbc);
+							window.frame17.setVisible(true);
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					}
+				});
+				
+			}
+		});
 		button_15.setBounds(140, 493, 168, 23);
 		Mitarbeiterplanung.add(button_15);
 		
@@ -461,19 +670,57 @@ public class GUIstartmenue2 {
 		Mitarbeiterplanung.add(radioButton_1);
 		
 		ButtonGroup gruppe = new ButtonGroup();
+		
+		radioButton.setSelected(true);
 		 
         //JRadioButtons werden zur ButtonGroup hinzugefügt
         gruppe.add(radioButton);
         gruppe.add(radioButton_1);
+        
+        radioButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				table_2.setModel(DbUtils.resultSetToTableModel(jdbc.selectPartieLeiter()));
+			}
+		});
+        
+        radioButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				table_2.setModel(DbUtils.resultSetToTableModel(jdbc.selectMitarbeiterinfo()));
+			}
+		});
 		
 		JMenuBar menuBar_2 = new JMenuBar();
 		menuBar_2.setBounds(0, 0, 1102, 25);
 		Mitarbeiterplanung.add(menuBar_2);
 		
 		JButton button_16 = new JButton("zur\u00FCck");
+		button_16.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Mitarbeiterplanung.setVisible(false);
+				Startmenue.setVisible(true);
+				
+			}
+		});
 		menuBar_2.add(button_16);
 		
 		JButton button_17 = new JButton("Mitarbeiterdetails bearbeiten");
+		button_17.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				EventQueue.invokeLater(new Runnable() {
+					public void run() {
+						try {
+							GUIBearbeitungMitarbeiter window = new GUIBearbeitungMitarbeiter(jdbc);
+							window.frame111.setVisible(true);
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					}
+				});
+			}
+		});
 		menuBar_2.add(button_17);
 		
 		JScrollPane scrollPane_2 = new JScrollPane();
@@ -492,5 +739,96 @@ public class GUIstartmenue2 {
 		
 		table_2.setModel(DbUtils.resultSetToTableModel(jdbc.selectMitarbeiterinfo()));
 		table_3.setModel(DbUtils.resultSetToTableModel(jdbc.selectTabelleProjects()));
+		
+		JPanel MitarbeiterHINZU = new JPanel();
+		frame2.getContentPane().add(MitarbeiterHINZU, "name_5368979385300");
+		MitarbeiterHINZU.setLayout(null);
+		
+		JLabel label_6 = new JLabel("PersNr");
+		label_6.setBounds(124, 69, 46, 14);
+		MitarbeiterHINZU.add(label_6);
+		
+		textField_5 = new JTextField();
+		textField_5.setColumns(10);
+		textField_5.setBounds(124, 89, 96, 20);
+		MitarbeiterHINZU.add(textField_5);
+		
+		JLabel label_7 = new JLabel("Name");
+		label_7.setBounds(124, 120, 46, 14);
+		MitarbeiterHINZU.add(label_7);
+		
+		textField_6 = new JTextField();
+		textField_6.setColumns(10);
+		textField_6.setBounds(124, 140, 96, 20);
+		MitarbeiterHINZU.add(textField_6);
+		
+		JLabel label_8 = new JLabel("Vorname");
+		label_8.setBounds(124, 171, 53, 14);
+		MitarbeiterHINZU.add(label_8);
+		
+		textField_7 = new JTextField();
+		textField_7.setColumns(10);
+		textField_7.setBounds(124, 191, 96, 20);
+		MitarbeiterHINZU.add(textField_7);
+		
+		JButton button_9 = new JButton("Eingabe");
+		button_9.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				String Name=null;
+				String Nachname=null;
+				int PersoNr=0;
+				
+					
+					try {
+						PersoNr=Integer.parseInt(textField_5.getText());
+						Name=textField_6.getText();
+						Nachname=textField_7.getText();
+						
+						jdbc.insertEmployee(PersoNr, Name, Nachname);
+						
+						
+						//JOptionPane.showMessageDialog(null, "Mitarbeiter erfolgreich hinzugefügt ", "Bestätigen", JOptionPane.OK_CANCEL_OPTION);
+					
+					}catch(Exception e1) {
+						e1.printStackTrace();
+					}
+					
+					textField_5.setText(null);
+					textField_6.setText(null);
+					textField_7.setText(null);
+					
+					Mitarbeiterplanung.setVisible(true);
+					MitarbeiterHINZU.setVisible(false);
+					
+					table_2.setModel(DbUtils.resultSetToTableModel(jdbc.selectMitarbeiterinfo()));
+					
+				
+			}
+		});
+		button_9.setBounds(266, 248, 89, 23);
+		MitarbeiterHINZU.add(button_9);
+		
+		JMenuBar menuBar_3 = new JMenuBar();
+		menuBar_3.setBounds(0, 0, 1102, 25);
+		MitarbeiterHINZU.add(menuBar_3);
+		
+		JButton btnZurck = new JButton("zur\u00FCck");
+		btnZurck.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				MitarbeiterHINZU.setVisible(false);
+				Mitarbeiterplanung.setVisible(true);
+			}
+		});
+		menuBar_3.add(btnZurck);
+		
+		button_8.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				Mitarbeiterplanung.setVisible(false);
+				MitarbeiterHINZU.setVisible(true);
+								
+			}
+		});
 	}
 	}

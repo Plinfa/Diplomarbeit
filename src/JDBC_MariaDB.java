@@ -35,7 +35,7 @@ public class JDBC_MariaDB {
 
 		try {
 
-			con = DriverManager.getConnection("jdbc:mariadb://localhost:3306/eqospersonalplanung", "root","davmay81");
+			con = DriverManager.getConnection("jdbc:mariadb://localhost:3306/eqospersonalplanung", "root","5455809Otto");
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -1105,6 +1105,7 @@ public String countbenötigt(java.sql.Date abfrage1, int ProjNr) {
 		int benoetigt = Integer.parseInt(countbenötigt(abfrage1, ProjNr));
 		int zugeteilt = Integer.parseInt(countzugeteilt(abfrage1, ProjNr));
 		int auslastung_next=0;
+		
 		
 		auslastung_next= (zugeteilt/benoetigt)*100;
 		return auslastung_next;

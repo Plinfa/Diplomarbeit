@@ -379,6 +379,8 @@ public class GUIgruppeODEReinzeln {
         gruppe.add(rdbtnEinzeln);
         gruppe.add(rdbtnPartie);
         
+        rdbtnEinzeln.setSelected(true);
+        
         rdbtnPartie.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 

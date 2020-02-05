@@ -31,7 +31,7 @@ public class GUIPartienverwaltung {
 	private void initialize(JDBC_MariaDB jdbc) {
 		frame17 = new JFrame();
 		frame17.setBounds(100, 100, 717, 463);
-		frame17.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame17.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame17.getContentPane().setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();

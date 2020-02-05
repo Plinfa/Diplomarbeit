@@ -36,7 +36,7 @@ public class GUIBearbeitungMitarbeiter {
 		frame111 = new JFrame();
 		frame111.setIconImage(Toolkit.getDefaultToolkit().getImage(GUIBearbeitungMitarbeiter.class.getResource("/ressources/EQOS.jpg")));
 		frame111.setBounds(100, 100, 709, 470);
-		frame111.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame111.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame111.getContentPane().setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
@@ -65,16 +65,7 @@ public class GUIBearbeitungMitarbeiter {
 		btnZurck.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame111.dispose();
-				EventQueue.invokeLater(new Runnable() {
-					public void run() {
-						try {
-							GUIgruppeODEReinzeln window = new GUIgruppeODEReinzeln(jdbc);
-							window.frame6.setVisible(true);
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
-					}
-				});
+				
 				
 			}
 		});
