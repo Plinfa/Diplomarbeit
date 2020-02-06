@@ -32,6 +32,7 @@ import java.awt.Color;
 import java.awt.Rectangle;
 import java.awt.Component;
 import java.awt.SystemColor;
+import java.awt.Font;
 
 //Wartecker Marcel
 public class GUIstartmenue2 {
@@ -86,42 +87,34 @@ public class GUIstartmenue2 {
 		Startmenue.setBackground(SystemColor.menu);
 		Startmenue.setSize(2147483647, 2147483647);
 		frame2.getContentPane().add(Startmenue, "name_1799136513500");
-		Startmenue.setLayout(null);
 		
 		JButton btnProjekte = new JButton("Projektplanung");
-		btnProjekte.setBounds(78, 148, 429, 100);
-		Startmenue.add(btnProjekte);
+		btnProjekte.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		
 		JProgressBar progressBar = new JProgressBar(0, 100);
-		progressBar.setBounds(781, 313, 296, 25);
-		Startmenue.add(progressBar);
 		
 		progressBar.setValue(2);
 		progressBar.setStringPainted(true);
 		
 		JButton btnMitarbeiter = new JButton("Mitarbeiterplanung");
-		btnMitarbeiter.setBounds(682, 143, 380, 111);
-		Startmenue.add(btnMitarbeiter);
+		btnMitarbeiter.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(88, 278, 419, 198);
-		Startmenue.add(scrollPane);
 		
 		table = new JTable();
 		scrollPane.setViewportView(table);
 		table.setModel(DbUtils.resultSetToTableModel(jdbc.selectTabelleProjects()));
 		
 		JLabel lblAuslastungNchsteKw = new JLabel("Auslastung n\u00E4chste KW:");
-		lblAuslastungNchsteKw.setBounds(644, 313, 118, 25);
-		Startmenue.add(lblAuslastungNchsteKw);
+		lblAuslastungNchsteKw.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		
 		JLabel lblAuslastungbernchsteKw = new JLabel("Auslastung \u00FCbern\u00E4chste KW:");
-		lblAuslastungbernchsteKw.setBounds(622, 350, 140, 25);
-		Startmenue.add(lblAuslastungbernchsteKw);
+		lblAuslastungbernchsteKw.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		
 		JProgressBar progressBar_1 = new JProgressBar(0, 100);
-		progressBar_1.setBounds(781, 350, 296, 25);
-		Startmenue.add(progressBar_1);
+		
+		progressBar_1.setValue(30);
+		progressBar_1.setStringPainted(true);
 		
 		/*Calendar c1 = Calendar.getInstance();
 		
@@ -136,8 +129,6 @@ public class GUIstartmenue2 {
 		progressBar_1.setStringPainted(true);*/
 		
 		JMenuBar menuBar = new JMenuBar();
-		menuBar.setBounds(0, 0, 1102, 25);
-		Startmenue.add(menuBar);
 		
 		JButton btnAbmelden = new JButton("Abmelden");
 		btnAbmelden.addActionListener(new ActionListener() {
@@ -163,6 +154,52 @@ public class GUIstartmenue2 {
 		
 		JButton btnPasswortndern = new JButton("Passwort \u00E4ndern");
 		menuBar.add(btnPasswortndern);
+		GroupLayout gl_Startmenue = new GroupLayout(Startmenue);
+		gl_Startmenue.setHorizontalGroup(
+			gl_Startmenue.createParallelGroup(Alignment.LEADING)
+				.addComponent(menuBar, GroupLayout.DEFAULT_SIZE, 1102, Short.MAX_VALUE)
+				.addGroup(gl_Startmenue.createSequentialGroup()
+					.addGap(88)
+					.addComponent(btnProjekte, GroupLayout.DEFAULT_SIZE, 419, Short.MAX_VALUE)
+					.addGap(79)
+					.addComponent(btnMitarbeiter, GroupLayout.DEFAULT_SIZE, 419, Short.MAX_VALUE)
+					.addGap(97))
+				.addGroup(gl_Startmenue.createSequentialGroup()
+					.addGap(88)
+					.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 428, Short.MAX_VALUE)
+					.addGap(21)
+					.addGroup(gl_Startmenue.createParallelGroup(Alignment.TRAILING)
+						.addComponent(lblAuslastungNchsteKw)
+						.addComponent(lblAuslastungbernchsteKw))
+					.addGap(18)
+					.addGroup(gl_Startmenue.createParallelGroup(Alignment.TRAILING)
+						.addComponent(progressBar_1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addComponent(progressBar, GroupLayout.DEFAULT_SIZE, 320, Short.MAX_VALUE))
+					.addGap(53))
+		);
+		gl_Startmenue.setVerticalGroup(
+			gl_Startmenue.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_Startmenue.createSequentialGroup()
+					.addComponent(menuBar, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addGap(102)
+					.addGroup(gl_Startmenue.createParallelGroup(Alignment.LEADING)
+						.addComponent(btnProjekte, GroupLayout.PREFERRED_SIZE, 118, GroupLayout.PREFERRED_SIZE)
+						.addComponent(btnMitarbeiter, GroupLayout.PREFERRED_SIZE, 118, GroupLayout.PREFERRED_SIZE))
+					.addGap(44)
+					.addGroup(gl_Startmenue.createParallelGroup(Alignment.LEADING)
+						.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 275, Short.MAX_VALUE)
+						.addGroup(gl_Startmenue.createSequentialGroup()
+							.addGap(29)
+							.addGroup(gl_Startmenue.createParallelGroup(Alignment.BASELINE)
+								.addComponent(progressBar, GroupLayout.PREFERRED_SIZE, 66, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblAuslastungNchsteKw, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
+							.addGap(38)
+							.addGroup(gl_Startmenue.createParallelGroup(Alignment.BASELINE)
+								.addComponent(progressBar_1, GroupLayout.PREFERRED_SIZE, 66, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblAuslastungbernchsteKw, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))))
+					.addGap(24))
+		);
+		Startmenue.setLayout(gl_Startmenue);
 		btnPasswortndern.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				EventQueue.invokeLater(new Runnable() {
@@ -222,7 +259,7 @@ public class GUIstartmenue2 {
 		Projektplanung.setLayout(null);
 		
 		JMenuBar menuBar_1 = new JMenuBar();
-		menuBar_1.setBounds(0, 0, 1601, 25);
+		menuBar_1.setBounds(0, 0, 1102, 25);
 		Projektplanung.add(menuBar_1);
 		
 		JButton button = new JButton("zur\u00FCck");
@@ -233,10 +270,6 @@ public class GUIstartmenue2 {
 			}
 		});
 		menuBar_1.add(button);
-		
-		JLabel label = new JLabel("Projekte");
-		label.setBounds(200, 53, 48, 14);
-		Projektplanung.add(label);
 		
 		JButton button_1 = new JButton("Hinzuf\u00FCgen");
 		button_1.addActionListener(new ActionListener() {
@@ -386,7 +419,7 @@ public class GUIstartmenue2 {
 		Projektplanung.add(button_5);
 		
 		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(92, 170, 816, 276);
+		scrollPane_1.setBounds(61, 170, 981, 377);
 		Projektplanung.add(scrollPane_1);
 		
 		table_1 = new JTable();
@@ -661,11 +694,11 @@ public class GUIstartmenue2 {
 		Mitarbeiterplanung.add(button_15);
 		
 		JRadioButton radioButton = new JRadioButton("einzeln");
-		radioButton.setBounds(629, 94, 109, 23);
+		radioButton.setBounds(629, 94, 67, 23);
 		Mitarbeiterplanung.add(radioButton);
 		
 		JRadioButton radioButton_1 = new JRadioButton("Partie");
-		radioButton_1.setBounds(739, 94, 109, 23);
+		radioButton_1.setBounds(712, 94, 109, 23);
 		Mitarbeiterplanung.add(radioButton_1);
 		
 		ButtonGroup gruppe = new ButtonGroup();
