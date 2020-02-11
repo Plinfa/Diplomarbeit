@@ -162,7 +162,7 @@ public class GUIMitarbeiter2 {
 				
 				//System.out.println(tablecontent);
 				
-				jdbc.updateMitarbeiter(PersoNr, tablecontent);
+				//jdbc.updateMitarbeiter(PersoNr, tablecontent);
 				JOptionPane.showMessageDialog(null, "Update war erfolgreich ", "Bestätigen", JOptionPane.OK_CANCEL_OPTION);
 				
 			}catch(Exception e1) {

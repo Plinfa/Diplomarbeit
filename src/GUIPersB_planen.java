@@ -7,6 +7,7 @@ import javax.swing.JTextField;
 import net.proteanit.sql.DbUtils;
 
 import javax.swing.JMenuBar;
+import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.util.Calendar;
@@ -140,6 +141,26 @@ public class GUIPersB_planen {
 		frame27.getContentPane().add(btnBesttigen);
 		
 		JButton btnEintragLschen = new JButton("Eintrag l\u00F6schen");
+		btnEintragLschen.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				int row = table.getSelectedRow();
+				
+				String von = table.getValueAt(row, 0).toString();
+				String bis = table.getValueAt(row, 1).toString();
+				String Anzahl = table.getValueAt(row, 2).toString();
+				
+				if (JOptionPane.showConfirmDialog(frame27, "Eintrag wirklich löschen?", "Personal- und Projektmanager", JOptionPane.YES_NO_OPTION)==JOptionPane.YES_NO_OPTION) 
+				{
+					jdbc.deletebenoetigt(von, bis, Anzahl, ProjNr);
+					table.setModel(DbUtils.resultSetToTableModel(jdbc.selectPersbedarfplanungfürProj(ProjNr)));
+				}
+				else {
+					table.setModel(DbUtils.resultSetToTableModel(jdbc.selectPersbedarfplanungfürProj(ProjNr)));
+				}
+				
+			}
+		});
 		btnEintragLschen.setBounds(99, 236, 163, 23);
 		frame27.getContentPane().add(btnEintragLschen);
 		

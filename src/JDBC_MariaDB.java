@@ -35,7 +35,7 @@ public class JDBC_MariaDB {
 
 		try {
 
-			con = DriverManager.getConnection("jdbc:mariadb://localhost:3306/eqospersonalplanung", "root","5455809Otto");
+			con = DriverManager.getConnection("jdbc:mariadb://localhost:3306/eqospersonalplanung", "root","davmay81");
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -322,6 +322,7 @@ public class JDBC_MariaDB {
 				String projektname = res.getString(1);
 				Date startdatum = res.getDate(2);
 				Date enddatum = res.getDate(3);
+				
 
 				if (startdatum.compareTo(heute) < 0) {
 
@@ -338,14 +339,14 @@ public class JDBC_MariaDB {
 				 */
 
 				series1.add(new Task(projektname, startdatum, enddatum));
-
+				
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 
+		
 		dataset.add(series1);
-
 		return dataset;
 
 	}
@@ -559,7 +560,29 @@ public class JDBC_MariaDB {
 		}
 
 	}
+	public void deletebenoetigt(String von, String bis, String Anzahl, int ProjNr) {
+		ResultSet res = null;
 
+		try {
+
+			Statement stmt = con.createStatement();
+
+			// SQL Befehl
+			
+			String deletebenoetigt ="DELETE FROM benötigt WHERE von= '" +von + "' AND bis= '" + bis + "' AND Anzahl='"+Anzahl+"' AND ProjektNr='" + ProjNr + "' ";
+			
+
+			res = stmt.executeQuery(deletebenoetigt);
+			
+
+			res.close();
+			stmt.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+	}
 	public String selectPasswort() {
 		String passwort = null;
 		try {
@@ -611,7 +634,7 @@ public class JDBC_MariaDB {
 	}
 
 	// David auf marcel angepasst
-	public void updateMitarbeiter(String PersoNr, List<String> tablecontent) {
+	public void updateMitarbeiter(String PersoNr, String Nachname, String GebDat, String Taetigkeit, String EMail, String Fuehrerschein) {
 		ResultSet res = null;
 		String PersNr = PersoNr;
 
@@ -622,8 +645,8 @@ public class JDBC_MariaDB {
 			// SQL Befehl
 
 			
-			String sql = "UPDATE mitarbeiter SET PersNr='" + tablecontent.get(0) + "', Name='" + tablecontent.get(1)
-					+ "', Vorname='" + tablecontent.get(2) + "'WHERE PersNr='" + PersNr + "'";
+			String sql = "UPDATE mitarbeiter SET  Nachname='"+Nachname+"',GebDat='" + GebDat
+					+ "', Tätigkeit='" + Taetigkeit + "', EMail= '"+EMail+"', Führerschein='"+Fuehrerschein+"' WHERE PersNr='" + PersNr + "'";
 
 			res = stmt.executeQuery(sql);
 

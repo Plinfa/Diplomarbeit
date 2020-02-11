@@ -128,12 +128,13 @@ public class GUIvon_bis {
 				if (JOptionPane.showConfirmDialog(frame12, "Eintrag wirklich löschen?", "Personal- und Projektmanager", JOptionPane.YES_NO_OPTION)==JOptionPane.YES_NO_OPTION) 
 				{
 					jdbc.deleteabwesenheit(von, bis, PersNr);
+					table.setModel(DbUtils.resultSetToTableModel(jdbc.selectAbwesenheiten(PersNr)));
 				}
 				else {
-					
+					table.setModel(DbUtils.resultSetToTableModel(jdbc.selectAbwesenheiten(PersNr)));
 				}
 				
-				table.setModel(DbUtils.resultSetToTableModel(jdbc.selectAbwesenheiten(PersNr)));
+				
 				/*
 				
 				int von=0;

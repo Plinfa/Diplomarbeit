@@ -47,12 +47,39 @@ public class GUIBearbeitungMitarbeiter {
 		scrollPane.setViewportView(table);
 		table.setModel(DbUtils.resultSetToTableModel(jdbc.selectTabelleMitarbeiter()));
 		
+		
+		
 		JButton btnnderungenSpeichern = new JButton("\u00C4nderungen speichern");
 		btnnderungenSpeichern.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
-				//jdbc.updateMitarbeiter(PersoNr, tablecontent);
-				//personalnummer von ausgewähltem mitarbeiter benötigt
+				int row=0;
+				
+				String PersoNr=null;
+				String Nachname=null;
+				String GebDat=null;
+				String Taetigkeit=null;
+				String EMail=null;
+				String Fuehrerschein=null;
+				
+				try {
+					 row = table.getSelectedRow();
+					 PersoNr = table.getValueAt(row, 0).toString();
+					 Nachname= table.getValueAt(row, 2).toString();
+					 GebDat = table.getValueAt(row, 3).toString();
+					 Taetigkeit = table.getValueAt(row, 4).toString();
+					 EMail = table.getValueAt(row, 5).toString();
+					 Fuehrerschein = table.getValueAt(row, 6).toString();
+					 
+					 
+					jdbc.updateMitarbeiter(PersoNr, Nachname, GebDat, Taetigkeit, EMail, Fuehrerschein);
+					//personalnummer von ausgewähltem mitarbeiter benötigt
+					
+				}catch(Exception e1) {
+					
+					e1.printStackTrace();
+				}
+				 
 			}
 		});
 		btnnderungenSpeichern.setBounds(91, 43, 189, 23);
