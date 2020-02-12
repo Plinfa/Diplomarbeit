@@ -148,6 +148,7 @@ public class GUIstartmenue2 {
 							try {
 								GUIWillkommen2 window = new GUIWillkommen2("Personal- und Projektmanager", new JDBC_MariaDB());
 								window.frame.setVisible(true);
+								
 							} catch (Exception e) {
 								e.printStackTrace();
 							}
@@ -310,8 +311,10 @@ public class GUIstartmenue2 {
 				
 					e1.printStackTrace();
 				}
-				
+				table.setModel(DbUtils.resultSetToTableModel(jdbc.selectTabelleProjects()));
 				table_1.setModel(DbUtils.resultSetToTableModel(jdbc.selectTabelleProjects()));
+				table_2.setModel(DbUtils.resultSetToTableModel(jdbc.selectMitarbeiterinfo()));
+				table_3.setModel(DbUtils.resultSetToTableModel(jdbc.selectTabelleProjects()));
 			}
 		});
 		button_2.setBounds(92, 126, 89, 23);
@@ -520,7 +523,10 @@ public class GUIstartmenue2 {
 
 							e1.printStackTrace();
 						}
+						table.setModel(DbUtils.resultSetToTableModel(jdbc.selectTabelleProjects()));
+						table_1.setModel(DbUtils.resultSetToTableModel(jdbc.selectTabelleProjects()));
 						table_2.setModel(DbUtils.resultSetToTableModel(jdbc.selectMitarbeiterinfo()));
+						table_3.setModel(DbUtils.resultSetToTableModel(jdbc.selectTabelleProjects()));
 					}
 
 				});
@@ -934,7 +940,10 @@ public class GUIstartmenue2 {
 					Mitarbeiterplanung.setVisible(true);
 					MitarbeiterHINZU.setVisible(false);
 					
+					table.setModel(DbUtils.resultSetToTableModel(jdbc.selectTabelleProjects()));
+					table_1.setModel(DbUtils.resultSetToTableModel(jdbc.selectTabelleProjects()));
 					table_2.setModel(DbUtils.resultSetToTableModel(jdbc.selectMitarbeiterinfo()));
+					table_3.setModel(DbUtils.resultSetToTableModel(jdbc.selectTabelleProjects()));
 					
 				
 			}
@@ -1046,7 +1055,10 @@ public class GUIstartmenue2 {
 					textField_13.setText(null);
 					textField_16.setText(null);
 					
+					table.setModel(DbUtils.resultSetToTableModel(jdbc.selectTabelleProjects()));
 					table_1.setModel(DbUtils.resultSetToTableModel(jdbc.selectTabelleProjects()));
+					table_2.setModel(DbUtils.resultSetToTableModel(jdbc.selectMitarbeiterinfo()));
+					table_3.setModel(DbUtils.resultSetToTableModel(jdbc.selectTabelleProjects()));
 					
 					Projektplanung.setVisible(true);
 					ProjekteHINZU.setVisible(false);
