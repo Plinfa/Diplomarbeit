@@ -53,6 +53,13 @@ public class GUIstartmenue2 {
 	private JTextField textField_5;
 	private JTextField textField_6;
 	private JTextField textField_7;
+	private JTextField textField_8;
+	private JTextField textField_9;
+	private JTextField textField_10;
+	private JTextField textField_13;
+	private JTextField textField_14;
+	private JTextField textField_15;
+	private JTextField textField_16;
 	/**
 	 * Launch the application.
 	 */
@@ -93,7 +100,7 @@ public class GUIstartmenue2 {
 		
 		JProgressBar progressBar = new JProgressBar(0, 100);
 		
-		progressBar.setValue(2);
+		progressBar.setValue(78);
 		progressBar.setStringPainted(true);
 		
 		JButton btnMitarbeiter = new JButton("Mitarbeiterplanung");
@@ -272,22 +279,7 @@ public class GUIstartmenue2 {
 		menuBar_1.add(button);
 		
 		JButton button_1 = new JButton("Hinzuf\u00FCgen");
-		button_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				EventQueue.invokeLater(new Runnable() {
-					public void run() {
-						try {
-							GUIProjektHINZU window = new GUIProjektHINZU(jdbc);
-							window.frame11.setVisible(true);
-							
-							
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
-					}
-				});
-			}
-		});
+		
 		button_1.setBounds(92, 92, 89, 23);
 		Projektplanung.add(button_1);
 		
@@ -428,7 +420,6 @@ public class GUIstartmenue2 {
 		
 		Mitarbeiterplanung = new JPanel();
 		frame2.getContentPane().add(Mitarbeiterplanung, "name_1809842464300");
-		Mitarbeiterplanung.setLayout(null);
 		
 		JButton button_6 = new JButton("Best\u00E4tigen");
 		button_6.addActionListener(new ActionListener() {
@@ -486,35 +477,21 @@ public class GUIstartmenue2 {
 				textField_2.setText(null);
 			}
 		});
-		button_6.setBounds(870, 241, 96, 23);
-		Mitarbeiterplanung.add(button_6);
 		
 		JLabel label_1 = new JLabel("Projektnummer");
-		label_1.setBounds(712, 134, 74, 14);
-		Mitarbeiterplanung.add(label_1);
 		
 		JLabel label_2 = new JLabel("von:");
-		label_2.setBounds(723, 193, 38, 14);
-		Mitarbeiterplanung.add(label_2);
 		
 		JLabel label_3 = new JLabel("bis:");
-		label_3.setBounds(834, 193, 38, 14);
-		Mitarbeiterplanung.add(label_3);
 		
 		textField = new JTextField();
 		textField.setColumns(10);
-		textField.setBounds(712, 154, 96, 20);
-		Mitarbeiterplanung.add(textField);
 		
 		textField_1 = new JTextField();
 		textField_1.setColumns(10);
-		textField_1.setBounds(658, 217, 96, 20);
-		Mitarbeiterplanung.add(textField_1);
 		
 		textField_2 = new JTextField();
 		textField_2.setColumns(10);
-		textField_2.setBounds(764, 217, 96, 20);
-		Mitarbeiterplanung.add(textField_2);
 		
 		JButton button_7 = new JButton("entfernen");
 		button_7.addActionListener(new ActionListener() {
@@ -549,13 +526,8 @@ public class GUIstartmenue2 {
 				});
 			}
 		});
-		button_7.setBounds(130, 193, 103, 23);
-		Mitarbeiterplanung.add(button_7);
 		
 		JButton button_8 = new JButton("Hinzuf\u00FCgen");
-		
-		button_8.setBounds(130, 173, 103, 23);
-		Mitarbeiterplanung.add(button_8);
 		
 		JButton button_10 = new JButton("Mitarbeiter nicht verf\u00FCgbar");
 		button_10.addActionListener(new ActionListener() {
@@ -580,10 +552,8 @@ public class GUIstartmenue2 {
 			}
 			
 		});
-		button_10.setBounds(332, 173, 191, 23);
-		Mitarbeiterplanung.add(button_10);
 		
-		JButton button_11 = new JButton("Zuteilung Detailansicht");
+		JButton button_11 = new JButton("Dienstplan");
 		button_11.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				EventQueue.invokeLater(new Runnable() {
@@ -605,26 +575,16 @@ public class GUIstartmenue2 {
 				
 			}
 		});
-		button_11.setBounds(130, 241, 145, 23);
-		Mitarbeiterplanung.add(button_11);
 		
 		textField_3 = new JTextField();
 		textField_3.setColumns(10);
-		textField_3.setBounds(658, 244, 96, 20);
-		Mitarbeiterplanung.add(textField_3);
 		
 		textField_4 = new JTextField();
 		textField_4.setColumns(10);
-		textField_4.setBounds(764, 244, 96, 20);
-		Mitarbeiterplanung.add(textField_4);
 		
 		JLabel label_4 = new JLabel("KW:");
-		label_4.setBounds(628, 217, 48, 14);
-		Mitarbeiterplanung.add(label_4);
 		
 		JLabel label_5 = new JLabel("Jahr:");
-		label_5.setBounds(628, 244, 48, 14);
-		Mitarbeiterplanung.add(label_5);
 		
 		JButton button_12 = new JButton("Personalbedarf gesamt");
 		button_12.addActionListener(new ActionListener() {
@@ -642,8 +602,6 @@ public class GUIstartmenue2 {
 				});
 			}
 		});
-		button_12.setBounds(615, 493, 213, 33);
-		Mitarbeiterplanung.add(button_12);
 		
 		JButton button_13 = new JButton("Personalbedarf pro Projekt");
 		button_13.addActionListener(new ActionListener() {
@@ -666,12 +624,6 @@ public class GUIstartmenue2 {
 				
 			}
 		});
-		button_13.setBounds(831, 493, 198, 23);
-		Mitarbeiterplanung.add(button_13);
-		
-		JButton button_14 = new JButton("Zuteilung per Email senden (Kann Ziel)");
-		button_14.setBounds(300, 241, 283, 23);
-		Mitarbeiterplanung.add(button_14);
 		
 		JButton button_15 = new JButton("Partien verwalten");
 		button_15.addActionListener(new ActionListener() {
@@ -690,16 +642,10 @@ public class GUIstartmenue2 {
 				
 			}
 		});
-		button_15.setBounds(140, 493, 168, 23);
-		Mitarbeiterplanung.add(button_15);
 		
 		JRadioButton radioButton = new JRadioButton("einzeln");
-		radioButton.setBounds(629, 94, 67, 23);
-		Mitarbeiterplanung.add(radioButton);
 		
 		JRadioButton radioButton_1 = new JRadioButton("Partie");
-		radioButton_1.setBounds(712, 94, 109, 23);
-		Mitarbeiterplanung.add(radioButton_1);
 		
 		ButtonGroup gruppe = new ButtonGroup();
 		
@@ -724,8 +670,6 @@ public class GUIstartmenue2 {
 		});
 		
 		JMenuBar menuBar_2 = new JMenuBar();
-		menuBar_2.setBounds(0, 0, 1102, 25);
-		Mitarbeiterplanung.add(menuBar_2);
 		
 		JButton button_16 = new JButton("zur\u00FCck");
 		button_16.addActionListener(new ActionListener() {
@@ -756,21 +700,178 @@ public class GUIstartmenue2 {
 		menuBar_2.add(button_17);
 		
 		JScrollPane scrollPane_2 = new JScrollPane();
-		scrollPane_2.setBounds(140, 297, 442, 176);
-		Mitarbeiterplanung.add(scrollPane_2);
 		
 		table_2 = new JTable();
 		scrollPane_2.setViewportView(table_2);
 		
 		JScrollPane scrollPane_3 = new JScrollPane();
-		scrollPane_3.setBounds(628, 304, 361, 178);
-		Mitarbeiterplanung.add(scrollPane_3);
 		
 		table_3 = new JTable();
 		scrollPane_3.setViewportView(table_3);
 		
 		table_2.setModel(DbUtils.resultSetToTableModel(jdbc.selectMitarbeiterinfo()));
 		table_3.setModel(DbUtils.resultSetToTableModel(jdbc.selectTabelleProjects()));
+		
+		JLabel lblMitarbeiter = new JLabel("Mitarbeiter");
+		
+		JLabel lblZuteilenZuProjekt = new JLabel("Zuteilen zu Projekt");
+		
+		JLabel lblOder = new JLabel("oder");
+		
+		JLabel lblZuteilen = new JLabel("zuteilen?");
+		
+		JLabel lblZuerstMitarbeiterOder = new JLabel("zuerst Mitarbeiter oder Partie aus Tabelle links ausw\u00E4hlen");
+		
+		JLabel lblUntersttzendeDatenFr = new JLabel("unterst\u00FCtzende Daten f\u00FCr die Zuteilung:");
+		GroupLayout gl_Mitarbeiterplanung = new GroupLayout(Mitarbeiterplanung);
+		gl_Mitarbeiterplanung.setHorizontalGroup(
+			gl_Mitarbeiterplanung.createParallelGroup(Alignment.LEADING)
+				.addComponent(menuBar_2, GroupLayout.DEFAULT_SIZE, 1102, Short.MAX_VALUE)
+				.addGroup(gl_Mitarbeiterplanung.createSequentialGroup()
+					.addGap(99)
+					.addComponent(lblMitarbeiter, GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE)
+					.addGap(426)
+					.addComponent(lblZuteilenZuProjekt, GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE)
+					.addGap(316))
+				.addGroup(gl_Mitarbeiterplanung.createSequentialGroup()
+					.addGap(51)
+					.addComponent(button_8, GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE)
+					.addGap(17)
+					.addComponent(button_7, GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE)
+					.addGap(10)
+					.addComponent(button_10, GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE)
+					.addGap(135)
+					.addComponent(radioButton, GroupLayout.DEFAULT_SIZE, 61, Short.MAX_VALUE)
+					.addGap(23)
+					.addComponent(lblOder, GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)
+					.addGap(3)
+					.addComponent(radioButton_1, GroupLayout.DEFAULT_SIZE, 61, Short.MAX_VALUE)
+					.addGap(18)
+					.addComponent(lblZuteilen, GroupLayout.DEFAULT_SIZE, 92, Short.MAX_VALUE)
+					.addGap(168))
+				.addGroup(gl_Mitarbeiterplanung.createSequentialGroup()
+					.addGap(51)
+					.addComponent(scrollPane_2, GroupLayout.DEFAULT_SIZE, 442, Short.MAX_VALUE)
+					.addGap(86)
+					.addGroup(gl_Mitarbeiterplanung.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_Mitarbeiterplanung.createSequentialGroup()
+							.addGap(133)
+							.addComponent(label_1))
+						.addGroup(gl_Mitarbeiterplanung.createSequentialGroup()
+							.addGap(49)
+							.addGroup(gl_Mitarbeiterplanung.createParallelGroup(Alignment.LEADING)
+								.addComponent(label_4, GroupLayout.PREFERRED_SIZE, 48, GroupLayout.PREFERRED_SIZE)
+								.addGroup(gl_Mitarbeiterplanung.createSequentialGroup()
+									.addGap(30)
+									.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+							.addGap(10)
+							.addComponent(textField_2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_Mitarbeiterplanung.createSequentialGroup()
+							.addGap(49)
+							.addGroup(gl_Mitarbeiterplanung.createParallelGroup(Alignment.LEADING)
+								.addComponent(label_5, GroupLayout.PREFERRED_SIZE, 48, GroupLayout.PREFERRED_SIZE)
+								.addGroup(gl_Mitarbeiterplanung.createSequentialGroup()
+									.addGap(30)
+									.addComponent(textField_3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+							.addGap(10)
+							.addComponent(textField_4, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+							.addGap(10)
+							.addComponent(button_6, GroupLayout.DEFAULT_SIZE, 96, Short.MAX_VALUE)
+							.addGap(136))
+						.addGroup(gl_Mitarbeiterplanung.createSequentialGroup()
+							.addComponent(scrollPane_3, GroupLayout.DEFAULT_SIZE, 491, Short.MAX_VALUE)
+							.addGap(32))
+						.addGroup(gl_Mitarbeiterplanung.createSequentialGroup()
+							.addGap(79)
+							.addComponent(label_2, GroupLayout.PREFERRED_SIZE, 38, GroupLayout.PREFERRED_SIZE)
+							.addGap(68)
+							.addComponent(label_3, GroupLayout.DEFAULT_SIZE, 338, Short.MAX_VALUE))
+						.addGroup(gl_Mitarbeiterplanung.createSequentialGroup()
+							.addGap(133)
+							.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_Mitarbeiterplanung.createSequentialGroup()
+							.addGap(49)
+							.addComponent(lblZuerstMitarbeiterOder, GroupLayout.DEFAULT_SIZE, 474, Short.MAX_VALUE))
+						.addGroup(gl_Mitarbeiterplanung.createSequentialGroup()
+							.addGap(49)
+							.addComponent(lblUntersttzendeDatenFr, GroupLayout.PREFERRED_SIZE, 289, GroupLayout.PREFERRED_SIZE)
+							.addContainerGap())))
+				.addGroup(gl_Mitarbeiterplanung.createSequentialGroup()
+					.addGap(51)
+					.addComponent(button_11, GroupLayout.DEFAULT_SIZE, 213, Short.MAX_VALUE)
+					.addGap(16)
+					.addComponent(button_15, GroupLayout.DEFAULT_SIZE, 213, Short.MAX_VALUE)
+					.addGap(131)
+					.addComponent(button_12, GroupLayout.DEFAULT_SIZE, 212, Short.MAX_VALUE)
+					.addGap(10)
+					.addComponent(button_13, GroupLayout.DEFAULT_SIZE, 212, Short.MAX_VALUE)
+					.addGap(44))
+		);
+		gl_Mitarbeiterplanung.setVerticalGroup(
+			gl_Mitarbeiterplanung.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_Mitarbeiterplanung.createSequentialGroup()
+					.addComponent(menuBar_2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addGap(21)
+					.addGroup(gl_Mitarbeiterplanung.createParallelGroup(Alignment.LEADING)
+						.addComponent(lblMitarbeiter, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addComponent(lblZuteilenZuProjekt, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+					.addGap(20)
+					.addGroup(gl_Mitarbeiterplanung.createParallelGroup(Alignment.LEADING)
+						.addComponent(button_8)
+						.addComponent(button_7)
+						.addComponent(button_10)
+						.addComponent(radioButton)
+						.addGroup(gl_Mitarbeiterplanung.createSequentialGroup()
+							.addGap(4)
+							.addComponent(lblOder))
+						.addGroup(gl_Mitarbeiterplanung.createParallelGroup(Alignment.BASELINE)
+							.addComponent(radioButton_1)
+							.addComponent(lblZuteilen)))
+					.addGap(11)
+					.addGroup(gl_Mitarbeiterplanung.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_Mitarbeiterplanung.createSequentialGroup()
+							.addComponent(scrollPane_2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+							.addGap(6))
+						.addGroup(gl_Mitarbeiterplanung.createSequentialGroup()
+							.addGap(8)
+							.addComponent(lblZuerstMitarbeiterOder)
+							.addGap(32)
+							.addComponent(label_1)
+							.addGap(3)
+							.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+							.addGap(11)
+							.addGroup(gl_Mitarbeiterplanung.createParallelGroup(Alignment.LEADING)
+								.addComponent(label_3)
+								.addComponent(label_2))
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addGroup(gl_Mitarbeiterplanung.createParallelGroup(Alignment.LEADING)
+								.addComponent(label_4)
+								.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addComponent(textField_2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+							.addGap(4)
+							.addGroup(gl_Mitarbeiterplanung.createParallelGroup(Alignment.LEADING)
+								.addGroup(gl_Mitarbeiterplanung.createSequentialGroup()
+									.addGap(3)
+									.addGroup(gl_Mitarbeiterplanung.createParallelGroup(Alignment.LEADING)
+										.addComponent(label_5)
+										.addComponent(textField_3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+								.addGroup(gl_Mitarbeiterplanung.createSequentialGroup()
+									.addGap(3)
+									.addComponent(textField_4, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+								.addComponent(button_6))
+							.addGap(11)
+							.addComponent(scrollPane_3, GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)
+							.addGap(4)
+							.addComponent(lblUntersttzendeDatenFr)))
+					.addGap(11)
+					.addGroup(gl_Mitarbeiterplanung.createParallelGroup(Alignment.LEADING)
+						.addComponent(button_11)
+						.addComponent(button_15)
+						.addComponent(button_12)
+						.addComponent(button_13))
+					.addGap(32))
+		);
+		Mitarbeiterplanung.setLayout(gl_Mitarbeiterplanung);
 		
 		JPanel MitarbeiterHINZU = new JPanel();
 		frame2.getContentPane().add(MitarbeiterHINZU, "name_5368979385300");
@@ -854,12 +955,157 @@ public class GUIstartmenue2 {
 		});
 		menuBar_3.add(btnZurck);
 		
+		JPanel ProjekteHINZU = new JPanel();
+		frame2.getContentPane().add(ProjekteHINZU, "name_995074335200");
+		ProjekteHINZU.setLayout(null);
+		
+		JLabel label = new JLabel("ProjektNr");
+		label.setBounds(65, 44, 55, 14);
+		ProjekteHINZU.add(label);
+		
+		textField_8 = new JTextField();
+		textField_8.setColumns(10);
+		textField_8.setBounds(65, 64, 96, 20);
+		ProjekteHINZU.add(textField_8);
+		
+		JLabel label_9 = new JLabel("Projektname");
+		label_9.setBounds(65, 90, 75, 14);
+		ProjekteHINZU.add(label_9);
+		
+		textField_9 = new JTextField();
+		textField_9.setColumns(10);
+		textField_9.setBounds(65, 107, 96, 20);
+		ProjekteHINZU.add(textField_9);
+		
+		JLabel label_10 = new JLabel("Ort");
+		label_10.setBounds(65, 224, 31, 14);
+		ProjekteHINZU.add(label_10);
+		
+		textField_10 = new JTextField();
+		textField_10.setColumns(10);
+		textField_10.setBounds(65, 244, 96, 20);
+		ProjekteHINZU.add(textField_10);
+		
+		JButton button_18 = new JButton("Eingabe");
+		button_18.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int ProjektNr=0;
+				String Projektname=null;
+				String Ort=null;
+				
+				ProjektNr=Integer.parseInt(textField_8.getText());
+				Projektname=textField_9.getText();
+						
+				Ort=textField_10.getText();
+				String vonEingabe = null;
+				String bisEingabe = null;
+				String vonJahr = null;
+				String bisJahr = null;
+				vonEingabe = textField_13.getText();
+				bisEingabe = textField_16.getText();
+				vonJahr = textField_14.getText();
+				bisJahr = textField_15.getText(); 				// Eingabe
+				int vonint = Integer.parseInt(vonEingabe);
+				int bisint = Integer.parseInt(bisEingabe);
+				int vJahr = Integer.parseInt(vonJahr);
+				int bJahr = Integer.parseInt(bisJahr); 			// Eingabe in Integer umwandeln
+				int startday = 2; 								// 2 für Montag
+				int endday = 7;
+
+				Calendar startdate = Calendar.getInstance();
+				startdate.setWeekDate(vJahr, vonint, startday); 			// von Datum setzen
+				Date vonDate = startdate.getTime(); 						// in Java Date speichern
+				java.sql.Date von = new java.sql.Date(vonDate.getTime()); 	// in SQL Date umwandeln
+
+				Calendar enddate = Calendar.getInstance();
+				enddate.setWeekDate(bJahr, bisint, endday); 				// bis Datum setzen
+				enddate.getTime();
+				Date bisDate = enddate.getTime(); 							// in Java Date speichern
+				java.sql.Date bis = new java.sql.Date(bisDate.getTime());
+					
+					try {
+						
+						
+
+				        
+						
+						jdbc.insertProject(ProjektNr, Projektname, Ort, von, bis);
+						
+					
+						
+						
+						JOptionPane.showMessageDialog(null, "Projekt erfolgreich hinzugefügt ", "Bestätigen", JOptionPane.OK_CANCEL_OPTION);
+					
+					}catch(Exception e1) {
+						e1.printStackTrace();
+					}
+					textField_8.setText(null);
+					textField_9.setText(null);
+				
+					textField_10.setText(null);
+					textField_13.setText(null);
+					textField_16.setText(null);
+					
+					table_1.setModel(DbUtils.resultSetToTableModel(jdbc.selectTabelleProjects()));
+					
+					Projektplanung.setVisible(true);
+					ProjekteHINZU.setVisible(false);
+				
+			}
+		});
+		button_18.setBounds(390, 243, 89, 23);
+		ProjekteHINZU.add(button_18);
+		
+		JLabel label_13 = new JLabel("Jahr:");
+		label_13.setBounds(210, 107, 48, 14);
+		ProjekteHINZU.add(label_13);
+		
+		JLabel label_14 = new JLabel("KW:");
+		label_14.setBounds(210, 80, 48, 14);
+		ProjekteHINZU.add(label_14);
+		
+		textField_13 = new JTextField();
+		textField_13.setColumns(10);
+		textField_13.setBounds(240, 80, 96, 20);
+		ProjekteHINZU.add(textField_13);
+		
+		textField_14 = new JTextField();
+		textField_14.setColumns(10);
+		textField_14.setBounds(240, 107, 96, 20);
+		ProjekteHINZU.add(textField_14);
+		
+		textField_15 = new JTextField();
+		textField_15.setColumns(10);
+		textField_15.setBounds(346, 107, 96, 20);
+		ProjekteHINZU.add(textField_15);
+		
+		textField_16 = new JTextField();
+		textField_16.setColumns(10);
+		textField_16.setBounds(346, 80, 96, 20);
+		ProjekteHINZU.add(textField_16);
+		
+		JLabel label_15 = new JLabel("bis:");
+		label_15.setBounds(416, 56, 38, 14);
+		ProjekteHINZU.add(label_15);
+		
+		JLabel label_16 = new JLabel("von:");
+		label_16.setBounds(305, 56, 38, 14);
+		ProjekteHINZU.add(label_16);
+		
 		button_8.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
 				Mitarbeiterplanung.setVisible(false);
 				MitarbeiterHINZU.setVisible(true);
 								
+			}
+		});
+		
+		button_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				Projektplanung.setVisible(false);
+				ProjekteHINZU.setVisible(true);
 			}
 		});
 	}

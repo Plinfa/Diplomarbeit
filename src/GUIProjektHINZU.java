@@ -116,7 +116,7 @@ public class GUIProjektHINZU {
 
 				        
 						
-						jdbc.insertProject(ProjektNr, Projektname, Ort, Startdatum, Enddatum);
+						
 						
 					
 						

@@ -35,7 +35,7 @@ public class JDBC_MariaDB {
 
 		try {
 
-			con = DriverManager.getConnection("jdbc:mariadb://localhost:3306/eqospersonalplanung", "root","davmay81");
+			con = DriverManager.getConnection("jdbc:mariadb://localhost:3306/eqospersonalplanung", "root","5455809Otto");
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -685,7 +685,7 @@ public class JDBC_MariaDB {
 
 	}
 
-	public void insertProject(int ProjektNr, String Projektname, String Ort, String Startdatum, String Enddatum) {
+	public void insertProject(int ProjektNr, String Projektname, String Ort, java.sql.Date Startdatum, java.sql.Date Enddatum) {
 
 		ResultSet res = null;
 
