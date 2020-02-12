@@ -15,6 +15,7 @@ import java.util.Date;
 import java.awt.event.ActionEvent;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
+import java.awt.Toolkit;
 
 public class GUIPersB_planen {
 
@@ -43,6 +44,8 @@ public class GUIPersB_planen {
 	 */
 	private void initialize(JDBC_MariaDB jdbc, int ProjNr) {
 		frame27 = new JFrame();
+		frame27.setTitle("Personal- und Projektmanager");
+		frame27.setIconImage(Toolkit.getDefaultToolkit().getImage(GUIPersB_planen.class.getResource("/ressources/EQOS.jpg")));
 		frame27.setBounds(100, 100, 676, 437);
 		frame27.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame27.getContentPane().setLayout(null);

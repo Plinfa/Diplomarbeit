@@ -45,6 +45,7 @@ public class GUIvon_bis {
 	 */
 	private void initialize(JDBC_MariaDB jdbc, int PersNr) {
 		frame12 = new JFrame();
+		frame12.setTitle("Personal- und Projektmanager");
 		frame12.setIconImage(Toolkit.getDefaultToolkit().getImage(GUIvon_bis.class.getResource("/ressources/EQOS.jpg")));
 		frame12.setBounds(100, 100, 746, 431);
 		frame12.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

@@ -39,6 +39,7 @@ public class GUIeinzelPERS {
 	 */
 	private void initialize(JDBC_MariaDB jdbc, int ProjNr) {
 		frameEinzelPerso = new JFrame();
+		frameEinzelPerso.setTitle("Personal- und Projektmanager");
 		frameEinzelPerso.setIconImage(Toolkit.getDefaultToolkit().getImage(GUIeinzelPERS.class.getResource("/ressources/EQOS.jpg")));
 		frameEinzelPerso.setBounds(100, 100, 690, 485);
 		frameEinzelPerso.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
