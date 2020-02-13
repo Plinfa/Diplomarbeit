@@ -38,6 +38,7 @@ import java.awt.Font;
 public class GUIstartmenue2 {
 
 	public JFrame frame2;
+	private JFrame frame25;
 	private JTable table;
 	private JTable table_1;
 	private JTextField textField;
@@ -141,8 +142,8 @@ public class GUIstartmenue2 {
 		btnAbmelden.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				frame2= new JFrame("Abmelden");
-				if (JOptionPane.showConfirmDialog(frame2, "Wirklich abmelden?", "Personal- und Projektmanager", JOptionPane.YES_NO_OPTION)==JOptionPane.YES_NO_OPTION) {
+				frame25= new JFrame("Abmelden");
+				if (JOptionPane.showConfirmDialog(frame25, "Wirklich abmelden?", "Personal- und Projektmanager", JOptionPane.YES_NO_OPTION)==JOptionPane.YES_NO_OPTION) {
 					EventQueue.invokeLater(new Runnable() {
 						public void run() {
 							try {
@@ -154,6 +155,7 @@ public class GUIstartmenue2 {
 							}
 						}
 					});
+					frame2.dispose();
 				}
 			}
 		});
@@ -562,22 +564,45 @@ public class GUIstartmenue2 {
 		JButton button_11 = new JButton("Dienstplan");
 		button_11.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				EventQueue.invokeLater(new Runnable() {
-					public void run() {
-						try {
-							int row = table_2.getSelectedRow();
-							int column = 0;
-							String content = table_2.getValueAt(row, column).toString();
-							int PersNr = Integer.parseInt(content);
-							
-							jdbc.zuteilungdetailansicht(PersNr);
-							GUI_Gantt_ChartDesigner window = new GUI_Gantt_ChartDesigner(jdbc, jdbc.zuteilungdetailansicht(PersNr));
-							window.frame4.setVisible(true);
-						} catch (Exception e) {
-							e.printStackTrace();
+				
+				int row = table_2.getSelectedRow();
+				int column = 0;
+				
+				
+				if (row==-1) {
+					JOptionPane.showMessageDialog(null, "Bitte Mitarbeiter auswählen", "Fehler", JOptionPane.ERROR_MESSAGE);
+					
+				}
+				else {
+					String content = table_2.getValueAt(row, column).toString();
+					int PersNr = Integer.parseInt(content);
+					
+					EventQueue.invokeLater(new Runnable() {
+						public void run() {
+							try {
+								
+								
+								jdbc.zuteilungdetailansicht(PersNr);
+								GUI_Gantt_ChartDesigner window = new GUI_Gantt_ChartDesigner(jdbc, jdbc.zuteilungdetailansicht(PersNr));
+								window.frame4.setVisible(true);
+							} catch (Exception e) {
+								e.printStackTrace();
+							}
 						}
-					}
-				});
+					});
+					
+					EventQueue.invokeLater(new Runnable() {
+						public void run() {
+							try {
+								GUIDienstplan window = new GUIDienstplan(jdbc, PersNr);
+								window.frameDienstplan.setVisible(true);
+							} catch (Exception e) {
+								e.printStackTrace();
+							}
+						}
+					});
+				}
+				
 				
 			}
 		});
@@ -614,19 +639,29 @@ public class GUIstartmenue2 {
 			public void actionPerformed(ActionEvent e) {
 				int row = table_3.getSelectedRow();
 				int column = 0;
-				String content = table_3.getValueAt(row, column).toString();
-				int ProjNr = Integer.parseInt(content);
 				
-				EventQueue.invokeLater(new Runnable() {
-					public void run() {
-						try {
-							GUIeinzelPERS window = new GUIeinzelPERS(jdbc, ProjNr);
-							window.frameEinzelPerso.setVisible(true);
-						} catch (Exception e) {
-							e.printStackTrace();
+				if (row==-1) {
+					JOptionPane.showMessageDialog(null, "Bitte Projekt auswählen", "Fehler", JOptionPane.ERROR_MESSAGE);
+					
+				}
+				else {
+					String content = table_3.getValueAt(row, column).toString();
+					int ProjNr = Integer.parseInt(content);
+				
+					EventQueue.invokeLater(new Runnable() {
+						public void run() {
+							try {
+								GUIeinzelPERS window = new GUIeinzelPERS(jdbc, ProjNr);
+								window.frameEinzelPerso.setVisible(true);
+							} catch (Exception e) {
+								e.printStackTrace();
+							}
 						}
-					}
-				});
+					});
+					
+					
+				}
+				
 				
 			}
 		});
@@ -1103,6 +1138,19 @@ public class GUIstartmenue2 {
 		JLabel label_16 = new JLabel("von:");
 		label_16.setBounds(305, 56, 38, 14);
 		ProjekteHINZU.add(label_16);
+		
+		JMenuBar menuBar_4 = new JMenuBar();
+		menuBar_4.setBounds(0, 0, 1102, 25);
+		ProjekteHINZU.add(menuBar_4);
+		
+		JButton btnZurck_1 = new JButton("zur\u00FCck");
+		btnZurck_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ProjekteHINZU.setVisible(false);
+				Projektplanung.setVisible(true);
+			}
+		});
+		menuBar_4.add(btnZurck_1);
 		
 		button_8.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

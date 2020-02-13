@@ -165,6 +165,26 @@ public class JDBC_MariaDB {
 
 		return res;
 	}
+	public ResultSet selectZuteilungen(int PersNr) {
+
+		ResultSet res = null;
+
+		try {
+
+			Statement stmt = con.createStatement();
+
+			// SQL Befehl
+
+			String sql = "SELECT von, bis, ProjektNr FROM arbeitet WHERE PersNr='" + PersNr + "'";
+
+			res = stmt.executeQuery(sql);
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return res;
+	}
 	
 	public ResultSet selectPersbedarfplanungfürProj(int ProjNr) {
 
@@ -560,6 +580,31 @@ public class JDBC_MariaDB {
 		}
 
 	}
+	
+	public void deleteZuteilung(String von, String bis, int PersNr) {
+		ResultSet res = null;
+
+		try {
+
+			Statement stmt = con.createStatement();
+
+			// SQL Befehl
+			
+			String deleteabwesenheit ="DELETE FROM arbeitet WHERE von= '" +von + "' AND bis= '" + bis + "' AND PersNr='" + PersNr + "' ";
+			
+
+			res = stmt.executeQuery(deleteabwesenheit);
+			
+
+			res.close();
+			stmt.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+	}
+	
 	public void deletebenoetigt(String von, String bis, String Anzahl, int ProjNr) {
 		ResultSet res = null;
 

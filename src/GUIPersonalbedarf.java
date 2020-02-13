@@ -25,6 +25,7 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import java.awt.Dimension;
+import java.awt.Font;
 //Wartecker Marcel
 public class GUIPersonalbedarf {
 
@@ -52,25 +53,32 @@ public class GUIPersonalbedarf {
 		frmPersonalUndProjektmanager = new JFrame();
 		frmPersonalUndProjektmanager.setTitle("Personal- und Projektmanager");
 		frmPersonalUndProjektmanager.setIconImage(Toolkit.getDefaultToolkit().getImage(GUIPersonalbedarf.class.getResource("/ressources/EQOS.jpg")));
-		frmPersonalUndProjektmanager.setBounds(100, 100, 1057, 584);
+		frmPersonalUndProjektmanager.setBounds(100, 100, 869, 398);
 		frmPersonalUndProjektmanager.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
 		
 		JLabel lblMitarbeiter = new JLabel("Mitarbeiter");
+		lblMitarbeiter.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		
 		JLabel lblKrank = new JLabel("krank");
+		lblKrank.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		
 		JLabel lblUrlaub = new JLabel("Urlaub");
+		lblUrlaub.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		
 		JLabel lblSchulung = new JLabel("Schulung");
+		lblSchulung.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		
 		JLabel label = new JLabel("");
 		
 		JLabel lblZugeteilt = new JLabel("zugeteilt");
+		lblZugeteilt.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		
 		JLabel lblNichtZugeteiltbentigt = new JLabel("nicht zugeteilt");
+		lblNichtZugeteiltbentigt.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		
 		JLabel lblKw = new JLabel("KW:");
+		lblKw.setFont(new Font("Tahoma", Font.PLAIN, 13));
 	//	textField_6.setText(nichtzugeteilt);
 		
 		int i=0;
@@ -123,6 +131,8 @@ public class GUIPersonalbedarf {
 			
 			
 			
+			
+			
 			spalte++;
 			woche++;
 			i++;
@@ -134,54 +144,56 @@ public class GUIPersonalbedarf {
 		scrollPane.setMinimumSize(new Dimension(1000, 1000));
 		
 		table_1 = new JTable(data, columns);
+		
 		table_1.setAutoResizeMode(JTable.AUTO_RESIZE_OFF); 
-		table_1.setRowHeight(25);
+		//TableColorCellRenderer renderer =new TableColorCellRenderer();
+		//table_1.setDefaultRenderer(Object.class, renderer);
+		table_1.setRowHeight(36);
 		scrollPane.setViewportView(table_1);
 		
 		JLabel lblBentigt = new JLabel("ben\u00F6tigt");
+		lblBentigt.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		GroupLayout groupLayout = new GroupLayout(frmPersonalUndProjektmanager.getContentPane());
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(122)
+					.addGap(25)
 					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-						.addComponent(lblMitarbeiter)
-						.addComponent(lblKrank)
-						.addComponent(lblUrlaub)
+						.addComponent(lblKw, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblNichtZugeteiltbentigt)
 						.addComponent(lblSchulung)
 						.addComponent(lblZugeteilt)
-						.addComponent(lblNichtZugeteiltbentigt)
+						.addComponent(lblUrlaub)
 						.addComponent(lblBentigt)
-						.addComponent(lblKw))
+						.addComponent(lblKrank)
+						.addComponent(lblMitarbeiter))
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 618, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(186, Short.MAX_VALUE))
+					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 735, Short.MAX_VALUE)
+					.addContainerGap())
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+					.addGap(29)
+					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE, false)
+						.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 294, GroupLayout.PREFERRED_SIZE)
 						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(97)
+							.addComponent(lblKw)
+							.addGap(13)
 							.addComponent(lblMitarbeiter)
-							.addPreferredGap(ComponentPlacement.RELATED)
+							.addGap(22)
 							.addComponent(lblKrank)
-							.addPreferredGap(ComponentPlacement.RELATED)
+							.addGap(18)
 							.addComponent(lblUrlaub)
-							.addPreferredGap(ComponentPlacement.RELATED)
+							.addGap(21)
 							.addComponent(lblSchulung)
-							.addPreferredGap(ComponentPlacement.RELATED)
+							.addGap(21)
 							.addComponent(lblZugeteilt)
-							.addPreferredGap(ComponentPlacement.RELATED)
+							.addGap(19)
 							.addComponent(lblNichtZugeteiltbentigt)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(lblBentigt))
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(65)
-							.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-								.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 297, GroupLayout.PREFERRED_SIZE)
-								.addComponent(lblKw))))
-					.addContainerGap(158, Short.MAX_VALUE))
+							.addGap(20)
+							.addComponent(lblBentigt)))
+					.addContainerGap())
 		);
 		frmPersonalUndProjektmanager.getContentPane().setLayout(groupLayout);
 		
@@ -213,7 +225,7 @@ public class GUIPersonalbedarf {
 		String benoetigt=jdbc.countbenötigt(abfrage1,ProjNr);
 		//zählen wie viele nicht zugeteilt
 	
-		       
+		
 		
 		return benoetigt;
 	}
