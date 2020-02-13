@@ -16,6 +16,7 @@ import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JLabel;
 import javax.swing.JTable;
+import java.awt.Font;
 
 public class GUIeinzelPERS {
 
@@ -41,27 +42,22 @@ public class GUIeinzelPERS {
 		frameEinzelPerso = new JFrame();
 		frameEinzelPerso.setTitle("Personal- und Projektmanager");
 		frameEinzelPerso.setIconImage(Toolkit.getDefaultToolkit().getImage(GUIeinzelPERS.class.getResource("/ressources/EQOS.jpg")));
-		frameEinzelPerso.setBounds(100, 100, 690, 485);
+		frameEinzelPerso.setBounds(100, 100, 716, 218);
 		frameEinzelPerso.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		frameEinzelPerso.getContentPane().setLayout(null);
 		
 		
 		
 		JLabel lblKw = new JLabel("KW:");
-		lblKw.setBounds(45, 68, 48, 14);
-		frameEinzelPerso.getContentPane().add(lblKw);
+		lblKw.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		
 		JLabel lblBentigt = new JLabel("ben\u00F6tigt:");
-		lblBentigt.setBounds(27, 93, 48, 14);
-		frameEinzelPerso.getContentPane().add(lblBentigt);
+		lblBentigt.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		
 		JLabel lblZugeteilt = new JLabel("zugeteilt:");
-		lblZugeteilt.setBounds(27, 118, 48, 14);
-		frameEinzelPerso.getContentPane().add(lblZugeteilt);
+		lblZugeteilt.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		
-		JLabel lblDifferenz = new JLabel("Differenz:");
-		lblDifferenz.setBounds(27, 143, 66, 14);
-		frameEinzelPerso.getContentPane().add(lblDifferenz);
+		JLabel lblDifferenz = new JLabel("\u00DCberhang:");
+		lblDifferenz.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		
 		
 		
@@ -126,8 +122,6 @@ public class GUIeinzelPERS {
 			i++;
 		}
 		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(119, 68, 571, 325);
-		frameEinzelPerso.getContentPane().add(scrollPane_1);
 		
 		
 		scrollPane_1.setMinimumSize(new Dimension(1000, 1000));
@@ -136,6 +130,37 @@ public class GUIeinzelPERS {
 		table_1.setAutoResizeMode(JTable.AUTO_RESIZE_OFF); 
 		table_1.setRowHeight(25);
 		scrollPane_1.setViewportView(table_1);
+		GroupLayout groupLayout = new GroupLayout(frameEinzelPerso.getContentPane());
+		groupLayout.setHorizontalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addGap(27)
+					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+						.addComponent(lblKw)
+						.addComponent(lblBentigt)
+						.addComponent(lblZugeteilt)
+						.addComponent(lblDifferenz))
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(scrollPane_1, GroupLayout.PREFERRED_SIZE, 542, Short.MAX_VALUE)
+					.addContainerGap())
+		);
+		groupLayout.setVerticalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addGap(26)
+					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(scrollPane_1, GroupLayout.PREFERRED_SIZE, 117, GroupLayout.PREFERRED_SIZE)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addComponent(lblKw)
+							.addGap(9)
+							.addComponent(lblBentigt)
+							.addGap(9)
+							.addComponent(lblZugeteilt)
+							.addGap(8)
+							.addComponent(lblDifferenz)))
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+		);
+		frameEinzelPerso.getContentPane().setLayout(groupLayout);
 		
 	}
 	

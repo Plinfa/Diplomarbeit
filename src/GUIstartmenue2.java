@@ -266,11 +266,8 @@ public class GUIstartmenue2 {
 		
 		Projektplanung = new JPanel();
 		frame2.getContentPane().add(Projektplanung, "name_1804404374300");
-		Projektplanung.setLayout(null);
 		
 		JMenuBar menuBar_1 = new JMenuBar();
-		menuBar_1.setBounds(0, 0, 1102, 25);
-		Projektplanung.add(menuBar_1);
 		
 		JButton button = new JButton("zur\u00FCck");
 		button.addActionListener(new ActionListener() {
@@ -281,67 +278,8 @@ public class GUIstartmenue2 {
 		});
 		menuBar_1.add(button);
 		
-		JButton button_1 = new JButton("Hinzuf\u00FCgen");
-		
-		button_1.setBounds(92, 92, 89, 23);
-		Projektplanung.add(button_1);
-		
-		JButton button_2 = new JButton("l\u00F6schen");
-		button_2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				int row=0;
-				String ProjNr=null;
-				
-				try {
-				
-				row=table_1.getSelectedRow();
-				ProjNr=table_1.getValueAt(row, 0).toString();
-				
-				int ProjektNr = Integer.parseInt(ProjNr);
-				if (JOptionPane.showConfirmDialog(frame2, "Projekt und alle Einträge wirklich löschen?", "Personal- und Projektmanager", JOptionPane.YES_NO_OPTION)==JOptionPane.YES_NO_OPTION) 
-				{
-					jdbc.deleteProject(ProjektNr);
-				}
-				else {
-					
-				}
-				
-				
-				//System.out.println(ProjektNr);
-				
-				}catch(Exception e1) {
-				
-					e1.printStackTrace();
-				}
-				table.setModel(DbUtils.resultSetToTableModel(jdbc.selectTabelleProjects()));
-				table_1.setModel(DbUtils.resultSetToTableModel(jdbc.selectTabelleProjects()));
-				table_2.setModel(DbUtils.resultSetToTableModel(jdbc.selectMitarbeiterinfo()));
-				table_3.setModel(DbUtils.resultSetToTableModel(jdbc.selectTabelleProjects()));
-			}
-		});
-		button_2.setBounds(92, 126, 89, 23);
-		Projektplanung.add(button_2);
-		
-		JButton button_3 = new JButton("Projektplanung Diagramm");
-		button_3.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				EventQueue.invokeLater(new Runnable() {
-					public void run() {
-						try {
-							GUI_Gantt_ChartDesigner window = new GUI_Gantt_ChartDesigner(jdbc,jdbc.zeitplanung());
-							window.frame4.setVisible(true);
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
-					}
-				});
-			}
-		});
-		button_3.setBounds(649, 92, 538, 23);
-		Projektplanung.add(button_3);
-		
-		JButton button_4 = new JButton("Update");
+		JButton button_4 = new JButton("Projekte bearbeiten");
+		menuBar_1.add(button_4);
 		button_4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -388,10 +326,61 @@ public class GUIstartmenue2 {
 				}
 			}
 		});
-		button_4.setBounds(191, 92, 89, 23);
-		Projektplanung.add(button_4);
 		
-		JButton button_5 = new JButton("Pers.Bedarf pro Projekt pro Woche planen");
+		JButton button_1 = new JButton("Hinzuf\u00FCgen");
+		
+		JButton button_2 = new JButton("l\u00F6schen");
+		button_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int row=0;
+				String ProjNr=null;
+				
+				try {
+				
+				row=table_1.getSelectedRow();
+				ProjNr=table_1.getValueAt(row, 0).toString();
+				
+				int ProjektNr = Integer.parseInt(ProjNr);
+				if (JOptionPane.showConfirmDialog(frame2, "Projekt und alle Einträge wirklich löschen?", "Personal- und Projektmanager", JOptionPane.YES_NO_OPTION)==JOptionPane.YES_NO_OPTION) 
+				{
+					jdbc.deleteProject(ProjektNr);
+				}
+				else {
+					
+				}
+				
+				
+				//System.out.println(ProjektNr);
+				
+				}catch(Exception e1) {
+				
+					e1.printStackTrace();
+				}
+				table.setModel(DbUtils.resultSetToTableModel(jdbc.selectTabelleProjects()));
+				table_1.setModel(DbUtils.resultSetToTableModel(jdbc.selectTabelleProjects()));
+				table_2.setModel(DbUtils.resultSetToTableModel(jdbc.selectMitarbeiterinfo()));
+				table_3.setModel(DbUtils.resultSetToTableModel(jdbc.selectTabelleProjects()));
+			}
+		});
+		
+		JButton button_3 = new JButton("Projektplanung Diagramm");
+		button_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				EventQueue.invokeLater(new Runnable() {
+					public void run() {
+						try {
+							GUI_Gantt_ChartDesigner window = new GUI_Gantt_ChartDesigner(jdbc,jdbc.zeitplanung());
+							window.frame4.setVisible(true);
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					}
+				});
+			}
+		});
+		
+		JButton button_5 = new JButton("Personalbedarf pro Projekt pro Woche planen");
 		button_5.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int row = table_1.getSelectedRow();
@@ -412,16 +401,47 @@ public class GUIstartmenue2 {
 				
 			}
 		});
-		button_5.setBounds(301, 92, 312, 23);
-		Projektplanung.add(button_5);
 		
 		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(61, 170, 981, 377);
-		Projektplanung.add(scrollPane_1);
 		
 		table_1 = new JTable();
 		scrollPane_1.setViewportView(table_1);
+		table_1.setRowHeight(25);
 		table_1.setModel(DbUtils.resultSetToTableModel(jdbc.selectTabelleProjects()));
+		GroupLayout gl_Projektplanung = new GroupLayout(Projektplanung);
+		gl_Projektplanung.setHorizontalGroup(
+			gl_Projektplanung.createParallelGroup(Alignment.LEADING)
+				.addComponent(menuBar_1, GroupLayout.DEFAULT_SIZE, 1102, Short.MAX_VALUE)
+				.addGroup(gl_Projektplanung.createSequentialGroup()
+					.addGap(61)
+					.addComponent(button_1, GroupLayout.DEFAULT_SIZE, 89, Short.MAX_VALUE)
+					.addGap(10)
+					.addComponent(button_2, GroupLayout.DEFAULT_SIZE, 89, Short.MAX_VALUE)
+					.addGap(159)
+					.addComponent(button_5, GroupLayout.DEFAULT_SIZE, 312, Short.MAX_VALUE)
+					.addGap(10)
+					.addComponent(button_3, GroupLayout.DEFAULT_SIZE, 312, Short.MAX_VALUE)
+					.addGap(60))
+				.addGroup(gl_Projektplanung.createSequentialGroup()
+					.addGap(61)
+					.addComponent(scrollPane_1, GroupLayout.DEFAULT_SIZE, 981, Short.MAX_VALUE)
+					.addGap(60))
+		);
+		gl_Projektplanung.setVerticalGroup(
+			gl_Projektplanung.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_Projektplanung.createSequentialGroup()
+					.addComponent(menuBar_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addGap(20)
+					.addGroup(gl_Projektplanung.createParallelGroup(Alignment.LEADING)
+						.addComponent(button_1)
+						.addComponent(button_2)
+						.addComponent(button_5)
+						.addComponent(button_3))
+					.addGap(11)
+					.addComponent(scrollPane_1, GroupLayout.DEFAULT_SIZE, 477, Short.MAX_VALUE)
+					.addGap(32))
+		);
+		Projektplanung.setLayout(gl_Projektplanung);
 		
 		Mitarbeiterplanung = new JPanel();
 		frame2.getContentPane().add(Mitarbeiterplanung, "name_1809842464300");
@@ -1001,34 +1021,21 @@ public class GUIstartmenue2 {
 		
 		JPanel ProjekteHINZU = new JPanel();
 		frame2.getContentPane().add(ProjekteHINZU, "name_995074335200");
-		ProjekteHINZU.setLayout(null);
 		
 		JLabel label = new JLabel("ProjektNr");
-		label.setBounds(65, 44, 55, 14);
-		ProjekteHINZU.add(label);
 		
 		textField_8 = new JTextField();
 		textField_8.setColumns(10);
-		textField_8.setBounds(65, 64, 96, 20);
-		ProjekteHINZU.add(textField_8);
 		
 		JLabel label_9 = new JLabel("Projektname");
-		label_9.setBounds(65, 90, 75, 14);
-		ProjekteHINZU.add(label_9);
 		
 		textField_9 = new JTextField();
 		textField_9.setColumns(10);
-		textField_9.setBounds(65, 107, 96, 20);
-		ProjekteHINZU.add(textField_9);
 		
 		JLabel label_10 = new JLabel("Ort");
-		label_10.setBounds(65, 224, 31, 14);
-		ProjekteHINZU.add(label_10);
 		
 		textField_10 = new JTextField();
 		textField_10.setColumns(10);
-		textField_10.setBounds(65, 244, 96, 20);
-		ProjekteHINZU.add(textField_10);
 		
 		JButton button_18 = new JButton("Eingabe");
 		button_18.addActionListener(new ActionListener() {
@@ -1100,48 +1107,28 @@ public class GUIstartmenue2 {
 				
 			}
 		});
-		button_18.setBounds(390, 243, 89, 23);
-		ProjekteHINZU.add(button_18);
 		
 		JLabel label_13 = new JLabel("Jahr:");
-		label_13.setBounds(210, 107, 48, 14);
-		ProjekteHINZU.add(label_13);
 		
 		JLabel label_14 = new JLabel("KW:");
-		label_14.setBounds(210, 80, 48, 14);
-		ProjekteHINZU.add(label_14);
 		
 		textField_13 = new JTextField();
 		textField_13.setColumns(10);
-		textField_13.setBounds(240, 80, 96, 20);
-		ProjekteHINZU.add(textField_13);
 		
 		textField_14 = new JTextField();
 		textField_14.setColumns(10);
-		textField_14.setBounds(240, 107, 96, 20);
-		ProjekteHINZU.add(textField_14);
 		
 		textField_15 = new JTextField();
 		textField_15.setColumns(10);
-		textField_15.setBounds(346, 107, 96, 20);
-		ProjekteHINZU.add(textField_15);
 		
 		textField_16 = new JTextField();
 		textField_16.setColumns(10);
-		textField_16.setBounds(346, 80, 96, 20);
-		ProjekteHINZU.add(textField_16);
 		
 		JLabel label_15 = new JLabel("bis:");
-		label_15.setBounds(416, 56, 38, 14);
-		ProjekteHINZU.add(label_15);
 		
 		JLabel label_16 = new JLabel("von:");
-		label_16.setBounds(305, 56, 38, 14);
-		ProjekteHINZU.add(label_16);
 		
 		JMenuBar menuBar_4 = new JMenuBar();
-		menuBar_4.setBounds(0, 0, 1102, 25);
-		ProjekteHINZU.add(menuBar_4);
 		
 		JButton btnZurck_1 = new JButton("zur\u00FCck");
 		btnZurck_1.addActionListener(new ActionListener() {
@@ -1151,6 +1138,96 @@ public class GUIstartmenue2 {
 			}
 		});
 		menuBar_4.add(btnZurck_1);
+		GroupLayout gl_ProjekteHINZU = new GroupLayout(ProjekteHINZU);
+		gl_ProjekteHINZU.setHorizontalGroup(
+			gl_ProjekteHINZU.createParallelGroup(Alignment.LEADING)
+				.addComponent(menuBar_4, GroupLayout.PREFERRED_SIZE, 1102, GroupLayout.PREFERRED_SIZE)
+				.addGroup(gl_ProjekteHINZU.createSequentialGroup()
+					.addGap(65)
+					.addComponent(label, GroupLayout.PREFERRED_SIZE, 55, GroupLayout.PREFERRED_SIZE))
+				.addGroup(gl_ProjekteHINZU.createSequentialGroup()
+					.addGap(65)
+					.addComponent(label_10, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE))
+				.addGroup(gl_ProjekteHINZU.createSequentialGroup()
+					.addGap(65)
+					.addComponent(textField_10, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+				.addGroup(gl_ProjekteHINZU.createSequentialGroup()
+					.addGap(65)
+					.addGroup(gl_ProjekteHINZU.createParallelGroup(Alignment.TRAILING)
+						.addComponent(button_18, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE)
+						.addGroup(gl_ProjekteHINZU.createParallelGroup(Alignment.TRAILING, false)
+							.addGroup(gl_ProjekteHINZU.createSequentialGroup()
+								.addComponent(textField_8, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addGap(140)
+								.addComponent(label_16, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+								.addGap(86)
+								.addComponent(label_15, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+							.addGroup(Alignment.LEADING, gl_ProjekteHINZU.createSequentialGroup()
+								.addGroup(gl_ProjekteHINZU.createParallelGroup(Alignment.LEADING)
+									.addComponent(label_9, GroupLayout.PREFERRED_SIZE, 75, GroupLayout.PREFERRED_SIZE)
+									.addComponent(textField_9, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+								.addGap(34)
+								.addGroup(gl_ProjekteHINZU.createParallelGroup(Alignment.LEADING)
+									.addGroup(gl_ProjekteHINZU.createSequentialGroup()
+										.addGap(5)
+										.addComponent(label_14))
+									.addComponent(label_13))
+								.addGap(10)
+								.addGroup(gl_ProjekteHINZU.createParallelGroup(Alignment.LEADING)
+									.addComponent(textField_13, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+									.addComponent(textField_14, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+								.addGap(10)
+								.addGroup(gl_ProjekteHINZU.createParallelGroup(Alignment.LEADING)
+									.addComponent(textField_16, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+									.addComponent(textField_15, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))))))
+		);
+		gl_ProjekteHINZU.setVerticalGroup(
+			gl_ProjekteHINZU.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_ProjekteHINZU.createSequentialGroup()
+					.addComponent(menuBar_4, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addGroup(gl_ProjekteHINZU.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_ProjekteHINZU.createSequentialGroup()
+							.addGap(14)
+							.addComponent(label)
+							.addGap(9)
+							.addGroup(gl_ProjekteHINZU.createParallelGroup(Alignment.LEADING)
+								.addComponent(textField_8, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addGroup(gl_ProjekteHINZU.createSequentialGroup()
+									.addGap(19)
+									.addComponent(label_16))))
+						.addGroup(gl_ProjekteHINZU.createSequentialGroup()
+							.addGap(56)
+							.addComponent(label_15)))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_ProjekteHINZU.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_ProjekteHINZU.createSequentialGroup()
+							.addComponent(label_9)
+							.addGap(8)
+							.addComponent(textField_9, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_ProjekteHINZU.createSequentialGroup()
+							.addGap(8)
+							.addComponent(label_14)
+							.addGap(13)
+							.addComponent(label_13))
+						.addGroup(gl_ProjekteHINZU.createSequentialGroup()
+							.addGap(5)
+							.addComponent(textField_13, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+							.addGap(7)
+							.addComponent(textField_14, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_ProjekteHINZU.createSequentialGroup()
+							.addGap(5)
+							.addComponent(textField_16, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+							.addGap(7)
+							.addComponent(textField_15, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+					.addGap(5)
+					.addComponent(label_10)
+					.addGap(11)
+					.addComponent(textField_10, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addGap(18)
+					.addComponent(button_18)
+					.addGap(344))
+		);
+		ProjekteHINZU.setLayout(gl_ProjekteHINZU);
 		
 		button_8.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

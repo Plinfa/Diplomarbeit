@@ -39,9 +39,9 @@ public class GUIchangePasswort {
 	 */
 	private void initialize(JDBC_MariaDB jdbc) {
 		frame7 = new JFrame();
-		frame7.setTitle("Passwort \u00E4ndern");
+		frame7.setTitle("Personal- und Projektmanager");
 		frame7.setIconImage(Toolkit.getDefaultToolkit().getImage(GUIchangePasswort.class.getResource("/ressources/EQOS.jpg")));
-		frame7.setBounds(100, 100, 592, 406);
+		frame7.setBounds(100, 100, 565, 388);
 		frame7.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
 		passwordField = new JPasswordField();
@@ -77,7 +77,7 @@ public class GUIchangePasswort {
 		});
 		GroupLayout groupLayout = new GroupLayout(frame7.getContentPane());
 		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
+			groupLayout.createParallelGroup(Alignment.TRAILING)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addGap(46)
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
@@ -86,14 +86,14 @@ public class GUIchangePasswort {
 						.addComponent(lblNeuesPasswortWiederholen))
 					.addGap(45)
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addComponent(passwordField_1, GroupLayout.DEFAULT_SIZE, 218, Short.MAX_VALUE)
-						.addComponent(passwordField_2, GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE)
-						.addComponent(passwordField, GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE))
-					.addGap(182))
-				.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
-					.addContainerGap(301, Short.MAX_VALUE)
+						.addComponent(passwordField_2, GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE)
+						.addComponent(passwordField_1, GroupLayout.DEFAULT_SIZE, 164, Short.MAX_VALUE)
+						.addComponent(passwordField, GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE))
+					.addGap(166))
+				.addGroup(groupLayout.createSequentialGroup()
+					.addContainerGap(353, Short.MAX_VALUE)
 					.addComponent(btnBesttigen)
-					.addGap(149))
+					.addGap(138))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
@@ -110,9 +110,9 @@ public class GUIchangePasswort {
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(passwordField_2, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)
 						.addComponent(lblNeuesPasswortWiederholen))
-					.addGap(71)
+					.addGap(52)
 					.addComponent(btnBesttigen)
-					.addContainerGap(73, Short.MAX_VALUE))
+					.addContainerGap(94, Short.MAX_VALUE))
 		);
 		frame7.getContentPane().setLayout(groupLayout);
 	}

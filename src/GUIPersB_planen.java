@@ -16,6 +16,8 @@ import java.awt.event.ActionEvent;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
 import java.awt.Toolkit;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
 
 public class GUIPersB_planen {
 
@@ -48,43 +50,26 @@ public class GUIPersB_planen {
 		frame27.setIconImage(Toolkit.getDefaultToolkit().getImage(GUIPersB_planen.class.getResource("/ressources/EQOS.jpg")));
 		frame27.setBounds(100, 100, 676, 437);
 		frame27.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		frame27.getContentPane().setLayout(null);
 		
 		JLabel label = new JLabel("Jahr:");
-		label.setBounds(61, 155, 25, 14);
-		frame27.getContentPane().add(label);
 		
 		textField = new JTextField();
 		textField.setColumns(10);
-		textField.setBounds(92, 152, 96, 20);
-		frame27.getContentPane().add(textField);
 		
 		textField_1 = new JTextField();
 		textField_1.setColumns(10);
-		textField_1.setBounds(92, 126, 96, 20);
-		frame27.getContentPane().add(textField_1);
 		
 		JLabel label_1 = new JLabel("von KW:");
-		label_1.setBounds(92, 106, 58, 14);
-		frame27.getContentPane().add(label_1);
 		
 		JLabel label_2 = new JLabel("bis KW:");
-		label_2.setBounds(198, 106, 50, 14);
-		frame27.getContentPane().add(label_2);
 		
 		textField_2 = new JTextField();
 		textField_2.setColumns(10);
-		textField_2.setBounds(198, 126, 96, 20);
-		frame27.getContentPane().add(textField_2);
 		
 		textField_3 = new JTextField();
 		textField_3.setColumns(10);
-		textField_3.setBounds(198, 152, 96, 20);
-		frame27.getContentPane().add(textField_3);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(347, 81, 277, 232);
-		frame27.getContentPane().add(scrollPane);
 		
 		table = new JTable();
 		scrollPane.setViewportView(table);
@@ -138,10 +123,6 @@ public class GUIPersB_planen {
 					//frame12.dispose();
 			}
 		});
-				
-			
-		btnBesttigen.setBounds(99, 202, 89, 23);
-		frame27.getContentPane().add(btnBesttigen);
 		
 		JButton btnEintragLschen = new JButton("Eintrag l\u00F6schen");
 		btnEintragLschen.addActionListener(new ActionListener() {
@@ -164,17 +145,76 @@ public class GUIPersB_planen {
 				
 			}
 		});
-		btnEintragLschen.setBounds(99, 236, 163, 23);
-		frame27.getContentPane().add(btnEintragLschen);
 		
 		textField_4 = new JTextField();
-		textField_4.setBounds(93, 75, 95, 20);
-		frame27.getContentPane().add(textField_4);
 		textField_4.setColumns(10);
 		
 		JLabel lblBentigt = new JLabel("Ben\u00F6tigt: (Anzahl)");
-		lblBentigt.setBounds(92, 57, 146, 14);
-		frame27.getContentPane().add(lblBentigt);
+		GroupLayout groupLayout = new GroupLayout(frame27.getContentPane());
+		groupLayout.setHorizontalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addGap(61)
+					.addComponent(label)
+					.addGap(6)
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addComponent(lblBentigt, GroupLayout.PREFERRED_SIZE, 146, GroupLayout.PREFERRED_SIZE)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(1)
+							.addComponent(textField_4, GroupLayout.PREFERRED_SIZE, 95, GroupLayout.PREFERRED_SIZE))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addComponent(label_1, GroupLayout.PREFERRED_SIZE, 58, GroupLayout.PREFERRED_SIZE)
+							.addGap(48)
+							.addComponent(label_2, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+							.addGap(10)
+							.addComponent(textField_2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+							.addGap(10)
+							.addComponent(textField_3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(7)
+							.addComponent(btnBesttigen, GroupLayout.PREFERRED_SIZE, 163, GroupLayout.PREFERRED_SIZE))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(7)
+							.addComponent(btnEintragLschen, GroupLayout.PREFERRED_SIZE, 163, GroupLayout.PREFERRED_SIZE)))
+					.addGap(38)
+					.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 297, Short.MAX_VALUE)
+					.addGap(31))
+		);
+		groupLayout.setVerticalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addGap(155)
+					.addComponent(label))
+				.addGroup(groupLayout.createSequentialGroup()
+					.addGap(57)
+					.addComponent(lblBentigt)
+					.addGap(4)
+					.addComponent(textField_4, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addGap(11)
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addComponent(label_1)
+						.addComponent(label_2))
+					.addGap(6)
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(textField_2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addGap(6)
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(textField_3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addGap(30)
+					.addComponent(btnBesttigen)
+					.addGap(11)
+					.addComponent(btnEintragLschen))
+				.addGroup(groupLayout.createSequentialGroup()
+					.addGap(57)
+					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 252, GroupLayout.PREFERRED_SIZE))
+		);
+		frame27.getContentPane().setLayout(groupLayout);
 		
 		JMenuBar menuBar = new JMenuBar();
 		frame27.setJMenuBar(menuBar);
