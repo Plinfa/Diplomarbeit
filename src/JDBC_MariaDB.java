@@ -884,23 +884,61 @@ public class JDBC_MariaDB {
 
 	public void unverfuegbarSetzen(int PersNr, java.sql.Date von, java.sql.Date bis, String Grund ) {
 
-		String verfueg = null;
+		
 		ResultSet res = null;
-		//java.sql.Date von1 = new java.sql.Date(bisDate.getTime());
+		
 		try {
-
+			boolean verfueg = true;
+			String projnr=null;
+			java.util.Date von1 = new java.util.Date(von.getTime());
+			java.sql.Date von3 = bis;
+			java.util.Date bis1 = new java.util.Date(bis.getTime());
+			java.sql.Date bis3 = von;
 			Statement stmt = con.createStatement();
 
 			// SQL Befehl
 			
 			String sql = "INSERT INTO abwesenheit (PersNr, Grund, von, bis) VALUES ('" + PersNr + "','" + Grund + "','"
 					+ von + "','" + bis + "')";
-			
-			String sql1=" DELETE FROM arbeitet WHERE '"+von+"' BETWEEN von AND bis AND PersNr='"+PersNr+"'"; 
-			
 			res = stmt.executeQuery(sql);
-			res = stmt.executeQuery(sql1);
-			//Mitarbeiterzuteilen(PersNr, von,  bis, projnr);
+			
+			
+			verfueg=verfuegbarkeitabfrage( PersNr,  von, bis);
+			
+			if(verfueg==false) {
+				
+				String sql1 = "SELECT ProjektNr,von,bis FROM arbeitet WHERE  '"+von+"' BETWEEN von AND bis AND PersNr='"+PersNr+"'";
+				res = stmt.executeQuery(sql1);
+				
+				while (res.next()) {
+					
+					 projnr = res.getString(1);
+					 von1= res.getDate(2);
+					 bis1= res.getDate(3);
+					 
+				
+				}
+				int ProjektNr = Integer.parseInt(projnr);
+				java.sql.Date von2 = new java.sql.Date(von1.getTime());
+				java.sql.Date bis2 = new java.sql.Date(bis1.getTime());
+				
+				
+				String sql2=" DELETE FROM arbeitet WHERE '"+von+"' BETWEEN von AND bis AND PersNr='"+PersNr+"'"; 
+				res = stmt.executeQuery(sql2);
+				//vorher setzen
+				//Mitarbeiterzuteilen(PersNr, von2,  bis3, ProjektNr);
+				//nachher setzen
+				Mitarbeiterzuteilen(PersNr, von3,  bis2, ProjektNr);
+				
+			}else {
+				
+			}
+			
+			
+			
+		
+			
+			
 			
 			res.close();
 			stmt.close();
@@ -960,7 +998,7 @@ public class JDBC_MariaDB {
 			
 			}
 			
-			 //countkrank = Integer.parseInt(count);
+			
 			
 					res.close();
 			stmt.close();
@@ -969,7 +1007,7 @@ public class JDBC_MariaDB {
 		catch (SQLException e) {
 			e.printStackTrace();
 		}
-		//System.out.println(countkrank);
+		
 		return count;
 		
 	}

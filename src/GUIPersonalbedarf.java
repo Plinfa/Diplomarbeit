@@ -266,8 +266,14 @@ public String nichtzugeteilt(JDBC_MariaDB jdbc, int week, int year) {
 		int mitarbeitercount = Integer.parseInt(mitarbeiter);
 		String zugeteilt=jdbc.countzugeteilt(abfrage1,0);
 		int zugeteiltcount = Integer.parseInt(zugeteilt);
+		String krank=jdbc.countkrank(abfrage1);
+		int krankcount= Integer.parseInt(krank);
+		String urlaub=jdbc.counturlaub(abfrage1);
+		int urlaubcount= Integer.parseInt(urlaub);
+		String schulung=jdbc.countschulung(abfrage1);
+		int schulungcount= Integer.parseInt(schulung);
 		
-		int nichtzugeteiltcount=mitarbeitercount-zugeteiltcount;
+		int nichtzugeteiltcount=mitarbeitercount-zugeteiltcount-krankcount-urlaubcount-schulungcount;
 		String nichtzugeteilt=Integer.toString(nichtzugeteiltcount);
 		//zählen wie viele zugeteilt
 		
