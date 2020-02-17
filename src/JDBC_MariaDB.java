@@ -35,7 +35,7 @@ public class JDBC_MariaDB {
 
 		try {
 
-			con = DriverManager.getConnection("jdbc:mariadb://localhost:3306/eqospersonalplanung", "root","5455809Otto");
+			con = DriverManager.getConnection("jdbc:mariadb://localhost:3306/eqospersonalplanung", "root","davmay81");
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -886,18 +886,22 @@ public class JDBC_MariaDB {
 
 		String verfueg = null;
 		ResultSet res = null;
-
+		//java.sql.Date von1 = new java.sql.Date(bisDate.getTime());
 		try {
 
 			Statement stmt = con.createStatement();
 
 			// SQL Befehl
-			// i think u meant this
+			
 			String sql = "INSERT INTO abwesenheit (PersNr, Grund, von, bis) VALUES ('" + PersNr + "','" + Grund + "','"
 					+ von + "','" + bis + "')";
-
+			
+			String sql1=" DELETE FROM arbeitet WHERE '"+von+"' BETWEEN von AND bis AND PersNr='"+PersNr+"'"; 
+			
 			res = stmt.executeQuery(sql);
-
+			res = stmt.executeQuery(sql1);
+			//Mitarbeiterzuteilen(PersNr, von,  bis, projnr);
+			
 			res.close();
 			stmt.close();
 		}
@@ -1170,13 +1174,21 @@ public String countbenötigt(java.sql.Date abfrage1, int ProjNr) {
 }
 	public int auslastung(java.sql.Date abfrage1, int ProjNr) {
 		
-		int benoetigt = Integer.parseInt(countbenötigt(abfrage1, ProjNr));
-		int zugeteilt = Integer.parseInt(countzugeteilt(abfrage1, ProjNr));
-		int auslastung_next=0;
+		
+		double zugeteilt = Double.parseDouble(countzugeteilt(abfrage1, ProjNr));
+		double krank = Double.parseDouble(countkrank(abfrage1));
+		double schulung = Double.parseDouble(countschulung(abfrage1));
+		double urlaub = Double.parseDouble(counturlaub(abfrage1));
+		double mitarbeiter = Double.parseDouble(countmitarbeiter());
+		double auslastung=0;
+		
+	
+		 auslastung= ((zugeteilt+krank+urlaub+schulung)/mitarbeiter)*100;
+		 
+		 int auslastung1 = (int)auslastung;
 		
 		
-		auslastung_next= (zugeteilt/benoetigt)*100;
-		return auslastung_next;
+		return auslastung1;
 	}
 	public void projektliste_füllen(int projektnummer, String projektname, Date startdatum, Date enddatum) {
 

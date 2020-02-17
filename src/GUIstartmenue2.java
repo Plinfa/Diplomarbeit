@@ -100,8 +100,18 @@ public class GUIstartmenue2 {
 		btnProjekte.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		
 		JProgressBar progressBar = new JProgressBar(0, 100);
+		Calendar c1 = Calendar.getInstance();
 		
-		progressBar.setValue(78);
+		int week = c1.get(Calendar.WEEK_OF_YEAR)+1;
+		int year= c1.get(Calendar.YEAR);
+		c1.setWeekDate(year, week, 2);
+		
+		
+		
+		Date abfrage=c1.getTime();
+		java.sql.Date abfrage1 = new java.sql.Date(abfrage.getTime());
+		
+		progressBar.setValue(jdbc.auslastung(abfrage1, 0));
 		progressBar.setStringPainted(true);
 		
 		JButton btnMitarbeiter = new JButton("Mitarbeiterplanung");
@@ -124,17 +134,19 @@ public class GUIstartmenue2 {
 		progressBar_1.setValue(30);
 		progressBar_1.setStringPainted(true);
 		
-		/*Calendar c1 = Calendar.getInstance();
+		Calendar calendar = Calendar.getInstance();
 		
-		int woche = c1.get(Calendar.WEEK_OF_YEAR);
-		int year= c1.get(Calendar.YEAR);
+		 int week1 = calendar.get(Calendar.WEEK_OF_YEAR)+2;
+		 int year1= calendar.get(Calendar.YEAR);
+		calendar.setWeekDate(year1, week1, 2);
 		
-		c1.set(year, woche+1, 2);
 		
-		Date abfrage=c1.getTime();
-		java.sql.Date abfrage1 = new java.sql.Date(abfrage.getTime());
-		progressBar_1.setValue(jdbc.auslastung(abfrage1, 0));
-		progressBar_1.setStringPainted(true);*/
+		
+		Date abfrage2=calendar.getTime();
+		java.sql.Date abfrage3 = new java.sql.Date(abfrage2.getTime());
+		
+		progressBar_1.setValue(jdbc.auslastung(abfrage3, 0));
+		progressBar_1.setStringPainted(true);
 		
 		JMenuBar menuBar = new JMenuBar();
 		
@@ -737,6 +749,8 @@ public class GUIstartmenue2 {
 			public void actionPerformed(ActionEvent e) {
 				Mitarbeiterplanung.setVisible(false);
 				Startmenue.setVisible(true);
+				progressBar.setValue(jdbc.auslastung(abfrage1, 0));
+				progressBar_1.setValue(jdbc.auslastung(abfrage3, 0));
 				
 			}
 		});
