@@ -61,6 +61,7 @@ public class GUIstartmenue2 {
 	private JTextField textField_14;
 	private JTextField textField_15;
 	private JTextField textField_16;
+	private JTable table_4;
 	/**
 	 * Launch the application.
 	 */
@@ -292,52 +293,7 @@ public class GUIstartmenue2 {
 		
 		JButton button_4 = new JButton("Projekte bearbeiten");
 		menuBar_1.add(button_4);
-		button_4.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				String content= null;
-				int row=0;
-				String ProjektNr=null;
-				
-				try {
-				
-				row=table_1.getSelectedRow();
-				ProjektNr=table_1.getValueAt(row, 0).toString();
-				
-				List<String> tablecontent = new ArrayList<String>();
-				tablecontent.clear();
-				
-				
-				
-				for( int column=1;column<=table_1.getColumnCount();column++) {
-					content=null;
-					
-					
-					
-					if(table_1.getModel().getValueAt(row, column-1)==null) {
-						
-						tablecontent.add(column-1, "");
-					}
-					else {
-						content=table_1.getModel().getValueAt(row, column-1).toString();
-						tablecontent.add(column-1, content);
-					
-					}
-					
-					
-				}
-				
-				//System.out.println(tablecontent);
-				
-				jdbc.updateProjekt(ProjektNr,tablecontent);
-				//JOptionPane.showMessageDialog(null, "Update war erfolgreich ", "Bestätigen", JOptionPane.OK_CANCEL_OPTION);
-				
-				}catch(Exception e1) {
-				
-					e1.printStackTrace();
-				}
-			}
-		});
+		
 		
 		JButton button_1 = new JButton("Hinzuf\u00FCgen");
 		
@@ -1243,12 +1199,87 @@ public class GUIstartmenue2 {
 		);
 		ProjekteHINZU.setLayout(gl_ProjekteHINZU);
 		
+		JPanel Bearbeitung_Projekte = new JPanel();
+		frame2.getContentPane().add(Bearbeitung_Projekte, "name_4173580015200");
+		
+		JButton btnNewButton = new JButton("Änderungen speichern");
+		btnNewButton.setBounds(540, 58, 141, 23);
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				int row=0;
+				
+				String ProjektNr=null;
+				String Name=null;
+				String Ort=null;
+				String von=null;
+				String bis=null;
+				
+				
+				try {
+					 row = table_4.getSelectedRow();
+					 ProjektNr = table_4.getValueAt(row, 0).toString();
+					 Name= table_4.getValueAt(row, 1).toString();
+					 Ort = table_4.getValueAt(row, 2).toString();
+					 von = table_4.getValueAt(row, 3).toString();
+					 bis = table_4.getValueAt(row, 4).toString();
+					 
+					 jdbc.updateProjekt( ProjektNr,  Name,  Ort,  von,  bis );
+				
+				}catch(Exception e1) {
+				
+					e1.printStackTrace();
+				}
+				
+			}
+		});
+		Bearbeitung_Projekte.setLayout(null);
+		Bearbeitung_Projekte.add(btnNewButton);
+		
+		JScrollPane scrollPane_4 = new JScrollPane();
+		scrollPane_4.setBounds(409, 115, 460, 168);
+		Bearbeitung_Projekte.add(scrollPane_4);
+		
+		table_4 = new JTable();
+		table_4.setRowHeight(25);
+		table_4.setModel(DbUtils.resultSetToTableModel(jdbc.selectTabelleProjects()));
+		scrollPane_4.setViewportView(table_4);
+		
+		JMenuBar menuBar_5 = new JMenuBar();
+		menuBar_5.setBounds(0, 0, 1102, 25);
+		Bearbeitung_Projekte.add(menuBar_5);
+		
+		JButton btnZurck_2 = new JButton("zur\u00FCck");
+		btnZurck_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Bearbeitung_Projekte.setVisible(false);
+				Projektplanung.setVisible(true);
+				table.setModel(DbUtils.resultSetToTableModel(jdbc.selectTabelleProjects()));
+				table_1.setModel(DbUtils.resultSetToTableModel(jdbc.selectTabelleProjects()));
+				table_2.setModel(DbUtils.resultSetToTableModel(jdbc.selectMitarbeiterinfo()));
+				table_3.setModel(DbUtils.resultSetToTableModel(jdbc.selectTabelleProjects()));
+			}
+		});
+		menuBar_5.add(btnZurck_2);
+		
 		button_8.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
 				Mitarbeiterplanung.setVisible(false);
 				MitarbeiterHINZU.setVisible(true);
 								
+			}
+		});
+		
+		button_4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				Bearbeitung_Projekte.setVisible(true);
+				Projektplanung.setVisible(false);
+				
+				
+				
+				
 			}
 		});
 		

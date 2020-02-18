@@ -151,47 +151,6 @@ public class GUIProjekte {
 				btnUpdate.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						
-						String content= null;
-						int row=0;
-						String ProjektNr=null;
-						
-						try {
-						
-						row=table.getSelectedRow();
-						ProjektNr=table.getValueAt(row, 0).toString();
-						
-						List<String> tablecontent = new ArrayList<String>();
-						tablecontent.clear();
-						
-						
-						
-						for( int column=1;column<=table.getColumnCount();column++) {
-							content=null;
-							
-							
-							
-							if(table.getModel().getValueAt(row, column-1)==null) {
-								
-								tablecontent.add(column-1, "");
-							}
-							else {
-								content=table.getModel().getValueAt(row, column-1).toString();
-								tablecontent.add(column-1, content);
-							
-							}
-							
-							
-						}
-						
-						//System.out.println(tablecontent);
-						
-						jdbc.updateProjekt(ProjektNr,tablecontent);
-						//JOptionPane.showMessageDialog(null, "Update war erfolgreich ", "Bestätigen", JOptionPane.OK_CANCEL_OPTION);
-						
-						}catch(Exception e1) {
-						
-							e1.printStackTrace();
-						}
 					}
 				});
 				btnUpdate.setBounds(198, 67, 89, 23);

@@ -705,7 +705,7 @@ public class JDBC_MariaDB {
 	}
 
 	// David
-	public void updateProjekt(String ProjektNr, List<String> tablecontent) {
+	public void updateProjekt(String ProjektNr, String Name, String Ort, String von, String bis ) {
 		ResultSet res = null;
 
 		try {
@@ -714,10 +714,8 @@ public class JDBC_MariaDB {
 
 			// SQL Befehl
 
-			String sql = "UPDATE projekte SET ProjektNr='" + tablecontent.get(0) + "', Projektname='"
-					+ tablecontent.get(1) + "', GruppenNr='" + tablecontent.get(2) + "', sonstigeMitarbeiterPersNr='"
-					+ tablecontent.get(3) + "', Ort='" + tablecontent.get(4) + "', Startdatum='" + tablecontent.get(5)
-					+ "', Enddatum='" + tablecontent.get(6) + "' WHERE ProjektNr='" + ProjektNr + "'";
+			String sql = "UPDATE projekt SET  Name='"+Name+"',Ort='" +Ort
+					+ "', von='" + von + "', bis= '"+bis+"'WHERE ProjektNr='" + ProjektNr + "'";
 
 			res = stmt.executeQuery(sql);
 
