@@ -894,13 +894,13 @@ public class JDBC_MariaDB {
 			java.sql.Date von3 = bis;
 			java.util.Date bis1 = new java.util.Date(bis.getTime());
 			java.sql.Date bis3 = von;
+			int pastDay=7;
+			java.sql.Date pastDate = subtractDays(bis3, pastDay);
 			Statement stmt = con.createStatement();
 
 			// SQL Befehl
 			
-			String sql = "INSERT INTO abwesenheit (PersNr, Grund, von, bis) VALUES ('" + PersNr + "','" + Grund + "','"
-					+ von + "','" + bis + "')";
-			res = stmt.executeQuery(sql);
+			
 			
 			
 			verfueg=verfuegbarkeitabfrage( PersNr,  von, bis);
@@ -926,7 +926,7 @@ public class JDBC_MariaDB {
 				String sql2=" DELETE FROM arbeitet WHERE '"+von+"' BETWEEN von AND bis AND PersNr='"+PersNr+"'"; 
 				res = stmt.executeQuery(sql2);
 				//vorher setzen
-				//Mitarbeiterzuteilen(PersNr, von2,  bis3, ProjektNr);
+				Mitarbeiterzuteilen(PersNr, von2,  pastDate, ProjektNr);
 				//nachher setzen
 				Mitarbeiterzuteilen(PersNr, von3,  bis2, ProjektNr);
 				
@@ -938,7 +938,9 @@ public class JDBC_MariaDB {
 			
 		
 			
-			
+			String sql = "INSERT INTO abwesenheit (PersNr, Grund, von, bis) VALUES ('" + PersNr + "','" + Grund + "','"
+					+ von + "','" + bis + "')";
+			res = stmt.executeQuery(sql);
 			
 			res.close();
 			stmt.close();
@@ -1250,5 +1252,11 @@ public String countbenötigt(java.sql.Date abfrage1, int ProjNr) {
 	public void setProjekte(ArrayList<Project> projekte) {
 		this.projekte = projekte;
 	}
-
+	
+	 public static Date subtractDays(Date date, int days) {
+	        Calendar c = Calendar.getInstance();
+	        c.setTime(date);
+	        c.add(Calendar.DATE, -days);
+	        return new Date(c.getTimeInMillis());
+	    }
 }
