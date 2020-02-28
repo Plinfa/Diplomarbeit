@@ -1203,7 +1203,6 @@ public class GUIstartmenue2 {
 		frame2.getContentPane().add(Bearbeitung_Projekte, "name_4173580015200");
 		
 		JButton btnNewButton = new JButton("Änderungen speichern");
-		btnNewButton.setBounds(540, 58, 141, 23);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
@@ -1233,21 +1232,15 @@ public class GUIstartmenue2 {
 				
 			}
 		});
-		Bearbeitung_Projekte.setLayout(null);
-		Bearbeitung_Projekte.add(btnNewButton);
 		
 		JScrollPane scrollPane_4 = new JScrollPane();
-		scrollPane_4.setBounds(409, 115, 460, 168);
-		Bearbeitung_Projekte.add(scrollPane_4);
 		
 		table_4 = new JTable();
-		table_4.setRowHeight(25);
+		table_4.setRowHeight(30);
 		table_4.setModel(DbUtils.resultSetToTableModel(jdbc.selectTabelleProjects()));
 		scrollPane_4.setViewportView(table_4);
 		
 		JMenuBar menuBar_5 = new JMenuBar();
-		menuBar_5.setBounds(0, 0, 1102, 25);
-		Bearbeitung_Projekte.add(menuBar_5);
 		
 		JButton btnZurck_2 = new JButton("zur\u00FCck");
 		btnZurck_2.addActionListener(new ActionListener() {
@@ -1261,6 +1254,38 @@ public class GUIstartmenue2 {
 			}
 		});
 		menuBar_5.add(btnZurck_2);
+		
+		JLabel label_11 = new JLabel("\u00C4nderungen mit Enter best\u00E4tigen und dann:");
+		GroupLayout gl_Bearbeitung_Projekte = new GroupLayout(Bearbeitung_Projekte);
+		gl_Bearbeitung_Projekte.setHorizontalGroup(
+			gl_Bearbeitung_Projekte.createParallelGroup(Alignment.LEADING)
+				.addComponent(menuBar_5, GroupLayout.DEFAULT_SIZE, 1102, Short.MAX_VALUE)
+				.addGroup(gl_Bearbeitung_Projekte.createSequentialGroup()
+					.addGap(160)
+					.addComponent(label_11, GroupLayout.DEFAULT_SIZE, 257, Short.MAX_VALUE)
+					.addGap(6)
+					.addComponent(btnNewButton, GroupLayout.DEFAULT_SIZE, 543, Short.MAX_VALUE)
+					.addGap(136))
+				.addGroup(gl_Bearbeitung_Projekte.createSequentialGroup()
+					.addGap(123)
+					.addComponent(scrollPane_4, GroupLayout.DEFAULT_SIZE, 843, Short.MAX_VALUE)
+					.addGap(136))
+		);
+		gl_Bearbeitung_Projekte.setVerticalGroup(
+			gl_Bearbeitung_Projekte.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_Bearbeitung_Projekte.createSequentialGroup()
+					.addComponent(menuBar_5, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addGap(33)
+					.addGroup(gl_Bearbeitung_Projekte.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_Bearbeitung_Projekte.createSequentialGroup()
+							.addGap(4)
+							.addComponent(label_11))
+						.addComponent(btnNewButton))
+					.addGap(34)
+					.addComponent(scrollPane_4, GroupLayout.DEFAULT_SIZE, 434, Short.MAX_VALUE)
+					.addGap(39))
+		);
+		Bearbeitung_Projekte.setLayout(gl_Bearbeitung_Projekte);
 		
 		button_8.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

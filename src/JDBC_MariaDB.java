@@ -35,7 +35,7 @@ public class JDBC_MariaDB {
 
 		try {
 
-			con = DriverManager.getConnection("jdbc:mariadb://localhost:3306/eqospersonalplanung", "root","davmay81");
+			con = DriverManager.getConnection("jdbc:mariadb://localhost:3306/eqospersonalplanung", "root","5455809Otto");
 
 		} catch (SQLException e) {
 			e.printStackTrace();
