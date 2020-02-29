@@ -35,7 +35,8 @@ public class JDBC_MariaDB {
 
 		try {
 
-			con = DriverManager.getConnection("jdbc:mariadb://localhost:3306/eqospersonalplanung", "root","5455809Otto");
+			con = DriverManager.getConnection("jdbc:mariadb://localhost:3306/eqospersonalplanung", "root",
+					"5455809Otto");
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -54,8 +55,6 @@ public class JDBC_MariaDB {
 			Statement stmt = con.createStatement();
 
 			// SQL Befehl
-
-		
 
 			String sql = "SELECT * FROM mitarbeiter";
 
@@ -90,8 +89,6 @@ public class JDBC_MariaDB {
 
 			// SQL Befehl
 
-			
-
 			String sql = "SELECT * FROM mitarbeiter";
 
 			res = stmt.executeQuery(sql);
@@ -123,7 +120,7 @@ public class JDBC_MariaDB {
 
 		return res;
 	}
-	
+
 	public ResultSet selectPartieLeiter() {
 
 		ResultSet res = null;
@@ -165,6 +162,7 @@ public class JDBC_MariaDB {
 
 		return res;
 	}
+
 	public ResultSet selectZuteilungen(int PersNr) {
 
 		ResultSet res = null;
@@ -185,7 +183,7 @@ public class JDBC_MariaDB {
 
 		return res;
 	}
-	
+
 	public ResultSet selectPersbedarfplanungfürProj(int ProjNr) {
 
 		ResultSet res = null;
@@ -209,7 +207,7 @@ public class JDBC_MariaDB {
 
 	public ResultSet selectAllProjects() {
 		ResultSet res = null;
-		//ResultSet resu = null;
+		// ResultSet resu = null;
 		try {
 
 			Statement stmt = con.createStatement();
@@ -219,7 +217,7 @@ public class JDBC_MariaDB {
 			String sql = "SELECT * FROM projekt";
 
 			res = stmt.executeQuery(sql);
-			//resu = stmt.executeQuery(sql);
+			// resu = stmt.executeQuery(sql);
 
 			while (!res.isLast()) // as long as valid data is in the result set
 			{
@@ -236,7 +234,7 @@ public class JDBC_MariaDB {
 			}
 			res.close();
 			stmt.close();
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -316,6 +314,7 @@ public class JDBC_MariaDB {
 		return dataset;
 
 	}
+
 	public IntervalCategoryDataset zuteilungdetailansicht(int PersNr) {
 
 		ResultSet res = null;
@@ -328,7 +327,8 @@ public class JDBC_MariaDB {
 
 			// SQL Befehl
 
-			String sql = "SELECT projekt.Name,arbeitet.von, arbeitet.bis FROM arbeitet JOIN projekt ON arbeitet.ProjektNr=projekt.ProjektNr WHERE PersNr= '"+PersNr+"'";
+			String sql = "SELECT projekt.Name,arbeitet.von, arbeitet.bis FROM arbeitet JOIN projekt ON arbeitet.ProjektNr=projekt.ProjektNr WHERE PersNr= '"
+					+ PersNr + "'";
 
 			res = stmt.executeQuery(sql);
 
@@ -342,7 +342,6 @@ public class JDBC_MariaDB {
 				String projektname = res.getString(1);
 				Date startdatum = res.getDate(2);
 				Date enddatum = res.getDate(3);
-				
 
 				if (startdatum.compareTo(heute) < 0) {
 
@@ -359,13 +358,12 @@ public class JDBC_MariaDB {
 				 */
 
 				series1.add(new Task(projektname, startdatum, enddatum));
-				
+
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 
-		
 		dataset.add(series1);
 		return dataset;
 
@@ -403,6 +401,7 @@ public class JDBC_MariaDB {
 		// "Bestätigen", JOptionPane.OK_CANCEL_OPTION);
 
 	}
+
 	public void Partiezuteilen(int PersNr, java.sql.Date von, java.sql.Date bis, int projnr) {
 
 		ResultSet res = null;
@@ -430,9 +429,8 @@ public class JDBC_MariaDB {
 			e.printStackTrace();
 		}
 
-	
-
 	}
+
 	public void insertEmployee(int PersoNr, String Name, String Nachname) {
 
 		ResultSet res = null;
@@ -510,7 +508,7 @@ public class JDBC_MariaDB {
 			Statement stmt = con.createStatement();
 
 			// SQL Befehl
-			String deletearbeitet ="DELETE FROM arbeitet WHERE PersNr= '" + PersNr + "'";
+			String deletearbeitet = "DELETE FROM arbeitet WHERE PersNr= '" + PersNr + "'";
 			String deleteabwesenheit = "DELETE FROM abwesenheit WHERE PersNr= '" + PersNr + "'";
 			String deletefaehrt = "DELETE FROM fährt WHERE PersNr= '" + PersNr + "'";
 			String deletemitarbeiter = "DELETE FROM mitarbeiter WHERE PersNr= '" + PersNr + "'";
@@ -538,8 +536,8 @@ public class JDBC_MariaDB {
 			Statement stmt = con.createStatement();
 
 			// SQL Befehl
-			
-			String deletebenötigt ="DELETE FROM benötigt WHERE ProjektNr= '" + ProjektNr + "'";
+
+			String deletebenötigt = "DELETE FROM benötigt WHERE ProjektNr= '" + ProjektNr + "'";
 			String deletearbeitet = "DELETE FROM arbeitet WHERE ProjektNr= '" + ProjektNr + "'";
 			String deleteleitet = "DELETE FROM leitetprojekt WHERE ProjektNr= '" + ProjektNr + "'";
 			String deleteproject = "DELETE FROM projekt WHERE ProjektNr='" + ProjektNr + "'";
@@ -557,6 +555,7 @@ public class JDBC_MariaDB {
 		}
 
 	}
+
 	public void deleteabwesenheit(String von, String bis, int PersNr) {
 		ResultSet res = null;
 
@@ -565,12 +564,11 @@ public class JDBC_MariaDB {
 			Statement stmt = con.createStatement();
 
 			// SQL Befehl
-			
-			String deleteabwesenheit ="DELETE FROM abwesenheit WHERE von= '" +von + "' AND bis= '" + bis + "' AND PersNr='" + PersNr + "' ";
-			
+
+			String deleteabwesenheit = "DELETE FROM abwesenheit WHERE von= '" + von + "' AND bis= '" + bis
+					+ "' AND PersNr='" + PersNr + "' ";
 
 			res = stmt.executeQuery(deleteabwesenheit);
-			
 
 			res.close();
 			stmt.close();
@@ -580,7 +578,7 @@ public class JDBC_MariaDB {
 		}
 
 	}
-	
+
 	public void deleteZuteilung(String von, String bis, int PersNr) {
 		ResultSet res = null;
 
@@ -589,12 +587,11 @@ public class JDBC_MariaDB {
 			Statement stmt = con.createStatement();
 
 			// SQL Befehl
-			
-			String deleteabwesenheit ="DELETE FROM arbeitet WHERE von= '" +von + "' AND bis= '" + bis + "' AND PersNr='" + PersNr + "' ";
-			
+
+			String deleteabwesenheit = "DELETE FROM arbeitet WHERE von= '" + von + "' AND bis= '" + bis
+					+ "' AND PersNr='" + PersNr + "' ";
 
 			res = stmt.executeQuery(deleteabwesenheit);
-			
 
 			res.close();
 			stmt.close();
@@ -604,7 +601,7 @@ public class JDBC_MariaDB {
 		}
 
 	}
-	
+
 	public void deletebenoetigt(String von, String bis, String Anzahl, int ProjNr) {
 		ResultSet res = null;
 
@@ -613,12 +610,11 @@ public class JDBC_MariaDB {
 			Statement stmt = con.createStatement();
 
 			// SQL Befehl
-			
-			String deletebenoetigt ="DELETE FROM benötigt WHERE von= '" +von + "' AND bis= '" + bis + "' AND Anzahl='"+Anzahl+"' AND ProjektNr='" + ProjNr + "' ";
-			
+
+			String deletebenoetigt = "DELETE FROM benötigt WHERE von= '" + von + "' AND bis= '" + bis + "' AND Anzahl='"
+					+ Anzahl + "' AND ProjektNr='" + ProjNr + "' ";
 
 			res = stmt.executeQuery(deletebenoetigt);
-			
 
 			res.close();
 			stmt.close();
@@ -628,6 +624,7 @@ public class JDBC_MariaDB {
 		}
 
 	}
+
 	public String selectPasswort() {
 		String passwort = null;
 		try {
@@ -642,7 +639,6 @@ public class JDBC_MariaDB {
 
 			while (res.next()) {
 				passwort = res.getString(1); // Spalte 1
-				
 
 			}
 
@@ -679,7 +675,8 @@ public class JDBC_MariaDB {
 	}
 
 	// David auf marcel angepasst
-	public void updateMitarbeiter(String PersoNr, String Nachname, String GebDat, String Taetigkeit, String EMail, String Fuehrerschein) {
+	public void updateMitarbeiter(String PersoNr, String Nachname, String GebDat, String Taetigkeit, String EMail,
+			String Fuehrerschein) {
 		ResultSet res = null;
 		String PersNr = PersoNr;
 
@@ -689,9 +686,9 @@ public class JDBC_MariaDB {
 
 			// SQL Befehl
 
-			
-			String sql = "UPDATE mitarbeiter SET  Nachname='"+Nachname+"',GebDat='" + GebDat
-					+ "', Tätigkeit='" + Taetigkeit + "', EMail= '"+EMail+"', Führerschein='"+Fuehrerschein+"' WHERE PersNr='" + PersNr + "'";
+			String sql = "UPDATE mitarbeiter SET  Nachname='" + Nachname + "',GebDat='" + GebDat + "', Tätigkeit='"
+					+ Taetigkeit + "', EMail= '" + EMail + "', Führerschein='" + Fuehrerschein + "' WHERE PersNr='"
+					+ PersNr + "'";
 
 			res = stmt.executeQuery(sql);
 
@@ -705,7 +702,7 @@ public class JDBC_MariaDB {
 	}
 
 	// David
-	public void updateProjekt(String ProjektNr, String Name, String Ort, String von, String bis ) {
+	public void updateProjekt(String ProjektNr, String Name, String Ort, String von, String bis) {
 		ResultSet res = null;
 
 		try {
@@ -714,8 +711,8 @@ public class JDBC_MariaDB {
 
 			// SQL Befehl
 
-			String sql = "UPDATE projekt SET  Name='"+Name+"',Ort='" +Ort
-					+ "', von='" + von + "', bis= '"+bis+"'WHERE ProjektNr='" + ProjektNr + "'";
+			String sql = "UPDATE projekt SET  Name='" + Name + "',Ort='" + Ort + "', von='" + von + "', bis= '" + bis
+					+ "'WHERE ProjektNr='" + ProjektNr + "'";
 
 			res = stmt.executeQuery(sql);
 
@@ -728,7 +725,8 @@ public class JDBC_MariaDB {
 
 	}
 
-	public void insertProject(int ProjektNr, String Projektname, String Ort, java.sql.Date Startdatum, java.sql.Date Enddatum) {
+	public void insertProject(int ProjektNr, String Projektname, String Ort, java.sql.Date Startdatum,
+			java.sql.Date Enddatum) {
 
 		ResultSet res = null;
 
@@ -768,8 +766,6 @@ public class JDBC_MariaDB {
 
 			// SQL Befehl
 
-			
-
 			String sql = "SELECT COUNT(ProjektNr) FROM projekt";
 
 			res = stmt.executeQuery(sql);
@@ -792,8 +788,8 @@ public class JDBC_MariaDB {
 
 	public boolean verfuegbarkeitabfrage(int PersNr, java.sql.Date von, java.sql.Date bis) {
 
-		java.util.Date von3 = new java.util.Date(von.getTime());
-		java.util.Date bis3 = new java.util.Date(bis.getTime());
+		java.util.Date vonStart = new java.util.Date(von.getTime());
+		java.util.Date bisEnd = new java.util.Date(bis.getTime());
 
 		boolean verfueg = true;
 		ResultSet res = null;
@@ -818,7 +814,8 @@ public class JDBC_MariaDB {
 				von1 = res.getDate(4);
 				bis1 = res.getDate(5);
 				// verfueg = res.getString(2);
-				if (von3.compareTo(von1) < 0 && bis3.compareTo(von1) < 0 || von3.compareTo(bis1) > 0 && bis3.compareTo(bis1) > 0) {
+				if (vonStart.compareTo(von1) < 0 && bisEnd.compareTo(von1) < 0
+						|| vonStart.compareTo(bis1) > 0 && bisEnd.compareTo(bis1) > 0) {
 
 					verfueg = true;
 
@@ -854,7 +851,8 @@ public class JDBC_MariaDB {
 
 				if (verfueg == true) {
 
-					if (von3.compareTo(von2) < 0 && bis3.compareTo(von2) < 0 || von3.compareTo(bis2) > 0 && bis3.compareTo(bis2) > 0) {
+					if (vonStart.compareTo(von2) < 0 && bisEnd.compareTo(von2) < 0
+							|| vonStart.compareTo(bis2) > 0 && bisEnd.compareTo(bis2) > 0) {
 
 						verfueg = true;
 
@@ -880,68 +878,68 @@ public class JDBC_MariaDB {
 
 	}
 
-	public void unverfuegbarSetzen(int PersNr, java.sql.Date von, java.sql.Date bis, String Grund ) {
+	public void unverfuegbarSetzen(int PersNr, java.sql.Date von, java.sql.Date bis, String Grund) {
 
-		
 		ResultSet res = null;
-		
+
 		try {
 			boolean verfueg = true;
-			String projnr=null;
+			String projnr = null;
 			java.util.Date von1 = new java.util.Date(von.getTime());
 			java.sql.Date von3 = bis;
 			java.util.Date bis1 = new java.util.Date(bis.getTime());
 			java.sql.Date bis3 = von;
-			int pastDay=7;
+			int pastDay = 7;
 			java.sql.Date pastDate = subtractDays(bis3, pastDay);
 			Statement stmt = con.createStatement();
 
 			// SQL Befehl
-			
-			
-			
-			
-			verfueg=verfuegbarkeitabfrage( PersNr,  von, bis);
-			
-			if(verfueg==false) {
-				
-				String sql1 = "SELECT ProjektNr,von,bis FROM arbeitet WHERE  '"+von+"' BETWEEN von AND bis AND PersNr='"+PersNr+"'";
+
+			verfueg = verfuegbarkeitabfrage(PersNr, von, bis);
+
+			if (verfueg == false) {
+
+				String sql1 = "SELECT ProjektNr,von,bis FROM arbeitet WHERE  '" + von
+						+ "' BETWEEN von AND bis AND PersNr='" + PersNr + "'";
 				res = stmt.executeQuery(sql1);
-				
+
 				while (res.next()) {
-					
-					 projnr = res.getString(1);
-					 von1= res.getDate(2);
-					 bis1= res.getDate(3);
-					 
-				
+
+					projnr = res.getString(1);
+					von1 = res.getDate(2);
+					bis1 = res.getDate(3);
+
 				}
-				int ProjektNr = Integer.parseInt(projnr);
-				java.sql.Date von2 = new java.sql.Date(von1.getTime());
-				java.sql.Date bis2 = new java.sql.Date(bis1.getTime());
+				if (projnr==null) {
+					JOptionPane.showMessageDialog(null, "Mitarbeiter ist in diesem Zeitraum schon in mindestens einer Woche abwesend",
+							"Fehler", JOptionPane.ERROR_MESSAGE);
+				}
 				
-				
-				String sql2=" DELETE FROM arbeitet WHERE '"+von+"' BETWEEN von AND bis AND PersNr='"+PersNr+"'"; 
-				res = stmt.executeQuery(sql2);
-				//vorher setzen
-				Mitarbeiterzuteilen(PersNr, von2,  pastDate, ProjektNr);
-				//nachher setzen
-				Mitarbeiterzuteilen(PersNr, von3,  bis2, ProjektNr);
-				
-			}else {
-				
-			}
+				else {
+					int ProjektNr = Integer.parseInt(projnr);
+					java.sql.Date von2 = new java.sql.Date(von1.getTime());
+					java.sql.Date bis2 = new java.sql.Date(bis1.getTime());
+
+					String sql2 = " DELETE FROM arbeitet WHERE '" + von + "' BETWEEN von AND bis AND PersNr='" + PersNr
+							+ "'";
+					res = stmt.executeQuery(sql2);
+					// Zuteilung vorher setzen
+					Mitarbeiterzuteilen(PersNr, von2, pastDate, ProjektNr);
+					// Zuteilung nachher setzen
+					Mitarbeiterzuteilen(PersNr, von3, bis2, ProjektNr);
+				}
+			} 
 			
-			
-			
-		
-			
-			String sql = "INSERT INTO abwesenheit (PersNr, Grund, von, bis) VALUES ('" + PersNr + "','" + Grund + "','"
+			else {
+				String sql = "INSERT INTO abwesenheit (PersNr, Grund, von, bis) VALUES ('" + PersNr + "','" + Grund + "','"
 					+ von + "','" + bis + "')";
-			res = stmt.executeQuery(sql);
+				res = stmt.executeQuery(sql);
+
+				res.close();
+				stmt.close();
+			}
+
 			
-			res.close();
-			stmt.close();
 		}
 
 		catch (SQLException e) {
@@ -949,9 +947,9 @@ public class JDBC_MariaDB {
 		}
 
 	}
+
 	public void persbedarfplanen(int ProjNr, java.sql.Date von, java.sql.Date bis, int anzahl) {
 
-		
 		ResultSet res = null;
 
 		try {
@@ -974,260 +972,239 @@ public class JDBC_MariaDB {
 		}
 
 	}
-	
+
 	public String countkrank(java.sql.Date abfrage1) {
 
-		
 		ResultSet res = null;
-		String count=null;
-		
+		String count = null;
+
 		try {
 
 			Statement stmt = con.createStatement();
 
 			// SQL Befehl
 
-
-			String sql = "SELECT COUNT(PersNr)FROM abwesenheit WHERE Grund = 'krank' AND '"+abfrage1+"' BETWEEN von AND bis";
+			String sql = "SELECT COUNT(PersNr)FROM abwesenheit WHERE Grund = 'krank' AND '" + abfrage1
+					+ "' BETWEEN von AND bis";
 
 			res = stmt.executeQuery(sql);
-			
+
 			while (res.next()) {
-				
+
 				count = res.getString(1);
-			
+
 			}
-			
-			
-			
-					res.close();
+
+			res.close();
 			stmt.close();
 		}
 
 		catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
-		return count;
-		
-	}
-	
-public String countschulung(java.sql.Date abfrage1) {
 
-		
+		return count;
+
+	}
+
+	public String countschulung(java.sql.Date abfrage1) {
+
 		ResultSet res = null;
-		String count=null;
-		
+		String count = null;
+
 		try {
 
 			Statement stmt = con.createStatement();
 
 			// SQL Befehl
 
-
-			String sql = "SELECT COUNT(PersNr)FROM abwesenheit WHERE Grund = 'schulung' AND '"+abfrage1+"' BETWEEN von AND bis";
+			String sql = "SELECT COUNT(PersNr)FROM abwesenheit WHERE Grund = 'schulung' AND '" + abfrage1
+					+ "' BETWEEN von AND bis";
 
 			res = stmt.executeQuery(sql);
-			
+
 			while (res.next()) {
-				
+
 				count = res.getString(1);
-			
+
 			}
-			
-			 
-			
-					res.close();
+
+			res.close();
 			stmt.close();
 		}
 
 		catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+
 		return count;
-		
-	}
-	
-public String counturlaub(java.sql.Date abfrage1) {
 
-	
-	ResultSet res = null;
-	String count=null;
-	
-	try {
-
-		Statement stmt = con.createStatement();
-
-		// SQL Befehl
-
-
-		String sql = "SELECT COUNT(PersNr)FROM abwesenheit WHERE Grund = 'urlaub' AND '"+abfrage1+"' BETWEEN von AND bis";
-
-		res = stmt.executeQuery(sql);
-		
-		while (res.next()) {
-			
-			count = res.getString(1);
-		
-		}
-		
-		 
-		
-				res.close();
-		stmt.close();
 	}
 
-	catch (SQLException e) {
-		e.printStackTrace();
-	}
-	
-	return count;
-	
-}
-public String countmitarbeiter() {
+	public String counturlaub(java.sql.Date abfrage1) {
 
-	
-	ResultSet res = null;
-	String count=null;
-	
-	try {
+		ResultSet res = null;
+		String count = null;
 
-		Statement stmt = con.createStatement();
+		try {
 
-		// SQL Befehl
+			Statement stmt = con.createStatement();
 
+			// SQL Befehl
 
-		String sql = "SELECT COUNT(PersNr)FROM mitarbeiter";
+			String sql = "SELECT COUNT(PersNr)FROM abwesenheit WHERE Grund = 'urlaub' AND '" + abfrage1
+					+ "' BETWEEN von AND bis";
 
-		res = stmt.executeQuery(sql);
-		
-		while (res.next()) {
-			
-			count = res.getString(1);
-		
-		}
-		
-		 
-		
-				res.close();
-		stmt.close();
-	}
-
-	catch (SQLException e) {
-		e.printStackTrace();
-	}
-	
-	return count;
-}
-
-public String countzugeteilt(java.sql.Date abfrage1, int ProjNr) {
-
-	
-	ResultSet res = null;
-	String count=null;
-	
-	try {
-
-		Statement stmt = con.createStatement();
-
-		// SQL Befehl
-
-		if(ProjNr==0) {
-			String sql = "SELECT COUNT(PersNr)FROM arbeitet WHERE  '"+abfrage1+"' BETWEEN von AND bis";
 			res = stmt.executeQuery(sql);
-		}
-		else {
-			String sql = "SELECT COUNT(PersNr)FROM arbeitet WHERE ProjektNr='"+ProjNr+"' AND '"+abfrage1+"' BETWEEN von AND bis";
-			
-			res = stmt.executeQuery(sql);
-			
-		}
-		
-		
-		while (res.next()) {
-			
-			count = res.getString(1);
-		
-		}
-		
-		
-		
-				res.close();
-		stmt.close();
-	}
 
-	catch (SQLException e) {
-		e.printStackTrace();
-	}
-	
-	return count;
-	
-}
+			while (res.next()) {
 
+				count = res.getString(1);
 
-public String countbenötigt(java.sql.Date abfrage1, int ProjNr) {
-
-	
-	ResultSet res = null;
-	String count=null;
-	
-	try {
-
-		Statement stmt = con.createStatement();
-
-		// SQL Befehl
-
-		if(ProjNr==0) {
-			String sql = "SELECT SUM(Anzahl)FROM benötigt WHERE  '"+abfrage1+"' BETWEEN von AND bis";
-			res = stmt.executeQuery(sql);
-		}
-		else {
-			String sql = "SELECT SUM(Anzahl)FROM benötigt WHERE ProjektNr='"+ProjNr+"' AND  '"+abfrage1+"' BETWEEN von AND bis  ";
-			
-			res = stmt.executeQuery(sql);
-			
-		}
-		while (res.next()) {
-			
-			count = res.getString(1);
-			if(count==null) {
-				count="0";
 			}
-		
+
+			res.close();
+			stmt.close();
 		}
-		
-		
-		
-				res.close();
-				stmt.close();
+
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return count;
+
 	}
 
-	catch (SQLException e) {
-		e.printStackTrace();
+	public String countmitarbeiter() {
+
+		ResultSet res = null;
+		String count = null;
+
+		try {
+
+			Statement stmt = con.createStatement();
+
+			// SQL Befehl
+
+			String sql = "SELECT COUNT(PersNr)FROM mitarbeiter";
+
+			res = stmt.executeQuery(sql);
+
+			while (res.next()) {
+
+				count = res.getString(1);
+
+			}
+
+			res.close();
+			stmt.close();
+		}
+
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return count;
 	}
-	
-	return count;
-	
-}
+
+	public String countzugeteilt(java.sql.Date abfrage1, int ProjNr) {
+
+		ResultSet res = null;
+		String count = null;
+
+		try {
+
+			Statement stmt = con.createStatement();
+
+			// SQL Befehl
+
+			if (ProjNr == 0) {
+				String sql = "SELECT COUNT(PersNr)FROM arbeitet WHERE  '" + abfrage1 + "' BETWEEN von AND bis";
+				res = stmt.executeQuery(sql);
+			} else {
+				String sql = "SELECT COUNT(PersNr)FROM arbeitet WHERE ProjektNr='" + ProjNr + "' AND '" + abfrage1
+						+ "' BETWEEN von AND bis";
+
+				res = stmt.executeQuery(sql);
+
+			}
+
+			while (res.next()) {
+
+				count = res.getString(1);
+
+			}
+
+			res.close();
+			stmt.close();
+		}
+
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return count;
+
+	}
+
+	public String countbenötigt(java.sql.Date abfrage1, int ProjNr) {
+
+		ResultSet res = null;
+		String count = null;
+
+		try {
+
+			Statement stmt = con.createStatement();
+
+			// SQL Befehl
+
+			if (ProjNr == 0) {
+				String sql = "SELECT SUM(Anzahl)FROM benötigt WHERE  '" + abfrage1 + "' BETWEEN von AND bis";
+				res = stmt.executeQuery(sql);
+			} else {
+				String sql = "SELECT SUM(Anzahl)FROM benötigt WHERE ProjektNr='" + ProjNr + "' AND  '" + abfrage1
+						+ "' BETWEEN von AND bis  ";
+
+				res = stmt.executeQuery(sql);
+
+			}
+			while (res.next()) {
+
+				count = res.getString(1);
+				if (count == null) {
+					count = "0";
+				}
+
+			}
+
+			res.close();
+			stmt.close();
+		}
+
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return count;
+
+	}
+
 	public int auslastung(java.sql.Date abfrage1, int ProjNr) {
-		
-		
+
 		double zugeteilt = Double.parseDouble(countzugeteilt(abfrage1, ProjNr));
 		double krank = Double.parseDouble(countkrank(abfrage1));
 		double schulung = Double.parseDouble(countschulung(abfrage1));
 		double urlaub = Double.parseDouble(counturlaub(abfrage1));
 		double mitarbeiter = Double.parseDouble(countmitarbeiter());
-		double auslastung=0;
-		
-	
-		 auslastung= ((zugeteilt+krank+urlaub+schulung)/mitarbeiter)*100;
-		 
-		 int auslastung1 = (int)auslastung;
-		
-		
+		double auslastung = 0;
+
+		auslastung = ((zugeteilt + krank + urlaub + schulung) / mitarbeiter) * 100;
+
+		int auslastung1 = (int) auslastung;
+
 		return auslastung1;
 	}
+
 	public void projektliste_füllen(int projektnummer, String projektname, Date startdatum, Date enddatum) {
 
 		Project xx = new Project(projektnummer, projektname, startdatum, enddatum);
@@ -1250,11 +1227,11 @@ public String countbenötigt(java.sql.Date abfrage1, int ProjNr) {
 	public void setProjekte(ArrayList<Project> projekte) {
 		this.projekte = projekte;
 	}
-	
-	 public static Date subtractDays(Date date, int days) {
-	        Calendar c = Calendar.getInstance();
-	        c.setTime(date);
-	        c.add(Calendar.DATE, -days);
-	        return new Date(c.getTimeInMillis());
-	    }
+
+	public static Date subtractDays(Date date, int days) {
+		Calendar c = Calendar.getInstance();
+		c.setTime(date);
+		c.add(Calendar.DATE, -days);
+		return new Date(c.getTimeInMillis());
+	}
 }

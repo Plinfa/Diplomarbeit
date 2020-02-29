@@ -529,22 +529,30 @@ public class GUIstartmenue2 {
 		button_10.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
+				
 				int row = table_2.getSelectedRow();
-				int column = 0;
-				String content = table_2.getValueAt(row, column).toString();
-				int PersNr = Integer.parseInt(content);
+				if (row==-1) {
+					JOptionPane.showMessageDialog(null, "Bitte Mitarbeiter auswählen", "Fehler", JOptionPane.ERROR_MESSAGE);
+					
+				}
+				else {
+					int column = 0;
+					String content = table_2.getValueAt(row, column).toString();
+					int PersNr = Integer.parseInt(content);
 
-				EventQueue.invokeLater(new Runnable() {
-					public void run() {
-						try {
-							GUIvon_bis window = new GUIvon_bis(jdbc, PersNr);
-							window.frame12.setVisible(true);
+					EventQueue.invokeLater(new Runnable() {
+						public void run() {
+							try {
+								GUIvon_bis window = new GUIvon_bis(jdbc, PersNr);
+								window.frame12.setVisible(true);
 
-						} catch (Exception e) {
-							e.printStackTrace();
+							} catch (Exception e) {
+								e.printStackTrace();
+							}
 						}
-					}
-				});
+					});
+				}
+
 			}
 			
 		});
