@@ -174,6 +174,32 @@ public class GUIstartmenue2 {
 				}
 			}
 		});
+JRadioButton radioButton = new JRadioButton("einzeln");
+		
+		JRadioButton radioButton_1 = new JRadioButton("Partie");
+		
+		ButtonGroup gruppe = new ButtonGroup();
+		
+		radioButton.setSelected(true);
+		 
+        //JRadioButtons werden zur ButtonGroup hinzugefügt
+        gruppe.add(radioButton);
+        gruppe.add(radioButton_1);
+        
+        radioButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				//auswahl=true;
+				table_2.setModel(DbUtils.resultSetToTableModel(jdbc.selectPartieLeiter()));
+			}
+		});
+        
+        radioButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				table_2.setModel(DbUtils.resultSetToTableModel(jdbc.selectMitarbeiterinfo()));
+			}
+		});
 		
 		menuBar.add(btnAbmelden);
 		
@@ -456,10 +482,11 @@ public class GUIstartmenue2 {
 				enddate.getTime();
 				Date bisDate = enddate.getTime(); 							// in Java Date speichern
 				java.sql.Date bis = new java.sql.Date(bisDate.getTime()); 	// in SQL Date umwandeln
-
+				
 				try {
-					if(auswahl=false) {
+					if(radioButton.isEnabled()==true) {
 						jdbc.Mitarbeiterzuteilen(PersNr, von, bis, projnr);
+						
 					}
 					else {
 						jdbc.Partiezuteilen(PersNr, von, bis, projnr);
@@ -686,31 +713,7 @@ public class GUIstartmenue2 {
 			}
 		});
 		
-		JRadioButton radioButton = new JRadioButton("einzeln");
 		
-		JRadioButton radioButton_1 = new JRadioButton("Partie");
-		
-		ButtonGroup gruppe = new ButtonGroup();
-		
-		radioButton.setSelected(true);
-		 
-        //JRadioButtons werden zur ButtonGroup hinzugefügt
-        gruppe.add(radioButton);
-        gruppe.add(radioButton_1);
-        
-        radioButton_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				auswahl=true;
-				table_2.setModel(DbUtils.resultSetToTableModel(jdbc.selectPartieLeiter()));
-			}
-		});
-        
-        radioButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-
-				table_2.setModel(DbUtils.resultSetToTableModel(jdbc.selectMitarbeiterinfo()));
-			}
-		});
 		
 		JMenuBar menuBar_2 = new JMenuBar();
 		

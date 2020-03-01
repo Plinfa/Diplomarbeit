@@ -978,7 +978,7 @@ public class JDBC_MariaDB {
 			Statement stmt = con.createStatement();
 
 			// SQL Befehl
-
+			
 			verfueg = verfuegbarkeitabfrage(PersNr, von, bis);
 
 			if (verfueg == false) {
@@ -995,8 +995,11 @@ public class JDBC_MariaDB {
 
 				}
 				if (projnr==null) {
+					
 					JOptionPane.showMessageDialog(null, "Mitarbeiter ist in diesem Zeitraum schon in mindestens einer Woche abwesend",
 							"Fehler", JOptionPane.ERROR_MESSAGE);
+							
+					
 				}
 				
 				else {
