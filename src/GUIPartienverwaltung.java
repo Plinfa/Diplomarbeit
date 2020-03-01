@@ -20,6 +20,9 @@ import javax.swing.JList;
 import javax.swing.JComboBox;
 import java.awt.Toolkit;
 import javax.swing.JLabel;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.LayoutStyle.ComponentPlacement;
 
 public class GUIPartienverwaltung {
 
@@ -47,11 +50,8 @@ public class GUIPartienverwaltung {
 		frame17.setIconImage(Toolkit.getDefaultToolkit().getImage(GUIPartienverwaltung.class.getResource("/ressources/EQOS.jpg")));
 		frame17.setBounds(100, 100, 717, 410);
 		frame17.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		frame17.getContentPane().setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(204, 100, 435, 189);
-		frame17.getContentPane().add(scrollPane);
 		
 		table = new JTable();
 		scrollPane.setViewportView(table);
@@ -61,16 +61,10 @@ public class GUIPartienverwaltung {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnHinzufgen.setBounds(53, 138, 127, 23);
-		frame17.getContentPane().add(btnHinzufgen);
 		
 		JButton btnEntfernen = new JButton("entfernen");
-		btnEntfernen.setBounds(53, 172, 127, 23);
-		frame17.getContentPane().add(btnEntfernen);
 		
 		JButton btnPartieLschen = new JButton("Partie l\u00F6schen");
-		btnPartieLschen.setBounds(53, 240, 127, 23);
-		frame17.getContentPane().add(btnPartieLschen);
 		
 		JComboBox comboBox = new JComboBox();
 		
@@ -107,20 +101,60 @@ public class GUIPartienverwaltung {
 			}
 		});
 		
-		comboBox.setBounds(265, 36, 156, 22);
-		frame17.getContentPane().add(comboBox);
-		
 		JLabel lblMitarbeiterZuPartie = new JLabel("Mitarbeiter zu Partie:");
-		lblMitarbeiterZuPartie.setBounds(53, 101, 127, 14);
-		frame17.getContentPane().add(lblMitarbeiterZuPartie);
 		
 		JLabel lblPartieleiterAuswhlenUm = new JLabel("Partieleiter ausw\u00E4hlen, um diese Partie zu bearbeiten:");
-		lblPartieleiterAuswhlenUm.setBounds(159, 11, 321, 14);
-		frame17.getContentPane().add(lblPartieleiterAuswhlenUm);
 		
 		JLabel lblOder = new JLabel("oder:");
-		lblOder.setBounds(96, 215, 48, 14);
-		frame17.getContentPane().add(lblOder);
+		GroupLayout groupLayout = new GroupLayout(frame17.getContentPane());
+		groupLayout.setHorizontalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addGap(53)
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
+						.addComponent(lblMitarbeiterZuPartie, GroupLayout.PREFERRED_SIZE, 127, GroupLayout.PREFERRED_SIZE)
+						.addComponent(btnHinzufgen, GroupLayout.PREFERRED_SIZE, 127, GroupLayout.PREFERRED_SIZE)
+						.addComponent(btnEntfernen, GroupLayout.PREFERRED_SIZE, 127, GroupLayout.PREFERRED_SIZE)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(43)
+							.addComponent(lblOder, GroupLayout.PREFERRED_SIZE, 48, GroupLayout.PREFERRED_SIZE))
+						.addComponent(btnPartieLschen, GroupLayout.PREFERRED_SIZE, 127, GroupLayout.PREFERRED_SIZE))
+					.addGap(24)
+					.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 435, Short.MAX_VALUE)
+					.addGap(62))
+				.addGroup(groupLayout.createSequentialGroup()
+					.addGap(204)
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addComponent(lblPartieleiterAuswhlenUm, GroupLayout.PREFERRED_SIZE, 487, GroupLayout.PREFERRED_SIZE)
+							.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, 281, GroupLayout.PREFERRED_SIZE)
+							.addContainerGap(216, Short.MAX_VALUE))))
+		);
+		groupLayout.setVerticalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(lblPartieleiterAuswhlenUm)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addGap(42)
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(1)
+							.addComponent(lblMitarbeiterZuPartie)
+							.addGap(23)
+							.addComponent(btnHinzufgen)
+							.addGap(11)
+							.addComponent(btnEntfernen)
+							.addGap(20)
+							.addComponent(lblOder)
+							.addGap(11)
+							.addComponent(btnPartieLschen))
+						.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 189, GroupLayout.PREFERRED_SIZE)))
+		);
+		frame17.getContentPane().setLayout(groupLayout);
 		
 		JMenuBar menuBar = new JMenuBar();
 		frame17.setJMenuBar(menuBar);

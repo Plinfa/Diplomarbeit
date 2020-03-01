@@ -910,6 +910,9 @@ public class GUIstartmenue2 {
 						.addComponent(button_13))
 					.addGap(32))
 		);
+		
+		JButton btnMitarbeiterAusExcel = new JButton("Mitarbeiter aus Excel importieren");
+		menuBar_2.add(btnMitarbeiterAusExcel);
 		Mitarbeiterplanung.setLayout(gl_Mitarbeiterplanung);
 		
 		JPanel MitarbeiterHINZU = new JPanel();
