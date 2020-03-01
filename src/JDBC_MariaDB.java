@@ -36,7 +36,7 @@ public class JDBC_MariaDB {
 		try {
 
 			con = DriverManager.getConnection("jdbc:mariadb://localhost:3306/eqospersonalplanung", "root",
-					"5455809Otto");
+					"davmay81");
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -131,7 +131,7 @@ public class JDBC_MariaDB {
 
 			// SQL Befehl
 
-			String sql = "SELECT leitetpartie.PartieNr, mitarbeiter.Name, mitarbeiter.Nachname  FROM leitetpartie JOIN mitarbeiter ON leitetpartie.PersNr=mitarbeiter.PersNr";
+			String sql = "SELECT leitetpartie.PersNr, leitetpartie.PartieNr, mitarbeiter.Name, mitarbeiter.Nachname  FROM leitetpartie JOIN mitarbeiter ON leitetpartie.PersNr=mitarbeiter.PersNr";
 
 			res = stmt.executeQuery(sql);
 
@@ -162,7 +162,63 @@ public class JDBC_MariaDB {
 
 		return res;
 	}
+	public ResultSet selectPartien(int PersNr) {
 
+		ResultSet res = null;
+		int PersNrLeiter=PersNr;
+		int PartieNr=0;
+		
+
+		try {
+
+			Statement stmt = con.createStatement();
+
+			// SQL Befehl
+
+			String sql= "SELECT PartieNr FROM leitetpartie WHERE PersNr='"+PersNrLeiter+"' ";
+			res = stmt.executeQuery(sql);
+			
+
+			
+			while (!res.isLast()) // as long as valid data is in the result set
+			{
+
+				res.next(); 
+				PartieNr = res.getInt(1);
+				
+			    //System.out.print(PartieNr);
+			}
+				 
+				
+			    
+			
+			
+			
+			String sql1= "SELECT  mitarbeiter.PersNr, mitarbeiter.Name, mitarbeier.nachname FROM mitarbeiter JOIN zugeteilt ON mitarbeiter.PersNr=zugeteilt.PersNr WHERE PartieNr = '"+PartieNr+"' ";
+			res = stmt.executeQuery(sql1);
+			
+			while (!res.isLast()) // as long as valid data is in the result set
+			{
+
+				res.next(); 
+				int PersNrMitarbeiter= res.getInt(1);
+				String Name =  res.getString(2);
+				String Nachname =  res.getString(3);
+				
+			    
+			}
+
+			
+			stmt.close();
+			res.close();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		
+		return res;
+	}
 	public ResultSet selectZuteilungen(int PersNr) {
 
 		ResultSet res = null;
@@ -176,6 +232,7 @@ public class JDBC_MariaDB {
 			String sql = "SELECT von, bis, ProjektNr FROM arbeitet WHERE PersNr='" + PersNr + "'";
 
 			res = stmt.executeQuery(sql);
+			stmt.close();
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -405,24 +462,51 @@ public class JDBC_MariaDB {
 	public void Partiezuteilen(int PersNr, java.sql.Date von, java.sql.Date bis, int projnr) {
 
 		ResultSet res = null;
+		int PersNrLeiter=PersNr;
+		
 		boolean verfueg = verfuegbarkeitabfrage(PersNr, von, bis);
+		int PartieNr=0;
+		int PersNrMitarbeiter=0;
 
 		try {
-
+			
+			 Mitarbeiterzuteilen(PersNrLeiter, von,  bis, projnr);
 			Statement stmt = con.createStatement();
+			String sql= "SELECT PartieNr FROM leitetpartie WHERE PersNr='"+PersNrLeiter+"' ";
+			res = stmt.executeQuery(sql);
+			
 
-			if (verfueg == false) {
-				JOptionPane.showMessageDialog(null,
-						"Mitarbeiter ist in diesem Zeitraum in mindestens einer Woche nicht verfügbar", "Fehler",
-						JOptionPane.ERROR_MESSAGE);
+			
+			while (!res.isLast()) // as long as valid data is in the result set
+			{
 
-			} else {
-				String sql = "INSERT INTO arbeitet ( zugeteilt.PartieNr, mitarbeiter.PersNr, mitarbeiter.Name, mitarbeiter.Nachname, leitetpartie.PersNr  FROM zugeteilt JOIN mitarbeiter ON zugeteilt.PersNr=mitarbeiter.PersNr JOIN leitetpartie ON zugeteilt.PartieNr=leitetpartie.PartieNr ";
-				res = stmt.executeQuery(sql);
-				res.close();
-				stmt.close();
+				res.next(); 
+				PartieNr = res.getInt(1);
+				
+			    System.out.print(PartieNr);
 			}
+				 
+				
+			    
+			
+			
+			
+			String sql1= "SELECT  mitarbeiter.PersNr FROM mitarbeiter JOIN zugeteilt ON mitarbeiter.PersNr=zugeteilt.PersNr WHERE PartieNr = '"+PartieNr+"' ";
+			res = stmt.executeQuery(sql1);
+			
+			while (!res.isLast()) // as long as valid data is in the result set
+			{
 
+				res.next(); 
+				PersNrMitarbeiter= res.getInt(1);
+				
+				 Mitarbeiterzuteilen(PersNrMitarbeiter, von,  bis, projnr);
+				
+			    
+			}
+		
+			res.close();
+			stmt.close();
 		}
 
 		catch (SQLException e) {
@@ -927,6 +1011,10 @@ public class JDBC_MariaDB {
 					Mitarbeiterzuteilen(PersNr, von2, pastDate, ProjektNr);
 					// Zuteilung nachher setzen
 					Mitarbeiterzuteilen(PersNr, von3, bis2, ProjektNr);
+					
+					String sql = "INSERT INTO abwesenheit (PersNr, Grund, von, bis) VALUES ('" + PersNr + "','" + Grund + "','"
+							+ von + "','" + bis + "')";
+						res = stmt.executeQuery(sql);
 				}
 			} 
 			

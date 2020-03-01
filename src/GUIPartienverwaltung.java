@@ -51,10 +51,12 @@ public class GUIPartienverwaltung {
 		frame17.setBounds(100, 100, 717, 410);
 		frame17.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
+		
 		JScrollPane scrollPane = new JScrollPane();
 		
 		table = new JTable();
 		scrollPane.setViewportView(table);
+	
 		
 		JButton btnHinzufgen = new JButton("Hinzuf\u00FCgen");
 		btnHinzufgen.addActionListener(new ActionListener() {
@@ -72,19 +74,22 @@ public class GUIPartienverwaltung {
 		ResultSet res2 = null;
 
 		try {
-			Connection con = DriverManager.getConnection("jdbc:mariadb://localhost:3306/eqospersonalplanung", "root","5455809Otto");
+			Connection con = DriverManager.getConnection("jdbc:mariadb://localhost:3306/eqospersonalplanung", "root","davmay81");
 			Statement stmt = con.createStatement();
 
 			// SQL Befehl
 
-			String sql = "SELECT leitetpartie.PartieNr, mitarbeiter.Name, mitarbeiter.Nachname  FROM leitetpartie JOIN mitarbeiter ON leitetpartie.PersNr=mitarbeiter.PersNr";
+			String sql = "SELECT leitetpartie.PartieNr, mitarbeiter.Name, mitarbeiter.Nachname, mitarbeiter.PersNr  FROM leitetpartie JOIN mitarbeiter ON leitetpartie.PersNr=mitarbeiter.PersNr";
 
 			res = stmt.executeQuery(sql);
 			while(res.next()) {
 				String name=res.getString(2)+ " "+ res.getString(3);
 				
+				
 				comboBox.addItem(name);
 			}
+			res.close();
+			stmt.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -93,10 +98,12 @@ public class GUIPartienverwaltung {
 			public void actionPerformed(ActionEvent e) {
 				//partie des Leiters bekommen und dann in tabelle anzeigen
 				int partienummer =comboBox.getSelectedIndex()+1;
+				
+				
 				//Statement stmt2 = con.createStatement();
-				//String sql2= "SELECT 
+				//String sql2= "SELECT Pers
 				//res2 = stmt2.executeQuery(sql2);
-				//table.setModel(DbUtils.resultSetToTableModel(jdbc.));
+				//table.setModel(DbUtils.resultSetToTableModel(jdbc.selectPartien(PersNrLeiter)));
 				
 			}
 		});

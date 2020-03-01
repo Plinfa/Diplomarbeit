@@ -47,6 +47,7 @@ public class GUIgruppeODEReinzeln {
 	private JButton btnZuteilungPerEmail;
 	private JButton btnAutomatischeZuteilungkannZiel;
 	private JButton btnPartienVerwalten;
+	public boolean auswahl=false;
 
 	/**
 	 * Launch the application.
@@ -113,8 +114,14 @@ public class GUIgruppeODEReinzeln {
 				java.sql.Date bis = new java.sql.Date(bisDate.getTime()); 	// in SQL Date umwandeln
 
 				try {
-
-					jdbc.Mitarbeiterzuteilen(PersNr, von, bis, projnr);
+					
+						//jdbc.Mitarbeiterzuteilen(PersNr, von, bis, projnr);
+						//jdbc.Partiezuteilen(PersNr, von, bis, projnr);
+						
+					
+						//jdbc.Partiezuteilen(PersNr, von, bis, projnr);
+						
+					
 
 					// JOptionPane.showMessageDialog(null, "Mitarbeiter erfolgreich hinzugefügt ",
 					// "Bestätigen", JOptionPane.OK_CANCEL_OPTION);
@@ -383,6 +390,7 @@ public class GUIgruppeODEReinzeln {
         
         rdbtnPartie.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
 
 				table.setModel(DbUtils.resultSetToTableModel(jdbc.selectPartieLeiter()));
 			}

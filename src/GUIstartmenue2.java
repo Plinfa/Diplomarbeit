@@ -62,6 +62,7 @@ public class GUIstartmenue2 {
 	private JTextField textField_15;
 	private JTextField textField_16;
 	private JTable table_4;
+	public boolean auswahl=false;
 	/**
 	 * Launch the application.
 	 */
@@ -106,6 +107,7 @@ public class GUIstartmenue2 {
 		int week = c1.get(Calendar.WEEK_OF_YEAR)+1;
 		int year= c1.get(Calendar.YEAR);
 		c1.setWeekDate(year, week, 2);
+		
 		
 		
 		
@@ -456,8 +458,12 @@ public class GUIstartmenue2 {
 				java.sql.Date bis = new java.sql.Date(bisDate.getTime()); 	// in SQL Date umwandeln
 
 				try {
-
-					jdbc.Mitarbeiterzuteilen(PersNr, von, bis, projnr);
+					if(auswahl=false) {
+						jdbc.Mitarbeiterzuteilen(PersNr, von, bis, projnr);
+					}
+					else {
+						jdbc.Partiezuteilen(PersNr, von, bis, projnr);
+					}
 
 					// JOptionPane.showMessageDialog(null, "Mitarbeiter erfolgreich hinzugefügt ",
 					// "Bestätigen", JOptionPane.OK_CANCEL_OPTION);
@@ -694,7 +700,7 @@ public class GUIstartmenue2 {
         
         radioButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
+				auswahl=true;
 				table_2.setModel(DbUtils.resultSetToTableModel(jdbc.selectPartieLeiter()));
 			}
 		});
