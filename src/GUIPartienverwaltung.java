@@ -28,6 +28,7 @@ public class GUIPartienverwaltung {
 
 	public JFrame frame17;
 	private JTable table;
+	private int PartieNr=0;
 	/**
 	 * Launch the application.
 	 */
@@ -61,17 +62,48 @@ public class GUIPartienverwaltung {
 		JButton btnHinzufgen = new JButton("Hinzuf\u00FCgen");
 		btnHinzufgen.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
 			}
 		});
 		
 		JButton btnEntfernen = new JButton("entfernen");
+		btnEntfernen.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				int row = table.getSelectedRow();
+				int column = 0;
+				int PersNr = (int) table.getValueAt(row, column);
+				
+				jdbc.MitarbeiterausPartieloeschen(PersNr);
+				
+				table.setModel(DbUtils.resultSetToTableModel(jdbc.selectPartien(PartieNr)));
+				
+				
+			}
+		});
 		
 		JButton btnPartieLschen = new JButton("Partie l\u00F6schen");
+		btnPartieLschen.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				jdbc.deletePartie(PartieNr);
+				table.setModel(DbUtils.resultSetToTableModel(jdbc.selectPartien(PartieNr)));
+				frame17.dispose();
+				EventQueue.invokeLater(new Runnable() {
+					public void run() {
+						try {
+							GUIPartienverwaltung window = new GUIPartienverwaltung(jdbc);
+							window.frame17.setVisible(true);
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					}
+				});
+			}
+		});
 		
 		JComboBox comboBox = new JComboBox();
 		
 		ResultSet res = null;
-		ResultSet res2 = null;
 
 		try {
 			Connection con = DriverManager.getConnection("jdbc:mariadb://localhost:3306/eqospersonalplanung", "root","davmay81");
@@ -83,10 +115,11 @@ public class GUIPartienverwaltung {
 
 			res = stmt.executeQuery(sql);
 			while(res.next()) {
+				 PartieNr= res.getInt(1);
 				String name=res.getString(2)+ " "+ res.getString(3);
 				
 				
-				comboBox.addItem(name);
+				comboBox.addItem(new ComboItem(name, PartieNr));
 			}
 			res.close();
 			stmt.close();
@@ -97,13 +130,11 @@ public class GUIPartienverwaltung {
 		comboBox.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//partie des Leiters bekommen und dann in tabelle anzeigen
-				int partienummer =comboBox.getSelectedIndex()+1;
 				
+				Object item=comboBox.getSelectedItem();
+				int PartieNr = ((ComboItem)item).getPartieNr();
 				
-				//Statement stmt2 = con.createStatement();
-				//String sql2= "SELECT Pers
-				//res2 = stmt2.executeQuery(sql2);
-				//table.setModel(DbUtils.resultSetToTableModel(jdbc.selectPartien(PersNrLeiter)));
+				table.setModel(DbUtils.resultSetToTableModel(jdbc.selectPartien(PartieNr)));
 				
 			}
 		});
@@ -175,6 +206,11 @@ public class GUIPartienverwaltung {
 		menuBar.add(btnZurck);
 		
 		JButton btnNeuePartie = new JButton("neue Partie anlegen");
+		btnNeuePartie.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
 		menuBar.add(btnNeuePartie);
 	}
 }

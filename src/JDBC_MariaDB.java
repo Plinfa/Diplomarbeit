@@ -162,11 +162,11 @@ public class JDBC_MariaDB {
 
 		return res;
 	}
-	public ResultSet selectPartien(int PersNr) {
+	public ResultSet selectPartien(int PartieNr) {
 
 		ResultSet res = null;
-		int PersNrLeiter=PersNr;
-		int PartieNr=0;
+		//int PersNrLeiter=PersNr;
+		//int PartieNr=0;
 		
 
 		try {
@@ -175,42 +175,10 @@ public class JDBC_MariaDB {
 
 			// SQL Befehl
 
-			String sql= "SELECT PartieNr FROM leitetpartie WHERE PersNr='"+PersNrLeiter+"' ";
-			res = stmt.executeQuery(sql);
-			
-
-			
-			while (!res.isLast()) // as long as valid data is in the result set
-			{
-
-				res.next(); 
-				PartieNr = res.getInt(1);
-				
-			    //System.out.print(PartieNr);
-			}
-				 
-				
-			    
-			
-			
-			
-			String sql1= "SELECT  mitarbeiter.PersNr, mitarbeiter.Name, mitarbeier.nachname FROM mitarbeiter JOIN zugeteilt ON mitarbeiter.PersNr=zugeteilt.PersNr WHERE PartieNr = '"+PartieNr+"' ";
+		 
+		
+			String sql1= "SELECT  mitarbeiter.PersNr, mitarbeiter.Name, mitarbeiter.Nachname FROM mitarbeiter JOIN zugeteilt ON mitarbeiter.PersNr=zugeteilt.PersNr WHERE PartieNr = '"+PartieNr+"' ";
 			res = stmt.executeQuery(sql1);
-			
-			while (!res.isLast()) // as long as valid data is in the result set
-			{
-
-				res.next(); 
-				int PersNrMitarbeiter= res.getInt(1);
-				String Name =  res.getString(2);
-				String Nachname =  res.getString(3);
-				
-			    
-			}
-
-			
-			stmt.close();
-			res.close();
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -582,6 +550,48 @@ public class JDBC_MariaDB {
 		}
 
 	}
+	
+	public void MitarbeiterzuPartiezuteilen(int PartieNr) {
+		ResultSet res = null;
+		Date von=null;
+		Date bis=null;
+		int PersNr=0;
+		
+		try {
+
+			Statement stmt = con.createStatement();
+
+			// SQL Befehl
+
+			String sql = "INSERT INTO zugeiteilt (von, bis, PersNr, PartieNr) VALUES ('" + von + "','" + bis + "','"
+					+ PersNr + "','"+PartieNr+"')";
+			res = stmt.executeQuery(sql);
+
+			res.close();
+			stmt.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void MitarbeiterausPartieloeschen(int PersNr) {
+		ResultSet res=null;
+		try {
+
+			Statement stmt = con.createStatement();
+
+			// SQL Befehl
+
+			String sql = "DELETE FROM zugeteilt WHERE PersNr='"+PersNr+"' ";
+			res = stmt.executeQuery(sql);
+
+			res.close();
+			stmt.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+	}
 
 	// David
 	public void deleteEmployee(String PersNr) {
@@ -700,6 +710,31 @@ public class JDBC_MariaDB {
 
 			res = stmt.executeQuery(deletebenoetigt);
 
+			res.close();
+			stmt.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+	}
+	public void deletePartie(int PartieNr) {
+		ResultSet res = null;
+
+		try {
+
+			Statement stmt = con.createStatement();
+
+			// SQL Befehl
+
+			
+			String deletezuteilung ="DELETE FROM zugeteilt WHERE PartieNr='"+PartieNr+"'";
+			String deletepartieleiter ="DELETE FROM leitetpartie WHERE PartieNr='"+PartieNr+"'";
+			String deletepartie = "DELETE FROM partie WHERE PartieNr='"+PartieNr+"'";
+			
+			res = stmt.executeQuery(deletezuteilung);
+			res = stmt.executeQuery(deletepartieleiter);
+			res = stmt.executeQuery(deletepartie);
 			res.close();
 			stmt.close();
 
@@ -982,11 +1017,28 @@ public class JDBC_MariaDB {
 			verfueg = verfuegbarkeitabfrage(PersNr, von, bis);
 
 			if (verfueg == false) {
-
-				String sql1 = "SELECT ProjektNr,von,bis FROM arbeitet WHERE  '" + von
+				
+				String case1 = "SELECT ProjektNr,von,bis FROM arbeitet WHERE  '" + bis
 						+ "' BETWEEN von AND bis AND PersNr='" + PersNr + "'";
-				res = stmt.executeQuery(sql1);
-
+				
+				String case2 = "SELECT ProjektNr,von,bis FROM arbeitet WHERE  '" + von
+						+ "' BETWEEN von AND bis AND PersNr='" + PersNr + "'";
+				
+				String case3 = "SELECT ProjektNr,von,bis FROM arbeitet WHERE  '" + von
+						+ "' AND '"+bis+"' BETWEEN von AND bis AND PersNr='" + PersNr + "'";
+				
+				String case4 = "SELECT ProjektNr,von,bis FROM arbeitet WHERE von AND bis BETWEEN '"+von
+						+"' AND '"+bis+"'  AND PersNr='" + PersNr + "'";
+				
+				String case5 = "SELECT ProjektNr,von,bis FROM arbeitet WHERE von='"+von
+						+"' AND bis='"+bis+"' AND PersNr='" + PersNr + "'";
+				
+				res = stmt.executeQuery(case1);
+				res = stmt.executeQuery(case2);
+				res = stmt.executeQuery(case3);
+				res = stmt.executeQuery(case4);
+				res = stmt.executeQuery(case5);
+				
 				while (res.next()) {
 
 					projnr = res.getString(1);
