@@ -181,6 +181,7 @@ JRadioButton radioButton = new JRadioButton("einzeln");
 		ButtonGroup gruppe = new ButtonGroup();
 		
 		radioButton.setSelected(true);
+		
 		 
         //JRadioButtons werden zur ButtonGroup hinzugefügt
         gruppe.add(radioButton);
@@ -188,7 +189,9 @@ JRadioButton radioButton = new JRadioButton("einzeln");
         
         radioButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				//radioButton_1.setSelected(true);
 				
+				//System.out.println(radioButton_1.setse);
 				//auswahl=true;
 				table_2.setModel(DbUtils.resultSetToTableModel(jdbc.selectPartieLeiter()));
 			}
@@ -196,6 +199,10 @@ JRadioButton radioButton = new JRadioButton("einzeln");
         
         radioButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				//radioButton_1.setSelected(false);
+				
+				
 
 				table_2.setModel(DbUtils.resultSetToTableModel(jdbc.selectMitarbeiterinfo()));
 			}
@@ -484,12 +491,13 @@ JRadioButton radioButton = new JRadioButton("einzeln");
 				java.sql.Date bis = new java.sql.Date(bisDate.getTime()); 	// in SQL Date umwandeln
 				
 				try {
-					if(radioButton.isEnabled()==true) {
+					if(radioButton.isSelected()==true) {
 						jdbc.Mitarbeiterzuteilen(PersNr, von, bis, projnr);
 						
 					}
-					else {
+					else  {
 						jdbc.Partiezuteilen(PersNr, von, bis, projnr);
+						//System.out.println("funktioniert");
 					}
 
 					// JOptionPane.showMessageDialog(null, "Mitarbeiter erfolgreich hinzugefügt ",
