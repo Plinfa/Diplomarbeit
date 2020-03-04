@@ -23,12 +23,17 @@ import javax.swing.JLabel;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
+import java.awt.CardLayout;
+import javax.swing.JPanel;
 
 public class GUIPartienverwaltung {
 
 	public JFrame frame17;
 	private JTable table;
 	private int PartieNr=0;
+	private JTable table_1;
+	private JTable table_2;
+	private JTable table_3;
 	/**
 	 * Launch the application.
 	 */
@@ -51,62 +56,12 @@ public class GUIPartienverwaltung {
 		frame17.setIconImage(Toolkit.getDefaultToolkit().getImage(GUIPartienverwaltung.class.getResource("/ressources/EQOS.jpg")));
 		frame17.setBounds(100, 100, 717, 410);
 		frame17.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		
-		
-		JScrollPane scrollPane = new JScrollPane();
-		
-		table = new JTable();
-		scrollPane.setViewportView(table);
-	
-		
-		JButton btnHinzufgen = new JButton("Hinzuf\u00FCgen");
-		btnHinzufgen.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-			}
-		});
-		
-		JButton btnEntfernen = new JButton("entfernen");
-		btnEntfernen.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				int row = table.getSelectedRow();
-				int column = 0;
-				int PersNr = (int) table.getValueAt(row, column);
-				
-				jdbc.MitarbeiterausPartieloeschen(PersNr);
-				
-				table.setModel(DbUtils.resultSetToTableModel(jdbc.selectPartien(PartieNr)));
-				
-				
-			}
-		});
-		
-		JButton btnPartieLschen = new JButton("Partie l\u00F6schen");
-		btnPartieLschen.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				jdbc.deletePartie(PartieNr);
-				table.setModel(DbUtils.resultSetToTableModel(jdbc.selectPartien(PartieNr)));
-				frame17.dispose();
-				EventQueue.invokeLater(new Runnable() {
-					public void run() {
-						try {
-							GUIPartienverwaltung window = new GUIPartienverwaltung(jdbc);
-							window.frame17.setVisible(true);
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
-					}
-				});
-			}
-		});
-		
-		JComboBox comboBox = new JComboBox();
-		
+		JComboBox comboBox_1 = new JComboBox();
+		comboBox_1.setBounds(193, 55, 281, 22);
 		ResultSet res = null;
 
 		try {
-			Connection con = DriverManager.getConnection("jdbc:mariadb://localhost:3306/eqospersonalplanung", "root","davmay81");
+			Connection con = DriverManager.getConnection("jdbc:mariadb://localhost:3306/eqospersonalplanung", "root","5455809Otto");
 			Statement stmt = con.createStatement();
 
 			// SQL Befehl
@@ -119,7 +74,42 @@ public class GUIPartienverwaltung {
 				String name=res.getString(2)+ " "+ res.getString(3);
 				
 				
-				comboBox.addItem(new ComboItem(name, PartieNr));
+				comboBox_1.addItem(new ComboItem(name, PartieNr));
+			}
+			res.close();
+			stmt.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		frame17.getContentPane().setLayout(new CardLayout(0, 0));
+		
+		JPanel Partienverwaltung = new JPanel();
+		frame17.getContentPane().add(Partienverwaltung, "name_995414512100");
+		
+		JLabel label = new JLabel("Partieleiter ausw\u00E4hlen, um diese Partie zu bearbeiten:");
+		label.setBounds(193, 30, 487, 14);
+		
+		
+		
+
+		
+		
+
+		try {
+			Connection con = DriverManager.getConnection("jdbc:mariadb://localhost:3306/eqospersonalplanung", "root","5455809Otto");
+			Statement stmt = con.createStatement();
+
+			// SQL Befehl
+
+			String sql = "SELECT leitetpartie.PartieNr, mitarbeiter.Name, mitarbeiter.Nachname, mitarbeiter.PersNr  FROM leitetpartie JOIN mitarbeiter ON leitetpartie.PersNr=mitarbeiter.PersNr";
+
+			res = stmt.executeQuery(sql);
+			while(res.next()) {
+				 PartieNr= res.getInt(1);
+				String name=res.getString(2)+ " "+ res.getString(3);
+				
+				
+				comboBox_1.addItem(new ComboItem(name, PartieNr));
 			}
 			res.close();
 			stmt.close();
@@ -127,75 +117,82 @@ public class GUIPartienverwaltung {
 			e.printStackTrace();
 		}
 
-		comboBox.addActionListener(new ActionListener() {
+		comboBox_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//partie des Leiters bekommen und dann in tabelle anzeigen
 				
-				Object item=comboBox.getSelectedItem();
+				Object item=comboBox_1.getSelectedItem();
 				int PartieNr = ((ComboItem)item).getPartieNr();
 				
-				table.setModel(DbUtils.resultSetToTableModel(jdbc.selectPartien(PartieNr)));
+				table_1.setModel(DbUtils.resultSetToTableModel(jdbc.selectPartien(PartieNr)));
 				
 			}
 		});
 		
-		JLabel lblMitarbeiterZuPartie = new JLabel("Mitarbeiter zu Partie:");
+		JLabel label_1 = new JLabel("Mitarbeiter zu Partie:");
+		label_1.setBounds(42, 120, 127, 14);
 		
-		JLabel lblPartieleiterAuswhlenUm = new JLabel("Partieleiter ausw\u00E4hlen, um diese Partie zu bearbeiten:");
+		JButton button = new JButton("Hinzuf\u00FCgen");
 		
-		JLabel lblOder = new JLabel("oder:");
-		GroupLayout groupLayout = new GroupLayout(frame17.getContentPane());
-		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(53)
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
-						.addComponent(lblMitarbeiterZuPartie, GroupLayout.PREFERRED_SIZE, 127, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnHinzufgen, GroupLayout.PREFERRED_SIZE, 127, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnEntfernen, GroupLayout.PREFERRED_SIZE, 127, GroupLayout.PREFERRED_SIZE)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(43)
-							.addComponent(lblOder, GroupLayout.PREFERRED_SIZE, 48, GroupLayout.PREFERRED_SIZE))
-						.addComponent(btnPartieLschen, GroupLayout.PREFERRED_SIZE, 127, GroupLayout.PREFERRED_SIZE))
-					.addGap(24)
-					.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 435, Short.MAX_VALUE)
-					.addGap(62))
-				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(204)
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(lblPartieleiterAuswhlenUm, GroupLayout.PREFERRED_SIZE, 487, GroupLayout.PREFERRED_SIZE)
-							.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, 281, GroupLayout.PREFERRED_SIZE)
-							.addContainerGap(216, Short.MAX_VALUE))))
-		);
-		groupLayout.setVerticalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(lblPartieleiterAuswhlenUm)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addGap(42)
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(1)
-							.addComponent(lblMitarbeiterZuPartie)
-							.addGap(23)
-							.addComponent(btnHinzufgen)
-							.addGap(11)
-							.addComponent(btnEntfernen)
-							.addGap(20)
-							.addComponent(lblOder)
-							.addGap(11)
-							.addComponent(btnPartieLschen))
-						.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 189, GroupLayout.PREFERRED_SIZE)))
-		);
-		frame17.getContentPane().setLayout(groupLayout);
+		button.setBounds(42, 157, 127, 23);
+		
+		JButton button_1 = new JButton("entfernen");
+		button_1.setBounds(42, 191, 127, 23);
+		button_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				int row = table_1.getSelectedRow();
+				int column = 0;
+				int PersNr = (int) table_1.getValueAt(row, column);
+				
+				jdbc.MitarbeiterausPartieloeschen(PersNr);
+				
+				table_1.setModel(DbUtils.resultSetToTableModel(jdbc.selectPartien(PartieNr)));
+			}
+		});
+		
+		JLabel label_2 = new JLabel("oder:");
+		label_2.setBounds(85, 234, 48, 14);
+		
+		JButton button_2 = new JButton("Partie l\u00F6schen");
+		button_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				jdbc.deletePartie(PartieNr);
+				table_1.setModel(DbUtils.resultSetToTableModel(jdbc.selectPartien(PartieNr)));
+				frame17.dispose();
+				EventQueue.invokeLater(new Runnable() {
+					public void run() {
+						try {
+							GUIPartienverwaltung window = new GUIPartienverwaltung(jdbc);
+							window.frame17.setVisible(true);
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					}
+				});
+				
+			}
+		});
+		button_2.setBounds(42, 259, 127, 23);
+		Partienverwaltung.setLayout(null);
+		Partienverwaltung.add(label);
+		Partienverwaltung.add(comboBox_1);
+		Partienverwaltung.add(label_1);
+		Partienverwaltung.add(button);
+		Partienverwaltung.add(button_1);
+		Partienverwaltung.add(label_2);
+		Partienverwaltung.add(button_2);
+		
+		JScrollPane scrollPane_1 = new JScrollPane();
+		scrollPane_1.setBounds(193, 120, 480, 181);
+		Partienverwaltung.add(scrollPane_1);
+		
+		table_1 = new JTable();
+		scrollPane_1.setViewportView(table_1);
 		
 		JMenuBar menuBar = new JMenuBar();
-		frame17.setJMenuBar(menuBar);
+		menuBar.setBounds(0, 0, 701, 25);
+		Partienverwaltung.add(menuBar);
 		
 		JButton btnZurck = new JButton("zur\u00FCck");
 		btnZurck.addActionListener(new ActionListener() {
@@ -206,11 +203,88 @@ public class GUIPartienverwaltung {
 		menuBar.add(btnZurck);
 		
 		JButton btnNeuePartie = new JButton("neue Partie anlegen");
+		menuBar.add(btnNeuePartie);
+		
+		JPanel PartieAnlegen = new JPanel();
+		frame17.getContentPane().add(PartieAnlegen, "name_1824475757400");
+		PartieAnlegen.setLayout(null);
+		
+		JMenuBar menuBar_1 = new JMenuBar();
+		menuBar_1.setBounds(0, 0, 701, 22);
+		PartieAnlegen.add(menuBar_1);
+		
+		JButton btnZurck_2 = new JButton("zur\u00FCck");
+		btnZurck_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Partienverwaltung.setVisible(true);
+				PartieAnlegen.setVisible(false);
+			}
+		});
+		menuBar_1.add(btnZurck_2);
+		
+		JScrollPane scrollPane_2 = new JScrollPane();
+		scrollPane_2.setBounds(70, 63, 601, 233);
+		PartieAnlegen.add(scrollPane_2);
+		
+		table_3 = new JTable();
+		scrollPane_2.setViewportView(table_3);
+		
+		JLabel lblPartieleiterAuswhlen = new JLabel("Partieleiter ausw\u00E4hlen:");
+		lblPartieleiterAuswhlen.setBounds(69, 33, 169, 14);
+		PartieAnlegen.add(lblPartieleiterAuswhlen);
+		
+		JButton btnBesttigen_1 = new JButton("Best\u00E4tigen");
+		btnBesttigen_1.setBounds(584, 317, 89, 23);
+		PartieAnlegen.add(btnBesttigen_1);
+		
+		JPanel Hinzufuegen = new JPanel();
+		frame17.getContentPane().add(Hinzufuegen, "name_1845002358000");
+		Hinzufuegen.setLayout(null);
+		
+		JMenuBar menuBar_2 = new JMenuBar();
+		menuBar_2.setBounds(0, 0, 701, 22);
+		Hinzufuegen.add(menuBar_2);
+		
+		JButton btnZurck_1 = new JButton("zur\u00FCck");
+		btnZurck_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Partienverwaltung.setVisible(true);
+				Hinzufuegen.setVisible(false);
+			}
+		});
+		menuBar_2.add(btnZurck_1);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(88, 55, 579, 225);
+		Hinzufuegen.add(scrollPane);
+		
+		table_2 = new JTable();
+		scrollPane.setViewportView(table_2);
+		
+		JButton btnBesttigen = new JButton("Best\u00E4tigen");
+		btnBesttigen.setBounds(576, 308, 89, 23);
+		Hinzufuegen.add(btnBesttigen);
+		
+		JLabel lblMitarbeiterAuswhlen = new JLabel("Mitarbeiter ausw\u00E4hlen:");
+		lblMitarbeiterAuswhlen.setBounds(87, 33, 150, 14);
+		Hinzufuegen.add(lblMitarbeiterAuswhlen);
+		
+		
 		btnNeuePartie.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				PartieAnlegen.setVisible(true);
+				Partienverwaltung.setVisible(false);
 				
 			}
 		});
-		menuBar.add(btnNeuePartie);
+		
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				Hinzufuegen.setVisible(true);
+				Partienverwaltung.setVisible(false);
+				
+			}
+		});
 	}
 }
