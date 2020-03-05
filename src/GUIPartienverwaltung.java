@@ -60,27 +60,7 @@ public class GUIPartienverwaltung {
 		comboBox_1.setBounds(193, 55, 281, 22);
 		ResultSet res = null;
 
-		try {
-			Connection con = DriverManager.getConnection("jdbc:mariadb://localhost:3306/eqospersonalplanung", "root","5455809Otto");
-			Statement stmt = con.createStatement();
-
-			// SQL Befehl
-
-			String sql = "SELECT leitetpartie.PartieNr, mitarbeiter.Name, mitarbeiter.Nachname, mitarbeiter.PersNr  FROM leitetpartie JOIN mitarbeiter ON leitetpartie.PersNr=mitarbeiter.PersNr";
-
-			res = stmt.executeQuery(sql);
-			while(res.next()) {
-				 PartieNr= res.getInt(1);
-				String name=res.getString(2)+ " "+ res.getString(3);
-				
-				
-				comboBox_1.addItem(new ComboItem(name, PartieNr));
-			}
-			res.close();
-			stmt.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		
 		frame17.getContentPane().setLayout(new CardLayout(0, 0));
 		
 		JPanel Partienverwaltung = new JPanel();
@@ -207,11 +187,8 @@ public class GUIPartienverwaltung {
 		
 		JPanel PartieAnlegen = new JPanel();
 		frame17.getContentPane().add(PartieAnlegen, "name_1824475757400");
-		PartieAnlegen.setLayout(null);
 		
 		JMenuBar menuBar_1 = new JMenuBar();
-		menuBar_1.setBounds(0, 0, 701, 22);
-		PartieAnlegen.add(menuBar_1);
 		
 		JButton btnZurck_2 = new JButton("zur\u00FCck");
 		btnZurck_2.addActionListener(new ActionListener() {
@@ -223,27 +200,44 @@ public class GUIPartienverwaltung {
 		menuBar_1.add(btnZurck_2);
 		
 		JScrollPane scrollPane_2 = new JScrollPane();
-		scrollPane_2.setBounds(70, 63, 601, 233);
-		PartieAnlegen.add(scrollPane_2);
 		
 		table_3 = new JTable();
 		scrollPane_2.setViewportView(table_3);
 		
 		JLabel lblPartieleiterAuswhlen = new JLabel("Partieleiter ausw\u00E4hlen:");
-		lblPartieleiterAuswhlen.setBounds(69, 33, 169, 14);
-		PartieAnlegen.add(lblPartieleiterAuswhlen);
 		
 		JButton btnBesttigen_1 = new JButton("Best\u00E4tigen");
-		btnBesttigen_1.setBounds(584, 317, 89, 23);
-		PartieAnlegen.add(btnBesttigen_1);
+		GroupLayout gl_PartieAnlegen = new GroupLayout(PartieAnlegen);
+		gl_PartieAnlegen.setHorizontalGroup(
+			gl_PartieAnlegen.createParallelGroup(Alignment.LEADING)
+				.addComponent(menuBar_1, GroupLayout.PREFERRED_SIZE, 701, GroupLayout.PREFERRED_SIZE)
+				.addGroup(gl_PartieAnlegen.createSequentialGroup()
+					.addGap(69)
+					.addComponent(lblPartieleiterAuswhlen, GroupLayout.PREFERRED_SIZE, 169, GroupLayout.PREFERRED_SIZE))
+				.addGroup(gl_PartieAnlegen.createSequentialGroup()
+					.addGap(70)
+					.addComponent(scrollPane_2, GroupLayout.PREFERRED_SIZE, 601, GroupLayout.PREFERRED_SIZE))
+				.addGroup(gl_PartieAnlegen.createSequentialGroup()
+					.addGap(530)
+					.addComponent(btnBesttigen_1, GroupLayout.PREFERRED_SIZE, 141, GroupLayout.PREFERRED_SIZE))
+		);
+		gl_PartieAnlegen.setVerticalGroup(
+			gl_PartieAnlegen.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_PartieAnlegen.createSequentialGroup()
+					.addComponent(menuBar_1, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE)
+					.addGap(11)
+					.addComponent(lblPartieleiterAuswhlen)
+					.addGap(16)
+					.addComponent(scrollPane_2, GroupLayout.PREFERRED_SIZE, 233, GroupLayout.PREFERRED_SIZE)
+					.addGap(20)
+					.addComponent(btnBesttigen_1))
+		);
+		PartieAnlegen.setLayout(gl_PartieAnlegen);
 		
 		JPanel Hinzufuegen = new JPanel();
 		frame17.getContentPane().add(Hinzufuegen, "name_1845002358000");
-		Hinzufuegen.setLayout(null);
 		
 		JMenuBar menuBar_2 = new JMenuBar();
-		menuBar_2.setBounds(0, 0, 701, 22);
-		Hinzufuegen.add(menuBar_2);
 		
 		JButton btnZurck_1 = new JButton("zur\u00FCck");
 		btnZurck_1.addActionListener(new ActionListener() {
@@ -255,19 +249,39 @@ public class GUIPartienverwaltung {
 		menuBar_2.add(btnZurck_1);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(88, 55, 579, 225);
-		Hinzufuegen.add(scrollPane);
 		
 		table_2 = new JTable();
 		scrollPane.setViewportView(table_2);
 		
 		JButton btnBesttigen = new JButton("Best\u00E4tigen");
-		btnBesttigen.setBounds(576, 308, 89, 23);
-		Hinzufuegen.add(btnBesttigen);
 		
 		JLabel lblMitarbeiterAuswhlen = new JLabel("Mitarbeiter ausw\u00E4hlen:");
-		lblMitarbeiterAuswhlen.setBounds(87, 33, 150, 14);
-		Hinzufuegen.add(lblMitarbeiterAuswhlen);
+		GroupLayout gl_Hinzufuegen = new GroupLayout(Hinzufuegen);
+		gl_Hinzufuegen.setHorizontalGroup(
+			gl_Hinzufuegen.createParallelGroup(Alignment.LEADING)
+				.addComponent(menuBar_2, GroupLayout.PREFERRED_SIZE, 701, GroupLayout.PREFERRED_SIZE)
+				.addGroup(gl_Hinzufuegen.createSequentialGroup()
+					.addGap(87)
+					.addComponent(lblMitarbeiterAuswhlen, GroupLayout.PREFERRED_SIZE, 160, GroupLayout.PREFERRED_SIZE))
+				.addGroup(gl_Hinzufuegen.createSequentialGroup()
+					.addGap(88)
+					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 579, GroupLayout.PREFERRED_SIZE))
+				.addGroup(gl_Hinzufuegen.createSequentialGroup()
+					.addGap(554)
+					.addComponent(btnBesttigen, GroupLayout.PREFERRED_SIZE, 113, GroupLayout.PREFERRED_SIZE))
+		);
+		gl_Hinzufuegen.setVerticalGroup(
+			gl_Hinzufuegen.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_Hinzufuegen.createSequentialGroup()
+					.addComponent(menuBar_2, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE)
+					.addGap(11)
+					.addComponent(lblMitarbeiterAuswhlen)
+					.addGap(8)
+					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 253, GroupLayout.PREFERRED_SIZE)
+					.addGap(11)
+					.addComponent(btnBesttigen))
+		);
+		Hinzufuegen.setLayout(gl_Hinzufuegen);
 		
 		
 		btnNeuePartie.addActionListener(new ActionListener() {
