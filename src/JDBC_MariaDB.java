@@ -36,7 +36,7 @@ public class JDBC_MariaDB {
 		try {
 
 			con = DriverManager.getConnection("jdbc:mariadb://localhost:3306/eqospersonalplanung", "root",
-					"5455809Otto");
+					"davmay81");
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -482,7 +482,34 @@ public class JDBC_MariaDB {
 		}
 
 	}
+	public void MitarbeiterzuPartie(int PersNr, int PartieNr) {
 
+		ResultSet res = null;
+		
+
+		try {
+
+			Statement stmt = con.createStatement();
+
+		/*
+				JOptionPane.showMessageDialog(null,
+						"Mitarbeiter ist in diesem Zeitraum in mindestens einer Woche nicht verfügbar", "Fehler",
+						JOptionPane.ERROR_MESSAGE);
+
+			*/
+				String sql = "INSERT INTO zugeteilt (PersNr, PartieNr) VALUES('"+ PersNr + "','" + PartieNr + "')";
+				res = stmt.executeQuery(sql);
+				res.close();
+				stmt.close();
+			
+
+		}
+
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+	}
 	public void insertEmployee(int PersoNr, String Name, String Nachname) {
 
 		ResultSet res = null;
@@ -551,28 +578,7 @@ public class JDBC_MariaDB {
 
 	}
 	
-	public void MitarbeiterzuPartiezuteilen(int PartieNr) {
-		ResultSet res = null;
-		Date von=null;
-		Date bis=null;
-		int PersNr=0;
-		
-		try {
-
-			Statement stmt = con.createStatement();
-
-			// SQL Befehl
-
-			String sql = "INSERT INTO zugeiteilt (von, bis, PersNr, PartieNr) VALUES ('" + von + "','" + bis + "','"
-					+ PersNr + "','"+PartieNr+"')";
-			res = stmt.executeQuery(sql);
-
-			res.close();
-			stmt.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
+	
 	
 	public void MitarbeiterausPartieloeschen(int PersNr) {
 		ResultSet res=null;

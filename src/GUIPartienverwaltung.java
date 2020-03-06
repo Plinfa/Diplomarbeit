@@ -76,7 +76,7 @@ public class GUIPartienverwaltung {
 		
 
 		try {
-			Connection con = DriverManager.getConnection("jdbc:mariadb://localhost:3306/eqospersonalplanung", "root","5455809Otto");
+			Connection con = DriverManager.getConnection("jdbc:mariadb://localhost:3306/eqospersonalplanung", "root","davmay81");
 			Statement stmt = con.createStatement();
 
 			// SQL Befehl
@@ -254,6 +254,24 @@ public class GUIPartienverwaltung {
 		scrollPane.setViewportView(table_2);
 		
 		JButton btnBesttigen = new JButton("Best\u00E4tigen");
+		btnBesttigen.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				
+				
+				int row = table_2.getSelectedRow();
+				
+				String PersoNr = table_2.getValueAt(row, 0).toString();
+				int PersNr= Integer.parseInt(PersoNr);
+				
+				jdbc.MitarbeiterzuPartie(PersNr, PartieNr);
+				Hinzufuegen.setVisible(false);
+				table_1.setModel(DbUtils.resultSetToTableModel(jdbc.selectPartien(PartieNr)));
+				
+				
+			}
+			
+		});
 		
 		JLabel lblMitarbeiterAuswhlen = new JLabel("Mitarbeiter ausw\u00E4hlen:");
 		GroupLayout gl_Hinzufuegen = new GroupLayout(Hinzufuegen);
@@ -297,7 +315,7 @@ public class GUIPartienverwaltung {
 				
 				Hinzufuegen.setVisible(true);
 				Partienverwaltung.setVisible(false);
-				
+				table_2.setModel(DbUtils.resultSetToTableModel(jdbc.selectMitarbeiterinfo()));
 			}
 		});
 	}
