@@ -70,7 +70,7 @@ public class GUIWillkommen2 {
 		btnAnmelden.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				jdbc.selectAllMitarbeiter();
+				//jdbc.selectAllMitarbeiter();
  
 				
 				if(passwordField.getText().equals(jdbc.selectPasswort())) {/*Passwort von Datenbank importieren*/

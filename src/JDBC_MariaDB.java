@@ -8,7 +8,7 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.util.*;
-
+import java.time.format.*;
 import javax.swing.JOptionPane;
 
 import org.jfree.data.category.IntervalCategoryDataset;
@@ -132,6 +132,26 @@ public class JDBC_MariaDB {
 			// SQL Befehl
 
 			String sql = "SELECT PersNr, Name, Nachname FROM mitarbeiter WHERE PersNr NOT IN (SELECT PersNr FROM leitetpartie) AND PersNr NOT IN (SELECT PersNr FROM zugeteilt)";
+
+			res = stmt.executeQuery(sql);
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return res;
+	}
+	public ResultSet selectPartieleiterinfo() {
+
+		ResultSet res = null;
+
+		try {
+
+			Statement stmt = con.createStatement();
+
+			// SQL Befehl
+
+			String sql = "SELECT PersNr, Name, Nachname FROM mitarbeiter WHERE PersNr NOT IN (SELECT PersNr FROM leitetpartie) AND PersNr NOT IN (SELECT PersNr FROM zugeteilt) AND Tätigkeit='Partieführer'";
 
 			res = stmt.executeQuery(sql);
 
@@ -579,14 +599,33 @@ public class JDBC_MariaDB {
 	}
 
 	// David angepasst für marcel
-	public void insertallfromExcel() { // bearbeiten reihenanzahl von excelreader fehlt nicht sicher ob benötigt
+	public void insertallfromExcel(int PersNr, String Name, String Nachname, java.sql.Date GebDat, String Tätigkeit, String EMail /*String Fuehrerschein*/) { // bearbeiten reihenanzahl von excelreader fehlt nicht sicher ob benötigt
 
 		try {
 
 			Statement stmt = con.createStatement();
 
 			// SQL Befehl
-			for (int r = 0; r <= 122; r++) {
+			String sql="INSERT INTO mitarbeiter(PersNr, Name,Nachname,GebDat,Tätigkeit,EMail) VALUES('"+PersNr+"','"+Name+"','"+Nachname+"','"+GebDat+"','"+Tätigkeit+"','"+EMail+"')";
+
+			//String sql="INSERT INTO mitarbeiter(PersNr, Name, Nachname, GebDat, Tätigkeit, EMail, Führerschein) VALUES('"+PersNr+"','"+Name+"','"+Nachname+"','"+GebDat+"','"+Tätigkeit+"','"+EMail+"','"+Fuehrerschein+"')";
+			/*
+			for (int r = 1; r <= 122; r++) {
+				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd, MM, yyyy", Locale.ENGLISH);
+				LocalDate date1 = LocalDate.parse(ExcelReader.mitarbeiter[3][r], formatter);
+				Date date = Date.valueOf(date1);
+				//Date GebDate= ExcelReader.mitarbeiter[3][r];		//in Java Date speichern
+				
+				 
+				
+				System.out.println(ExcelReader.mitarbeiter[3][r]);
+				//ExcelReader.mitarbeiter[3][r];
+				 Date date1=Date.valueOf(ExcelReader.mitarbeiter[3][r]);//converting string into sql date  
+				 java.sql.Date date = new java.sql.Date(date1.getTime());
+				 //System.out.println(date); 
+				    
+				String sql= "INSERT INTO mitarbeiter (PersNr, Name, Nachname, GebDat, Tätigkeit, EMail, Führerschein) "
+						+ "VALUES ('"+ExcelReader.mitarbeiter[0][r]+"','"+ExcelReader.mitarbeiter[2][r]+"','"+ExcelReader.mitarbeiter[1][r]+"','"+date+"','"+ExcelReader.mitarbeiter[5][r]+"','"+ExcelReader.mitarbeiter[4][r]+"','"+ExcelReader.mitarbeiter[6][r]+"')";
 
 				// String sql = "INSERT INTO mitarbeiter(ANGA, GruppenNr, AAktiv, PersNr,
 				// StichtagUrlaub, Eintritt, SVNr, Name, Vorname, NameuVorname, PlzOrt, Strasse,
@@ -610,11 +649,11 @@ public class JDBC_MariaDB {
 						+ ExcelReader.mitarbeiter[4][r] + "','" + ExcelReader.mitarbeiter[5][r] + "','"
 						+ ExcelReader.mitarbeiter[6][r] + "','" + ExcelReader.mitarbeiter[7][r] + "','"
 						+ ExcelReader.mitarbeiter[8][r] + "')";
-
+*/
 				ResultSet res = stmt.executeQuery(sql);
 				res.close();
 
-			}
+			
 
 			stmt.close();
 		} catch (SQLException e) {

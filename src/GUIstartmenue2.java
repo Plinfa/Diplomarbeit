@@ -15,6 +15,8 @@ import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
+import org.apache.poi.EncryptedDocumentException;
+
 import net.proteanit.sql.DbUtils;
 
 import javax.swing.JMenuBar;
@@ -929,6 +931,21 @@ JRadioButton radioButton = new JRadioButton("einzeln");
 		);
 		
 		JButton btnMitarbeiterAusExcel = new JButton("Mitarbeiter aus Excel importieren");
+		btnMitarbeiterAusExcel.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//String filePath=null;
+				
+				ExcelReader excelReader = new ExcelReader();
+				try {
+					excelReader.openfile("C:\\Users\\David\\Desktop\\Test1.xlsx",jdbc); //location
+					//jdbc.insertallfromExcel(PersNr, Name, Nachname, GebDat, Tätigkeit, EMail, Fuehrerschein);
+					table_2.setModel(DbUtils.resultSetToTableModel(jdbc.selectMitarbeiterinfo()));
+						
+				}catch(Exception e1) {
+					e1.printStackTrace();
+				}
+			}
+		});
 		menuBar_2.add(btnMitarbeiterAusExcel);
 		Mitarbeiterplanung.setLayout(gl_Mitarbeiterplanung);
 		

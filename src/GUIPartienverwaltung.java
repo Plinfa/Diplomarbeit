@@ -334,7 +334,7 @@ public class GUIPartienverwaltung {
 			public void actionPerformed(ActionEvent e) {
 				PartieAnlegen.setVisible(true);
 				Partienverwaltung.setVisible(false);
-				table_3.setModel(DbUtils.resultSetToTableModel(jdbc.selectMitarbeiterPartieinfo()));
+				table_3.setModel(DbUtils.resultSetToTableModel(jdbc.selectPartieleiterinfo()));
 				
 			}
 		});
