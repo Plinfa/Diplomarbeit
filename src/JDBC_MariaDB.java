@@ -120,7 +120,27 @@ public class JDBC_MariaDB {
 
 		return res;
 	}
+	
+	public ResultSet selectMitarbeiterPartieinfo() {
 
+		ResultSet res = null;
+
+		try {
+
+			Statement stmt = con.createStatement();
+
+			// SQL Befehl
+
+			String sql = "SELECT PersNr, Name, Nachname FROM mitarbeiter WHERE PersNr NOT IN (SELECT PersNr FROM leitetpartie) AND PersNr NOT IN (SELECT PersNr FROM zugeteilt)";
+
+			res = stmt.executeQuery(sql);
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return res;
+	}
 	public ResultSet selectPartieLeiter() {
 
 		ResultSet res = null;
@@ -425,6 +445,31 @@ public class JDBC_MariaDB {
 		// JOptionPane.showMessageDialog(null, "Mitarbeiter erfolgreich hinzugefügt ",
 		// "Bestätigen", JOptionPane.OK_CANCEL_OPTION);
 
+	}
+	
+	public void Partiehinzufuegen(int PersNr) {
+
+		ResultSet res = null;
+		
+
+		try {
+
+			Statement stmt = con.createStatement();
+
+			
+				String sql = "INSERT INTO leitetpartie (PersNr) VALUES('" + PersNr + "')";
+				res = stmt.executeQuery(sql);
+				res.close();
+				stmt.close();
+			
+
+		}
+
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		
 	}
 
 	public void Partiezuteilen(int PersNr, java.sql.Date von, java.sql.Date bis, int projnr) {
@@ -736,11 +781,11 @@ public class JDBC_MariaDB {
 			
 			String deletezuteilung ="DELETE FROM zugeteilt WHERE PartieNr='"+PartieNr+"'";
 			String deletepartieleiter ="DELETE FROM leitetpartie WHERE PartieNr='"+PartieNr+"'";
-			String deletepartie = "DELETE FROM partie WHERE PartieNr='"+PartieNr+"'";
+			
 			
 			res = stmt.executeQuery(deletezuteilung);
 			res = stmt.executeQuery(deletepartieleiter);
-			res = stmt.executeQuery(deletepartie);
+			
 			res.close();
 			stmt.close();
 

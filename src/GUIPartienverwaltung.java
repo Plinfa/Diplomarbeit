@@ -102,7 +102,7 @@ public class GUIPartienverwaltung {
 				//partie des Leiters bekommen und dann in tabelle anzeigen
 				
 				Object item=comboBox_1.getSelectedItem();
-				int PartieNr = ((ComboItem)item).getPartieNr();
+				 PartieNr = ((ComboItem)item).getPartieNr();
 				
 				table_1.setModel(DbUtils.resultSetToTableModel(jdbc.selectPartien(PartieNr)));
 				
@@ -137,6 +137,8 @@ public class GUIPartienverwaltung {
 		JButton button_2 = new JButton("Partie l\u00F6schen");
 		button_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				
 				jdbc.deletePartie(PartieNr);
 				table_1.setModel(DbUtils.resultSetToTableModel(jdbc.selectPartien(PartieNr)));
 				frame17.dispose();
@@ -195,6 +197,8 @@ public class GUIPartienverwaltung {
 			public void actionPerformed(ActionEvent e) {
 				Partienverwaltung.setVisible(true);
 				PartieAnlegen.setVisible(false);
+				table_1.setModel(DbUtils.resultSetToTableModel(jdbc.selectPartien(PartieNr)));
+				
 			}
 		});
 		menuBar_1.add(btnZurck_2);
@@ -207,6 +211,30 @@ public class GUIPartienverwaltung {
 		JLabel lblPartieleiterAuswhlen = new JLabel("Partieleiter ausw\u00E4hlen:");
 		
 		JButton btnBesttigen_1 = new JButton("Best\u00E4tigen");
+		btnBesttigen_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				int row = table_3.getSelectedRow();
+				int column = 0;
+				int PersNr =  (int) table_3.getValueAt(row, column);
+				
+				jdbc.Partiehinzufuegen(PersNr);
+				PartieAnlegen.setVisible(false);
+				table_1.setModel(DbUtils.resultSetToTableModel(jdbc.selectPartien(PartieNr)));
+				
+				frame17.dispose();
+				EventQueue.invokeLater(new Runnable() {
+					public void run() {
+						try {
+							GUIPartienverwaltung window = new GUIPartienverwaltung(jdbc);
+							window.frame17.setVisible(true);
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					}
+				});
+			}
+		});
 		GroupLayout gl_PartieAnlegen = new GroupLayout(PartieAnlegen);
 		gl_PartieAnlegen.setHorizontalGroup(
 			gl_PartieAnlegen.createParallelGroup(Alignment.LEADING)
@@ -306,6 +334,7 @@ public class GUIPartienverwaltung {
 			public void actionPerformed(ActionEvent e) {
 				PartieAnlegen.setVisible(true);
 				Partienverwaltung.setVisible(false);
+				table_3.setModel(DbUtils.resultSetToTableModel(jdbc.selectMitarbeiterPartieinfo()));
 				
 			}
 		});
@@ -315,7 +344,7 @@ public class GUIPartienverwaltung {
 				
 				Hinzufuegen.setVisible(true);
 				Partienverwaltung.setVisible(false);
-				table_2.setModel(DbUtils.resultSetToTableModel(jdbc.selectMitarbeiterinfo()));
+				table_2.setModel(DbUtils.resultSetToTableModel(jdbc.selectMitarbeiterPartieinfo()));
 			}
 		});
 	}
