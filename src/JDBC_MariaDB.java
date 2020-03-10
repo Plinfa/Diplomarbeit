@@ -36,7 +36,7 @@ public class JDBC_MariaDB {
 		try {
 
 			con = DriverManager.getConnection("jdbc:mariadb://localhost:3306/eqospersonalplanung", "root",
-					"davmay81");
+					"5455809Otto");
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -352,25 +352,23 @@ public class JDBC_MariaDB {
 				String projektname = res.getString(2);
 				Date startdatum = res.getDate(4);
 				Date enddatum = res.getDate(5);
-
-				if (startdatum.compareTo(heute) < 0) {
-
-					startdatum = heute;
+				if (enddatum.compareTo(heute) < 0) {
 
 				}
 
-				/*
-				 * if(enddatum.compareTo(heute)<0) {
-				 * 
-				 * deleteProject(res.getString(1));
-				 * 
-				 * }
-				 */
+				else {
+					
+					if (startdatum.compareTo(heute) < 0) {
 
-				series1.add(new Task(projektname, startdatum, enddatum));
+						startdatum = heute;
 
+					}
+					
+					series1.add(new Task(projektname, startdatum, enddatum));
+				}
 			}
-		} catch (SQLException e) {
+		} 
+		catch (SQLException e) {
 			e.printStackTrace();
 		}
 
@@ -407,22 +405,21 @@ public class JDBC_MariaDB {
 				String projektname = res.getString(1);
 				Date startdatum = res.getDate(2);
 				Date enddatum = res.getDate(3);
-
-				if (startdatum.compareTo(heute) < 0) {
-
-					startdatum = heute;
+				
+				if (enddatum.compareTo(heute) < 0) {
 
 				}
 
-				/*
-				 * if(enddatum.compareTo(heute)<0) {
-				 * 
-				 * deleteProject(res.getString(1));
-				 * 
-				 * }
-				 */
+				else {
+					
+					if (startdatum.compareTo(heute) < 0) {
 
-				series1.add(new Task(projektname, startdatum, enddatum));
+						startdatum = heute;
+
+					}
+					
+					series1.add(new Task(projektname, startdatum, enddatum));
+				}
 
 			}
 		} catch (SQLException e) {

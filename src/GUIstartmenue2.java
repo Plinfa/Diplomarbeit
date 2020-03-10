@@ -937,7 +937,7 @@ JRadioButton radioButton = new JRadioButton("einzeln");
 				
 				ExcelReader excelReader = new ExcelReader();
 				try {
-					excelReader.openfile("C:\\Users\\David\\Desktop\\Test1.xlsx",jdbc); //location
+					excelReader.openfile("C:\\Users\\Marcel\\Desktop\\Test1.xlsx",jdbc); //location
 					//jdbc.insertallfromExcel(PersNr, Name, Nachname, GebDat, Tätigkeit, EMail, Fuehrerschein);
 					table_2.setModel(DbUtils.resultSetToTableModel(jdbc.selectMitarbeiterinfo()));
 						
