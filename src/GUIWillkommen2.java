@@ -60,18 +60,11 @@ public class GUIWillkommen2 {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setTitle("Personal- und Projektmanager");
 		
-		JLabel label = new JLabel("");
-		
-		JLabel label_1 = new JLabel("");
-		
 		passwordField = new JPasswordField();
 		
 		JButton btnAnmelden = new JButton("Anmelden");
 		btnAnmelden.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				//jdbc.selectAllMitarbeiter();
- 
 				
 				if(passwordField.getText().equals(jdbc.selectPasswort())) {/*Passwort von Datenbank importieren*/
 					passwordField.setText(null);
@@ -87,14 +80,10 @@ public class GUIWillkommen2 {
 								}
 							}
 						});
-					
-					//was passiert nach anmelden
 				}
 				else {
 					JOptionPane.showMessageDialog(null, "Falsches Passwort", "Error", JOptionPane.ERROR_MESSAGE);
 					passwordField.setText(null);
-					
-				
 				}
 			}
 				
@@ -132,19 +121,11 @@ public class GUIWillkommen2 {
 		});
 		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
 		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.TRAILING)
+			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(220)
-							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-								.addComponent(label)
-								.addComponent(label_1)))
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(270)
-							.addComponent(lblLogin, GroupLayout.DEFAULT_SIZE, 81, Short.MAX_VALUE)
-							.addGap(178)))
-					.addGap(114))
+					.addGap(270)
+					.addComponent(lblLogin, GroupLayout.DEFAULT_SIZE, 81, Short.MAX_VALUE)
+					.addGap(292))
 				.addGroup(groupLayout.createSequentialGroup()
 					.addGap(178)
 					.addComponent(lblPasswort, GroupLayout.PREFERRED_SIZE, 60, GroupLayout.PREFERRED_SIZE)
@@ -156,7 +137,7 @@ public class GUIWillkommen2 {
 						.addComponent(btnReset, GroupLayout.DEFAULT_SIZE, 81, Short.MAX_VALUE)
 						.addComponent(btnAnmelden, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 					.addGap(178))
-				.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
+				.addGroup(groupLayout.createSequentialGroup()
 					.addGap(189)
 					.addComponent(lblPersonalprojektmanager, GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
 					.addGap(196))
@@ -167,10 +148,7 @@ public class GUIWillkommen2 {
 					.addGap(53)
 					.addComponent(lblPersonalprojektmanager, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
-						.addComponent(label)
-						.addComponent(label_1)
-						.addComponent(lblLogin, GroupLayout.PREFERRED_SIZE, 116, GroupLayout.PREFERRED_SIZE))
+					.addComponent(lblLogin, GroupLayout.PREFERRED_SIZE, 116, GroupLayout.PREFERRED_SIZE)
 					.addGap(32)
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addGroup(groupLayout.createSequentialGroup()
