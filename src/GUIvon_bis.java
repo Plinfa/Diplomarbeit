@@ -99,7 +99,7 @@ public class GUIvon_bis {
 					try {
 						
 						//jdbc.unverfuegbarSetzen(PersNr, von, bis, Grund);
-						jdbc.unverfuegbarsetzen1(PersNr, von, bis, Grund);
+						jdbc.unverfuegbarsetzen(PersNr, von, bis, Grund);
 						
 						
 					}catch(Exception e1) {
@@ -209,7 +209,7 @@ public class GUIvon_bis {
 				
 					try {
 						
-						jdbc.unverfuegbarsetzen1(PersNr, von, bis, Grund);
+						jdbc.unverfuegbarsetzen(PersNr, von, bis, Grund);
 					
 					}catch(Exception e1) {
 						e1.printStackTrace();
@@ -259,7 +259,7 @@ public class GUIvon_bis {
 				
 					try {
 						
-						jdbc.unverfuegbarsetzen1(PersNr, von, bis, Grund);
+						jdbc.unverfuegbarsetzen(PersNr, von, bis, Grund);
 						
 					}catch(Exception e1) {
 						e1.printStackTrace();

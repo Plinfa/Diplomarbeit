@@ -1083,7 +1083,7 @@ public class JDBC_MariaDB {
 		return verfueg;
 
 	}
-
+/*
 	public void unverfuegbarSetzen(int PersNr, java.sql.Date von, java.sql.Date bis, String Grund) {
 
 		ResultSet res = null;
@@ -1179,26 +1179,64 @@ public class JDBC_MariaDB {
 		}
 
 	}
-	
-	public void unverfuegbarsetzen1(int PersNr, java.sql.Date von, java.sql.Date bis, String Grund) {
-		
-		//arbeitetvonw, arbeitetbisw, von1, und bis1 nur zum vergleich sonst stimmen datums nicht mehr 
+	*/
+	public void abwesenheitsetzen(int PersNr, java.sql.Date von, java.sql.Date bis, String Grund) {
+
 		ResultSet res = null;
-		boolean verfueg = verfuegbarkeitabfrage(PersNr, von, bis);
+
+		try {
+
+			Statement stmt = con.createStatement();
+
+			// SQL Befehl
+
+			String sql="INSERT INTO abwesenheit (PersNr, Grund, von, bis) VALUES ('" + PersNr + "','" + Grund + "','"  + von + "','" + bis + "')";
+
+			res = stmt.executeQuery(sql);
+
+	
+			res.close();
+			stmt.close();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		
+	}
+
+	public void unverfuegbarsetzen(int PersNr, java.sql.Date von, java.sql.Date bis, String Grund) {
+		
+		
+		ResultSet res = null;
+		ResultSet res1 = null;
+		ResultSet res2 = null;
+		ResultSet res3 = null;
+		ResultSet res4 = null;
+		ResultSet res5 = null;
+		boolean verfueg = true;
+				
 		//von bis des arbeitseintrages
 		Date arbeitetvon1=null;
 		Date arbeitetbis1=null;
 		int ProjektNr=0;
+		int count=0;
 		
-		// milisec. sec. und minuten entfernen des krankeneintrages
-		java.sql.Date von1 = new Date(von.getYear(), von.getMonth(), von.getDay());
-		java.sql.Date bis1 = new Date(bis.getYear(), bis.getMonth(), bis.getDay());
+		//ohne milisec. sec. und min
+		java.sql.Date krankvon = new java.sql.Date(von.getYear(),von.getMonth(),von.getDate());
+		java.sql.Date krankbis = new java.sql.Date(bis.getYear(),bis.getMonth(),bis.getDate());
+		//System.out.println(krankvon);
 		
-		
-		
+	
 		
 		try {
+			
 			Statement stmt = con.createStatement();
+			verfueg=verfuegbarkeitabfrage(PersNr, krankvon, krankbis);
+			System.out.println(verfueg);
+			
+			if(verfueg==false) {
+				
 			String arbeitet="SELECT ProjektNr, von, bis FROM arbeitet WHERE PersNr='"+PersNr+"'"; 
 			res = stmt.executeQuery(arbeitet);
 			
@@ -1211,99 +1249,106 @@ public class JDBC_MariaDB {
 				
 
 			}
+			if(ProjektNr!=0) {
+			//ohne milisec. sec. und min
+			java.sql.Date arbeitetvon = new java.sql.Date(arbeitetvon1.getYear(),arbeitetvon1.getMonth(),arbeitetvon1.getDate());
+			java.sql.Date arbeitetbis = new java.sql.Date(arbeitetbis1.getYear(),arbeitetbis1.getMonth(),arbeitetbis1.getDate());
+			//System.out.println(arbeitetvon);
 			
-			//mit milisec. sec. und min
-			java.sql.Date arbeitetvon = new java.sql.Date(arbeitetvon1.getTime());
-			java.sql.Date arbeitetbis = new java.sql.Date(arbeitetbis1.getTime());
+		
+		 
+		
 			
-			//ohne milisec. sec. und min. für gleiches datum
-			java.sql.Date arbeitetvonw = new Date(arbeitetvon1.getYear(), arbeitetvon1.getMonth(), arbeitetvon1.getDay());
-			
-			java.sql.Date arbeitetbisw = new Date(arbeitetbis1.getYear(), arbeitetbis1.getMonth(), arbeitetbis1.getDay());
-			
-			
-			if(verfueg==false) {
 				
 				
-				if(von1.compareTo(arbeitetvonw)==0 && bis1.compareTo(arbeitetbisw)==0) {	//von und bis gleich
+				
+				if(krankvon.equals(arbeitetvon) && krankbis.equals(arbeitetbis)) {	//von und bis gleich
+					//System.out.println("case1");
 					
-					
-					String delete = " DELETE FROM arbeitet WHERE von= '" + von + "' AND bis = '"+bis+"' AND PersNr='" + PersNr+ "'";
+					String delete = " DELETE FROM arbeitet WHERE von= '" + krankvon + "' AND bis = '"+krankbis+"' AND PersNr='" + PersNr+ "'";
 					res = stmt.executeQuery(delete);
-					String case1="INSERT INTO abwesenheit (PersNr, Grund, von, bis) VALUES ('" + PersNr + "','" + Grund + "','"  + von + "','" + bis + "')";
-					res = stmt.executeQuery(case1);
 					
-				}if(von.compareTo(arbeitetvon)<0 && bis.compareTo(arbeitetbis)<0) {	// von außerhalb bis innerhalb
 					
-					String delete1 = " DELETE FROM arbeitet WHERE '" + bis + "' BETWEEN von AND bis AND PersNr='" + PersNr+ "'";
-					res = stmt.executeQuery(delete1);
+					abwesenheitsetzen(PersNr, krankvon,  krankbis,  Grund);
+					res.close();
 					
-					String case2="INSERT INTO abwesenheit (PersNr, Grund, von, bis) VALUES ('" + PersNr + "','" + Grund + "','"  + von + "','" + bis + "')";
-					res = stmt.executeQuery(case2);
-	
-			        java.sql.Date vonneu = addDays(bis, 2); 
+				}else if(krankvon.compareTo(arbeitetvon)<0 && krankbis.compareTo(arbeitetbis)<0) {	// von außerhalb bis innerhalb
+					
+					//System.out.println("case2");
+					String delete1 = " DELETE FROM arbeitet WHERE '" + krankbis + "' BETWEEN von AND bis AND PersNr='" + PersNr+ "'";
+					res1 = stmt.executeQuery(delete1);
+					
+					
+					abwesenheitsetzen(PersNr, krankvon,  krankbis,  Grund);
+					
+			        java.sql.Date vonneu = addDays(krankbis, 2); 
 			        
 			        Mitarbeiterzuteilen(PersNr, vonneu, arbeitetbis, ProjektNr);
+					res1.close();
+					
+				}else if(krankvon.compareTo(arbeitetvon)>0 && krankbis.compareTo(arbeitetbis)>0) {	//von innerhalb bis außerhalb
 					
 					
-				} if(von.compareTo(arbeitetvon)>0 && bis.compareTo(arbeitetbis)>0) {	//von innerhalb bis außerhalb
+					//System.out.println("case3");
+					String delete2 = " DELETE FROM arbeitet WHERE '" + krankvon + "' BETWEEN von AND bis AND PersNr='" + PersNr+ "'";
+					res2 = stmt.executeQuery(delete2);
 					
-					String delete2 = " DELETE FROM arbeitet WHERE '" + von + "' BETWEEN von AND bis AND PersNr='" + PersNr+ "'";
-					res = stmt.executeQuery(delete2);
 					
-					//wo zum fick duad er mia de abwesenheit setzn???????
-					/*
-					String case2="INSERT INTO abwesenheit (PersNr, Grund, von, bis) VALUES ('" + PersNr + "','" + Grund + "','"  + von + "','" + bis + "')";
-					res = stmt.executeQuery(case2);
-					*/
-					java.sql.Date bisneu = subtractDays(von, 2);
+					
+					abwesenheitsetzen(PersNr, krankvon,  krankbis,  Grund);
+					java.sql.Date bisneu = subtractDays(krankvon, 2);
 					
 					Mitarbeiterzuteilen(PersNr, arbeitetvon, bisneu, ProjektNr);
 					
+					res2.close();
 					
 					
+				} else if(krankvon.compareTo(arbeitetvon)>0 && krankbis.compareTo(arbeitetbis)<0) {	//von und bis innerhalb
+				
+					//System.out.println("case4");
 					
-				}  if(von.compareTo(arbeitetvon)>0 && bis.compareTo(arbeitetbis)<0) {	//von und bis innerhalb
 					
-					String delete3 = " DELETE FROM arbeitet WHERE '" + von + "' BETWEEN von AND bis AND PersNr='" + PersNr+ "'";
-					res = stmt.executeQuery(delete3);
+					String case3 = "DELETE FROM arbeitet WHERE '"+krankvon+"'  AND '"+krankbis+"' BETWEEN von AND bis AND PersNr='" + PersNr + "'";
+					res3 = stmt.executeQuery(case3);
 					
-					String case3 = "DELETE FROM arbeitet WHERE  '" + von+ "' AND '"+bis+"' BETWEEN von AND bis AND PersNr='" + PersNr + "'";
-					res = stmt.executeQuery(case3);
 					
-					//do genau as gleiche er setzts richtig owa i ruafs nia auf
+					abwesenheitsetzen(PersNr, krankvon,  krankbis,  Grund);
 					
-					java.sql.Date bisneu = subtractDays(von, 2);
-					java.sql.Date vonneu = addDays(bis, 2); 
+					java.sql.Date bisneu = subtractDays(krankvon, 2);
+					java.sql.Date vonneu = addDays(krankbis, 2); 
 					
 					// Zuteilung vorher setzen
 					Mitarbeiterzuteilen(PersNr, arbeitetvon, bisneu, ProjektNr);
 					// Zuteilung nachher setzen
 					Mitarbeiterzuteilen(PersNr, vonneu, arbeitetbis, ProjektNr);
 					
+					res3.close();
 					
-				}  if(von.compareTo(arbeitetvon)<0 && bis.compareTo(arbeitetbis)>0) {	//von und bis außerhalb
+				} else  if(krankvon.compareTo(arbeitetvon)<0 && krankbis.compareTo(arbeitetbis)>0) {	//von und bis außerhalb
+					//System.out.println("case5");
 					
-					String delete4 = " DELETE FROM arbeitet WHERE von and bis BETWEEN '" + von + "' AND '"+bis+"'AND PersNr='" + PersNr+ "'";
-					res = stmt.executeQuery(delete4);
-					
-					String case4="INSERT INTO abwesenheit (PersNr, Grund, von, bis) VALUES ('" + PersNr + "','" + Grund + "','"  + von + "','" + bis + "')";
-					res = stmt.executeQuery(case4);
+					String delete4 = " DELETE FROM arbeitet WHERE von and bis BETWEEN '" + krankvon + "' AND '"+krankbis+"'AND PersNr='" + PersNr+ "'";
+					res4 = stmt.executeQuery(delete4);
 					
 					
+					abwesenheitsetzen(PersNr, krankvon,  krankbis,  Grund);
+					res4.close();
+				}
+				
+				}else {
+					JOptionPane.showMessageDialog(null, "Mitarbeiter ist in diesem Zeitraum schon in mindestens einer Woche abwesend","Fehler", JOptionPane.ERROR_MESSAGE);
 				}
 				
 				
-			}else {
-				System.out.println("is eh scho kronk");
+			}else{
+				abwesenheitsetzen(PersNr, krankvon,  krankbis,  Grund);
+				
 				
 			}
 			
 			
-			res.close();
-			stmt.close();
+			stmt.close();	
 			
-
 		}catch (SQLException e) {
 			e.printStackTrace();
 		}
