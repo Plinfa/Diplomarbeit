@@ -36,7 +36,7 @@ public class JDBC_MariaDB {
 		try {
 
 			con = DriverManager.getConnection("jdbc:mariadb://localhost:3306/eqospersonalplanung", "root",
-					"5455809Otto");
+					"davmay81");
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -1105,6 +1105,8 @@ public class JDBC_MariaDB {
 
 			if (verfueg == false) {
 				
+				
+				
 				String case1 = "SELECT ProjektNr,von,bis FROM arbeitet WHERE  '" + bis
 						+ "' BETWEEN von AND bis AND PersNr='" + PersNr + "'";
 				
@@ -1176,6 +1178,137 @@ public class JDBC_MariaDB {
 			e.printStackTrace();
 		}
 
+	}
+	
+	public void unverfuegbarsetzen1(int PersNr, java.sql.Date von, java.sql.Date bis, String Grund) {
+		
+		//arbeitetvonw, arbeitetbisw, von1, und bis1 nur zum vergleich sonst stimmen datums nicht mehr 
+		ResultSet res = null;
+		boolean verfueg = verfuegbarkeitabfrage(PersNr, von, bis);
+		//von bis des arbeitseintrages
+		Date arbeitetvon1=null;
+		Date arbeitetbis1=null;
+		int ProjektNr=0;
+		
+		// milisec. sec. und minuten entfernen des krankeneintrages
+		java.sql.Date von1 = new Date(von.getYear(), von.getMonth(), von.getDay());
+		java.sql.Date bis1 = new Date(bis.getYear(), bis.getMonth(), bis.getDay());
+		
+		
+		
+		
+		try {
+			Statement stmt = con.createStatement();
+			String arbeitet="SELECT ProjektNr, von, bis FROM arbeitet WHERE PersNr='"+PersNr+"'"; 
+			res = stmt.executeQuery(arbeitet);
+			
+			while (res.next()) {
+
+				ProjektNr = res.getInt(1);
+				arbeitetvon1 = res.getDate(2);
+				arbeitetbis1= res.getDate(3);
+				
+				
+
+			}
+			
+			//mit milisec. sec. und min
+			java.sql.Date arbeitetvon = new java.sql.Date(arbeitetvon1.getTime());
+			java.sql.Date arbeitetbis = new java.sql.Date(arbeitetbis1.getTime());
+			
+			//ohne milisec. sec. und min. für gleiches datum
+			java.sql.Date arbeitetvonw = new Date(arbeitetvon1.getYear(), arbeitetvon1.getMonth(), arbeitetvon1.getDay());
+			
+			java.sql.Date arbeitetbisw = new Date(arbeitetbis1.getYear(), arbeitetbis1.getMonth(), arbeitetbis1.getDay());
+			
+			
+			if(verfueg==false) {
+				
+				
+				if(von1.compareTo(arbeitetvonw)==0 && bis1.compareTo(arbeitetbisw)==0) {	//von und bis gleich
+					
+					
+					String delete = " DELETE FROM arbeitet WHERE von= '" + von + "' AND bis = '"+bis+"' AND PersNr='" + PersNr+ "'";
+					res = stmt.executeQuery(delete);
+					String case1="INSERT INTO abwesenheit (PersNr, Grund, von, bis) VALUES ('" + PersNr + "','" + Grund + "','"  + von + "','" + bis + "')";
+					res = stmt.executeQuery(case1);
+					
+				}if(von.compareTo(arbeitetvon)<0 && bis.compareTo(arbeitetbis)<0) {	// von außerhalb bis innerhalb
+					
+					String delete1 = " DELETE FROM arbeitet WHERE '" + bis + "' BETWEEN von AND bis AND PersNr='" + PersNr+ "'";
+					res = stmt.executeQuery(delete1);
+					
+					String case2="INSERT INTO abwesenheit (PersNr, Grund, von, bis) VALUES ('" + PersNr + "','" + Grund + "','"  + von + "','" + bis + "')";
+					res = stmt.executeQuery(case2);
+	
+			        java.sql.Date vonneu = addDays(bis, 2); 
+			        
+			        Mitarbeiterzuteilen(PersNr, vonneu, arbeitetbis, ProjektNr);
+					
+					
+				} if(von.compareTo(arbeitetvon)>0 && bis.compareTo(arbeitetbis)>0) {	//von innerhalb bis außerhalb
+					
+					String delete2 = " DELETE FROM arbeitet WHERE '" + von + "' BETWEEN von AND bis AND PersNr='" + PersNr+ "'";
+					res = stmt.executeQuery(delete2);
+					
+					//wo zum fick duad er mia de abwesenheit setzn???????
+					/*
+					String case2="INSERT INTO abwesenheit (PersNr, Grund, von, bis) VALUES ('" + PersNr + "','" + Grund + "','"  + von + "','" + bis + "')";
+					res = stmt.executeQuery(case2);
+					*/
+					java.sql.Date bisneu = subtractDays(von, 2);
+					
+					Mitarbeiterzuteilen(PersNr, arbeitetvon, bisneu, ProjektNr);
+					
+					
+					
+					
+				}  if(von.compareTo(arbeitetvon)>0 && bis.compareTo(arbeitetbis)<0) {	//von und bis innerhalb
+					
+					String delete3 = " DELETE FROM arbeitet WHERE '" + von + "' BETWEEN von AND bis AND PersNr='" + PersNr+ "'";
+					res = stmt.executeQuery(delete3);
+					
+					String case3 = "DELETE FROM arbeitet WHERE  '" + von+ "' AND '"+bis+"' BETWEEN von AND bis AND PersNr='" + PersNr + "'";
+					res = stmt.executeQuery(case3);
+					
+					//do genau as gleiche er setzts richtig owa i ruafs nia auf
+					
+					java.sql.Date bisneu = subtractDays(von, 2);
+					java.sql.Date vonneu = addDays(bis, 2); 
+					
+					// Zuteilung vorher setzen
+					Mitarbeiterzuteilen(PersNr, arbeitetvon, bisneu, ProjektNr);
+					// Zuteilung nachher setzen
+					Mitarbeiterzuteilen(PersNr, vonneu, arbeitetbis, ProjektNr);
+					
+					
+				}  if(von.compareTo(arbeitetvon)<0 && bis.compareTo(arbeitetbis)>0) {	//von und bis außerhalb
+					
+					String delete4 = " DELETE FROM arbeitet WHERE von and bis BETWEEN '" + von + "' AND '"+bis+"'AND PersNr='" + PersNr+ "'";
+					res = stmt.executeQuery(delete4);
+					
+					String case4="INSERT INTO abwesenheit (PersNr, Grund, von, bis) VALUES ('" + PersNr + "','" + Grund + "','"  + von + "','" + bis + "')";
+					res = stmt.executeQuery(case4);
+					
+					
+				}
+				
+				
+			}else {
+				System.out.println("is eh scho kronk");
+				
+			}
+			
+			
+			res.close();
+			stmt.close();
+			
+
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		
 	}
 
 	public void persbedarfplanen(int ProjNr, java.sql.Date von, java.sql.Date bis, int anzahl) {
@@ -1464,4 +1597,10 @@ public class JDBC_MariaDB {
 		c.add(Calendar.DATE, -days);
 		return new Date(c.getTimeInMillis());
 	}
+    public static Date addDays(Date date, int days) {
+        Calendar c = Calendar.getInstance();
+        c.setTime(date);
+        c.add(Calendar.DATE, days);
+        return new Date(c.getTimeInMillis());
+    }
 }

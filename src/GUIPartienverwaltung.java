@@ -76,7 +76,7 @@ public class GUIPartienverwaltung {
 		
 
 		try {
-			Connection con = DriverManager.getConnection("jdbc:mariadb://localhost:3306/eqospersonalplanung", "root","5455809Otto");
+			Connection con = DriverManager.getConnection("jdbc:mariadb://localhost:3306/eqospersonalplanung", "root","davmay81");
 			Statement stmt = con.createStatement();
 
 			// SQL Befehl
