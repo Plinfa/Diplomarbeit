@@ -81,7 +81,7 @@ public class GUIPartienverwaltung {
 
 			// SQL Befehl
 
-			String sql = "SELECT leitetpartie.PartieNr, mitarbeiter.Name, mitarbeiter.Nachname, mitarbeiter.PersNr  FROM leitetpartie JOIN mitarbeiter ON leitetpartie.PersNr=mitarbeiter.PersNr";
+			String sql = "SELECT partie.PartieNr, mitarbeiter.Name, mitarbeiter.Nachname, mitarbeiter.PersNr  FROM partie JOIN mitarbeiter ON partie.PersNr=mitarbeiter.PersNr";
 
 			res = stmt.executeQuery(sql);
 			while(res.next()) {

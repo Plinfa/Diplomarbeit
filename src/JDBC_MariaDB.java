@@ -131,7 +131,7 @@ public class JDBC_MariaDB {
 
 			// SQL Befehl
 
-			String sql = "SELECT PersNr, Name, Nachname FROM mitarbeiter WHERE PersNr NOT IN (SELECT PersNr FROM leitetpartie) AND PersNr NOT IN (SELECT PersNr FROM zugeteilt)";
+			String sql = "SELECT PersNr, Name, Nachname FROM mitarbeiter WHERE PersNr NOT IN (SELECT PersNr FROM partie) AND PersNr NOT IN (SELECT PersNr FROM zugeteilt)";
 
 			res = stmt.executeQuery(sql);
 
@@ -151,7 +151,7 @@ public class JDBC_MariaDB {
 
 			// SQL Befehl
 
-			String sql = "SELECT PersNr, Name, Nachname FROM mitarbeiter WHERE PersNr NOT IN (SELECT PersNr FROM leitetpartie) AND PersNr NOT IN (SELECT PersNr FROM zugeteilt) AND Tätigkeit='Partieführer'";
+			String sql = "SELECT PersNr, Name, Nachname FROM mitarbeiter WHERE PersNr NOT IN (SELECT PersNr FROM partie) AND PersNr NOT IN (SELECT PersNr FROM zugeteilt) AND Tätigkeit='Partieführer'";
 
 			res = stmt.executeQuery(sql);
 
@@ -171,7 +171,7 @@ public class JDBC_MariaDB {
 
 			// SQL Befehl
 
-			String sql = "SELECT leitetpartie.PersNr, leitetpartie.PartieNr, mitarbeiter.Name, mitarbeiter.Nachname  FROM leitetpartie JOIN mitarbeiter ON leitetpartie.PersNr=mitarbeiter.PersNr";
+			String sql = "SELECT partie.PersNr, partie.PartieNr, mitarbeiter.Name, mitarbeiter.Nachname  FROM partie JOIN mitarbeiter ON partie.PersNr=mitarbeiter.PersNr";
 
 			res = stmt.executeQuery(sql);
 
@@ -259,7 +259,7 @@ public class JDBC_MariaDB {
 
 			// SQL Befehl
 
-			String sql = "SELECT von, bis, Anzahl FROM benötigt WHERE ProjektNr='" + ProjNr + "'";
+			String sql = "SELECT von, bis, Anzahl FROM arbeiter WHERE ProjektNr='" + ProjNr + "'";
 
 			res = stmt.executeQuery(sql);
 
@@ -474,7 +474,7 @@ public class JDBC_MariaDB {
 			Statement stmt = con.createStatement();
 
 			
-				String sql = "INSERT INTO leitetpartie (PersNr) VALUES('" + PersNr + "')";
+				String sql = "INSERT INTO partie (PersNr) VALUES('" + PersNr + "')";
 				res = stmt.executeQuery(sql);
 				res.close();
 				stmt.close();
@@ -502,7 +502,7 @@ public class JDBC_MariaDB {
 			
 			 Mitarbeiterzuteilen(PersNrLeiter, von,  bis, projnr);
 			Statement stmt = con.createStatement();
-			String sql= "SELECT PartieNr FROM leitetpartie WHERE PersNr='"+PersNrLeiter+"' ";
+			String sql= "SELECT PartieNr FROM partie WHERE PersNr='"+PersNrLeiter+"' ";
 			res = stmt.executeQuery(sql);
 			
 
@@ -718,7 +718,7 @@ public class JDBC_MariaDB {
 
 			// SQL Befehl
 
-			String deletebenötigt = "DELETE FROM benötigt WHERE ProjektNr= '" + ProjektNr + "'";
+			String deletebenötigt = "DELETE FROM arbeiter WHERE ProjektNr= '" + ProjektNr + "'";
 			String deletearbeitet = "DELETE FROM arbeitet WHERE ProjektNr= '" + ProjektNr + "'";
 			String deleteleitet = "DELETE FROM leitetprojekt WHERE ProjektNr= '" + ProjektNr + "'";
 			String deleteproject = "DELETE FROM projekt WHERE ProjektNr='" + ProjektNr + "'";
@@ -792,7 +792,7 @@ public class JDBC_MariaDB {
 
 			// SQL Befehl
 
-			String deletebenoetigt = "DELETE FROM benötigt WHERE von= '" + von + "' AND bis= '" + bis + "' AND Anzahl='"
+			String deletebenoetigt = "DELETE FROM arbeiter WHERE von= '" + von + "' AND bis= '" + bis + "' AND Anzahl='"
 					+ Anzahl + "' AND ProjektNr='" + ProjNr + "' ";
 
 			res = stmt.executeQuery(deletebenoetigt);
@@ -816,7 +816,7 @@ public class JDBC_MariaDB {
 
 			
 			String deletezuteilung ="DELETE FROM zugeteilt WHERE PartieNr='"+PartieNr+"'";
-			String deletepartieleiter ="DELETE FROM leitetpartie WHERE PartieNr='"+PartieNr+"'";
+			String deletepartieleiter ="DELETE FROM partie WHERE PartieNr='"+PartieNr+"'";
 			
 			
 			res = stmt.executeQuery(deletezuteilung);
@@ -1366,7 +1366,7 @@ public class JDBC_MariaDB {
 
 			// SQL Befehl
 			// i think u meant this
-			String sql = "INSERT INTO benötigt (Anzahl, von, bis, ProjektNr) VALUES ('" + anzahl + "','" + von + "','"
+			String sql = "INSERT INTO arbeiter (Anzahl, von, bis, ProjektNr) VALUES ('" + anzahl + "','" + von + "','"
 					+ bis + "','" + ProjNr + "')";
 
 			res = stmt.executeQuery(sql);
@@ -1567,10 +1567,10 @@ public class JDBC_MariaDB {
 			// SQL Befehl
 
 			if (ProjNr == 0) {
-				String sql = "SELECT SUM(Anzahl)FROM benötigt WHERE  '" + abfrage1 + "' BETWEEN von AND bis";
+				String sql = "SELECT SUM(Anzahl)FROM arbeiter WHERE  '" + abfrage1 + "' BETWEEN von AND bis";
 				res = stmt.executeQuery(sql);
 			} else {
-				String sql = "SELECT SUM(Anzahl)FROM benötigt WHERE ProjektNr='" + ProjNr + "' AND  '" + abfrage1
+				String sql = "SELECT SUM(Anzahl)FROM arbeiter WHERE ProjektNr='" + ProjNr + "' AND  '" + abfrage1
 						+ "' BETWEEN von AND bis  ";
 
 				res = stmt.executeQuery(sql);
