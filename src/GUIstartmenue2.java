@@ -542,7 +542,8 @@ JRadioButton radioButton = new JRadioButton("einzeln");
 
 							row = table_2.getSelectedRow();
 							PersNr = table_2.getValueAt(row, 0).toString();
-							if (JOptionPane.showConfirmDialog(frame2, "Mitarbeiter und alle Einträge wirklich löschen?", "Personal- und Projektmanager", JOptionPane.YES_NO_OPTION)==JOptionPane.YES_NO_OPTION) 
+							if (JOptionPane.showConfirmDialog(frame2, "Mitarbeiter und alle Einträge wirklich löschen?", "Personal- und Projektmanager",
+									JOptionPane.YES_NO_OPTION)==JOptionPane.YES_NO_OPTION) 
 							{
 								jdbc.deleteEmployee(PersNr);
 							}
@@ -550,11 +551,12 @@ JRadioButton radioButton = new JRadioButton("einzeln");
 								
 							}
 							
-							//System.out.println(PersNr);
 
 						} catch (Exception e1) {
-
+							
+							JOptionPane.showMessageDialog(null, "Kein Mitarbeiter ausgewählt", "Fehler", JOptionPane.ERROR_MESSAGE);
 							e1.printStackTrace();
+							
 						}
 						table.setModel(DbUtils.resultSetToTableModel(jdbc.selectTabelleProjects()));
 						table_1.setModel(DbUtils.resultSetToTableModel(jdbc.selectTabelleProjects()));
@@ -997,10 +999,11 @@ JRadioButton radioButton = new JRadioButton("einzeln");
 						jdbc.insertEmployee(PersoNr, Name, Nachname);
 						
 						
-						//JOptionPane.showMessageDialog(null, "Mitarbeiter erfolgreich hinzugefügt ", "Bestätigen", JOptionPane.OK_CANCEL_OPTION);
+						JOptionPane.showMessageDialog(null, "Mitarbeiter erfolgreich hinzugefügt ", "Bestätigen", JOptionPane.OK_CANCEL_OPTION);
 					
 					}catch(Exception e1) {
 						e1.printStackTrace();
+						JOptionPane.showMessageDialog(null, "Mitarbeiter konnte nicht hinzugefügt werden","Fehler", JOptionPane.ERROR_MESSAGE);
 					}
 					
 					textField_5.setText(null);

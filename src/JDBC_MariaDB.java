@@ -680,7 +680,7 @@ public class JDBC_MariaDB {
 		
 	}
 
-	// David
+	//David
 	public void deleteEmployee(String PersNr) {
 		ResultSet res = null;
 
@@ -690,13 +690,19 @@ public class JDBC_MariaDB {
 
 			// SQL Befehl
 			String deletearbeitet = "DELETE FROM arbeitet WHERE PersNr= '" + PersNr + "'";
+			String deleteleitetprojekt = "DELETE FROM leitetprojekt WHERE PersNr= '" + PersNr + "'";
 			String deleteabwesenheit = "DELETE FROM abwesenheit WHERE PersNr= '" + PersNr + "'";
 			String deletefaehrt = "DELETE FROM fährt WHERE PersNr= '" + PersNr + "'";
+			String deletepartie = "DELETE FROM partie WHERE PersNr= '"+PersNr+"'";
+			String deletezugeteilt = "DELETE FROM zugeteilt WHERE PersNr= '"+PersNr+"'";
 			String deletemitarbeiter = "DELETE FROM mitarbeiter WHERE PersNr= '" + PersNr + "'";
 
 			res = stmt.executeQuery(deletearbeitet);
+			res = stmt.executeQuery(deleteleitetprojekt);
 			res = stmt.executeQuery(deleteabwesenheit);
 			res = stmt.executeQuery(deletefaehrt);
+			res = stmt.executeQuery(deletepartie);
+			res = stmt.executeQuery(deletezugeteilt);
 			res = stmt.executeQuery(deletemitarbeiter);
 
 			res.close();
