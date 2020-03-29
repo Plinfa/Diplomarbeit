@@ -59,24 +59,28 @@ public class GUIBearbeitungMitarbeiter {
 				int row=0;
 				
 				String PersoNr=null;
+				String Name =null;
 				String Nachname=null;
 				String GebDat=null;
 				String Taetigkeit=null;
 				String EMail=null;
-				String Fuehrerschein=null;
+				//String Fuehrerschein="NULL";
 				
 				try {
 					 row = table.getSelectedRow();
 					 PersoNr = table.getValueAt(row, 0).toString();
+					 Name = table.getValueAt(row, 1).toString();
 					 Nachname= table.getValueAt(row, 2).toString();
 					 GebDat = table.getValueAt(row, 3).toString();
 					 Taetigkeit = table.getValueAt(row, 4).toString();
 					 EMail = table.getValueAt(row, 5).toString();
-					 Fuehrerschein = table.getValueAt(row, 6).toString();
+					 //Fuehrerschein = table.getValueAt(row, 6).toString();
 					 
+					
+					jdbc.updateMitarbeiter(PersoNr, Name, Nachname, GebDat, Taetigkeit, EMail); 
 					 
-					jdbc.updateMitarbeiter(PersoNr, Nachname, GebDat, Taetigkeit, EMail, Fuehrerschein);
-					//personalnummer von ausgewähltem mitarbeiter benötigt
+					
+					//personalnummer vom ausgewählten mitarbeiter benötigt
 					
 				}catch(Exception e1) {
 					

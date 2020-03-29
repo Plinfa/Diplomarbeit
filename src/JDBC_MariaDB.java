@@ -89,7 +89,7 @@ public class JDBC_MariaDB {
 
 			// SQL Befehl
 
-			String sql = "SELECT * FROM mitarbeiter";
+			String sql = "SELECT PersNr, Name, Nachname, GebDat, Tätigkeit, EMail FROM mitarbeiter";
 
 			res = stmt.executeQuery(sql);
 
@@ -887,10 +887,10 @@ public class JDBC_MariaDB {
 	}
 
 	// David auf marcel angepasst
-	public void updateMitarbeiter(String PersoNr, String Nachname, String GebDat, String Taetigkeit, String EMail,
-			String Fuehrerschein) {
+	
+	public void updateMitarbeiter(String PersoNr, String Name, String Nachname, String GebDat, String Taetigkeit, String EMail) {
 		ResultSet res = null;
-		String PersNr = PersoNr;
+		
 
 		try {
 
@@ -898,9 +898,8 @@ public class JDBC_MariaDB {
 
 			// SQL Befehl
 
-			String sql = "UPDATE mitarbeiter SET  Nachname='" + Nachname + "',GebDat='" + GebDat + "', Tätigkeit='"
-					+ Taetigkeit + "', EMail= '" + EMail + "', Führerschein='" + Fuehrerschein + "' WHERE PersNr='"
-					+ PersNr + "'";
+			String sql = "UPDATE mitarbeiter SET Name = '"+Name+"', Nachname='" + Nachname + "',GebDat='" + GebDat + "', Tätigkeit='"
+					+ Taetigkeit + "', EMail= '" + EMail + "' WHERE PersNr='"+ PersoNr + "'";
 
 			res = stmt.executeQuery(sql);
 

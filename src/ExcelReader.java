@@ -82,9 +82,9 @@ public class ExcelReader {
 							
 							int PersNr=(int)Persnr;
 							
-							String Name=sheet.getRow(r).getCell(1).getStringCellValue();
+							String Name=sheet.getRow(r).getCell(2).getStringCellValue();
 							
-							String Nachname=sheet.getRow(r).getCell(2).getStringCellValue();
+							String Nachname=sheet.getRow(r).getCell(1).getStringCellValue();
 							
 							Date GebDat1= sheet.getRow(r).getCell(3).getDateCellValue();
 							java.sql.Date GebDat = new java.sql.Date(GebDat1.getTime());
