@@ -346,7 +346,9 @@ JRadioButton radioButton = new JRadioButton("einzeln");
 				ProjNr=table_1.getValueAt(row, 0).toString();
 				
 				int ProjektNr = Integer.parseInt(ProjNr);
-				if (JOptionPane.showConfirmDialog(frame2, "Projekt und alle Einträge wirklich löschen?", "Personal- und Projektmanager", JOptionPane.YES_NO_OPTION)==JOptionPane.YES_NO_OPTION) 
+				
+				if (JOptionPane.showConfirmDialog(frame2, "Projekt und alle Einträge wirklich löschen?", "Personal- und Projektmanager",
+						JOptionPane.YES_NO_OPTION)==JOptionPane.YES_NO_OPTION) 
 				{
 					jdbc.deleteProject(ProjektNr);
 				}
@@ -354,8 +356,7 @@ JRadioButton radioButton = new JRadioButton("einzeln");
 					
 				}
 				
-				
-				//System.out.println(ProjektNr);
+			
 				
 				}catch(Exception e1) {
 				
@@ -388,7 +389,13 @@ JRadioButton radioButton = new JRadioButton("einzeln");
 		JButton button_5 = new JButton("Personalbedarf pro Projekt pro Woche planen");
 		button_5.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
 				int row = table_1.getSelectedRow();
+				if(row==-1) {
+					JOptionPane.showMessageDialog(null, "Bitte Projekt auswählen", "Fehler", JOptionPane.ERROR_MESSAGE);
+				}else {
+					
+				
 				int column = 0;
 				String content = table_1.getValueAt(row, column).toString();
 				int ProjNr = Integer.parseInt(content);
@@ -399,11 +406,14 @@ JRadioButton radioButton = new JRadioButton("einzeln");
 							GUIPersB_planen window = new GUIPersB_planen(jdbc, ProjNr);
 							window.frame27.setVisible(true);
 						} catch (Exception e) {
+							
 							e.printStackTrace();
+							
 						}
+						
 					}
 				});
-				
+			}
 			}
 		});
 		
@@ -1064,20 +1074,23 @@ JRadioButton radioButton = new JRadioButton("einzeln");
 				
 				ProjektNr=Integer.parseInt(textField_8.getText());
 				Projektname=textField_9.getText();
-						
 				Ort=textField_10.getText();
+				/*
 				String vonEingabe = null;
 				String bisEingabe = null;
 				String vonJahr = null;
 				String bisJahr = null;
+				
 				vonEingabe = textField_13.getText();
 				bisEingabe = textField_16.getText();
 				vonJahr = textField_14.getText();
-				bisJahr = textField_15.getText(); 				// Eingabe
-				int vonint = Integer.parseInt(vonEingabe);
-				int bisint = Integer.parseInt(bisEingabe);
-				int vJahr = Integer.parseInt(vonJahr);
-				int bJahr = Integer.parseInt(bisJahr); 			// Eingabe in Integer umwandeln
+				bisJahr = textField_15.getText(); 
+				*/
+				// Eingabe
+				int vonint = Integer.parseInt(textField_13.getText());
+				int bisint = Integer.parseInt(textField_16.getText());
+				int vJahr = Integer.parseInt(textField_14.getText());
+				int bJahr = Integer.parseInt(textField_15.getText()); 			// Eingabe in Integer umwandeln
 				int startday = 2; 								// 2 für Montag
 				int endday = 7;
 
