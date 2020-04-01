@@ -83,7 +83,7 @@ public class GUIPersB_planen {
 				int vJahr=0;
 				int bJahr=0;
 				int anzahl=0;
-				//int PersNr=//Wert aus Datenbank
+				
 						
 				
 				vonint=Integer.parseInt(textField_1.getText());
@@ -134,7 +134,8 @@ public class GUIPersB_planen {
 				String bis = table.getValueAt(row, 1).toString();
 				String Anzahl = table.getValueAt(row, 2).toString();
 				
-				if (JOptionPane.showConfirmDialog(frame27, "Eintrag wirklich löschen?", "Personal- und Projektmanager", JOptionPane.YES_NO_OPTION)==JOptionPane.YES_NO_OPTION) 
+				if (JOptionPane.showConfirmDialog(frame27, "Eintrag wirklich löschen?", "Personal- und Projektmanager",
+						JOptionPane.YES_NO_OPTION)==JOptionPane.YES_NO_OPTION) 
 				{
 					jdbc.deletebenoetigt(von, bis, Anzahl, ProjNr);
 					table.setModel(DbUtils.resultSetToTableModel(jdbc.selectPersbedarfplanungfürProj(ProjNr)));
