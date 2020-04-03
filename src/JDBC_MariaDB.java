@@ -151,7 +151,8 @@ public class JDBC_MariaDB {
 
 			// SQL Befehl
 
-			String sql = "SELECT PersNr, Name, Nachname FROM mitarbeiter WHERE PersNr NOT IN (SELECT PersNr FROM partie) AND PersNr NOT IN (SELECT PersNr FROM zugeteilt) AND Tätigkeit='Partieführer'";
+			String sql = "SELECT PersNr, Name, Nachname FROM mitarbeiter WHERE PersNr NOT IN (SELECT PersNr FROM partie) "
+					+ "AND PersNr NOT IN (SELECT PersNr FROM zugeteilt) AND Tätigkeit='Partieführer'";
 
 			res = stmt.executeQuery(sql);
 
@@ -479,7 +480,6 @@ public class JDBC_MariaDB {
 				res.close();
 				stmt.close();
 			
-
 		}
 
 		catch (SQLException e) {
@@ -553,12 +553,7 @@ public class JDBC_MariaDB {
 
 			Statement stmt = con.createStatement();
 
-		/*
-				JOptionPane.showMessageDialog(null,
-						"Mitarbeiter ist in diesem Zeitraum in mindestens einer Woche nicht verfügbar", "Fehler",
-						JOptionPane.ERROR_MESSAGE);
-
-			*/
+		
 				String sql = "INSERT INTO zugeteilt (PersNr, PartieNr) VALUES('"+ PersNr + "','" + PartieNr + "')";
 				res = stmt.executeQuery(sql);
 				res.close();
@@ -596,57 +591,17 @@ public class JDBC_MariaDB {
 	}
 
 	// David angepasst für marcel
-	public void insertallfromExcel(int PersNr, String Name, String Nachname, java.sql.Date GebDat, String Tätigkeit, String EMail /*String Fuehrerschein*/) { // bearbeiten reihenanzahl von excelreader fehlt nicht sicher ob benötigt
+	public void insertallfromExcel(int PersNr, String Name, String Nachname, java.sql.Date GebDat, String Tätigkeit, String EMail ) { 
 
 		try {
 
 			Statement stmt = con.createStatement();
 
 			// SQL Befehl
-			String sql="INSERT INTO mitarbeiter(PersNr, Name,Nachname,GebDat,Tätigkeit,EMail) VALUES('"+PersNr+"','"+Name+"','"+Nachname+"','"+GebDat+"','"+Tätigkeit+"','"+EMail+"')";
+			String sql="INSERT INTO mitarbeiter(PersNr, Name,Nachname,GebDat,Tätigkeit,EMail) "
+					+ "VALUES('"+PersNr+"','"+Name+"','"+Nachname+"','"+GebDat+"','"+Tätigkeit+"','"+EMail+"')";
 
-			//String sql="INSERT INTO mitarbeiter(PersNr, Name, Nachname, GebDat, Tätigkeit, EMail, Führerschein) VALUES('"+PersNr+"','"+Name+"','"+Nachname+"','"+GebDat+"','"+Tätigkeit+"','"+EMail+"','"+Fuehrerschein+"')";
-			/*
-			for (int r = 1; r <= 122; r++) {
-				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd, MM, yyyy", Locale.ENGLISH);
-				LocalDate date1 = LocalDate.parse(ExcelReader.mitarbeiter[3][r], formatter);
-				Date date = Date.valueOf(date1);
-				//Date GebDate= ExcelReader.mitarbeiter[3][r];		//in Java Date speichern
-				
-				 
-				
-				System.out.println(ExcelReader.mitarbeiter[3][r]);
-				//ExcelReader.mitarbeiter[3][r];
-				 Date date1=Date.valueOf(ExcelReader.mitarbeiter[3][r]);//converting string into sql date  
-				 java.sql.Date date = new java.sql.Date(date1.getTime());
-				 //System.out.println(date); 
-				    
-				String sql= "INSERT INTO mitarbeiter (PersNr, Name, Nachname, GebDat, Tätigkeit, EMail, Führerschein) "
-						+ "VALUES ('"+ExcelReader.mitarbeiter[0][r]+"','"+ExcelReader.mitarbeiter[2][r]+"','"+ExcelReader.mitarbeiter[1][r]+"','"+date+"','"+ExcelReader.mitarbeiter[5][r]+"','"+ExcelReader.mitarbeiter[4][r]+"','"+ExcelReader.mitarbeiter[6][r]+"')";
-
-				// String sql = "INSERT INTO mitarbeiter(ANGA, GruppenNr, AAktiv, PersNr,
-				// StichtagUrlaub, Eintritt, SVNr, Name, Vorname, NameuVorname, PlzOrt, Strasse,
-				// GebDat, Stand, Geschl, Nation, Tel, Handy, Email, gelernterBeruf,
-				// Aufgabenbereich, Sicherheitsvertrauensperson, Firmenhandy, Kennzeichen,
-				// Fahrzeug, FIN, Handwerkerbefreiung, Führerscheine, FührerscheinNr, Behörde,
-				// Ausstelldat, gültigbis, Führerscheinüberprüfung, InfoschrPrivatnutzung, EzB,
-				// FahrbewilligungNr, Kranführerausbildung, C95LKW, HubstaplerÖ, HubstaplerDE,
-				// Notfallperson, NotfallsTel,TShirt, Jacke, Schuhe, GültigkeitA1,
-				// SicherheitspassNr, Bürounterweisung, VBFnAPG, Bayernwerkgültigbis, TenneT,
-				// TowerLatchSystem, Steigschulung, GUntersuchungenfälligam,
-				// GUntersuchungenfällig, PSAÜberprüfung, EHKursDauer, EHKursam,
-				// ErsthelferbisDE, nötigeDauer, APGSchulung, RichtigesPrüfenARCUS,
-				// LumpiSeilschulung, Compliance, Teleskopstapler, Hubarbeitsbühnen,
-				// HubarbeitsbKartenNr)"
-				// +"VALUES('"+ExcelReader.mitarbeiter[0][r]+"','"+ExcelReader.mitarbeiter[1][r]+"','"+ExcelReader.mitarbeiter[2][r]+"','"+ExcelReader.mitarbeiter[3][r]+"','"+ExcelReader.mitarbeiter[4][r]+"','"+ExcelReader.mitarbeiter[5][r]+"','"+ExcelReader.mitarbeiter[6][r]+"','"+ExcelReader.mitarbeiter[7][r]+"','"+ExcelReader.mitarbeiter[8][r]+"','"+ExcelReader.mitarbeiter[9][r]+"','"+ExcelReader.mitarbeiter[10][r]+"','"+ExcelReader.mitarbeiter[11][r]+"','"+ExcelReader.mitarbeiter[12][r]+"','"+ExcelReader.mitarbeiter[13][r]+"','"+ExcelReader.mitarbeiter[14][r]+"','"+ExcelReader.mitarbeiter[15][r]+"','"+ExcelReader.mitarbeiter[16][r]+"','"+ExcelReader.mitarbeiter[17][r]+"','"+ExcelReader.mitarbeiter[18][r]+"','"+ExcelReader.mitarbeiter[19][r]+"','"+ExcelReader.mitarbeiter[20][r]+"','"+ExcelReader.mitarbeiter[21][r]+"','"+ExcelReader.mitarbeiter[22][r]+"','"+ExcelReader.mitarbeiter[23][r]+"','"+ExcelReader.mitarbeiter[24][r]+"','"+ExcelReader.mitarbeiter[25][r]+"','"+ExcelReader.mitarbeiter[26][r]+"','"+ExcelReader.mitarbeiter[27][r]+"','"+ExcelReader.mitarbeiter[28][r]+"','"+ExcelReader.mitarbeiter[29][r]+"','"+ExcelReader.mitarbeiter[30][r]+"','"+ExcelReader.mitarbeiter[31][r]+"','"+ExcelReader.mitarbeiter[32][r]+"','"+ExcelReader.mitarbeiter[33][r]+"','"+ExcelReader.mitarbeiter[34][r]+"','"+ExcelReader.mitarbeiter[35][r]+"','"+ExcelReader.mitarbeiter[36][r]+"','"+ExcelReader.mitarbeiter[37][r]+"','"+ExcelReader.mitarbeiter[38][r]+"','"+ExcelReader.mitarbeiter[39][r]+"','"+ExcelReader.mitarbeiter[40][r]+"','"+ExcelReader.mitarbeiter[41][r]+"','"+ExcelReader.mitarbeiter[42][r]+"','"+ExcelReader.mitarbeiter[43][r]+"','"+ExcelReader.mitarbeiter[44][r]+"','"+ExcelReader.mitarbeiter[45][r]+"','"+ExcelReader.mitarbeiter[46][r]+"','"+ExcelReader.mitarbeiter[47][r]+"','"+ExcelReader.mitarbeiter[48][r]+"','"+ExcelReader.mitarbeiter[49][r]+"','"+ExcelReader.mitarbeiter[50][r]+"','"+ExcelReader.mitarbeiter[51][r]+"','"+ExcelReader.mitarbeiter[52][r]+"','"+ExcelReader.mitarbeiter[53][r]+"','"+ExcelReader.mitarbeiter[54][r]+"','"+ExcelReader.mitarbeiter[55][r]+"','"+ExcelReader.mitarbeiter[56][r]+"','"+ExcelReader.mitarbeiter[57][r]+"','"+ExcelReader.mitarbeiter[58][r]+"','"+ExcelReader.mitarbeiter[59][r]+"','"+ExcelReader.mitarbeiter[60][r]+"','"+ExcelReader.mitarbeiter[61][r]+"','"+ExcelReader.mitarbeiter[62][r]+"','"+ExcelReader.mitarbeiter[63][r]+"','"+ExcelReader.mitarbeiter[64][r]+"','"+ExcelReader.mitarbeiter[65][r]+"','"+ExcelReader.mitarbeiter[66][r]+"')";
-
-				String sql = "INSERT INTO mitarbeiter(ANGA, GruppenNr, AAktiv, PersNr, StichtagUrlaub, Eintritt, SVNr, Name, Vorname)"
-						+ "VALUES('" + ExcelReader.mitarbeiter[0][r] + "','" + ExcelReader.mitarbeiter[1][r] + "','"
-						+ ExcelReader.mitarbeiter[2][r] + "','" + ExcelReader.mitarbeiter[3][r] + "','"
-						+ ExcelReader.mitarbeiter[4][r] + "','" + ExcelReader.mitarbeiter[5][r] + "','"
-						+ ExcelReader.mitarbeiter[6][r] + "','" + ExcelReader.mitarbeiter[7][r] + "','"
-						+ ExcelReader.mitarbeiter[8][r] + "')";
-*/
+		
 				ResultSet res = stmt.executeQuery(sql);
 				res.close();
 
